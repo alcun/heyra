@@ -1,0 +1,31 @@
+# Heyra
+
+> Self-hosted speech to text. Send a short WAV, get the words back. English and
+> 24 other European languages, found automatically. Audio is never kept.
+
+## Transcribe
+
+POST /v1/transcribe with a WAV file as the request body: 16-bit PCM, mono or
+stereo, 8 to 48 kHz. Without a key, clips may be up to 15 seconds; with
+`Authorization: Bearer <key>`, up to 30.
+
+    curl https://<this host>/v1/transcribe --data-binary @clip.wav
+
+Answer: {"text": "Draw me a cat in a hat.", "seconds": 2.4, "ms": 231}
+
+## Limits
+
+Anyone gets a free daily allowance per visitor, within a daily ceiling for
+everyone. 429 means the allowance is used up until midnight UTC; 503 means
+busy, so retry after the `retry-after` seconds. 400 means the body is not a
+WAV Heyra can read, 413 that the clip is too long.
+
+## Status
+
+GET /healthz returns {"ok": true, "busy": n, "free": true, "today": {...}}
+once the model is loaded.
+
+## Source
+
+https://github.com/alcun/heyra (MIT). The model is NVIDIA's Parakeet TDT 0.6B
+v3 (CC BY 4.0).

@@ -1,0 +1,17 @@
+{
+  "name": "heyra",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "bun --hot src/index.ts",
+    "start": "bun src/index.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "hono": "^4.0.0",
+    "sherpa-onnx-node": "1.13.8"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

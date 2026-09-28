@@ -1,0 +1,11 @@
+Heyra
+Copyright (c) 2026 Alasdair Cunningham. MIT licensed; see LICENSE.
+
+This software downloads and runs the speech recognition model
+"Parakeet TDT 0.6B v3" by NVIDIA, licensed under CC BY 4.0:
+  Model:   https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3
+  Licence: https://creativecommons.org/licenses/by/4.0/
+It is used as converted to ONNX and quantised to int8 by the sherpa-onnx
+project (https://github.com/k2-fsa/sherpa-onnx), release asset
+sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8. The model itself is not modified
+further by Heyra.

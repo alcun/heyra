@@ -1,0 +1,150 @@
+---
+// Fonts are served from here, not a font service: no render-blocking third
+// party, and nothing about a visitor leaves the server.
+import "@fontsource/atkinson-hyperlegible/latin-400.css";
+import "@fontsource/atkinson-hyperlegible/latin-700.css";
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+const curl = `curl http://localhost:3000/v1/transcribe \\
+  --data-binary @clip.wav
+
+{ "text": "Draw me a cat in a hat.", "seconds": 2.4, "ms": 231 }`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heyra</title>
+  <meta name="description" content="Self-hosted speech to text. Hold the stone, speak, and read what Heyra heard." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Heyra: self-hosted speech to text" />
+  <meta property="og:description" content="Send a short WAV, get the words back. Runs on a CPU, in 25 languages, and never keeps the audio." />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="How to use this API" />
+  <script type="application/ld+json">{JSON.stringify({
+    "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Heyra",
+    description: "Self-hosted speech to text: send a short WAV, get the words back. English and 24 other European languages, on a CPU, audio never kept.",
+    applicationCategory: "DeveloperApplication", operatingSystem: "Linux, macOS, Windows (Docker)",
+    license: "https://opensource.org/licenses/MIT", codeRepository: "https://github.com/alcun/heyra",
+    offers: { "@type": "Offer", price: "0" },
+  })}</script>
+  <style is:global>
+    :root {
+      --mist: #cdd5d6; --mist-deep: #b9c3c5; --slate: #1f2b31; --slate-soft: #4a5a61; --ochre: #9c2f24; --lichen: #6f7d4c;
+      --bg: var(--mist); --ink: var(--slate); --muted: var(--slate-soft); --stone: var(--slate); --on-stone: var(--mist); --groove: #9aa6a9; --cut: var(--ochre); --panel: var(--mist-deep);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #172126; --ink: #d3dbdc; --muted: #93a2a7; --stone: #2c3a41; --on-stone: #d3dbdc; --groove: #34444b; --cut: #d0664f; --panel: #1f2b31;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font: 400 1.0625rem/1.6 "Atkinson Hyperlegible", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 40rem; margin: 0 auto; padding: 3.5rem 1rem 2rem; }
+    h1 {
+      font: 800 clamp(4rem, 16vw, 7.5rem)/0.85 "Bricolage Grotesque Variable", sans-serif;
+      letter-spacing: -0.045em; margin: 0;
+    }
+    .lede { font-size: 1.25rem; line-height: 1.45; max-width: 26rem; margin: 1rem 0 0; }
+    a { color: inherit; text-decoration-color: var(--cut); text-underline-offset: 0.2em; }
+    :focus-visible { outline: 3px solid var(--cut); outline-offset: 4px; }
+
+    /* The stone and its ring of notches. */
+    .listen { display: grid; justify-items: center; margin: 3rem 0 1rem; }
+    .dial { position: relative; width: min(20rem, 84vw); aspect-ratio: 1; }
+    #ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transition: transform 1.2s ease; }
+    #ring line { stroke: var(--groove); stroke-width: 3.2; stroke-linecap: round; }
+    #ring line.cut { stroke: var(--cut); }
+    #stone {
+      position: absolute; inset: 14%; border-radius: 50%; border: 0; cursor: pointer;
+      background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--stone) 78%, white), var(--stone) 62%);
+      color: var(--on-stone); font: 500 1.35rem/1 "Bricolage Grotesque Variable", sans-serif; letter-spacing: 0.01em;
+      box-shadow: inset 0 -10px 24px rgb(0 0 0 / 0.28), 0 14px 30px -12px rgb(0 0 0 / 0.45);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+    }
+    #stone:disabled { cursor: default; opacity: 0.55; }
+    #stone.held { transform: scale(0.965); box-shadow: inset 0 -4px 14px rgb(0 0 0 / 0.35), 0 6px 14px -8px rgb(0 0 0 / 0.5); }
+    #stone .when-listening, #stone.listening .when-idle { display: none; }
+    #stone.listening .when-listening { display: inline; }
+    .dial:has(#stone.thinking) #ring { transform: rotate(40deg); }
+    @media (prefers-reduced-motion: reduce) { #ring, #stone { transition: none; } .dial:has(#stone.thinking) #ring { transform: none; } }
+    #status { min-height: 1.6em; text-align: center; max-width: 24rem; margin: 1.25rem auto 0; color: var(--muted); }
+
+    #key { display: flex; gap: 0.5rem; max-width: 26rem; margin: 0 auto; }
+    #key[hidden] { display: none; }
+    #key input {
+      flex: 1; min-width: 0; font: inherit; color: inherit; background: var(--panel);
+      border: 1px solid var(--groove); border-radius: 0.5rem; padding: 0.55rem 0.75rem;
+    }
+    button.plain {
+      font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 0.5rem;
+      padding: 0.55rem 1rem; cursor: pointer;
+    }
+    #forget { display: block; margin: 0.5rem auto 0; border: 0; padding: 0.25rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--groove); }
+    #forget[hidden] { display: none; }
+
+    #heard { list-style: none; padding: 0; margin: 0.5rem auto 0; max-width: 32rem; text-align: center; }
+    #heard li { margin: 0 0 1rem; color: var(--muted); }
+    #heard q { display: block; quotes: none; font-size: 1.0625rem; }
+    #heard span { font-size: 0.85rem; }
+    #heard li:first-child { color: var(--ink); margin-bottom: 2rem; }
+    #heard li:first-child q { font: 500 clamp(1.5rem, 5vw, 2rem)/1.25 "Bricolage Grotesque Variable", sans-serif; letter-spacing: -0.01em; margin-bottom: 0.35rem; }
+    #heard li:first-child span { color: var(--muted); }
+    @media (prefers-reduced-motion: no-preference) {
+      #heard li:first-child { animation: arrive 0.35s ease-out; }
+      @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
+    }
+
+    details { margin-top: 4rem; border-top: 1px solid var(--groove); padding-top: 1rem; }
+    summary { cursor: pointer; font: 500 1.125rem/1.4 "Bricolage Grotesque Variable", sans-serif; width: fit-content; }
+    pre {
+      background: var(--panel); border-radius: 0.5rem; padding: 1rem; overflow-x: auto;
+      font: 0.85rem/1.55 ui-monospace, "SF Mono", Menlo, monospace; margin: 1rem 0;
+    }
+    details p { max-width: 34rem; }
+    footer { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem 3rem; color: var(--muted); font-size: 0.9rem; }
+    footer p { margin: 0.25rem 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Heyra</h1>
+    <p class="lede">Hears what you say and writes it down.</p>
+
+    <section class="listen" aria-label="Try it">
+      <div class="dial">
+        <svg id="ring" viewBox="0 0 320 320" aria-hidden="true"></svg>
+        <button id="stone" type="button" aria-describedby="status">
+          <span class="when-idle">Hold</span><span class="when-listening">Listening</span>
+        </button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <form id="key" hidden>
+        <input type="password" autocomplete="off" spellcheck="false" placeholder="Heyra key" aria-label="Heyra key" />
+        <button class="plain" type="submit">Use key</button>
+      </form>
+      <button id="forget" class="plain" type="button" hidden>Forget key</button>
+    </section>
+
+    <ol id="heard" aria-label="What Heyra heard" reversed></ol>
+
+    <details>
+      <summary>Use it from code</summary>
+      <p>Send a WAV of up to 15 seconds, or 30 with a key (<code>Authorization: Bearer &lt;key&gt;</code>). English and 24 other European languages, found by themselves. Audio is never kept.</p>
+      <pre><code id="curl">{curl}</code></pre>
+    </details>
+  </main>
+  <footer>
+    <p>Heyra is Old Norse for "to hear". <a href="https://github.com/alcun/heyra">The code</a> is MIT licensed; <a href="/llms.txt">llms.txt</a> describes the API for agents.</p>
+    <p>Listening by NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), as converted by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
+  </footer>
+  <script src="/heyra.js" type="module"></script>
+</body>
+</html>
