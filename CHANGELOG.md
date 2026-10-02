@@ -2,7 +2,7 @@
 
 All notable changes to Heyra are documented here. Newest first.
 
-## Unreleased
+## 2026-10-02
 
 ### Changed
 - The page is set in a typewriter monospace (Courier Prime, served from Heyra
