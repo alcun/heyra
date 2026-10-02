@@ -4,6 +4,11 @@ All notable changes to Heyra are documented here. Newest first.
 
 ## Unreleased
 
+### Changed
+- The page is set in a typewriter monospace (Courier Prime, served from Heyra
+  itself) with more space between the heading, the stone, what it heard and
+  the footer. The design is otherwise unchanged.
+
 ### Added
 - MIT licence for the code. The image carries LICENSE and a NOTICE crediting
   NVIDIA's model and its CC BY 4.0 licence, and the page links both.

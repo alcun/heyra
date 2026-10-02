@@ -1,9 +1,9 @@
 ---
 // Fonts are served from here, not a font service: no render-blocking third
 // party, and nothing about a visitor leaves the server.
-import "@fontsource/atkinson-hyperlegible/latin-400.css";
-import "@fontsource/atkinson-hyperlegible/latin-700.css";
-import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource/courier-prime/latin-400.css";
+import "@fontsource/courier-prime/latin-400-italic.css";
+import "@fontsource/courier-prime/latin-700.css";
 const curl = `curl http://localhost:3000/v1/transcribe \\
   --data-binary @clip.wav
 
@@ -43,20 +43,20 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     html { background: var(--bg); }
     body {
       margin: 0; background: var(--bg); color: var(--ink);
-      font: 400 1.0625rem/1.6 "Atkinson Hyperlegible", system-ui, sans-serif;
+      font: 400 1.0625rem/1.7 "Courier Prime", ui-monospace, monospace;
       -webkit-font-smoothing: antialiased;
     }
-    main { max-width: 40rem; margin: 0 auto; padding: 3.5rem 1rem 2rem; }
+    main { max-width: 40rem; margin: 0 auto; padding: 6rem 1rem 3rem; }
     h1 {
-      font: 800 clamp(4rem, 16vw, 7.5rem)/0.85 "Bricolage Grotesque Variable", sans-serif;
-      letter-spacing: -0.045em; margin: 0;
+      font: 700 clamp(3rem, 12vw, 5.5rem)/0.9 "Courier Prime", ui-monospace, monospace;
+      letter-spacing: -0.02em; margin: 0;
     }
-    .lede { font-size: 1.25rem; line-height: 1.45; max-width: 26rem; margin: 1rem 0 0; }
+    .lede { font-size: 1.125rem; line-height: 1.5; max-width: 26rem; margin: 1.75rem 0 0; color: var(--muted); }
     a { color: inherit; text-decoration-color: var(--cut); text-underline-offset: 0.2em; }
     :focus-visible { outline: 3px solid var(--cut); outline-offset: 4px; }
 
     /* The stone and its ring of notches. */
-    .listen { display: grid; justify-items: center; margin: 3rem 0 1rem; }
+    .listen { display: grid; justify-items: center; margin: 6rem 0 2rem; }
     .dial { position: relative; width: min(20rem, 84vw); aspect-ratio: 1; }
     #ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transition: transform 1.2s ease; }
     #ring line { stroke: var(--groove); stroke-width: 3.2; stroke-linecap: round; }
@@ -64,7 +64,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     #stone {
       position: absolute; inset: 14%; border-radius: 50%; border: 0; cursor: pointer;
       background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--stone) 78%, white), var(--stone) 62%);
-      color: var(--on-stone); font: 500 1.35rem/1 "Bricolage Grotesque Variable", sans-serif; letter-spacing: 0.01em;
+      color: var(--on-stone); font: 700 1.2rem/1 "Courier Prime", ui-monospace, monospace; letter-spacing: 0.2em; text-indent: 0.2em;
       box-shadow: inset 0 -10px 24px rgb(0 0 0 / 0.28), 0 14px 30px -12px rgb(0 0 0 / 0.45);
       transition: transform 0.18s ease, box-shadow 0.18s ease;
       touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
@@ -75,7 +75,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     #stone.listening .when-listening { display: inline; }
     .dial:has(#stone.thinking) #ring { transform: rotate(40deg); }
     @media (prefers-reduced-motion: reduce) { #ring, #stone { transition: none; } .dial:has(#stone.thinking) #ring { transform: none; } }
-    #status { min-height: 1.6em; text-align: center; max-width: 24rem; margin: 1.25rem auto 0; color: var(--muted); }
+    #status { min-height: 1.6em; text-align: center; max-width: 24rem; margin: 2.5rem auto 0; color: var(--muted); }
 
     #key { display: flex; gap: 0.5rem; max-width: 26rem; margin: 0 auto; }
     #key[hidden] { display: none; }
@@ -87,30 +87,30 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 0.5rem;
       padding: 0.55rem 1rem; cursor: pointer;
     }
-    #forget { display: block; margin: 0.5rem auto 0; border: 0; padding: 0.25rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--groove); }
+    #forget { display: block; margin: 1rem auto 0; border: 0; padding: 0.25rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--groove); }
     #forget[hidden] { display: none; }
 
-    #heard { list-style: none; padding: 0; margin: 0.5rem auto 0; max-width: 32rem; text-align: center; }
-    #heard li { margin: 0 0 1rem; color: var(--muted); }
+    #heard { list-style: none; padding: 0; margin: 3rem auto 0; max-width: 32rem; text-align: center; }
+    #heard li { margin: 0 0 1.5rem; color: var(--muted); }
     #heard q { display: block; quotes: none; font-size: 1.0625rem; }
     #heard span { font-size: 0.85rem; }
-    #heard li:first-child { color: var(--ink); margin-bottom: 2rem; }
-    #heard li:first-child q { font: 500 clamp(1.5rem, 5vw, 2rem)/1.25 "Bricolage Grotesque Variable", sans-serif; letter-spacing: -0.01em; margin-bottom: 0.35rem; }
+    #heard li:first-child { color: var(--ink); margin-bottom: 3rem; }
+    #heard li:first-child q { font: 400 clamp(1.4rem, 4.5vw, 1.8rem)/1.35 "Courier Prime", ui-monospace, monospace; margin-bottom: 0.6rem; }
     #heard li:first-child span { color: var(--muted); }
     @media (prefers-reduced-motion: no-preference) {
       #heard li:first-child { animation: arrive 0.35s ease-out; }
       @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
     }
 
-    details { margin-top: 4rem; border-top: 1px solid var(--groove); padding-top: 1rem; }
-    summary { cursor: pointer; font: 500 1.125rem/1.4 "Bricolage Grotesque Variable", sans-serif; width: fit-content; }
+    details { margin-top: 7rem; border-top: 1px solid var(--groove); padding-top: 1.5rem; }
+    summary { cursor: pointer; font: 700 1.0625rem/1.4 "Courier Prime", ui-monospace, monospace; width: fit-content; }
     pre {
       background: var(--panel); border-radius: 0.5rem; padding: 1rem; overflow-x: auto;
-      font: 0.85rem/1.55 ui-monospace, "SF Mono", Menlo, monospace; margin: 1rem 0;
+      font: 0.875rem/1.6 "Courier Prime", ui-monospace, monospace; margin: 1.5rem 0;
     }
     details p { max-width: 34rem; }
-    footer { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem 3rem; color: var(--muted); font-size: 0.9rem; }
-    footer p { margin: 0.25rem 0; }
+    footer { max-width: 40rem; margin: 0 auto; padding: 3rem 1rem 4rem; color: var(--muted); font-size: 0.9rem; }
+    footer p { margin: 0.5rem 0; }
   </style>
 </head>
 <body>
