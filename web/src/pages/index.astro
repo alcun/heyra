@@ -1,9 +1,15 @@
 ---
 // Fonts are served from here, not a font service: no render-blocking third
 // party, and nothing about a visitor leaves the server.
-import "@fontsource/courier-prime/latin-400.css";
-import "@fontsource/courier-prime/latin-400-italic.css";
-import "@fontsource/courier-prime/latin-700.css";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-500.css";
+import "@fontsource/ibm-plex-sans/latin-600.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+
+const MAC = "https://github.com/alcun/heyra-desktop/releases/latest/download/Heyra.zip";
+const MAC_CODE = "https://github.com/alcun/heyra-desktop";
+const SERVER_CODE = "https://github.com/alcun/heyra";
 const curl = `curl http://localhost:3000/v1/transcribe \\
   --data-binary @clip.wav
 
@@ -15,136 +21,427 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Heyra</title>
-  <meta name="description" content="Self-hosted speech to text. Hold the stone, speak, and read what Heyra heard." />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="Hold a key, talk, let go. Heyra writes it down, on your own Mac. Free and open source." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#121318" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Heyra: self-hosted speech to text" />
-  <meta property="og:description" content="Send a short WAV, get the words back. Runs on a CPU, in 25 languages, and never keeps the audio." />
+  <meta property="og:title" content="Heyra" />
+  <meta property="og:description" content="Hold a key, talk, let go. Speech to text that runs on your own Mac." />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="How to use this API" />
   <script type="application/ld+json">{JSON.stringify({
     "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Heyra",
-    description: "Self-hosted speech to text: send a short WAV, get the words back. English and 24 other European languages, on a CPU, audio never kept.",
-    applicationCategory: "DeveloperApplication", operatingSystem: "Linux, macOS, Windows (Docker)",
-    license: "https://opensource.org/licenses/MIT", codeRepository: "https://github.com/alcun/heyra",
+    description: "Push-to-talk dictation that runs on your Mac with NVIDIA Parakeet, plus a self-hosted speech-to-text API.",
+    applicationCategory: "UtilitiesApplication", operatingSystem: "macOS (Apple Silicon)",
+    license: "https://opensource.org/licenses/MIT", codeRepository: MAC_CODE,
     offers: { "@type": "Offer", price: "0" },
   })}</script>
   <style is:global>
+    /* Night instrument: graphite ground, cream readouts, gold for anything live,
+       slate for labels, lavender only in the orb's edge light. One dark look by choice. */
     :root {
-      --mist: #cdd5d6; --mist-deep: #b9c3c5; --slate: #1f2b31; --slate-soft: #4a5a61; --ochre: #9c2f24; --lichen: #6f7d4c;
-      --bg: var(--mist); --ink: var(--slate); --muted: var(--slate-soft); --stone: var(--slate); --on-stone: var(--mist); --groove: #9aa6a9; --cut: var(--ochre); --panel: var(--mist-deep);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #172126; --ink: #d3dbdc; --muted: #93a2a7; --stone: #2c3a41; --on-stone: #d3dbdc; --groove: #34444b; --cut: #d0664f; --panel: #1f2b31;
-      }
+      --ground: #121318; --ground-2: #17181e; --panel: #1d1f26; --hair: #2c2f3a;
+      --cream: #ede0c4; --slate: #8a9aa6; --dim: #5b6470; --gold: #d9a86a; --gold-deep: #9c6d3c;
+      --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+      --page: 72rem;
+      color-scheme: dark;
     }
     * { box-sizing: border-box; }
-    html { background: var(--bg); }
+    html { background: var(--ground); }
     body {
-      margin: 0; background: var(--bg); color: var(--ink);
-      font: 400 1.0625rem/1.7 "Courier Prime", ui-monospace, monospace;
-      -webkit-font-smoothing: antialiased;
+      margin: 0; background: var(--ground); color: var(--cream);
+      font: 400 1.0625rem/1.65 var(--sans); -webkit-font-smoothing: antialiased;
     }
-    main { max-width: 40rem; margin: 0 auto; padding: 6rem 1rem 3rem; }
-    h1 {
-      font: 700 clamp(3rem, 12vw, 5.5rem)/0.9 "Courier Prime", ui-monospace, monospace;
-      letter-spacing: -0.02em; margin: 0;
-    }
-    .lede { font-size: 1.125rem; line-height: 1.5; max-width: 26rem; margin: 1.75rem 0 0; color: var(--muted); }
-    a { color: inherit; text-decoration-color: var(--cut); text-underline-offset: 0.2em; }
-    :focus-visible { outline: 3px solid var(--cut); outline-offset: 4px; }
+    a { color: inherit; text-decoration-color: var(--gold); text-underline-offset: 0.22em; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+    .wrap { max-width: var(--page); margin: 0 auto; padding-inline: max(1rem, 4vw); }
+    .label { font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); }
 
-    /* The stone and its ring of notches. */
-    .listen { display: grid; justify-items: center; margin: 6rem 0 2rem; }
-    .dial { position: relative; width: min(20rem, 84vw); aspect-ratio: 1; }
-    #ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transition: transform 1.2s ease; }
-    #ring line { stroke: var(--groove); stroke-width: 3.2; stroke-linecap: round; }
-    #ring line.cut { stroke: var(--cut); }
-    #stone {
-      position: absolute; inset: 14%; border-radius: 50%; border: 0; cursor: pointer;
-      background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--stone) 78%, white), var(--stone) 62%);
-      color: var(--on-stone); font: 700 1.2rem/1 "Courier Prime", ui-monospace, monospace; letter-spacing: 0.2em; text-indent: 0.2em;
-      box-shadow: inset 0 -10px 24px rgb(0 0 0 / 0.28), 0 14px 30px -12px rgb(0 0 0 / 0.45);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+    /* ---- top bar ---- */
+    header.bar {
+      position: absolute; inset: 0 0 auto; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.25rem max(1rem, 4vw);
     }
-    #stone:disabled { cursor: default; opacity: 0.55; }
-    #stone.held { transform: scale(0.965); box-shadow: inset 0 -4px 14px rgb(0 0 0 / 0.35), 0 6px 14px -8px rgb(0 0 0 / 0.5); }
-    #stone .when-listening, #stone.listening .when-idle { display: none; }
-    #stone.listening .when-listening { display: inline; }
-    .dial:has(#stone.thinking) #ring { transform: rotate(40deg); }
-    @media (prefers-reduced-motion: reduce) { #ring, #stone { transition: none; } .dial:has(#stone.thinking) #ring { transform: none; } }
-    #status { min-height: 1.6em; text-align: center; max-width: 24rem; margin: 2.5rem auto 0; color: var(--muted); }
+    .mark { display: flex; align-items: center; gap: 0.6rem; font: 500 0.9rem/1 var(--mono); letter-spacing: 0.18em; color: var(--gold); text-decoration: none; }
+    .mark i { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: #000; box-shadow: inset 0 0 0 1px #2a2c34; display: grid; place-items: center; }
+    .mark i::after { content: ""; width: 0.18rem; height: 0.18rem; border-radius: 50%; background: var(--gold); }
+    nav { display: flex; align-items: center; gap: 1.5rem; font: 500 0.8rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+    nav a { color: var(--slate); text-decoration: none; }
+    nav a:hover { color: var(--cream); }
 
-    #key { display: flex; gap: 0.5rem; max-width: 26rem; margin: 0 auto; }
-    #key[hidden] { display: none; }
-    #key input {
-      flex: 1; min-width: 0; font: inherit; color: inherit; background: var(--panel);
-      border: 1px solid var(--groove); border-radius: 0.5rem; padding: 0.55rem 0.75rem;
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem; border-radius: 999px;
+      padding: 0.85rem 1.4rem; font: 500 0.95rem/1 var(--sans); text-decoration: none; cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
     }
-    button.plain {
-      font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 0.5rem;
-      padding: 0.55rem 1rem; cursor: pointer;
-    }
-    #forget { display: block; margin: 1rem auto 0; border: 0; padding: 0.25rem; color: var(--muted); text-decoration: underline; text-decoration-color: var(--groove); }
-    #forget[hidden] { display: none; }
+    .btn.primary { background: var(--cream); color: #15161b; border: 1px solid var(--cream); }
+    .btn.primary:hover { background: #fff6e3; transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--cream); border: 1px solid var(--hair); }
+    .btn.ghost:hover { border-color: var(--gold); }
+    .btn.small { padding: 0.55rem 0.95rem; font-size: 0.8rem; }
+    .btn svg { width: 1rem; height: 1rem; }
 
-    #heard { list-style: none; padding: 0; margin: 3rem auto 0; max-width: 32rem; text-align: center; }
-    #heard li { margin: 0 0 1.5rem; color: var(--muted); }
-    #heard q { display: block; quotes: none; font-size: 1.0625rem; }
-    #heard span { font-size: 0.85rem; }
-    #heard li:first-child { color: var(--ink); margin-bottom: 3rem; }
-    #heard li:first-child q { font: 400 clamp(1.4rem, 4.5vw, 1.8rem)/1.35 "Courier Prime", ui-monospace, monospace; margin-bottom: 0.6rem; }
-    #heard li:first-child span { color: var(--muted); }
+    /* ---- hero ---- */
+    .hero {
+      position: relative; min-height: 100svh; display: grid; place-items: center; text-align: center;
+      padding: 5.5rem 1rem 3rem; overflow: hidden; isolation: isolate;
+    }
+    .hero-inner { position: relative; width: 100%; max-width: 56rem; }
+    .eyebrow { margin: 0; }
+    /* The sky: a faint field of stars and a slow, warm drift behind the orb. */
+    .sky { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(1px 1px at 12% 22%, rgb(237 224 196 / 0.35), transparent 60%),
+        radial-gradient(1px 1px at 78% 14%, rgb(237 224 196 / 0.25), transparent 60%),
+        radial-gradient(1px 1px at 64% 72%, rgb(237 224 196 / 0.22), transparent 60%),
+        radial-gradient(1px 1px at 28% 81%, rgb(237 224 196 / 0.2), transparent 60%),
+        radial-gradient(1.5px 1.5px at 88% 58%, rgb(217 168 106 / 0.35), transparent 60%),
+        radial-gradient(1px 1px at 41% 9%, rgb(237 224 196 / 0.2), transparent 60%),
+        radial-gradient(1px 1px at 6% 61%, rgb(237 224 196 / 0.18), transparent 60%),
+        radial-gradient(1px 1px at 93% 88%, rgb(237 224 196 / 0.2), transparent 60%),
+        radial-gradient(120% 80% at 50% 0%, #17181f 0%, var(--ground) 60%);
+    }
+    .sky span { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; }
+    .sky span:nth-child(1) { width: 46vmax; height: 46vmax; left: 50%; top: 52%; translate: -50% -50%; background: radial-gradient(closest-side, rgb(217 168 106 / 0.16), transparent); }
+    .sky span:nth-child(2) { width: 38vmax; height: 30vmax; left: 30%; top: 70%; translate: -50% -50%; background: radial-gradient(closest-side, rgb(154 148 180 / 0.10), transparent); }
     @media (prefers-reduced-motion: no-preference) {
-      #heard li:first-child { animation: arrive 0.35s ease-out; }
-      @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
+      .sky span:nth-child(1) { animation: drift 26s ease-in-out infinite alternate; }
+      .sky span:nth-child(2) { animation: drift 34s ease-in-out infinite alternate-reverse; }
+      @keyframes drift { to { transform: translate(6vmax, -3vmax) scale(1.12); } }
     }
+    .stage { position: relative; width: min(28rem, 80vw, 46svh); aspect-ratio: 1; margin: 0.5rem auto -1.5rem; }
+    #orb { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #orb.no-gl { background: radial-gradient(circle at 50% 50%, #000 0 33%, rgb(217 168 106 / 0.18) 34%, transparent 60%); border-radius: 50%; }
+    #stone {
+      position: absolute; inset: 21%; border-radius: 50%; border: 0; background: transparent; cursor: pointer;
+      touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+      transition: transform 0.2s ease;
+    }
+    #stone:disabled { cursor: default; }
+    #stone.held { transform: scale(0.98); }
+    #stone .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    h1 {
+      margin: 1rem 0 0; font: 600 clamp(2.3rem, 5.6vw, 4.2rem)/1.04 var(--sans);
+      letter-spacing: -0.035em; text-wrap: balance;
+    }
+    h1 em { font-style: normal; color: var(--gold); }
+    .lede { margin: 1rem auto 0; max-width: 30rem; color: var(--slate); font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.5; text-wrap: balance; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; }
+    .fine { margin: 0.8rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
+    #status { min-height: 1.5em; margin: 0.25rem auto 0; font: 500 0.78rem/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+    #heard { list-style: none; padding: 0; margin: 0.5rem auto 0; max-width: 36rem; }
+    #heard:empty { display: none; }
+    #heard li { color: var(--dim); margin: 0 0 0.75rem; }
+    #heard li q { quotes: none; display: block; font-size: 1rem; }
+    #heard li span { font: 400 0.75rem/1.4 var(--mono); }
+    #heard li:first-child { color: var(--cream); margin-bottom: 1.5rem; }
+    #heard li:first-child q { font: 500 clamp(1.25rem, 3.4vw, 1.7rem)/1.35 var(--sans); letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+    #heard li:first-child span { color: var(--slate); }
+    #heard li:nth-child(n+3) { display: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      #heard li:first-child { animation: arrive 0.5s cubic-bezier(.2,.8,.2,1); }
+      @keyframes arrive { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
+    }
+    #key { display: flex; gap: 0.5rem; max-width: 26rem; margin: 1rem 0 0; }
+    #key[hidden] { display: none; }
+    #key input { flex: 1; min-width: 0; font: 400 0.9rem/1 var(--mono); color: var(--cream); background: var(--panel); border: 1px solid var(--hair); border-radius: 999px; padding: 0.7rem 1rem; }
+    button.plain { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); background: none; border: 1px solid var(--hair); border-radius: 999px; padding: 0.7rem 1rem; cursor: pointer; }
+    .demo-note { margin: 1.5rem 0 0; max-width: 38rem; font: 400 0.8rem/1.6 var(--mono); color: var(--dim); }
+    code { font-family: var(--mono); font-size: 0.92em; overflow-wrap: anywhere; }
 
-    details { margin-top: 7rem; border-top: 1px solid var(--groove); padding-top: 1.5rem; }
-    summary { cursor: pointer; font: 700 1.0625rem/1.4 "Courier Prime", ui-monospace, monospace; width: fit-content; }
-    pre {
-      background: var(--panel); border-radius: 0.5rem; padding: 1rem; overflow-x: auto;
-      font: 0.875rem/1.6 "Courier Prime", ui-monospace, monospace; margin: 1.5rem 0;
+    /* ---- sections ---- */
+    section.block { padding: clamp(5rem, 11vw, 9rem) 0; border-top: 1px solid var(--hair); overflow-x: clip; }
+    h2 { margin: 0.75rem 0 0; font: 600 clamp(1.9rem, 4.2vw, 3rem)/1.08 var(--sans); letter-spacing: -0.03em; text-wrap: balance; max-width: 20ch; }
+    .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
+
+    /* steps: a real sequence, so numbered */
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 3rem; }
+    .step { padding: 1.5rem; border: 1px solid var(--hair); border-radius: 14px; background: var(--ground-2); min-width: 0; }
+    .step .n { display: block; font: 500 0.75rem/1 var(--mono); color: var(--gold); letter-spacing: 0.1em; }
+    .step h3 { margin: 1.1rem 0 0.35rem; font: 600 1.25rem/1.25 var(--sans); letter-spacing: -0.015em; }
+    .step p { margin: 0; color: var(--slate); font-size: 0.98rem; }
+    .keycap {
+      display: inline-grid; place-items: center; min-width: 3.1rem; height: 3.1rem; padding: 0 0.9rem; margin-top: 1.4rem;
+      border-radius: 10px; background: linear-gradient(#25272f, #1b1d23); border: 1px solid #353845;
+      box-shadow: 0 2px 0 #0b0c10, inset 0 1px 0 #3a3d4a; font: 500 0.95rem/1 var(--mono); color: var(--cream);
     }
-    details p { max-width: 34rem; }
-    footer { max-width: 40rem; margin: 0 auto; padding: 3rem 1rem 4rem; color: var(--muted); font-size: 0.9rem; }
-    footer p { margin: 0.5rem 0; }
+    .wave-mini { display: flex; gap: 3px; align-items: center; height: 3.1rem; margin-top: 1.4rem; }
+    .wave-mini b { width: 4px; border-radius: 2px; background: var(--gold); opacity: 0.85; }
+    .typed { margin-top: 1.4rem; height: 3.1rem; display: flex; align-items: center; padding: 0 0.9rem; border-radius: 10px; border: 1px solid var(--hair); font: 400 0.9rem/1 var(--sans); color: var(--cream); overflow: hidden; white-space: nowrap; }
+    .typed::after { content: ""; width: 2px; height: 1.1rem; margin-left: 2px; background: var(--gold); }
+    @media (prefers-reduced-motion: no-preference) { .typed::after { animation: blink 1.1s steps(1) infinite; } @keyframes blink { 50% { opacity: 0; } } }
+
+    /* readouts */
+    .readouts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 3rem; border: 1px solid var(--hair); border-radius: 14px; overflow: hidden; }
+    .readouts div { padding: 1.6rem 1.4rem; min-width: 0; }
+    .readouts div + div { border-left: 1px solid var(--hair); }
+    .readouts strong { display: block; font: 500 clamp(1.8rem, 3.6vw, 2.6rem)/1 var(--mono); color: var(--cream); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .readouts span { display: block; margin-top: 0.6rem; color: var(--slate); font-size: 0.92rem; }
+
+    /* split: words and picture */
+    .split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+    .shot { position: relative; border-radius: 16px; padding: 10px; background: linear-gradient(160deg, #2a2c35, #16171c); border: 1px solid var(--hair); box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.02); }
+    .shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    .shot::before { content: ""; position: absolute; inset: -30% -10% auto; height: 70%; background: radial-gradient(closest-side, rgb(217 168 106 / 0.10), transparent); z-index: -1; }
+
+    .features { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.25rem; }
+    .features li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 0.75rem; }
+    .features li::before { content: ""; width: 0.55rem; height: 0.55rem; margin-top: 0.55rem; border-radius: 50%; background: #000; box-shadow: 0 0 0 1px #34374a, 0 0 12px rgb(217 168 106 / 0.35); justify-self: center; }
+    .features b { display: block; font-weight: 600; }
+    .features span { color: var(--slate); font-size: 0.98rem; }
+
+
+    /* ---- the scene: a Mac screen ---- */
+    .screen {
+      position: relative; margin-top: 3rem; aspect-ratio: 16 / 10; border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--hair); box-shadow: 0 50px 100px -40px rgb(0 0 0 / 0.8), inset 0 0 0 1px rgb(255 255 255 / 0.03);
+      background:
+        radial-gradient(70% 60% at 75% 20%, rgb(154 148 180 / 0.35), transparent 70%),
+        radial-gradient(60% 70% at 15% 85%, rgb(111 132 147 / 0.35), transparent 70%),
+        radial-gradient(50% 50% at 50% 60%, rgb(217 168 106 / 0.12), transparent 70%),
+        linear-gradient(160deg, #262833, #16171d);
+    }
+    .menubar { position: absolute; inset: 0 0 auto; height: 4.2%; min-height: 18px; display: flex; justify-content: space-between; align-items: center; padding: 0 1.4%; background: rgb(20 21 26 / 0.55); backdrop-filter: blur(12px); font: 500 clamp(0.5rem, 1vw, 0.78rem)/1 var(--sans); color: rgb(237 224 196 / 0.85); }
+    .mb-left, .mb-right { display: flex; gap: 1.6em; align-items: center; }
+    .mb-dot { width: 0.8em; height: 0.8em; border-radius: 50%; background: #000; box-shadow: 0 0 0 1px rgb(237 224 196 / 0.35); display: grid; place-items: center; }
+    .mb-dot::after { content: ""; width: 0.2em; height: 0.2em; border-radius: 50%; background: var(--gold); }
+    .window { position: absolute; left: 22%; top: 13%; width: 56%; height: 52%; border-radius: 12px; background: rgb(28 29 36 / 0.92); border: 1px solid rgb(255 255 255 / 0.06); box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8); overflow: hidden; }
+    .titlebar { height: 13%; display: flex; align-items: center; gap: 0.5em; padding: 0 3%; border-bottom: 1px solid rgb(255 255 255 / 0.05); font: 500 clamp(0.5rem, 1vw, 0.75rem)/1 var(--sans); color: var(--slate); }
+    .titlebar i { width: 0.75em; height: 0.75em; border-radius: 50%; background: #3a3d48; }
+    .titlebar span { margin-left: auto; margin-right: auto; }
+    .doc { padding: 5% 7%; font: 400 clamp(0.72rem, 1.7vw, 1.3rem)/1.45 var(--sans); color: var(--cream); letter-spacing: -0.01em; }
+    .doc-line { margin: 0 0 0.6em; }
+    .doc-line:first-child { font-weight: 600; color: var(--cream); }
+    .doc-line:not(.now):not(:first-child) { color: rgb(237 224 196 / 0.62); }
+    .doc-text.landed { animation: land 0.6s cubic-bezier(.2,.8,.2,1); }
+    @keyframes land { from { opacity: 0; filter: blur(6px); background: rgb(217 168 106 / 0.25); } }
+    .caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--gold); }
+    @media (prefers-reduced-motion: no-preference) { .caret { animation: blink 1.1s steps(1) infinite; } }
+    .dock { position: absolute; left: 50%; bottom: 2%; translate: -50% 0; display: flex; gap: 0.8%; padding: 0.6%; width: 36%; border-radius: 16px; background: rgb(40 42 52 / 0.45); border: 1px solid rgb(255 255 255 / 0.08); backdrop-filter: blur(14px); }
+    .dock i { flex: 1; aspect-ratio: 1; border-radius: 22%; background: linear-gradient(160deg, #3b3e4b, #23252e); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06); }
+    .dock i:nth-child(2) { background: linear-gradient(160deg, #6f8493, #3d4a55); }
+    .dock i:nth-child(4) { background: linear-gradient(160deg, #d9a86a, #8d6233); }
+    .dock i:nth-child(6) { background: linear-gradient(160deg, #9a94b4, #514c69); }
+    .scene-orb { position: absolute; left: 50%; bottom: 9.5%; width: 14%; aspect-ratio: 1; translate: -50% 0; }
+    .fnkey {
+      position: absolute; left: 4%; bottom: 6%; display: grid; place-items: center; width: 7%; aspect-ratio: 1.1;
+      border-radius: 12%; background: linear-gradient(#2a2c35, #1c1e25); border: 1px solid #3b3e4c;
+      box-shadow: 0 4px 0 #0c0d11, inset 0 1px 0 #44475a; font: 500 clamp(0.6rem, 1.5vw, 1.05rem)/1 var(--mono); color: var(--cream);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.2s ease;
+    }
+    .fnkey.down { transform: translateY(3px); box-shadow: 0 1px 0 #0c0d11, inset 0 1px 0 #44475a, 0 0 24px rgb(217 168 106 / 0.35); color: var(--gold); }
+
+    /* ---- privacy readout ---- */
+    .private-split { align-items: start; }
+    .meter-panel { border: 1px solid var(--hair); border-radius: 16px; background: var(--ground-2); padding: 0.5rem 1.5rem 1.4rem; }
+    .meter-panel .row { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--hair); }
+    .meter-panel .row span { font: 500 0.78rem/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+    .meter-panel .row b { font: 500 1.05rem/1.2 var(--mono); color: var(--cream); font-variant-numeric: tabular-nums; }
+    .meter-panel .row b.yes { color: var(--gold); }
+    .meter-panel p { margin: 1.1rem 0 0; color: var(--dim); font-size: 0.9rem; }
+
+    /* privacy */
+
+    /* developers */
+    pre { margin: 2rem 0 0; padding: 1.25rem 1.4rem; border-radius: 14px; background: #0d0e12; border: 1px solid var(--hair); overflow-x: auto; font: 400 0.85rem/1.7 var(--mono); color: var(--cream); }
+    .dev-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+
+    /* closing */
+    .closing { text-align: center; padding: clamp(6rem, 13vw, 10rem) 0; border-top: 1px solid var(--hair);
+      background: radial-gradient(40rem 22rem at 50% 30%, rgb(217 168 106 / 0.06), transparent 70%); }
+    .closing h2 { margin-inline: auto; }
+    .closing .dot { width: 1.1rem; height: 1.1rem; margin: 0 auto 1.75rem; border-radius: 50%; background: #000; box-shadow: 0 0 0 1px #34374a, 0 0 30px 6px rgb(217 168 106 / 0.18); display: grid; place-items: center; }
+    .closing .dot::after { content: ""; width: 0.25rem; height: 0.25rem; border-radius: 50%; background: var(--gold); }
+
+    footer { border-top: 1px solid var(--hair); padding: 2.5rem 0 3.5rem; color: var(--dim); font-size: 0.85rem; }
+    footer p { margin: 0.4rem 0; max-width: 52rem; }
+    footer a { color: var(--slate); }
+
+    @media (max-width: 860px) {
+      .steps { grid-template-columns: minmax(0, 1fr); }
+      .readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .readouts div:nth-child(3) { border-left: 0; }
+      .readouts div:nth-child(n+3) { border-top: 1px solid var(--hair); }
+      .split { grid-template-columns: minmax(0, 1fr); }
+      nav .hide-sm { display: none; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Heyra</h1>
-    <p class="lede">Hears what you say and writes it down.</p>
+  <header class="bar">
+    <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
+    <nav aria-label="Main">
+      <a class="hide-sm" href="#how">How it works</a>
+      <a class="hide-sm" href="#private">Privacy</a>
+      <a class="hide-sm" href="#developers">Developers</a>
+      <a class="btn ghost small" href={MAC}>Download</a>
+    </nav>
+  </header>
 
-    <section class="listen" aria-label="Try it">
-      <div class="dial">
-        <svg id="ring" viewBox="0 0 320 320" aria-hidden="true"></svg>
-        <button id="stone" type="button" aria-describedby="status">
-          <span class="when-idle">Hold</span><span class="when-listening">Listening</span>
-        </button>
+  <main>
+    <section class="hero" aria-label="Heyra">
+      <div class="sky" aria-hidden="true"><span></span><span></span></div>
+      <div class="hero-inner">
+        <p class="label eyebrow">Dictation for Mac · runs on your machine</p>
+        <h1>Hold a key. Talk. <em>Let&nbsp;go.</em></h1>
+        <p class="lede">Heyra writes down what you say, wherever your cursor is. Your voice never leaves your Mac.</p>
+
+        <div class="stage">
+          <canvas id="orb" aria-hidden="true"></canvas>
+          <button id="stone" type="button" aria-describedby="status">
+            <span class="sr">Hold to talk</span>
+          </button>
+        </div>
+        <p id="status" role="status" aria-live="polite"></p>
+        <ol id="heard" aria-label="What Heyra heard" reversed></ol>
+
+        <div class="actions">
+          <a class="btn primary" href={MAC}>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.5-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.3 4.7 3.2 5.4 2.6 6.5c-1.2 2.1-.3 5.2.9 6.9.6.8 1.2 1.7 2.1 1.7.8 0 1.2-.5 2.2-.5s1.3.5 2.2.5 1.5-.8 2-1.7c.6-.9.9-1.8.9-1.9-.1 0-1.7-.7-1.7-3zM9.6 3.6c.4-.5.8-1.3.7-2-.7 0-1.5.4-1.9 1-.4.5-.8 1.2-.7 2 .7 0 1.4-.4 1.9-1z"/></svg>
+            Download for Mac
+          </a>
+          <a class="btn ghost" href={MAC_CODE}>View the code</a>
+        </div>
+        <p class="fine">Free · Apple Silicon · macOS 13 or later</p>
       </div>
-      <p id="status" role="status" aria-live="polite"></p>
-      <form id="key" hidden>
-        <input type="password" autocomplete="off" spellcheck="false" placeholder="Heyra key" aria-label="Heyra key" />
-        <button class="plain" type="submit">Use key</button>
-      </form>
-      <button id="forget" class="plain" type="button" hidden>Forget key</button>
     </section>
 
-    <ol id="heard" aria-label="What Heyra heard" reversed></ol>
+    <section class="block scene-block" aria-labelledby="scene-title">
+      <div class="wrap">
+        <p class="label">On your Mac</p>
+        <h2 id="scene-title">A dot above the Dock.</h2>
+        <p class="intro">At rest, Heyra is a single dark dot. Hold fn and it opens into the orb, listens, writes, and goes back to sleep.</p>
+        <div class="screen" id="scene" role="img" aria-label="A Mac screen. The Heyra dot sits above the Dock; when fn is held it grows into the orb, and the spoken sentence appears in a Notes window.">
+          <div class="menubar" aria-hidden="true">
+            <span class="mb-left"><b>Notes</b><span>File</span><span>Edit</span><span>Format</span></span>
+            <span class="mb-right"><i class="mb-dot"></i><span>Tue 9:41</span></span>
+          </div>
+          <div class="window" aria-hidden="true">
+            <div class="titlebar"><i></i><i></i><i></i><span>Today</span></div>
+            <div class="doc"><p class="doc-line">Notes from Tuesday</p><p class="doc-line now"><span class="doc-text">Call the printers about the proofs.</span><span class="caret"></span></p></div>
+          </div>
+          <div class="fnkey" aria-hidden="true">fn</div>
+          <canvas class="scene-orb" aria-hidden="true"></canvas>
+          <div class="dock" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
 
-    <details>
-      <summary>Use it from code</summary>
-      <p>Send a WAV of up to 15 seconds, or 30 with a key (<code>Authorization: Bearer &lt;key&gt;</code>). English and 24 other European languages, found by themselves. Audio is never kept.</p>
-      <pre><code id="curl">{curl}</code></pre>
-    </details>
+    <section class="block" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <p class="label">How it works</p>
+        <h2 id="how-title">The fastest way to type is to talk.</h2>
+        <p class="intro">Heyra lives in your menu bar. Any app, any text box: hold the key, say it, let go.</p>
+        <div class="steps">
+          <div class="step">
+            <span class="n">01</span>
+            <div class="keycap">fn</div>
+            <h3>Hold fn</h3>
+            <p>A small orb appears at the bottom of the screen. It's listening.</p>
+          </div>
+          <div class="step">
+            <span class="n">02</span>
+            <div class="wave-mini" aria-hidden="true">
+              <b style="height:30%"></b><b style="height:62%"></b><b style="height:44%"></b><b style="height:88%"></b><b style="height:56%"></b><b style="height:74%"></b><b style="height:38%"></b><b style="height:66%"></b><b style="height:28%"></b><b style="height:50%"></b><b style="height:80%"></b><b style="height:42%"></b>
+            </div>
+            <h3>Talk</h3>
+            <p>As long as you like. Pause, think, carry on.</p>
+          </div>
+          <div class="step">
+            <span class="n">03</span>
+            <div class="typed">Meet at the café at four?</div>
+            <h3>Let go</h3>
+            <p>Your words appear where the cursor is, about half a second later.</p>
+          </div>
+        </div>
+
+        <div class="readouts" aria-label="Heyra in numbers">
+          <div><strong>0.4 s</strong><span>to write six seconds of speech</span></div>
+          <div><strong>25</strong><span>languages, found automatically</span></div>
+          <div><strong>0 bytes</strong><span>of your voice sent anywhere</span></div>
+          <div><strong>Free</strong><span>no account, no subscription</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="app-title">
+      <div class="wrap split">
+        <div>
+          <p class="label">The app</p>
+          <h2 id="app-title">Small, fast, and yours.</h2>
+          <ul class="features">
+            <li><div><b>History</b><span>Every take is kept on your Mac. Click one to copy it again.</span></div></li>
+            <li><div><b>Dictionary</b><span>Teach it the words it gets wrong, once: names, jargon, places.</span></div></li>
+            <li><div><b>Any microphone</b><span>Your Mac's, a headset, an audio interface. Pick it in Settings.</span></div></li>
+            <li><div><b>Fix a slip</b><span>Pressing another key while you hold fn cancels the take.</span></div></li>
+          </ul>
+        </div>
+        <figure class="shot" style="margin:0">
+          <img src="/app.png" width="1560" height="1080" alt="Heyra's Home screen: a ready light and level meter, the microphone in use, and a setup list with each step ticked off." decoding="async" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="private" aria-labelledby="private-title">
+      <div class="wrap">
+        <div class="split private-split">
+        <div>
+        <p class="label">Privacy</p>
+        <h2 id="private-title">Your voice stays on your Mac.</h2>
+        <p class="intro">NVIDIA's Parakeet model runs on your Mac itself. After the first download Heyra needs no network at all. Turn off Wi-Fi and it still writes.</p>
+        </div>
+        <div class="meter-panel" aria-label="What Heyra needs from the internet">
+          <div class="row"><span>Audio sent</span><b>0 B</b></div>
+          <div class="row"><span>Words sent</span><b>0 B</b></div>
+          <div class="row"><span>Accounts</span><b>None</b></div>
+          <div class="row"><span>Works offline</span><b class="yes">Yes</b></div>
+          <div class="row"><span>Source</span><b>MIT, on GitHub</b></div>
+          <p>The only download is the speech model, once, from GitHub. It's checked against a fingerprint before Heyra uses it.</p>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="developers" aria-labelledby="dev-title">
+      <div class="wrap">
+        <p class="label">Developers</p>
+        <h2 id="dev-title">Or run your own server.</h2>
+        <p class="intro">The same model as a small HTTP API. Send a WAV of up to 15 seconds, or 30 with a key (<code>Authorization: Bearer &lt;key&gt;</code>), and get the words back. Audio is never kept.</p>
+        <pre><code id="curl">{curl}</code></pre>
+        <div class="dev-links">
+          <a class="btn ghost small" href={SERVER_CODE}>Server code</a>
+          <a class="btn ghost small" href="/llms.txt">llms.txt</a>
+          <button id="forget" class="btn ghost small" type="button">Use a key in the demo</button>
+        </div>
+        <form id="key" hidden>
+          <input type="password" autocomplete="off" spellcheck="false" placeholder="Heyra key" aria-label="Heyra key" />
+          <button class="btn ghost small" type="submit">Use key</button>
+        </form>
+        <p class="demo-note">The orb at the top of this page is a live demo. It sends your clip to this server, which writes it down and doesn't keep it. The Mac app sends nothing at all.</p>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="end-title">
+      <div class="wrap">
+        <div class="dot" aria-hidden="true"></div>
+        <h2 id="end-title">Talk to your Mac.</h2>
+        <div class="actions">
+          <a class="btn primary" href={MAC}>Download for Mac</a>
+        </div>
+        <p class="fine">Free and open source. Apple Silicon.</p>
+      </div>
+    </section>
   </main>
+
   <footer>
-    <p>Heyra is Old Norse for "to hear". <a href="https://github.com/alcun/heyra">The code</a> is MIT licensed; <a href="/llms.txt">llms.txt</a> describes the API for agents.</p>
-    <p>Listening by NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), as converted by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
+    <div class="wrap">
+      <p>Heyra is Old Norse for "to hear". The <a href={MAC_CODE}>Mac app</a> and the <a href={SERVER_CODE}>server</a> are MIT licensed.</p>
+      <p>Listening by NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), as converted by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
+    </div>
   </footer>
   <script src="/heyra.js" type="module"></script>
+  <script src="/scene.js" type="module"></script>
 </body>
 </html>

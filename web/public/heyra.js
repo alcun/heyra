@@ -1,15 +1,17 @@
-// Hold the stone, speak, let go: the recording is resampled to 16 kHz mono,
-// wrapped as a WAV and sent to Heyra's API with this browser's saved key, on this same origin.
-// While you hold, the ring of notches is a live level meter: each notch is a
-// band of the voice, mirrored left and right, low notes at the top. It settles
-// when you let go, and draws nothing at all when idle.
+// Hold the orb (or the space bar), speak, let go: the recording is resampled to
+// 16 kHz mono, wrapped as a WAV and sent to Heyra's API with this browser's saved
+// key, on this same origin. While you hold, the orb follows your voice; while
+// the words are written it turns gold.
+
+import { orb as makeOrb } from "/orb.js";
 
 // Just under the server's limits: 15 s free, 30 s with a key.
 const limit = () => (key ? 29.5 : 14.5);
-const NOTCHES = 90, BANDS = NOTCHES / 2, RATE = 16000, MIN = 0.4;
+const RATE = 16000, MIN = 0.4;
 
 const $ = (s) => document.querySelector(s);
-const stone = $("#stone"), ring = $("#ring"), status = $("#status"), heard = $("#heard");
+const stone = $("#stone"), status = $("#status"), heard = $("#heard");
+const orb = makeOrb($("#orb"));
 const keyForm = $("#key"), keyInput = keyForm.querySelector("input"), forget = $("#forget");
 
 const store = {
@@ -21,16 +23,17 @@ const store = {
 let key = store.get(), needsKey = false;
 
 const say = (t) => { status.textContent = t; };
-const IDLE = "Hold and speak.";
+const IDLE = "Hold the orb, or the space bar, and speak.";
 
 function showKey(message) {
-  keyForm.hidden = false; stone.disabled = true; forget.hidden = true;
+  keyForm.hidden = false; forget.hidden = true;
+  if (needsKey && !key) stone.disabled = true;
   say(message || "Paste your key to start. It stays in this browser.");
 }
 function ready() {
-  // One link: "Have a key?" without one, "Forget key" with one.
+  // In the developer section: "Use a key in the demo" without one, "Forget key" with one.
   keyForm.hidden = true; stone.disabled = false; forget.hidden = false;
-  forget.textContent = key ? "Forget key" : "Have a key?"; say(IDLE);
+  forget.textContent = key ? "Forget key" : "Use a key in the demo"; say(IDLE);
 }
 keyForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -39,47 +42,25 @@ keyForm.addEventListener("submit", (e) => {
   else if (!needsKey) ready();
 });
 forget.addEventListener("click", () => {
-  if (!key) return showKey("Paste your key for longer clips and no waiting. Leave it empty to go back.");
+  if (!key) { showKey("Paste your key for longer clips and no waiting. Leave it empty to go back."); return keyInput.focus(); }
   key = ""; store.set("");
   if (needsKey) showKey("Key forgotten."); else { ready(); say("Key forgotten. The free allowance still works."); }
 });
 
-// ---- the ring ----------------------------------------------------------
-const SVG = "http://www.w3.org/2000/svg", C = 160, R = 150;
-const notches = Array.from({ length: NOTCHES }, (_, i) => {
-  const a = (i / NOTCHES) * Math.PI * 2 - Math.PI / 2, l = document.createElementNS(SVG, "line");
-  // Mirrored: the notch on the left shares its band with the one on the right.
-  l.dataset.a = String(a); l.dataset.band = String(i < BANDS ? i : NOTCHES - 1 - i); ring.append(l); return l;
-});
-function draw(levels) {
-  for (const l of notches) {
-    const a = Number(l.dataset.a), v = levels[Number(l.dataset.band)] || 0, inner = R - 8 - v * 34;
-    l.setAttribute("x1", String(C + Math.cos(a) * R)); l.setAttribute("y1", String(C + Math.sin(a) * R));
-    l.setAttribute("x2", String(C + Math.cos(a) * inner)); l.setAttribute("y2", String(C + Math.sin(a) * inner));
-    l.classList.toggle("cut", v > 0.04);
-  }
-}
-const rest = new Float32Array(BANDS);
-draw(rest);
-
-// Log-spaced bands from 90 Hz to 5 kHz, where a voice lives. Fast to rise,
-// slower to fall, so it reads as a voice rather than flicker.
-let analyser = null, bins = null, edges = [], levels = new Float32Array(BANDS), frame = 0;
+// ---- the level -------------------------------------------------------------
+// Loudness of the voice, fast to rise and slow to fall, handed to the orb.
+let analyser = null, samples = null, frame = 0;
 function meter() {
   if (analyser && stream) {
-    analyser.getByteFrequencyData(bins);
-    for (let b = 0; b < BANDS; b++) {
-      let peak = 0;
-      for (let k = edges[b]; k < Math.max(edges[b] + 1, edges[b + 1]); k++) peak = Math.max(peak, bins[k]);
-      const target = Math.pow(peak / 255, 1.8);
-      levels[b] += (target - levels[b]) * (target > levels[b] ? 0.55 : 0.12);
-    }
+    analyser.getFloatTimeDomainData(samples);
+    let sum = 0;
+    for (const x of samples) sum += x * x;
+    orb.level(Math.min(1, Math.sqrt(sum / samples.length) * 9));
+    frame = requestAnimationFrame(meter);
   } else {
-    for (let b = 0; b < BANDS; b++) levels[b] *= 0.82;
+    orb.level(0);
+    frame = 0;
   }
-  draw(levels);
-  frame = stream || levels.some((v) => v > 0.01) ? requestAnimationFrame(meter) : 0;
-  if (!frame) draw(rest);
 }
 
 // ---- recording -----------------------------------------------------------
@@ -112,11 +93,8 @@ async function begin() {
     if (t >= limit()) end();
   };
   if (!analyser) {
-    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.smoothingTimeConstant = 0.5;
-    analyser.minDecibels = -85; analyser.maxDecibels = -25;
-    bins = new Uint8Array(analyser.frequencyBinCount);
-    const hz = ctx.sampleRate / analyser.fftSize;
-    edges = Array.from({ length: BANDS + 1 }, (_, b) => Math.round((90 * Math.pow(5000 / 90, b / BANDS)) / hz));
+    analyser = ctx.createAnalyser(); analyser.fftSize = 1024;
+    samples = new Float32Array(analyser.fftSize);
   }
   source.connect(node); source.connect(analyser);
   started = performance.now();
@@ -136,7 +114,7 @@ async function end() {
   stop();
   const seconds = (performance.now() - started) / 1000;
   if (seconds < MIN) return say("Hold a little longer while you speak.");
-  sending = true; stone.classList.add("thinking"); say("Writing it down");
+  sending = true; stone.classList.add("thinking"); orb.writing(true); say("Writing it down");
   try {
     const wav = await encode(chunks, ctx.sampleRate);
     const r = await fetch("/v1/transcribe", { method: "POST", headers: { ...(key ? { authorization: `Bearer ${key}` } : {}), "content-type": "audio/wav" }, body: wav });
@@ -153,7 +131,7 @@ async function end() {
   } catch {
     say("Could not reach Heyra. Check the connection.");
   } finally {
-    sending = false; stone.classList.remove("thinking");
+    sending = false; stone.classList.remove("thinking"); orb.writing(false);
   }
 }
 
@@ -176,12 +154,12 @@ async function encode(parts, rate) {
 function record({ text, seconds, ms }) {
   const li = document.createElement("li"), q = document.createElement("q"), meta = document.createElement("span");
   q.textContent = text;
-  meta.textContent = `${seconds.toFixed(1)} s, written in ${(ms / 1000).toFixed(2)} s`;
+  meta.textContent = `${seconds.toFixed(1)} s of speech · written in ${(ms / 1000).toFixed(2)} s`;
   li.append(q, meta); heard.prepend(li);
   while (heard.children.length > 5) heard.lastChild.remove();
 }
 
-// ---- the stone, by pointer and by keyboard --------------------------------
+// ---- the orb, by pointer and by keyboard -----------------------------------
 stone.addEventListener("pointerdown", (e) => { e.preventDefault(); stone.setPointerCapture?.(e.pointerId); begin(); });
 stone.addEventListener("pointerup", end);
 stone.addEventListener("pointercancel", end);
@@ -189,6 +167,12 @@ stone.addEventListener("contextmenu", (e) => e.preventDefault());
 stone.addEventListener("keydown", (e) => { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); begin(); } });
 stone.addEventListener("keyup", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); end(); } });
 stone.addEventListener("blur", end);
+// The space bar anywhere on the page, unless you're typing in a field.
+const typing = (e) => e.target.closest?.("input, textarea, [contenteditable]");
+addEventListener("keydown", (e) => {
+  if (e.key === " " && !e.repeat && !typing(e) && e.target !== stone && !stone.disabled) { e.preventDefault(); begin(); }
+});
+addEventListener("keyup", (e) => { if (e.key === " " && !typing(e) && e.target !== stone) { e.preventDefault(); end(); } });
 
 // The code example names whichever host is serving this page.
 const example = $("#curl");
