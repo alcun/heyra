@@ -12,6 +12,17 @@ const RATE = 16000, MIN = 0.4;
 const $ = (s) => document.querySelector(s);
 const stone = $("#stone"), status = $("#status"), heard = $("#heard");
 const orb = makeOrb($("#orb"));
+// The light leans toward the pointer while it's over the hero.
+const hero = $(".hero");
+hero?.addEventListener("pointermove", (e) => {
+  const r = $("#orb").getBoundingClientRect();
+  const x = (e.clientX - (r.left + r.width / 2)) / (innerWidth / 2);
+  const y = (e.clientY - (r.top + r.height / 2)) / (innerHeight / 2);
+  orb.look(Math.max(-1, Math.min(1, x)), Math.max(-1, Math.min(1, y)));
+});
+hero?.addEventListener("pointerleave", () => orb.look(0, 0));
+stone.addEventListener("pointerenter", () => orb.hover(true));
+stone.addEventListener("pointerleave", () => orb.hover(false));
 const keyForm = $("#key"), keyInput = keyForm.querySelector("input"), forget = $("#forget");
 
 const store = {

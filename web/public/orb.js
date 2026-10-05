@@ -18,8 +18,10 @@ precision highp float;
 #define STEPS __STEPS__
 uniform vec2 res;
 uniform float time, voice, wave, twist, writing, scale;
+uniform vec2 tilt;
 
 mat3 rotY(float a) { float c = cos(a), s = sin(a); return mat3(c, 0.0, s, 0.0, 1.0, 0.0, -s, 0.0, c); }
+mat3 rotX(float a) { float c = cos(a), s = sin(a); return mat3(1.0, 0.0, 0.0, 0.0, c, s, 0.0, -s, c); }
 mat3 rotZ(float a) { float c = cos(a), s = sin(a); return mat3(c, -s, 0.0, s, c, 0.0, 0.0, 0.0, 1.0); }
 
 void main() {
@@ -41,7 +43,7 @@ void main() {
     float t0 = -b - sh;
     float dt = 2.0 * sh / float(STEPS);
     float t = t0 + dt * 0.5;
-    mat3 lean = rotZ(0.3);
+    mat3 lean = rotZ(0.3 + tilt.x) * rotX(tilt.y);
     for (int i = 0; i < STEPS; i++) {
       vec3 p = lean * (ro + rd * t);
       float r = length(p);
@@ -91,7 +93,7 @@ export function orb(canvas, { scale: startScale = 1 } = {}) {
   const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
   if (!gl) {
     canvas.classList.add("no-gl");
-    return { level() {}, writing() {}, size() {}, stop() {} };
+    return { level() {}, writing() {}, size() {}, look() {}, hover() {}, stop() {} };
   }
   const compile = (type, src) => {
     const s = gl.createShader(type);
@@ -112,12 +114,13 @@ export function orb(canvas, { scale: startScale = 1 } = {}) {
   const loc = gl.getAttribLocation(prog, "p");
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const u = Object.fromEntries(["res", "time", "voice", "wave", "twist", "writing", "scale"].map((n) => [n, gl.getUniformLocation(prog, n)]));
+  const u = Object.fromEntries(["res", "time", "voice", "wave", "twist", "writing", "scale", "tilt"].map((n) => [n, gl.getUniformLocation(prog, n)]));
 
   const calm = matchMedia("(prefers-reduced-motion: reduce)");
   let target = 0, smooth = 0, gold = 0, goldTarget = 0, twist = 1, wave = 0, clock = 0;
   let last = performance.now(), frame = 0, visible = true;
   let scale = startScale, scaleTarget = startScale;
+  let tx = 0, ty = 0, txTarget = 0, tyTarget = 0, hover = 0, hoverTarget = 0;
 
   function size() {
     // The shader is soft; under 1.5x is plenty and keeps phones cool.
@@ -136,10 +139,14 @@ export function orb(canvas, { scale: startScale = 1 } = {}) {
     wave += dt * (goldTarget ? 3.2 : 0.45 + 2 * smooth);
     clock += dt * (0.6 + 1.2 * smooth);
     scale += (scaleTarget - scale) * (scaleTarget > scale ? 0.16 : 0.09);
+    tx += (txTarget - tx) * 0.05;
+    ty += (tyTarget - ty) * 0.05;
+    hover += (hoverTarget - hover) * 0.08;
     size();
     gl.uniform2f(u.res, canvas.width, canvas.height);
     gl.uniform1f(u.time, clock);
-    gl.uniform1f(u.voice, smooth);
+    gl.uniform1f(u.voice, Math.max(smooth, hover * 0.18));
+    gl.uniform2f(u.tilt, tx, ty);
     gl.uniform1f(u.wave, wave);
     gl.uniform1f(u.twist, twist);
     gl.uniform1f(u.writing, gold);
@@ -160,6 +167,9 @@ export function orb(canvas, { scale: startScale = 1 } = {}) {
     level(v) { target = Math.max(0, Math.min(1, v)); },
     writing(on) { goldTarget = on ? 1 : 0; if (on) target = 0; },
     size(s) { scaleTarget = s; },
+    // Lean the light toward a point (-1..1 on each axis), and wake a little on hover.
+    look(x, y) { if (!calm.matches) { txTarget = -x * 0.35; tyTarget = y * 0.35; } },
+    hover(on) { hoverTarget = on ? 1 : 0; },
     stop() { cancelAnimationFrame(frame); frame = 0; visible = false; },
   };
 }
