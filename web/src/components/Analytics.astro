@@ -1,0 +1,12 @@
+---
+// Optional, cookieless page analytics (LoggerLizard). Rendered only when the
+// site is built with HEYRA_LOGGERLIZARD_KEY; the server must then allow
+// https://api.loggerlizard.com in HEYRA_CONNECT_SRC.
+const { publicKey } = Astro.props;
+---
+<meta name="heyra-analytics" content={publicKey} />
+<script>
+  import Lizard from "@loggerlizard/lizard";
+  const key = document.querySelector('meta[name="heyra-analytics"]')?.getAttribute("content");
+  if (key) new Lizard(key, { autoTrack: true, debug: false });
+</script>

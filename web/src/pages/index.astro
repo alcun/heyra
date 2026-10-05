@@ -10,6 +10,21 @@ import "@fontsource/ibm-plex-mono/latin-500.css";
 const MAC = "https://github.com/alcun/heyra-desktop/releases/latest/download/Heyra.zip";
 const MAC_CODE = "https://github.com/alcun/heyra-desktop";
 const SERVER_CODE = "https://github.com/alcun/heyra";
+// One list for the page and for search engines' FAQ data.
+const faq = [
+  ["Does Heyra need the internet?", "Once, to download its speech model (about 490 MB). After that it works with no network at all."],
+  ["Which Macs does it run on?", "Macs with Apple Silicon (M1 or later) on macOS 13 or later."],
+  ["Which languages does it understand?", "English and 24 other European languages, including French, German, Spanish and Italian. It works out which one you're speaking."],
+  ["How is it different from the dictation built into macOS?", "Heyra works in any app by holding one key, uses NVIDIA's Parakeet model, keeps a history you can copy from, and has a dictionary for the words it gets wrong. And it's open source."],
+  ["Is it really free?", "Yes. It's MIT licensed, with no account and no paid tier."],
+  ["Does it work on Windows or Linux?", "Not yet. A Windows version is planned."],
+  ["What happens to my voice in the demo on this page?", "The demo sends your clip to this server, which writes it down in memory and doesn't keep the audio. The Mac app sends nothing."],
+];
+import Analytics from "../components/Analytics.astro";
+const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
+const site = Astro.site;
+const canonical = site ? new URL("/", site).href : undefined;
+const og = site ? new URL("/og.png", site).href : undefined;
 const curl = `curl http://localhost:3000/v1/transcribe \\
   --data-binary @clip.wav
 
@@ -20,28 +35,36 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Heyra</title>
+  <title>Heyra · Dictation that runs on your Mac</title>
+  {canonical && <link rel="canonical" href={canonical} />}
   <meta name="description" content="Hold a key, talk, let go. Heyra writes it down, on your own Mac. Free and open source." />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#121318" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Heyra" />
+  <meta property="og:title" content="Heyra · Dictation that runs on your Mac" />
+  {og && <meta property="og:image" content={og} />}
+  {og && <meta name="twitter:card" content="summary_large_image" />}
   <meta property="og:description" content="Hold a key, talk, let go. Speech to text that runs on your own Mac." />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="How to use this API" />
+  {analyticsKey && <Analytics publicKey={analyticsKey} />}
   <script type="application/ld+json">{JSON.stringify({
     "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Heyra",
     description: "Push-to-talk dictation that runs on your Mac with NVIDIA Parakeet, plus a self-hosted speech-to-text API.",
     applicationCategory: "UtilitiesApplication", operatingSystem: "macOS (Apple Silicon)",
     license: "https://opensource.org/licenses/MIT", codeRepository: MAC_CODE,
-    offers: { "@type": "Offer", price: "0" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  })}</script>
+  <script type="application/ld+json">{JSON.stringify({
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
   })}</script>
   <style is:global>
     /* Night instrument: graphite ground, cream readouts, gold for anything live,
        slate for labels, lavender only in the orb's edge light. One dark look by choice. */
     :root {
       --ground: #121318; --ground-2: #17181e; --panel: #1d1f26; --hair: #2c2f3a;
-      --cream: #ede0c4; --slate: #8a9aa6; --dim: #5b6470; --gold: #d9a86a; --gold-deep: #9c6d3c;
+      --cream: #ede0c4; --slate: #8a9aa6; --dim: #7a8491; --gold: #d9a86a; --gold-deep: #9c6d3c;
       --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
       --page: 72rem;
@@ -169,7 +192,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .readouts span { display: block; margin-top: 0.6rem; color: var(--slate); font-size: 0.92rem; }
 
     /* split: words and picture */
-    .split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+    .split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
     .shot { position: relative; border-radius: 16px; padding: 10px; background: linear-gradient(160deg, #2a2c35, #16171c); border: 1px solid var(--hair); box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.02); }
     .shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
     .shot::before { content: ""; position: absolute; inset: -30% -10% auto; height: 70%; background: radial-gradient(closest-side, rgb(217 168 106 / 0.10), transparent); z-index: -1; }
@@ -232,6 +255,48 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
     /* privacy */
 
+
+    /* comparison */
+    .compare { margin-top: 2.5rem; border: 1px solid var(--hair); border-radius: 16px; overflow: hidden; }
+    .crow { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); }
+    .crow > span { padding: 1rem 1.4rem; border-top: 1px solid var(--hair); color: var(--slate); min-width: 0; }
+    .crow.head > span { border-top: 0; font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); background: var(--ground-2); }
+    .crow.head > span:nth-child(2) { color: var(--gold); }
+    .crow > span:nth-child(2) { background: rgb(217 168 106 / 0.04); border-inline: 1px solid var(--hair); }
+    .crow > span[role="rowheader"] { color: var(--cream); }
+    .crow .us { color: var(--cream); font-weight: 500; }
+    @media (max-width: 640px) { .crow > span { padding: 0.85rem 0.8rem; font-size: 0.92rem; } }
+
+
+    /* faq */
+    .faq-wrap { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 5vw, 5rem); }
+    .faq details { border-top: 1px solid var(--hair); }
+    .faq details:last-child { border-bottom: 1px solid var(--hair); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 1rem; padding: 1.15rem 0; font: 500 1.05rem/1.4 var(--sans); color: var(--cream); }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font: 400 1.2rem/1 var(--mono); color: var(--gold); transition: transform 0.25s ease; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { margin: 0 0 1.2rem; max-width: 38rem; color: var(--slate); }
+    @media (max-width: 860px) { .faq-wrap { grid-template-columns: minmax(0, 1fr); } }
+
+    /* motion: one entrance for the hero, a gentle rise as sections scroll in.
+       Everything is visible without it; reduced motion turns it off. */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-inner > * { animation: enter 1s cubic-bezier(.2,.8,.2,1) both; }
+      .hero-inner > :nth-child(2) { animation-delay: 0.08s; }
+      .hero-inner > :nth-child(3) { animation-delay: 0.16s; }
+      .hero-inner > .stage { animation: bloom 1.6s cubic-bezier(.2,.8,.2,1) 0.2s both; }
+      .hero-inner > .actions, .hero-inner > .fine { animation-delay: 0.45s; }
+      @keyframes enter { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } }
+      @keyframes bloom { from { opacity: 0; transform: scale(0.82); filter: blur(10px); } }
+      @supports (animation-timeline: view()) {
+        section.block .wrap > *, .closing .wrap > * {
+          animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 28%;
+        }
+        @keyframes rise { from { opacity: 0.25; transform: translateY(28px); } }
+      }
+    }
+
     /* developers */
     pre { margin: 2rem 0 0; padding: 1.25rem 1.4rem; border-radius: 14px; background: #0d0e12; border: 1px solid var(--hair); overflow-x: auto; font: 400 0.85rem/1.7 var(--mono); color: var(--cream); }
     .dev-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
@@ -240,8 +305,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .closing { text-align: center; padding: clamp(6rem, 13vw, 10rem) 0; border-top: 1px solid var(--hair);
       background: radial-gradient(40rem 22rem at 50% 30%, rgb(217 168 106 / 0.06), transparent 70%); }
     .closing h2 { margin-inline: auto; }
-    .closing .dot { width: 1.1rem; height: 1.1rem; margin: 0 auto 1.75rem; border-radius: 50%; background: #000; box-shadow: 0 0 0 1px #34374a, 0 0 30px 6px rgb(217 168 106 / 0.18); display: grid; place-items: center; }
-    .closing .dot::after { content: ""; width: 0.25rem; height: 0.25rem; border-radius: 50%; background: var(--gold); }
+    .closing-orb { display: block; width: 9rem; height: 9rem; margin: -2rem auto -1rem; cursor: pointer; }
 
     footer { border-top: 1px solid var(--hair); padding: 2.5rem 0 3.5rem; color: var(--dim); font-size: 0.85rem; }
     footer p { margin: 0.4rem 0; max-width: 52rem; }
@@ -263,6 +327,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#private">Privacy</a>
       <a class="hide-sm" href="#developers">Developers</a>
+      <a class="hide-sm" href="#faq">FAQ</a>
       <a class="btn ghost small" href={MAC}>Download</a>
     </nav>
   </header>
@@ -360,6 +425,21 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       </div>
     </section>
 
+    <section class="block" aria-labelledby="compare-title">
+      <div class="wrap">
+        <p class="label">Local, not cloud</p>
+        <h2 id="compare-title">Everything stays where you said it.</h2>
+        <div class="compare" role="table" aria-label="Heyra compared with cloud dictation">
+          <div class="crow head" role="row"><span role="columnheader"></span><span role="columnheader">Heyra</span><span role="columnheader">Cloud dictation</span></div>
+          <div class="crow" role="row"><span role="rowheader">Where your speech is processed</span><span role="cell" class="us">Your Mac</span><span role="cell">Their servers</span></div>
+          <div class="crow" role="row"><span role="rowheader">Works offline</span><span role="cell" class="us">Yes</span><span role="cell">No</span></div>
+          <div class="crow" role="row"><span role="rowheader">Account</span><span role="cell" class="us">None</span><span role="cell">Required</span></div>
+          <div class="crow" role="row"><span role="rowheader">Price</span><span role="cell" class="us">Free</span><span role="cell">Usually a subscription</span></div>
+          <div class="crow" role="row"><span role="rowheader">Source code</span><span role="cell" class="us">Open, MIT</span><span role="cell">Closed</span></div>
+        </div>
+      </div>
+    </section>
+
     <section class="block" id="developers" aria-labelledby="dev-title">
       <div class="wrap">
         <p class="label">Developers</p>
@@ -379,9 +459,26 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       </div>
     </section>
 
+    <section class="block" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-wrap">
+        <div>
+          <p class="label">Questions</p>
+          <h2 id="faq-title">Good to know.</h2>
+        </div>
+        <div class="faq">
+          {faq.map(([q, a]) => (
+            <details>
+              <summary>{q}</summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section class="closing" aria-labelledby="end-title">
       <div class="wrap">
-        <div class="dot" aria-hidden="true"></div>
+        <canvas class="closing-orb" aria-hidden="true"></canvas>
         <h2 id="end-title">Talk to your Mac.</h2>
         <div class="actions">
           <a class="btn primary" href={MAC}>Download for Mac</a>

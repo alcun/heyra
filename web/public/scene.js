@@ -84,3 +84,11 @@ if (scene) {
     if (visible) loop();
   }, { threshold: 0.3 }).observe(scene);
 }
+
+// The closing dot: hover it and it wakes, like the one above your Dock.
+const closing = document.querySelector(".closing-orb");
+if (closing) {
+  const dot = makeOrb(closing, { scale: 0.12 });
+  closing.addEventListener("pointerenter", () => { dot.size(0.34); dot.writing(true); });
+  closing.addEventListener("pointerleave", () => { dot.size(0.12); dot.writing(false); });
+}

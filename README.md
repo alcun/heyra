@@ -90,6 +90,21 @@ page may call the API, and `/llms.txt` describes it for agents.
 | `PORT` | 3000 | |
 | `MODEL_DIR` | `/models/parakeet` | Set by the Docker image. |
 | `HEYRA_WEB_ROOT` | the page | Set by the Docker image; empty for the API alone. |
+| `HEYRA_CONNECT_SRC` | none | Extra hosts the page may send to, space separated `https://` origins (e.g. an analytics endpoint). |
+
+The page takes two optional build arguments:
+
+| Build argument | |
+|---|---|
+| `HEYRA_SITE` | The public address, e.g. `https://example.com`: adds a canonical link and a share image. |
+| `HEYRA_LOGGERLIZARD_KEY` | A [LoggerLizard](https://loggerlizard.com) public key for cookieless page analytics. Also set `HEYRA_CONNECT_SRC=https://api.loggerlizard.com` when running. |
+
+```sh
+docker build --build-arg HEYRA_SITE=https://example.com -t heyra .
+```
+
+For local work on the page, `HEYRA_DEV_API=https://your-heyra-server bun run dev` in `web/`
+sends the demo's requests to a running server.
 
 Numbers must be whole: at least 1 for `THREADS` and `PORT`, at least 0 for the
 rest. Anything else, including an empty value, stops the server at startup

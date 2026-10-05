@@ -8,9 +8,14 @@ import { resolve, sep } from "node:path";
 type Fetch = (request: Request) => Response | Promise<Response>;
 
 // Everything, fonts included, comes from this origin; the microphone is for
-// this page only; nobody may frame it.
+// this page only; nobody may frame it. HEYRA_CONNECT_SRC may add hosts the page
+// may send to (space-separated), e.g. an analytics endpoint.
+const extraConnect = (process.env.HEYRA_CONNECT_SRC ?? "")
+  .split(/\s+/)
+  .filter((h) => /^https:\/\/[a-z0-9.-]+$/i.test(h))
+  .join(" ");
 export const PAGE_HEADERS = {
-  "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+  "content-security-policy": `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'${extraConnect ? " " + extraConnect : ""}; frame-ancestors 'none'; base-uri 'none'; form-action 'none'`,
   "permissions-policy": "microphone=(self), camera=(), geolocation=()",
   "referrer-policy": "strict-origin-when-cross-origin",
   "x-content-type-options": "nosniff",

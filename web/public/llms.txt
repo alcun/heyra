@@ -3,6 +3,14 @@
 > Self-hosted speech to text. Send a short WAV, get the words back. English and
 > 24 other European languages, found automatically. Audio is never kept.
 
+## Mac app
+
+Heyra for Mac is push-to-talk dictation that runs the same model on the Mac
+itself: hold fn, talk, let go, and the words are typed where the cursor is.
+Nothing is sent anywhere. Free, MIT, Apple Silicon.
+Download: https://github.com/alcun/heyra-desktop/releases/latest/download/Heyra.zip
+Source: https://github.com/alcun/heyra-desktop
+
 ## Transcribe
 
 POST /v1/transcribe with a WAV file as the request body: 16-bit PCM, mono or
