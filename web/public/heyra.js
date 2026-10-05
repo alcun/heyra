@@ -23,7 +23,7 @@ const store = {
 let key = store.get(), needsKey = false;
 
 const say = (t) => { status.textContent = t; };
-const IDLE = "Hold the orb, or the space bar, and speak.";
+const IDLE = matchMedia("(pointer: coarse)").matches ? "Hold the orb and speak." : "Hold the orb, or the space bar, and speak.";
 
 function showKey(message) {
   keyForm.hidden = false; forget.hidden = true;
