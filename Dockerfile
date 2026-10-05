@@ -6,10 +6,12 @@ COPY web/package.json web/bun.lock ./
 RUN bun install --frozen-lockfile
 COPY web/ ./
 # Optional, both empty by default: the public address (canonical link and share
-# image) and a LoggerLizard public key for cookieless page analytics.
+# image), a LoggerLizard public key for cookieless page analytics, and a
+# "Made by" link for the footer.
 ARG HEYRA_SITE=
 ARG HEYRA_LOGGERLIZARD_KEY=
-RUN HEYRA_SITE="$HEYRA_SITE" HEYRA_LOGGERLIZARD_KEY="$HEYRA_LOGGERLIZARD_KEY" bun run build
+ARG HEYRA_CREDIT_URL=
+RUN HEYRA_SITE="$HEYRA_SITE" HEYRA_LOGGERLIZARD_KEY="$HEYRA_LOGGERLIZARD_KEY" HEYRA_CREDIT_URL="$HEYRA_CREDIT_URL" bun run build
 
 # Debian rather than Alpine from here: sherpa-onnx ships glibc binaries.
 FROM oven/bun:1-slim AS runtime

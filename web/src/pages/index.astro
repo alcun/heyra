@@ -22,6 +22,7 @@ const faq = [
 ];
 import Analytics from "../components/Analytics.astro";
 const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
+const credit = import.meta.env.HEYRA_CREDIT_URL;
 const site = Astro.site;
 const canonical = site ? new URL("/", site).href : undefined;
 const og = site ? new URL("/og.png", site).href : undefined;
@@ -121,7 +122,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       padding: 5.5rem 1rem 3rem; overflow: hidden; isolation: isolate;
     }
     .hero-inner { position: relative; width: 100%; max-width: 56rem; }
-    .eyebrow { margin: 0; }
     /* The sky: a faint field of stars and a slow, warm drift behind the orb. */
     .sky { position: absolute; inset: 0; z-index: -1; pointer-events: none;
       background:
@@ -143,7 +143,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       .sky span:nth-child(2) { animation: drift 34s ease-in-out infinite alternate-reverse; }
       @keyframes drift { to { transform: translate(6vmax, -3vmax) scale(1.12); } }
     }
-    .stage { position: relative; width: min(28rem, 80vw, 46svh); aspect-ratio: 1; margin: 0.5rem auto -1.5rem; }
+    .stage { position: relative; width: min(28rem, 80vw, 46svh); aspect-ratio: 1; margin: 2rem auto -1rem; }
     #orb { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
     #orb.no-gl { background: radial-gradient(circle at 50% 50%, #000 0 33%, rgb(217 168 106 / 0.18) 34%, transparent 60%); border-radius: 50%; }
     #stone {
@@ -155,12 +155,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     #stone.held { transform: scale(0.98); }
     #stone .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
     h1 {
-      margin: 1rem 0 0; font: 600 clamp(2.3rem, 5.6vw, 4.2rem)/1.04 var(--sans);
+      margin: 0; font: 600 clamp(2.6rem, 6.4vw, 4.8rem)/1.02 var(--sans);
       letter-spacing: -0.035em; text-wrap: balance;
     }
     h1 em { font-style: normal; color: var(--gold); }
     .lede { margin: 1rem auto 0; max-width: 30rem; color: var(--slate); font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.5; text-wrap: balance; }
-    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 2rem; }
     .fine { margin: 0.8rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
     #status { min-height: 1.5em; margin: 0.25rem auto 0; font: 500 0.78rem/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
     #status kbd {
@@ -197,7 +197,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
     /* ---- sections ---- */
     section.block { padding: clamp(4.5rem, 9vw, 7.5rem) 0; border-top: 1px solid var(--hair); overflow-x: clip; }
-    h2 { margin: 0.75rem 0 0; font: 600 clamp(1.9rem, 4.2vw, 3rem)/1.08 var(--sans); letter-spacing: -0.03em; text-wrap: balance; max-width: 20ch; }
+    h2 { margin: 0; font: 600 clamp(1.9rem, 4.2vw, 3rem)/1.08 var(--sans); letter-spacing: -0.03em; text-wrap: balance; max-width: 20ch; }
     .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
 
 
@@ -340,6 +340,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     footer { border-top: 1px solid var(--hair); padding: 3.5rem 0 3rem; color: var(--dim); font-size: 0.9rem; }
     .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; }
     .foot-brand p { margin: 0.8rem 0 0; }
+    .foot-brand .made { margin-top: 0.35rem; }
+    .foot-brand .made a { color: var(--slate); }
     .foot-cols { display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 5rem); }
     .foot-cols div { display: flex; flex-direction: column; gap: 0.55rem; }
     .foot-cols .label { margin: 0 0 0.3rem; }
@@ -362,10 +364,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <header class="bar">
     <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
     <nav aria-label="Main">
-      <a class="hide-sm" href="#how">How it works</a>
-      <a class="hide-sm" href="#private">Privacy</a>
-      <a class="hide-sm" href="#developers">Server</a>
-      <a class="hide-sm" href="#faq">FAQ</a>
+      <a class="hide-sm" href={MAC_CODE}>GitHub</a>
       <a class="btn ghost small" href={MAC}>Download</a>
     </nav>
   </header>
@@ -374,9 +373,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="hero" aria-label="Heyra">
       <div class="sky" aria-hidden="true"><span></span><span></span></div>
       <div class="hero-inner">
-        <p class="label eyebrow">Dictation for Mac · runs on your machine</p>
         <h1>Hold a key. Talk. <em>Let&nbsp;go.</em></h1>
-        <p class="lede">Heyra writes down what you say, wherever your cursor is. Your voice never leaves your Mac.</p>
+        <p class="lede">Dictation that never leaves your Mac.</p>
 
         <div class="stage">
           <canvas id="orb" aria-hidden="true"></canvas>
@@ -394,15 +392,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
           </a>
           <a class="btn ghost" href={MAC_CODE}>View the code</a>
         </div>
-        <p class="fine">Free · Apple Silicon · macOS 13 or later</p>
+        <p class="fine">Free for Apple Silicon Macs</p>
       </div>
     </section>
 
     <section class="block scene-block" id="how" aria-labelledby="scene-title">
       <div class="wrap">
-        <p class="label">How it works</p>
         <h2 id="scene-title">A dot above the Dock.</h2>
-        <p class="intro">At rest, Heyra is a single dark dot above the Dock. Hold fn in any app and it opens into the orb, listens, and writes what you said where your cursor is.</p>
+        <p class="intro">Hold fn in any app. Heyra listens, then types what you said.</p>
         <div class="scene-wrap">
         <div class="screen" id="scene" role="img" aria-label="A Mac screen. The Heyra dot sits above the Dock; when fn is held it grows into the orb, and the spoken sentence appears in a Notes window.">
           <div class="menubar" aria-hidden="true">
@@ -430,8 +427,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block" aria-labelledby="app-title">
       <div class="wrap split">
         <div>
-          <p class="label">The app</p>
-          <h2 id="app-title">Small, fast, and yours.</h2>
+          <h2 id="app-title">It lives in your menu bar.</h2>
           <ul class="features">
             <li><div><b>History</b><span>Every take is kept on your Mac. Click one to copy it again.</span></div></li>
             <li><div><b>Dictionary</b><span>Teach it the words it gets wrong, once: names, jargon, places.</span></div></li>
@@ -449,9 +445,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       <div class="wrap">
         <div class="split private-split">
         <div>
-        <p class="label">Privacy</p>
         <h2 id="private-title">Your voice stays on your Mac.</h2>
-        <p class="intro">NVIDIA's Parakeet model runs on your Mac itself. After the first download Heyra needs no network at all. Turn off Wi-Fi and it still writes.</p>
+        <p class="intro">The speech model runs on your Mac. Turn off Wi-Fi and it still works.</p>
         </div>
         <div class="meter-panel" aria-label="What Heyra needs from the internet">
           <div class="row"><span>Audio sent</span><b>0 B</b></div>
@@ -467,8 +462,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
     <section class="block" aria-labelledby="compare-title">
       <div class="wrap">
-        <p class="label">Local, not cloud</p>
-        <h2 id="compare-title">Everything stays where you said it.</h2>
+        <h2 id="compare-title">Local, not cloud.</h2>
         <div class="compare" role="table" aria-label="Heyra compared with cloud dictation">
           <div class="crow head" role="row"><span role="columnheader"><span class="sr-only">Question</span></span><span role="columnheader">Heyra</span><span role="columnheader">Cloud dictation</span></div>
           <div class="crow" role="row"><span role="rowheader">Where your speech is processed</span><span role="cell" class="us">Your Mac</span><span role="cell">Their servers</span></div>
@@ -483,9 +477,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block" id="developers" aria-labelledby="dev-title">
       <div class="wrap split server-split">
         <div>
-          <p class="label">Heyra Server</p>
           <h2 id="dev-title">The same engine, for everything else.</h2>
-          <p class="intro">Run Heyra on any server and give speech to things that can't run a model themselves. Send a WAV of up to 15 seconds, or 30 with a key, and get the words back. Audio is never kept.</p>
+          <p class="intro">Run Heyra on a server for anything that can't run a model itself. Send a WAV, get the words back.</p>
           <ul class="uses" aria-label="What people connect to it">
             <li>Microcontrollers</li><li>Web pages</li><li>Shell scripts</li><li>Home automation</li><li>Agents</li>
           </ul>
@@ -509,8 +502,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-wrap">
         <div>
-          <p class="label">Questions</p>
-          <h2 id="faq-title">Good to know.</h2>
+          <h2 id="faq-title">Questions</h2>
         </div>
         <div class="faq">
           {faq.map(([q, a]) => (
@@ -540,6 +532,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       <div class="foot-brand">
         <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
         <p>Old Norse for "to hear".</p>
+        {credit && <p class="made">Made by <a href={credit}>{new URL(credit).host}</a></p>}
       </div>
       <nav class="foot-cols" aria-label="Footer">
         <div><p class="label">Mac</p><a href={MAC}>Download</a><a href={MAC_CODE}>Source</a><a href={`${MAC_CODE}/releases`}>Releases</a></div>
