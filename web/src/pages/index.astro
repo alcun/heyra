@@ -94,9 +94,9 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .mark { display: flex; align-items: center; gap: 0.6rem; font: 500 0.9rem/1 var(--mono); letter-spacing: 0.18em; color: var(--gold); text-decoration: none; }
     .mark i { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: #000; box-shadow: inset 0 0 0 1px #2a2c34; display: grid; place-items: center; }
     .mark i::after { content: ""; width: 0.18rem; height: 0.18rem; border-radius: 50%; background: var(--gold); }
-    nav { display: flex; align-items: center; gap: 1.5rem; font: 500 0.8rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
-    nav a { color: var(--slate); text-decoration: none; }
-    nav a:hover { color: var(--cream); }
+    header.bar nav { display: flex; align-items: center; gap: 1.5rem; font: 500 0.8rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+    header.bar nav a { color: var(--slate); text-decoration: none; }
+    header.bar nav a:hover { color: var(--cream); }
 
     .btn {
       display: inline-flex; align-items: center; gap: 0.6rem; border-radius: 999px;
@@ -158,6 +158,18 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; }
     .fine { margin: 0.8rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
     #status { min-height: 1.5em; margin: 0.25rem auto 0; font: 500 0.78rem/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+    #status kbd {
+      display: inline-block; margin: 0 0.35em; padding: 0.25em 0.55em 0.2em; border-radius: 6px;
+      background: linear-gradient(#25272f, #1b1d23); border: 1px solid #353845; box-shadow: 0 2px 0 #0b0c10;
+      font: 500 0.95em/1 var(--mono); color: var(--cream); letter-spacing: 0.04em; text-transform: none;
+    }
+    #status::before {
+      content: ""; display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.6rem; vertical-align: 0.08em;
+      border-radius: 50%; background: var(--dim);
+    }
+    body[data-demo="up"] #status::before { background: #8fbf8a; box-shadow: 0 0 10px rgb(143 191 138 / 0.6); }
+    body[data-demo="down"] #status::before { background: #c9705a; }
+    .hero:has(#stone.listening) #status::before { background: var(--gold); box-shadow: 0 0 12px rgb(217 168 106 / 0.8); }
     #heard { list-style: none; padding: 0; margin: 0.5rem auto 0; max-width: 36rem; }
     #heard:empty { display: none; }
     #heard li { color: var(--dim); margin: 0 0 0.75rem; }
@@ -312,16 +324,24 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .closing h2 { margin-inline: auto; }
     .closing-orb { display: block; width: 9rem; height: 9rem; margin: -2rem auto -1rem; cursor: pointer; }
 
-    footer { border-top: 1px solid var(--hair); padding: 2.5rem 0 3.5rem; color: var(--dim); font-size: 0.85rem; }
-    footer p { margin: 0.4rem 0; max-width: 52rem; }
-    footer a { color: var(--slate); }
+    footer { border-top: 1px solid var(--hair); padding: 3.5rem 0 3rem; color: var(--dim); font-size: 0.9rem; }
+    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; }
+    .foot-brand p { margin: 0.8rem 0 0; }
+    .foot-cols { display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 5rem); }
+    .foot-cols div { display: flex; flex-direction: column; gap: 0.55rem; }
+    .foot-cols .label { margin: 0 0 0.3rem; }
+    .foot-cols a { color: var(--slate); text-decoration: none; font-size: 0.92rem; }
+    .foot-cols a:hover { color: var(--cream); }
+    .credits { margin-top: 2.5rem; }
+    .credits p { margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--hair); font-size: 0.82rem; }
+    .credits a { color: var(--slate); }
 
     @media (max-width: 860px) {
         .readouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .readouts div:nth-child(3) { border-left: 0; }
       .readouts div:nth-child(n+3) { border-top: 1px solid var(--hair); }
       .split { grid-template-columns: minmax(0, 1fr); }
-      nav .hide-sm { display: none; }
+      header.bar nav .hide-sm { display: none; }
     }
   </style>
 </head>
@@ -497,9 +517,19 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   </main>
 
   <footer>
-    <div class="wrap">
-      <p>Heyra is Old Norse for "to hear". The <a href={MAC_CODE}>Mac app</a> and the <a href={SERVER_CODE}>server</a> are MIT licensed.</p>
-      <p>Listening by NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), as converted by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
+    <div class="wrap foot">
+      <div class="foot-brand">
+        <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
+        <p>Old Norse for "to hear".</p>
+      </div>
+      <nav class="foot-cols" aria-label="Footer">
+        <div><p class="label">Mac</p><a href={MAC}>Download</a><a href={MAC_CODE}>Source</a><a href={`${MAC_CODE}/releases`}>Releases</a></div>
+        <div><p class="label">Server</p><a href={SERVER_CODE}>Source</a><a href="/llms.txt">llms.txt</a><a href="#developers">API</a></div>
+        <div><p class="label">More</p><a href="#faq">FAQ</a><a href="#private">Privacy</a></div>
+      </nav>
+    </div>
+    <div class="wrap credits">
+      <p>MIT licensed. Listening by NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), as converted by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
     </div>
   </footer>
   <script src="/heyra.js" type="module"></script>

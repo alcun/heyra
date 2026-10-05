@@ -22,8 +22,16 @@ const store = {
 // when one is needed, and a saved key is used and can be forgotten.
 let key = store.get(), needsKey = false;
 
-const say = (t) => { status.textContent = t; };
-const IDLE = matchMedia("(pointer: coarse)").matches ? "Hold the orb and speak." : "Hold the orb, or the space bar, and speak.";
+// Status text; "space" in the prompt is drawn as a key cap.
+const say = (t) => {
+  status.textContent = "";
+  const parts = t.split(/(space bar)/);
+  for (const part of parts) {
+    if (part === "space bar") { const k = document.createElement("kbd"); k.textContent = "space"; status.append(k); }
+    else status.append(part);
+  }
+};
+const IDLE = matchMedia("(pointer: coarse)").matches ? "Hold the orb to speak." : "Hold the orb or space bar to speak.";
 
 function showKey(message) {
   keyForm.hidden = false; forget.hidden = true;
@@ -187,8 +195,10 @@ const example = $("#curl");
 if (example) example.textContent = example.textContent.replace("http://localhost:3000", location.origin);
 
 if (!navigator.mediaDevices?.getUserMedia || !window.AudioWorkletNode) { stone.disabled = true; say("This browser cannot record audio here."); }
-// A server with no free allowance asks for a key up front.
+// A server with no free allowance asks for a key up front. The light by the
+// prompt shows whether the demo server is up.
 else fetch("/healthz").then((r) => r.json()).catch(() => ({})).then((h) => {
+  document.body.dataset.demo = h.ok ? "up" : "down";
   needsKey = h.free === false;
   if (!needsKey || key) ready(); else showKey();
 });
