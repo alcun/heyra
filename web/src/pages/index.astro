@@ -296,7 +296,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     @media (max-width: 860px) { .faq-wrap { grid-template-columns: minmax(0, 1fr); } }
 
     /* motion: one entrance for the hero, a gentle rise as sections scroll in.
-       Everything is visible without it; reduced motion turns it off. */
+       The rise is movement only, never transparency, so a section is always fully
+       visible, whatever captures it. Reduced motion turns both off. */
     @media (prefers-reduced-motion: no-preference) {
       .hero-inner > * { animation: enter 1s cubic-bezier(.2,.8,.2,1) both; }
       .hero-inner > :nth-child(2) { animation-delay: 0.08s; }
@@ -309,7 +310,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         section.block .wrap > *, .closing .wrap > * {
           animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 28%;
         }
-        @keyframes rise { from { opacity: 0.25; transform: translateY(28px); } }
+        @keyframes rise { from { transform: translateY(32px); } }
       }
     }
 
