@@ -8,7 +8,7 @@ import { orb as makeOrb } from "/orb.js";
 const scene = document.querySelector("#scene");
 if (scene) {
   const o = makeOrb(scene.querySelector(".scene-orb"), { scale: 0.12 });
-  const key = scene.querySelector(".fnkey");
+  const key = document.querySelector(".keys .fnkey");
   const docBox = scene.querySelector(".doc");
   const lines = [
     "Can we move the standup to ten tomorrow?",

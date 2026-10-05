@@ -248,8 +248,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .dock i:nth-child(4) { background: linear-gradient(160deg, #d9a86a, #8d6233); }
     .dock i:nth-child(6) { background: linear-gradient(160deg, #9a94b4, #514c69); }
     .scene-orb { position: absolute; left: 50%; bottom: 9.5%; width: 14%; aspect-ratio: 1; translate: -50% 0; }
+    .scene-wrap { position: relative; margin-top: 3rem; }
+    .scene-wrap .screen { margin-top: 0; }
+    .keys { display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0 0 2%; }
+    .keys span { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
     .fnkey {
-      position: absolute; left: 4%; bottom: 6%; display: grid; place-items: center; width: 7%; aspect-ratio: 1.1;
+      display: grid; place-items: center; width: clamp(2.6rem, 6vw, 4.2rem); aspect-ratio: 1.1;
       border-radius: 12%; background: linear-gradient(#2a2c35, #1c1e25); border: 1px solid #3b3e4c;
       box-shadow: 0 4px 0 #0c0d11, inset 0 1px 0 #44475a; font: 500 clamp(0.6rem, 1.5vw, 1.05rem)/1 var(--mono); color: var(--cream);
       transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.2s ease;
@@ -390,6 +394,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         <p class="label">How it works</p>
         <h2 id="scene-title">A dot above the Dock.</h2>
         <p class="intro">At rest, Heyra is a single dark dot above the Dock. Hold fn in any app and it opens into the orb, listens, and writes what you said where your cursor is.</p>
+        <div class="scene-wrap">
         <div class="screen" id="scene" role="img" aria-label="A Mac screen. The Heyra dot sits above the Dock; when fn is held it grows into the orb, and the spoken sentence appears in a Notes window.">
           <div class="menubar" aria-hidden="true">
             <span class="mb-left"><b>Notes</b><span>File</span><span>Edit</span><span>Format</span></span>
@@ -399,9 +404,10 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
             <div class="titlebar"><i></i><i></i><i></i><span>Today</span></div>
             <div class="doc"><p class="doc-line">Notes from Tuesday</p><p class="doc-line now"><span class="doc-text">Call the printers about the proofs.</span><span class="caret"></span></p></div>
           </div>
-          <div class="fnkey" aria-hidden="true">fn</div>
           <canvas class="scene-orb" aria-hidden="true"></canvas>
           <div class="dock" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="keys" aria-hidden="true"><div class="fnkey">fn</div><span>Hold</span></div>
         </div>
         <div class="readouts" aria-label="Heyra in numbers">
           <div><strong>0.4 s</strong><span>to write six seconds of speech</span></div>
@@ -425,7 +431,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
           </ul>
         </div>
         <figure class="shot" style="margin:0">
-          <img src="/app.png" width="1560" height="1080" alt="Heyra's Home screen: a ready light and level meter, the microphone in use, and a setup list with each step ticked off." decoding="async" />
+          <img src="/app.png" width="1560" height="1080" alt="Heyra's Home screen: a ready light and level meter, the microphone in use, and a setup list with each step ticked off." loading="lazy" decoding="async" />
         </figure>
       </div>
     </section>
