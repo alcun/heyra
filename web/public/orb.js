@@ -123,8 +123,8 @@ export function orb(canvas, { scale: startScale = 1 } = {}) {
   let tx = 0, ty = 0, txTarget = 0, tyTarget = 0, hover = 0, hoverTarget = 0;
 
   function size() {
-    // The shader is soft; under 1.5x is plenty and keeps phones cool.
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    // The shader is soft; 1.25x is plenty and keeps laptops and phones cool.
+    const dpr = Math.min(devicePixelRatio || 1, 1.25);
     const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     gl.viewport(0, 0, w, h);
