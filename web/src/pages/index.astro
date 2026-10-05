@@ -277,6 +277,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     /* privacy */
 
 
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     /* comparison */
     .compare { margin-top: 2.5rem; border: 1px solid var(--hair); border-radius: 16px; overflow: hidden; }
     .crow { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); }
@@ -469,7 +470,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         <p class="label">Local, not cloud</p>
         <h2 id="compare-title">Everything stays where you said it.</h2>
         <div class="compare" role="table" aria-label="Heyra compared with cloud dictation">
-          <div class="crow head" role="row"><span role="columnheader"></span><span role="columnheader">Heyra</span><span role="columnheader">Cloud dictation</span></div>
+          <div class="crow head" role="row"><span role="columnheader"><span class="sr-only">Question</span></span><span role="columnheader">Heyra</span><span role="columnheader">Cloud dictation</span></div>
           <div class="crow" role="row"><span role="rowheader">Where your speech is processed</span><span role="cell" class="us">Your Mac</span><span role="cell">Their servers</span></div>
           <div class="crow" role="row"><span role="rowheader">Works offline</span><span role="cell" class="us">Yes</span><span role="cell">No</span></div>
           <div class="crow" role="row"><span role="rowheader">Account</span><span role="cell" class="us">None</span><span role="cell">Required</span></div>
