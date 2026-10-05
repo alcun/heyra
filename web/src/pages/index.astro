@@ -161,7 +161,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     #heard { list-style: none; padding: 0; margin: 0.5rem auto 0; max-width: 36rem; }
     #heard:empty { display: none; }
     #heard li { color: var(--dim); margin: 0 0 0.75rem; }
-    #heard li q { quotes: none; display: block; font-size: 1rem; }
+    #heard li q { quotes: none; display: block; font-size: 1rem; cursor: copy; }
     #heard li span { font: 400 0.75rem/1.4 var(--mono); }
     #heard li:first-child { color: var(--cream); margin-bottom: 1.5rem; }
     #heard li:first-child q { font: 500 clamp(1.25rem, 3.4vw, 1.7rem)/1.35 var(--sans); letter-spacing: -0.01em; margin-bottom: 0.4rem; }
@@ -298,6 +298,11 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     }
 
     /* developers */
+    .uses { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .uses li { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); border: 1px solid var(--hair); border-radius: 999px; padding: 0.55rem 0.85rem; }
+    .hero:has(#stone.listening) #status { color: var(--gold); }
+    .hero:has(#stone.thinking) #status { color: var(--cream); }
+
     pre { margin: 2rem 0 0; padding: 1.25rem 1.4rem; border-radius: 14px; background: #0d0e12; border: 1px solid var(--hair); overflow-x: auto; font: 400 0.85rem/1.7 var(--mono); color: var(--cream); }
     .dev-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
 
@@ -326,7 +331,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <nav aria-label="Main">
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#private">Privacy</a>
-      <a class="hide-sm" href="#developers">Developers</a>
+      <a class="hide-sm" href="#developers">Server</a>
       <a class="hide-sm" href="#faq">FAQ</a>
       <a class="btn ghost small" href={MAC}>Download</a>
     </nav>
@@ -442,9 +447,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
     <section class="block" id="developers" aria-labelledby="dev-title">
       <div class="wrap">
-        <p class="label">Developers</p>
-        <h2 id="dev-title">Or run your own server.</h2>
-        <p class="intro">The same model as a small HTTP API. Send a WAV of up to 15 seconds, or 30 with a key (<code>Authorization: Bearer &lt;key&gt;</code>), and get the words back. Audio is never kept.</p>
+        <p class="label">Heyra Server</p>
+        <h2 id="dev-title">The same engine, for everything else.</h2>
+        <p class="intro">Run Heyra on any server and give speech to things that can't run a model themselves: a microcontroller with a microphone, a website, a script. Send a WAV of up to 15 seconds, or 30 with a key (<code>Authorization: Bearer &lt;key&gt;</code>), and get the words back. Audio is never kept.</p>
+        <ul class="uses" aria-label="What people connect to it">
+          <li>Microcontrollers</li><li>Web pages</li><li>Shell scripts</li><li>Home automation</li><li>Agents</li>
+        </ul>
         <pre><code id="curl">{curl}</code></pre>
         <div class="dev-links">
           <a class="btn ghost small" href={SERVER_CODE}>Server code</a>

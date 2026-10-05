@@ -156,6 +156,14 @@ function record({ text, seconds, ms }) {
   q.textContent = text;
   meta.textContent = `${seconds.toFixed(1)} s of speech · written in ${(ms / 1000).toFixed(2)} s`;
   li.append(q, meta); heard.prepend(li);
+  // Tap what it heard to copy it.
+  q.tabIndex = 0; q.title = "Copy";
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(text); meta.textContent = "Copied"; }
+    catch { getSelection()?.selectAllChildren(q); }
+  };
+  q.addEventListener("click", copy);
+  q.addEventListener("keydown", (e) => { if (e.key === "Enter") copy(); });
   while (heard.children.length > 5) heard.lastChild.remove();
 }
 

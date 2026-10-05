@@ -15,6 +15,7 @@ void main() { gl_Position = vec4(p, 0.0, 1.0); }
 
 const FRAG = `
 precision highp float;
+#define STEPS __STEPS__
 uniform vec2 res;
 uniform float time, voice, wave, twist, writing, scale;
 
@@ -38,10 +39,10 @@ void main() {
   if (h > 0.0) {
     float sh = sqrt(h);
     float t0 = -b - sh;
-    float dt = 2.0 * sh / 56.0;
+    float dt = 2.0 * sh / float(STEPS);
     float t = t0 + dt * 0.5;
     mat3 lean = rotZ(0.3);
-    for (int i = 0; i < 56; i++) {
+    for (int i = 0; i < STEPS; i++) {
       vec3 p = lean * (ro + rd * t);
       float r = length(p);
       vec3 q = rotY(twist * r * 3.1 - wave) * p;
@@ -55,7 +56,7 @@ void main() {
       float axis = length(q.xz);
       float spine = exp(-axis * axis * 16.0) * (0.35 + 0.9 * voice + 0.6 * writing);
       float body = 1.0 - smoothstep(0.55, 1.0, r);
-      float depth = float(i) / 56.0;
+      float depth = float(i) / float(STEPS);
       vec3 tint = mix(gold, cream, depth);
       tint = mix(tint, lavender, smoothstep(0.6, 1.0, r) * (1.0 - writing));
       tint = mix(tint, gold, writing * 0.5);
@@ -100,7 +101,9 @@ export function orb(canvas, { scale: startScale = 1 } = {}) {
   };
   const prog = gl.createProgram();
   gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  // Phones get fewer steps through the sphere: softer, and much cooler to run.
+  const steps = matchMedia("(pointer: coarse)").matches ? 36 : 56;
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG.replace("__STEPS__", String(steps))));
   gl.linkProgram(prog);
   gl.useProgram(prog);
   const buf = gl.createBuffer();
