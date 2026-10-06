@@ -38,7 +38,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Heyra · Dictation that runs on your Mac</title>
   {canonical && <link rel="canonical" href={canonical} />}
-  <meta name="description" content="Speech to text, typed into any app. Hold a key, talk, let go. Free, open source, and it never leaves your Mac." />
+  <meta name="description" content="Hold a key, talk, let go. Free, open source voice to text that never leaves your Mac." />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#121318" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -144,7 +144,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       .sky span:nth-child(2) { animation: drift 34s ease-in-out infinite alternate-reverse; }
       @keyframes drift { to { transform: translate(6vmax, -3vmax) scale(1.12); } }
     }
-    .stage { position: relative; width: min(32rem, 88vw, 48svh); aspect-ratio: 1; margin: 1.5rem auto -2rem; }
+    .stage { position: relative; width: min(32rem, 88vw, 46svh); aspect-ratio: 1; margin: 1.5rem auto -2rem; }
     #orb { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
     #orb.no-gl { background: radial-gradient(circle at 50% 50%, #000 0 33%, rgb(217 168 106 / 0.18) 34%, transparent 60%); border-radius: 50%; }
     #stone {
@@ -161,7 +161,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     }
     h1 em { font-style: normal; color: var(--gold); }
     @media (min-width: 900px) { h1 { white-space: nowrap; } }
-    .lede { margin: 1.25rem auto 0; max-width: 36rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
+    .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
     .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 0.5rem; }
     .fine { margin: 1rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
     .fine a { color: var(--slate); }
@@ -180,24 +180,24 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .hero:has(#stone.listening) #status::before { background: var(--gold); box-shadow: 0 0 12px rgb(217 168 106 / 0.8); }
     /* A fixed slot for the last two takes, so nothing below it ever moves:
        the newest large, the one before it small and dim. */
-    #heard { list-style: none; padding: 0; margin: 0.6rem auto 0; max-width: 40rem; height: 7.6rem; overflow: hidden; }
+    #heard { list-style: none; padding: 0; margin: 0.6rem auto 0; max-width: 40rem; height: 5.8rem; overflow: hidden; }
     #heard li { display: none; }
-    #heard li q { quotes: none; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; cursor: copy; }
+    #heard li q { quotes: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: copy; }
     #heard li:first-child { display: block; color: var(--cream); }
-    #heard li:first-child q { -webkit-line-clamp: 2; font: 500 clamp(1.1rem, 2.4vw, 1.4rem)/1.35 var(--sans); letter-spacing: -0.01em; }
+    #heard li:first-child q { font: 500 clamp(1.1rem, 2.4vw, 1.4rem)/1.35 var(--sans); letter-spacing: -0.01em; }
     #heard li:first-child span { display: block; margin-top: 0.3rem; font: 400 0.75rem/1.4 var(--mono); color: var(--slate); }
-    #heard li:nth-child(2) { display: block; margin-top: 0.8rem; color: var(--dim); }
-    #heard li:nth-child(2) q { -webkit-line-clamp: 1; font: 400 1rem/1.5 var(--sans); }
+    #heard li:nth-child(2) { display: block; margin-top: 0.6rem; color: var(--dim); }
+    #heard li:nth-child(2) q { font: 400 1rem/1.5 var(--sans); }
     #heard li:nth-child(2) span { display: none; }
     @media (prefers-reduced-motion: no-preference) {
       #heard li:first-child { animation: arrive 0.5s cubic-bezier(.2,.8,.2,1); }
       @keyframes arrive { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
     }
-    #key { display: flex; gap: 0.5rem; max-width: 26rem; margin: 1rem 0 0; }
+    #key { display: flex; gap: 0.75rem; max-width: 26rem; margin: 1.5rem 0 0; }
     #key[hidden] { display: none; }
     #key input { flex: 1; min-width: 0; font: 400 0.9rem/1 var(--mono); color: var(--cream); background: var(--panel); border: 1px solid var(--hair); border-radius: 999px; padding: 0.7rem 1rem; }
     button.plain { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); background: none; border: 1px solid var(--hair); border-radius: 999px; padding: 0.7rem 1rem; cursor: pointer; }
-    .demo-note { margin: 1.5rem 0 0; max-width: 38rem; font: 400 0.8rem/1.6 var(--mono); color: var(--dim); }
+    .demo-note { margin: 2rem 0 0; max-width: 38rem; font: 400 0.8rem/1.6 var(--mono); color: var(--dim); }
     code { font-family: var(--mono); font-size: 0.92em; overflow-wrap: anywhere; }
 
     /* ---- sections ---- */
@@ -364,13 +364,15 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .server-split { align-items: center; }
     .server-split pre { margin-top: 0; }
     pre { margin: 2rem 0 0; padding: 1.25rem 1.4rem; border-radius: 14px; background: #0d0e12; border: 1px solid var(--hair); overflow-x: auto; font: 400 0.85rem/1.7 var(--mono); color: var(--cream); }
-    .dev-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .dev-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
 
     /* closing */
     .closing { text-align: center; padding: clamp(6rem, 13vw, 10rem) 0; border-top: 1px solid var(--hair);
       background: radial-gradient(40rem 22rem at 50% 30%, rgb(217 168 106 / 0.06), transparent 70%); }
     .closing h2 { margin-inline: auto; }
-    .closing-orb { display: block; width: 9rem; height: 9rem; margin: -2rem auto -1rem; cursor: pointer; }
+    .closing-orb { display: block; width: 9rem; height: 9rem; margin: -2rem auto 0.5rem; cursor: pointer; }
+    .closing .actions.closing-actions { margin-top: 2.75rem; }
+    .closing .fine { margin-top: 1.25rem; }
 
     footer { border-top: 1px solid var(--hair); padding: 3.5rem 0 3rem; color: var(--dim); font-size: 0.9rem; }
     .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; }
@@ -409,7 +411,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       <div class="sky" aria-hidden="true"><span></span><span></span></div>
       <div class="hero-inner">
         <h1>Hold a key. Talk. <em>Let&nbsp;go.</em></h1>
-        <p class="lede">Speech to text, typed into any app. Free, open source, and it never leaves your Mac.</p>
+        <p class="lede">Free, open source voice to text that never leaves your Mac.</p>
 
         <div class="stage">
           <canvas id="orb" aria-hidden="true"></canvas>
@@ -419,13 +421,13 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         </div>
         <p id="status" role="status" aria-live="polite"></p>
         <ol id="heard" aria-label="What Heyra heard" reversed></ol>
-
         <div class="actions">
           <a class="btn primary large" href={MAC}>
             <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.5-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.3 4.7 3.2 5.4 2.6 6.5c-1.2 2.1-.3 5.2.9 6.9.6.8 1.2 1.7 2.1 1.7.8 0 1.2-.5 2.2-.5s1.3.5 2.2.5 1.5-.8 2-1.7c.6-.9.9-1.8.9-1.9-.1 0-1.7-.7-1.7-3zM9.6 3.6c.4-.5.8-1.3.7-2-.7 0-1.5.4-1.9 1-.4.5-.8 1.2-.7 2 .7 0 1.4-.4 1.9-1z"/></svg>
             Download for Mac
           </a>
         </div>
+
       </div>
     </section>
 
@@ -466,6 +468,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         <div>
           <h2 id="app-title">It lives in your menu bar.</h2>
           <ul class="features">
+            <li><div><b>Written in Rust</b><span>A small native app, not a browser in disguise. Six seconds of speech becomes text in under half a second.</span></div></li>
             <li><div><b>History</b><span>Every take is kept on your Mac. Click one to copy it again.</span></div></li>
             <li><div><b>Dictionary</b><span>Teach it the words it gets wrong, once: names, jargon, places.</span></div></li>
             <li><div><b>Any microphone</b><span>Your Mac's, a headset, an audio interface. Pick it in Settings.</span></div></li>
@@ -556,8 +559,11 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       <div class="wrap">
         <canvas class="closing-orb" aria-hidden="true"></canvas>
         <h2 id="end-title">Talk to your Mac.</h2>
-        <div class="actions">
-          <a class="btn primary" href={MAC}>Download for Mac</a>
+        <div class="actions closing-actions">
+          <a class="btn primary large" href={MAC}>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.5-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.3 4.7 3.2 5.4 2.6 6.5c-1.2 2.1-.3 5.2.9 6.9.6.8 1.2 1.7 2.1 1.7.8 0 1.2-.5 2.2-.5s1.3.5 2.2.5 1.5-.8 2-1.7c.6-.9.9-1.8.9-1.9-.1 0-1.7-.7-1.7-3zM9.6 3.6c.4-.5.8-1.3.7-2-.7 0-1.5.4-1.9 1-.4.5-.8 1.2-.7 2 .7 0 1.4-.4 1.9-1z"/></svg>
+            Download for Mac
+          </a>
         </div>
         <p class="fine">Free and open source.</p>
       </div>
