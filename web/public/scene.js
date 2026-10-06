@@ -9,13 +9,21 @@ const scene = document.querySelector("#scene");
 if (scene) {
   const o = makeOrb(scene.querySelector(".scene-orb"), { scale: 0.12 });
   const key = document.querySelector(".keys .fnkey");
-  const docBox = scene.querySelector(".doc");
-  const lines = [
-    "Can we move the standup to ten tomorrow?",
-    "Remind me to send Sam the invoice on Friday.",
-    "Looks good to me. Ship it.",
-    "Book a table for four at seven.",
+  const app = scene.querySelector(".mb-app");
+  const windows = { notes: scene.querySelector(".window.notes"), term: scene.querySelector(".window.term") };
+  // Each take goes to whichever window is in front.
+  const takes = [
+    ["term", "Add a dark mode switch to the settings page."],
+    ["notes", "Can we move the standup to ten tomorrow?"],
+    ["term", "Why is the login test failing? Fix it and run the suite."],
+    ["notes", "Remind me to send Sam the invoice on Friday."],
+    ["term", "Write tests for the invoice parser."],
+    ["notes", "Book a table for four at seven."],
   ];
+  function focus(name) {
+    for (const [k, w] of Object.entries(windows)) w.classList.toggle("focus", k === name);
+    app.textContent = name === "term" ? "Terminal" : "Notes";
+  }
   const calm = matchMedia("(prefers-reduced-motion: reduce)");
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   let running = false, visible = false, n = 0;
@@ -37,10 +45,28 @@ if (scene) {
     });
   }
 
-  // Each take lands as a new line, with the caret after it; old lines fade back.
-  function place(text) {
-    const current = docBox.querySelector(".now");
+  // In Notes each take lands as a new line; in the terminal it fills the prompt
+  // and the agent starts on it.
+  function place(where, text) {
+    const box = windows[where].querySelector(".doc");
+    const current = box.querySelector(".now");
     const caret = current.querySelector(".caret");
+    if (where === "term") {
+      current.classList.remove("now");
+      current.querySelector(".doc-text").textContent = text;
+      current.querySelector(".doc-text").classList.add("landed");
+      caret.remove();
+      const reply = document.createElement("p");
+      reply.className = "doc-line dim";
+      reply.textContent = "✻ On it.";
+      const next = document.createElement("p");
+      next.className = "doc-line now";
+      next.innerHTML = '<span class="prompt">›</span> <span class="doc-text"></span>';
+      next.append(caret);
+      box.append(reply, next);
+      while (box.children.length > 5) box.firstElementChild.remove();
+      return;
+    }
     current.classList.remove("now");
     caret.remove();
     const line = document.createElement("p");
@@ -49,15 +75,17 @@ if (scene) {
     words.className = "doc-text landed";
     words.textContent = text;
     line.append(words, caret);
-    docBox.append(line);
+    box.append(line);
     // Keep the note short: the title plus the last three lines.
-    while (docBox.children.length > 4) docBox.children[1].remove();
+    while (box.children.length > 4) box.children[1].remove();
   }
 
   async function loop() {
     if (running) return;
     running = true;
     while (visible && !calm.matches) {
+      const [where, text] = takes[n++ % takes.length];
+      focus(where);
       await wait(1400);
       key.classList.add("down");
       o.size(1);
@@ -66,7 +94,7 @@ if (scene) {
       key.classList.remove("down");
       o.writing(true);
       await wait(520);
-      place(lines[n++ % lines.length]);
+      place(where, text);
       o.writing(false);
       o.size(0.12);
       await wait(2400);
@@ -75,7 +103,8 @@ if (scene) {
   }
 
   if (calm.matches) {
-    place(lines[0]);
+    focus("term");
+    place("term", takes[0][1]);
     o.size(1);
     o.level(0.4);
   }

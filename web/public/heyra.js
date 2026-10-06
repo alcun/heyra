@@ -197,7 +197,10 @@ stone.addEventListener("blur", end);
 // The space bar anywhere on the page, unless you're typing in a field.
 const typing = (e) => e.target.closest?.("input, textarea, [contenteditable]");
 addEventListener("keydown", (e) => {
-  if (e.key === " " && !e.repeat && !typing(e) && e.target !== stone && !stone.disabled) { e.preventDefault(); begin(); }
+  if (e.key !== " " || typing(e) || e.target === stone || stone.disabled) return;
+  // Swallow every space, repeats included, so holding it never scrolls the page.
+  e.preventDefault();
+  if (!e.repeat) begin();
 });
 addEventListener("keyup", (e) => { if (e.key === " " && !typing(e) && e.target !== stone) { e.preventDefault(); end(); } });
 
