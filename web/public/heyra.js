@@ -194,15 +194,18 @@ stone.addEventListener("contextmenu", (e) => e.preventDefault());
 stone.addEventListener("keydown", (e) => { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); begin(); } });
 stone.addEventListener("keyup", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); end(); } });
 stone.addEventListener("blur", end);
-// The space bar anywhere on the page, unless you're typing in a field.
-const typing = (e) => e.target.closest?.("input, textarea, [contenteditable]");
+// The space bar too, but only while the orb is on screen and nothing has focus,
+// so space still scrolls the page and presses buttons and FAQ items.
+let orbInView = false;
+new IntersectionObserver(([entry]) => { orbInView = entry.isIntersecting; }).observe(stone);
+const loose = (e) => orbInView && (e.target === document.body || e.target === document.documentElement);
 addEventListener("keydown", (e) => {
-  if (e.key !== " " || typing(e) || e.target === stone || stone.disabled) return;
+  if (e.key !== " " || !loose(e) || stone.disabled) return;
   // Swallow every space, repeats included, so holding it never scrolls the page.
   e.preventDefault();
   if (!e.repeat) begin();
 });
-addEventListener("keyup", (e) => { if (e.key === " " && !typing(e) && e.target !== stone) { e.preventDefault(); end(); } });
+addEventListener("keyup", (e) => { if (e.key === " " && loose(e)) { e.preventDefault(); end(); } });
 
 // The code example names whichever host is serving this page.
 const example = $("#curl");

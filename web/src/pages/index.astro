@@ -49,17 +49,17 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <meta property="og:description" content="Hold a key, talk, let go. Speech to text that runs on your own Mac." />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="How to use this API" />
   {analyticsKey && <Analytics publicKey={analyticsKey} />}
-  <script type="application/ld+json">{JSON.stringify({
+  <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Heyra",
     description: "Push-to-talk dictation that runs on your Mac with NVIDIA Parakeet, plus a self-hosted speech-to-text API.",
     applicationCategory: "UtilitiesApplication", operatingSystem: "macOS (Apple Silicon)",
     license: "https://opensource.org/licenses/MIT", codeRepository: MAC_CODE,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  })}</script>
-  <script type="application/ld+json">{JSON.stringify({
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org", "@type": "FAQPage",
     mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
-  })}</script>
+  })} />
   <style is:global>
     /* Night instrument: graphite ground, cream readouts, gold for anything live,
        slate for labels, lavender only in the orb's edge light. One dark look by choice. */
