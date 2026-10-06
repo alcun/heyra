@@ -162,7 +162,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     h1 em { font-style: normal; color: var(--gold); }
     @media (min-width: 900px) { h1 { white-space: nowrap; } }
     .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
-    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 2.25rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 0.5rem; }
     .fine { margin: 1rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
     .fine a { color: var(--slate); }
     #status { min-height: 1.5em; margin: 0.25rem auto 0; font: 500 0.78rem/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
@@ -178,15 +178,15 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     body[data-demo="up"] #status::before { background: #8fbf8a; box-shadow: 0 0 10px rgb(143 191 138 / 0.6); }
     body[data-demo="down"] #status::before { background: #c9705a; }
     .hero:has(#stone.listening) #status::before { background: var(--gold); box-shadow: 0 0 12px rgb(217 168 106 / 0.8); }
-    #heard { list-style: none; padding: 0; margin: 0.5rem auto 0; max-width: 36rem; }
-    #heard:empty { display: none; }
-    #heard li { color: var(--dim); margin: 0 0 0.75rem; }
-    #heard li q { quotes: none; display: block; font-size: 1rem; cursor: copy; }
-    #heard li span { font: 400 0.75rem/1.4 var(--mono); }
-    #heard li:first-child { color: var(--cream); margin-bottom: 1.5rem; }
-    #heard li:first-child q { font: 500 clamp(1.25rem, 3.4vw, 1.7rem)/1.35 var(--sans); letter-spacing: -0.01em; margin-bottom: 0.4rem; }
-    #heard li:first-child span { color: var(--slate); }
-    #heard li:nth-child(n+3) { display: none; }
+    /* One fixed slot for the latest take, so nothing below it ever moves. */
+    #heard { list-style: none; padding: 0; margin: 0.6rem auto 0; max-width: 40rem; height: 5.7rem; overflow: hidden; }
+    #heard li { display: none; }
+    #heard li:first-child { display: block; color: var(--cream); }
+    #heard li:first-child q {
+      quotes: none; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+      font: 500 clamp(1.1rem, 2.4vw, 1.4rem)/1.35 var(--sans); letter-spacing: -0.01em; cursor: copy;
+    }
+    #heard li:first-child span { display: block; margin-top: 0.35rem; font: 400 0.75rem/1.4 var(--mono); color: var(--slate); }
     @media (prefers-reduced-motion: no-preference) {
       #heard li:first-child { animation: arrive 0.5s cubic-bezier(.2,.8,.2,1); }
       @keyframes arrive { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
