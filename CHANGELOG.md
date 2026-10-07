@@ -2,7 +2,7 @@
 
 All notable changes to Heyra are documented here. Newest first.
 
-## Unreleased
+## 2026-10-07
 
 ### Fixed
 - On a phone, pressing the orb stuck on "Opening the microphone" and never
@@ -10,6 +10,11 @@ All notable changes to Heyra are documented here. Newest first.
   finger can, and the page waited for it. The first press now opens the
   microphone and asks you to let go and hold again; after that holds record
   straight away.
+
+### Changed
+- The space bar talks only while the orb is on screen and nothing has focus,
+  so it still scrolls the page and presses buttons. This deploy also carried
+  the page redesign committed since 2 October.
 
 ## 2026-10-02
 
