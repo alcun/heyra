@@ -89,10 +89,14 @@ async function begin() {
   if (down || starting || sending || (needsKey && !key)) return;
   down = true; starting = true; stone.classList.add("held"); say("Opening the microphone");
   try {
+    // Audio may only start on a user activation, and on a touch screen pressing
+    // down is not one, only letting go is. So never wait on resume() here: a
+    // phone's first press would hang before the microphone prompt.
     ctx ??= new AudioContext();
-    if (ctx.state === "suspended") await ctx.resume();
+    ctx.resume().catch(() => {});
     if (!loaded) { await ctx.audioWorklet.addModule("/capture.js"); loaded = true; }
     stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+    await Promise.race([ctx.resume(), new Promise((r) => setTimeout(r, 250))]);
   } catch (e) {
     starting = false; down = false; stone.classList.remove("held");
     return say(e?.name === "NotAllowedError"
@@ -102,6 +106,9 @@ async function begin() {
   // Let go while the permission prompt was up: the microphone is on now, so say so.
   starting = false;
   if (!down) { stop(); return say("Microphone on. Now hold and speak."); }
+  // A first press on a phone: the microphone is open but audio can't run until
+  // the finger lifts, which unlocks it below. The next hold records.
+  if (ctx.state !== "running") { stop(); down = false; stone.classList.remove("held"); return say("Microphone on. Let go, then hold to speak."); }
   chunks = []; left = 0;
   source = ctx.createMediaStreamSource(stream);
   node = new AudioWorkletNode(ctx, "capture");
@@ -187,6 +194,9 @@ function record({ text, seconds, ms }) {
 }
 
 // ---- the orb, by pointer and by keyboard -----------------------------------
+// Lifting a finger is a user activation, so it can start audio a press could not.
+const unlock = () => { if (ctx && ctx.state !== "running") ctx.resume().catch(() => {}); };
+addEventListener("pointerup", unlock, true); addEventListener("touchend", unlock, true);
 stone.addEventListener("pointerdown", (e) => { e.preventDefault(); stone.setPointerCapture?.(e.pointerId); begin(); });
 stone.addEventListener("pointerup", end);
 stone.addEventListener("pointercancel", end);

@@ -2,6 +2,15 @@
 
 All notable changes to Heyra are documented here. Newest first.
 
+## Unreleased
+
+### Fixed
+- On a phone, pressing the orb stuck on "Opening the microphone" and never
+  asked for the microphone. A touch press cannot start audio, only lifting the
+  finger can, and the page waited for it. The first press now opens the
+  microphone and asks you to let go and hold again; after that holds record
+  straight away.
+
 ## 2026-10-02
 
 ### Changed
