@@ -13,8 +13,7 @@ All notable changes to Heyra are documented here. Newest first.
 
 ### Changed
 - The space bar talks only while the orb is on screen and nothing has focus,
-  so it still scrolls the page and presses buttons. This deploy also carried
-  the page redesign committed since 2 October.
+  so it still scrolls the page and presses buttons.
 
 ## 2026-10-02
 
