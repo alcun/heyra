@@ -43,6 +43,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <meta name="theme-color" content="#121318" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
+  {canonical && <meta property="og:url" content={canonical} />}
   <meta property="og:title" content="Heyra · Dictation that runs on your Mac" />
   {og && <meta property="og:image" content={og} />}
   {og && <meta name="twitter:card" content="summary_large_image" />}

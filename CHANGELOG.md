@@ -2,6 +2,14 @@
 
 All notable changes to Heyra are documented here. Newest first.
 
+## 2026-10-20
+
+### Added
+- `/sitemap.xml`, and `/robots.txt` points to it, so search engines find the
+  page without guessing. Both use the public address the build is given and
+  stay neutral on a self-hosted server without one.
+- The page declares its address for link previews (`og:url`).
+
 ## 2026-10-07
 
 ### Fixed
