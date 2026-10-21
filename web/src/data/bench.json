@@ -243,5 +243,6 @@
         ]
       ]
     }
-  ]
+  ],
+  "wait": "Text arrives about half a second after you let go: median 0.5 s for a 2–10 s take, 95 % under 1 s."
 }
