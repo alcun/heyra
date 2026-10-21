@@ -11,8 +11,8 @@
       "density": 0.75
     },
     {
-      "id": "phonon",
-      "name": "Phonon-2",
+      "id": "fluid",
+      "name": "Fluid Speech Mini",
       "note": "English · every word",
       "color": "#ede0c4",
       "density": 0.875
@@ -38,7 +38,7 @@
       "source": "DisfluencySpeech",
       "v": {
         "clean": 6.09,
-        "phonon": 17.05,
+        "fluid": 17.26,
         "parakeet": 17.47,
         "old": 17.84
       }
@@ -48,7 +48,7 @@
       "source": "7 leaderboard sets",
       "v": {
         "clean": 9.91,
-        "phonon": 7.28,
+        "fluid": 6.6,
         "parakeet": 8.13,
         "old": 23.25
       }
@@ -58,7 +58,7 @@
       "source": "AMI",
       "v": {
         "clean": 17.78,
-        "phonon": 10.99,
+        "fluid": 12.12,
         "parakeet": 11.92,
         "old": 34.29
       }
@@ -68,7 +68,7 @@
       "source": "Earnings-22",
       "v": {
         "clean": 19.51,
-        "phonon": 12.95,
+        "fluid": 10.25,
         "parakeet": 16.6,
         "old": 33.32
       }
@@ -78,7 +78,7 @@
       "source": "GigaSpeech",
       "v": {
         "clean": 12.77,
-        "phonon": 10.32,
+        "fluid": 10.24,
         "parakeet": 10.68,
         "old": 10.92
       }
@@ -88,7 +88,7 @@
       "source": "SPGISpeech",
       "v": {
         "clean": 5.57,
-        "phonon": 5.93,
+        "fluid": 5.1,
         "parakeet": 6.68,
         "old": 66.46
       }
@@ -98,7 +98,7 @@
       "source": "VoxPopuli",
       "v": {
         "clean": 4.23,
-        "phonon": 4.36,
+        "fluid": 3.11,
         "parakeet": 4.77,
         "old": 7.15
       }
@@ -108,7 +108,7 @@
       "source": "LibriSpeech clean",
       "v": {
         "clean": 3.84,
-        "phonon": 2.38,
+        "fluid": 2.47,
         "parakeet": 2.26,
         "old": 3.19
       }
@@ -118,7 +118,7 @@
       "source": "LibriSpeech other",
       "v": {
         "clean": 5.64,
-        "phonon": 4.01,
+        "fluid": 2.93,
         "parakeet": 4.01,
         "old": 7.41
       }
