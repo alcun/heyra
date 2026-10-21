@@ -1,0 +1,257 @@
+---
+// The bench: how many words each voice model gets wrong, as static bars. Everything
+// here is in the markup at build time, so nothing moves after the page loads.
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-500.css";
+import "@fontsource/ibm-plex-sans/latin-600.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+import "../styles/base.css";
+import { deflateSync } from "node:zlib";
+import bench from "../data/bench.json";
+import Analytics from "../components/Analytics.astro";
+
+const MAC = "https://github.com/alcun/heyra-desktop";
+const BENCH_CODE = "https://github.com/alcun/heyra-bench";
+const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
+const site = Astro.site;
+const canonical = site ? new URL("/bench", site).href : undefined;
+
+// A 4x4 ordered-dither tile as a PNG data URI: one look per model.
+const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+const crcTable = Array.from({ length: 256 }, (_, n) => {
+  let c = n;
+  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+  return c >>> 0;
+});
+const crc = (buf: Uint8Array) => {
+  let c = 0xffffffff;
+  for (const b of buf) c = crcTable[(c ^ b) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+};
+function chunk(type: string, data: Uint8Array) {
+  const out = new Uint8Array(12 + data.length);
+  const view = new DataView(out.buffer);
+  view.setUint32(0, data.length);
+  out.set(new TextEncoder().encode(type), 4);
+  out.set(data, 8);
+  view.setUint32(8 + data.length, crc(out.subarray(4, 8 + data.length)));
+  return out;
+}
+function tile(hex: string, density: number) {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  const raw = new Uint8Array(4 * 17);
+  for (let y = 0; y < 4; y++)
+    for (let x = 0; x < 4; x++)
+      if (BAYER[y * 4 + x] < density * 16) raw.set([r, g, b, 255], y * 17 + 1 + x * 4);
+  const ihdr = new Uint8Array(13);
+  new DataView(ihdr.buffer).setUint32(0, 4);
+  new DataView(ihdr.buffer).setUint32(4, 4);
+  ihdr.set([8, 6, 0, 0, 0], 8);
+  const parts = [new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]), chunk("IHDR", ihdr), chunk("IDAT", deflateSync(raw)), chunk("IEND", new Uint8Array())];
+  const png = new Uint8Array(parts.reduce((n, p) => n + p.length, 0));
+  let at = 0;
+  for (const p of parts) { png.set(p, at); at += p.length; }
+  return `url(data:image/png;base64,${Buffer.from(png).toString("base64")})`;
+}
+
+const models = bench.models.map((m) => ({ ...m, fill: tile(m.color, m.density) }));
+const model = Object.fromEntries(models.map((m) => [m.id, m]));
+const width = (v: number, max: number) => `${Math.min(100, (v / max) * 100).toFixed(2)}%`;
+// Shaped here, so the markup below only loops.
+const duos = bench.duos.map((d) => ({
+  ...d,
+  rows: (d.rows as [string, number, string][]).map(([name, v, id], i, all) => ({ name, v, fill: model[id].fill, win: i === all.length - 1 })),
+}));
+const sets = bench.sets.map((s) => {
+  const v = s.v as Record<string, number>;
+  const low = Math.min(...Object.values(v));
+  return { ...s, cells: models.map((m) => ({ m, v: v[m.id], win: v[m.id] === low })) };
+});
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heyra · Bench</title>
+  {canonical && <link rel="canonical" href={canonical} />}
+  <meta name="description" content={`How many words each voice model in Heyra gets wrong, on ${bench.clips} public English clips.`} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  {analyticsKey && <Analytics publicKey={analyticsKey} />}
+  <style is:global>
+    main { max-width: 64rem; margin: 0 auto; padding: 6.5rem max(1rem, 4vw) 5rem; display: grid; gap: 3.5rem; }
+    section { display: grid; gap: 1rem; min-width: 0; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.08; font-weight: 600; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+    h3 { margin: 0; font-size: 0.95rem; font-weight: 500; }
+    .small { margin: 0; color: var(--slate); font-size: 0.875rem; line-height: 1.5; }
+    .top { display: grid; gap: 0.9rem; }
+    #wave { width: 100%; height: 6rem; display: block; image-rendering: pixelated; }
+
+    .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--hair); border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; }
+    .tile { background: var(--panel); padding: 1.1rem 1.2rem; display: grid; gap: 0.7rem; align-content: start; }
+    .pair { display: grid; gap: 0.4rem; min-height: 4.2rem; align-content: start; }
+
+    .row { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 2.6rem; gap: 0.7rem; align-items: center; height: 1.15rem; }
+    .row .n { font-size: 0.8rem; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .row .t { height: 0.75rem; position: relative; }
+    .row .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; }
+    .row .v { font: 500 0.8rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--slate); }
+    .row.win .n, .row.win .v { color: var(--cream); }
+    .over { position: absolute; right: -0.7rem; top: -0.3rem; font: 0.85rem var(--mono); color: #e0795a; }
+
+    .legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 0.5rem 1rem; }
+    .key { display: grid; grid-template-columns: 1.6rem auto; column-gap: 0.5rem; align-items: center; font-size: 0.8rem; }
+    .key i { grid-row: span 2; width: 1.6rem; height: 0.75rem; background-size: 4px 4px; image-rendering: pixelated; }
+    .key b { font-weight: 500; }
+    .key span { color: var(--dim); font-size: 0.72rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--hair); border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; }
+    .cell { background: var(--panel); padding: 0.9rem 1rem; display: grid; gap: 0.4rem; min-width: 0; }
+    .cell .head { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.85rem; font-weight: 500; white-space: nowrap; }
+    .cell .head span:last-child { font: 0.66rem var(--mono); color: var(--dim); align-self: center; overflow: hidden; text-overflow: ellipsis; }
+    .cell .row { grid-template-columns: minmax(0, 1fr) 2.6rem; }
+    .scale { display: grid; grid-template-columns: minmax(0, 1fr) 2.6rem; gap: 0.7rem; font: 0.62rem var(--mono); color: var(--dim); }
+    .scale div { display: flex; justify-content: space-between; }
+
+    .clips { display: grid; gap: 0.75rem; }
+    .clip { background: var(--panel); border: 1px solid var(--hair); border-radius: 12px; padding: 0.9rem 1rem; display: grid; gap: 0.4rem; }
+    .line { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; font-size: 0.9rem; }
+    .line .who { font: 0.72rem var(--mono); color: var(--dim); }
+    .line.said span:last-child { color: var(--slate); }
+    .line.win .who { color: var(--gold); }
+    .line.empty span:last-child { color: #e0795a; font: 0.75rem var(--mono); letter-spacing: 0.06em; }
+
+    details { border: 1px solid var(--hair); border-radius: 12px; background: var(--panel); }
+    summary { cursor: pointer; padding: 0.8rem 1rem; font: 500 0.7rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+    .scroll { overflow-x: auto; border-top: 1px solid var(--hair); }
+    table { border-collapse: collapse; width: 100%; font: 0.75rem/1.4 var(--mono); font-variant-numeric: tabular-nums; }
+    th, td { padding: 0.5rem 0.65rem; text-align: right; border-bottom: 1px solid var(--hair); white-space: nowrap; }
+    th { font-weight: 500; font-size: 0.62rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--slate); white-space: normal; min-width: 4.5rem; vertical-align: bottom; }
+    th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--panel); min-width: 9.5rem; font-family: var(--sans); font-size: 0.8rem; }
+    td.best { color: var(--gold); }
+    td.none { color: var(--dim); }
+    ul { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.85rem; display: grid; gap: 0.25rem; }
+    ul a { color: var(--cream); }
+
+    @media (max-width: 52rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 40rem) {
+      .tiles, .grid { grid-template-columns: minmax(0, 1fr); }
+      .line { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
+    <nav aria-label="Main">
+      <a href="/bench" aria-current="page" style="color: var(--cream)">Bench</a>
+      <a class="btn ghost small" href={MAC}>Download</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="top">
+      <canvas id="wave" aria-hidden="true"></canvas>
+      <div class="label">Bench · {bench.date} · {bench.clips} clips</div>
+      <h1>Which voice model should you use?</h1>
+      <p class="small">% of words wrong. Shorter is better.</p>
+    </section>
+
+    <section>
+      <div class="tiles">
+        {duos.map((d) => (
+          <div class="tile">
+            <h3>{d.title}</h3>
+            <div class="pair">
+              {d.rows.map((r) => (
+                <div class={r.win ? "row win" : "row"}>
+                  <span class="n">{r.name}</span>
+                  <div class="t">
+                    <div class="b" style={`width:${width(r.v, d.max)};background-image:${r.fill}`}></div>
+                    {r.v > d.max && <span class="over">›</span>}
+                  </div>
+                  <span class="v">{r.v.toFixed(1)}</span>
+                </div>
+              ))}
+            </div>
+            <p class="small">{d.note}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <div class="label">By kind of speech · 0–20 %</div>
+      <div class="legend">
+        {models.map((m) => (
+          <div class="key"><i style={`background-image:${m.fill}`}></i><b>{m.name}</b><span>{m.note}</span></div>
+        ))}
+      </div>
+      <div class="grid">
+        {sets.map((s) => (
+          <div class="cell">
+            <div class="head"><span>{s.name}</span><span>{s.source}</span></div>
+            {s.cells.filter((c) => c.v !== undefined).map((c) => (
+              <div class={c.win ? "row win" : "row"} title={`${c.m.name}: ${c.v.toFixed(2)} %`}>
+                <div class="t">
+                  <div class="b" style={`width:${width(c.v, 20)};background-image:${c.m.fill}`}></div>
+                  {c.v > 20 && <span class="over">›</span>}
+                </div>
+                <span class="v">{c.v.toFixed(1)}</span>
+              </div>
+            ))}
+            <div class="scale"><div><span>0</span><span>10</span><span>20</span></div><span></span></div>
+          </div>
+        ))}
+      </div>
+      <p class="small">Leaderboard transcripts keep “um”s, so Bark Clean scores worse there by design.</p>
+    </section>
+
+    <section>
+      <div class="label">Side by side</div>
+      <div class="clips">
+        {bench.clips_shown.map((c) => (
+          <div class="clip">
+            <div class="label">{c.kind}</div>
+            {c.lines.map(([who, text, kind]) => (
+              <div class={`line ${kind}`}><span class="who">{who}</span><span>{text}</span></div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <details>
+      <summary>All numbers</summary>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Model</th>{sets.map((s) => <th>{s.name}</th>)}</tr></thead>
+          <tbody>
+            {models.map((m, i) => (
+              <tr>
+                <td>{m.name}</td>
+                {sets.map((s) => {
+                  const c = s.cells[i];
+                  return c.v === undefined ? <td class="none">–</td> : <td class={c.win ? "best" : undefined}>{c.v.toFixed(2)}</td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <section>
+      <div class="label">Method</div>
+      <ul>
+        <li>100 clips each: LibriSpeech, AMI, Earnings-22, GigaSpeech, SPGISpeech, VoxPopuli, DisfluencySpeech.</li>
+        <li>{bench.engine}, as in Heyra. Lower-cased, no punctuation.</li>
+        <li>Run it yourself: <a href={BENCH_CODE}>heyra-bench</a>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="/wave.js" type="module"></script>
+</body>
+</html>

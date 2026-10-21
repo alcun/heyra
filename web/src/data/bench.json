@@ -1,0 +1,44 @@
+{
+  "date": "21 October 2026",
+  "clips": 800,
+  "engine": "sherpa-onnx 1.13.8, int8",
+  "models": [
+    { "id": "clean", "name": "Bark 3.0 Clean", "note": "English · no “um”", "color": "#d9a86a", "density": 0.75 },
+    { "id": "plus", "name": "Bark 3.0 Plus", "note": "English · every word", "color": "#ede0c4", "density": 0.875 },
+    { "id": "parakeet", "name": "Parakeet v3", "note": "25 languages", "color": "#ede0c4", "density": 0.5 },
+    { "id": "old", "name": "Parakeet, Heyra 0.3.10", "note": "old engine", "color": "#e0795a", "density": 0.375 }
+  ],
+  "sets": [
+    { "name": "Off the cuff, meant", "source": "DisfluencySpeech", "v": { "clean": 6.09, "plus": 17.68, "parakeet": 17.47, "old": 17.84 } },
+    { "name": "Average", "source": "7 leaderboard sets", "v": { "clean": 9.91, "plus": 7.61, "parakeet": 8.13, "old": 23.25 } },
+    { "name": "Meetings", "source": "AMI", "v": { "clean": 17.78, "plus": 9.45, "parakeet": 11.92, "old": 34.29 } },
+    { "name": "Earnings calls", "source": "Earnings-22", "v": { "clean": 19.51, "plus": 14.71, "parakeet": 16.60, "old": 33.32 } },
+    { "name": "Podcasts", "source": "GigaSpeech", "v": { "clean": 12.77, "plus": 9.92, "parakeet": 10.68, "old": 10.92 } },
+    { "name": "Finance calls", "source": "SPGISpeech", "v": { "clean": 5.57, "plus": 6.64, "parakeet": 6.68, "old": 66.46 } },
+    { "name": "Parliament", "source": "VoxPopuli", "v": { "clean": 4.23, "plus": 3.08, "parakeet": 4.77, "old": 7.15 } },
+    { "name": "Audiobooks", "source": "LibriSpeech clean", "v": { "clean": 3.84, "plus": 3.68, "parakeet": 2.26, "old": 3.19 } },
+    { "name": "Audiobooks, hard", "source": "LibriSpeech other", "v": { "clean": 5.64, "plus": 5.77, "parakeet": 4.01, "old": 7.41 } }
+  ],
+  "duos": [
+    { "title": "Engine", "note": "0.3.10 returned nothing for 60 of 100 finance-call clips.", "max": 25,
+      "rows": [["0.3.10", 23.25, "old"], ["0.3.11", 8.13, "parakeet"]] },
+    { "title": "Off the cuff, meant", "note": "Against transcripts without “um”s and repeats.", "max": 25,
+      "rows": [["Parakeet v3", 17.47, "parakeet"], ["Bark Clean", 6.09, "clean"]] },
+    { "title": "7-minute take", "note": "0.3.11 cuts long takes into 15 s pieces.", "max": 35,
+      "rows": [["60 s pieces", 30.8, "old"], ["15 s pieces", 10.9, "parakeet"], ["Bark Clean", 5.3, "clean"]] }
+  ],
+  "clips_shown": [
+    { "kind": "Off the cuff", "lines": [
+      ["Said", "Well, what about, uh, papyrus, you know, made out of bam-, you know, bamboo stuff, from the from the banks of the Nile.", "said"],
+      ["Parakeet v3", "Well, what about uh peppers, you know, made out of bam, you know, bamboo stuff from the from the banks of the now?", ""],
+      ["Bark 3.0 Clean", "what about, pepperice, made out of bamboo stuff from the banks of the now?", "win"] ] },
+    { "kind": "Meeting", "lines": [
+      ["Said", "It should be a battery because uh uh remote controller should be like you you you should take it t to wherever you want…", "said"],
+      ["Parakeet v3", "it should be a battery because uh remote controller should be like you you you should take it to to wherever you want…", ""],
+      ["Bark 3.0 Clean", "It should be a battery because the remote control should be like you should take it to wherever you want…", "win"] ] },
+    { "kind": "Finance call", "lines": [
+      ["Said", "the capacity of the existing tank houses that we have with our improvement program, so that's an important part of this.", "said"],
+      ["0.3.10", "NOTHING", "empty"],
+      ["0.3.11", "the the capacity of the existing tank houses that we have uh with our improvement program. So that's an important part of this.", "win"] ] }
+  ]
+}

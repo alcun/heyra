@@ -10,6 +10,7 @@ itself: hold fn, talk, let go, and the words are typed where the cursor is.
 Nothing is sent anywhere. Free, MIT, Apple Silicon.
 Download: https://github.com/alcun/heyra-desktop/releases/latest/download/Heyra.zip
 Source: https://github.com/alcun/heyra-desktop
+Bench (word errors per voice model, 800 public English clips): /bench
 
 ## Transcribe
 
