@@ -12,7 +12,6 @@ import bench from "../data/bench.json";
 import Analytics from "../components/Analytics.astro";
 
 const MAC = "https://github.com/alcun/heyra-desktop";
-const BENCH_CODE = "https://github.com/alcun/heyra-bench";
 const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
 const site = Astro.site;
 const canonical = site ? new URL("/bench", site).href : undefined;
@@ -247,7 +246,6 @@ const sets = bench.sets.map((s) => {
       <ul>
         <li>100 clips each: LibriSpeech, AMI, Earnings-22, GigaSpeech, SPGISpeech, VoxPopuli, DisfluencySpeech.</li>
         <li>{bench.engine}, as in Heyra. Lower-cased, no punctuation.</li>
-        <li>Run it yourself: <a href={BENCH_CODE}>heyra-bench</a>.</li>
       </ul>
     </section>
   </main>

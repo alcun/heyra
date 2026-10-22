@@ -13,10 +13,10 @@ const MAC_CODE = "https://github.com/alcun/heyra-desktop";
 const SERVER_CODE = "https://github.com/alcun/heyra";
 // One list for the page and for search engines' FAQ data.
 const faq = [
-  ["Does Heyra need the internet?", "Once, to download its speech model (about 490 MB). After that it works with no network at all."],
+  ["Does Heyra need the internet?", "Once, to download a speech model (300 to 490 MB). After that it works with no network at all."],
   ["Which Macs does it run on?", "Macs with Apple Silicon (M1 or later) on macOS 13 or later."],
-  ["Which languages does it understand?", "English and 24 other European languages, including French, German, Spanish and Italian. It works out which one you're speaking."],
-  ["How is it different from the dictation built into macOS?", "Heyra works in any app by holding one key, uses NVIDIA's Parakeet model, keeps a history you can copy from, and has a dictionary for the words it gets wrong. And it's open source."],
+  ["Which languages does it understand?", "English with any model. Pick Parakeet v3 for 24 other European languages, including French, German, Spanish and Italian; it works out which one you're speaking."],
+  ["How is it different from the dictation built into macOS?", "Heyra works in any app by holding one key, uses the open speech model you pick, keeps a history you can copy from, and has a dictionary for the words it gets wrong. And it's open source."],
   ["Is it really free?", "Yes. It's MIT licensed, with no account and no paid tier."],
   ["Does it work on Windows or Linux?", "Not yet. A Windows version is planned."],
   ["What happens to my voice in the demo on this page?", "The demo sends your clip to this server, which writes it down in memory and doesn't keep the audio. The Mac app sends nothing."],
@@ -53,7 +53,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   {analyticsKey && <Analytics publicKey={analyticsKey} />}
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Heyra",
-    description: "Push-to-talk dictation that runs on your Mac with NVIDIA Parakeet, plus a self-hosted speech-to-text API.",
+    description: "Push-to-talk dictation that runs on your Mac with open speech models, plus a self-hosted speech-to-text API.",
     applicationCategory: "UtilitiesApplication", operatingSystem: "macOS (Apple Silicon)",
     license: "https://opensource.org/licenses/MIT", codeRepository: MAC_CODE,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -524,7 +524,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       </nav>
     </div>
     <div class="wrap credits">
-      <p>MIT licensed. Listening by NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), as converted by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
+      <p>MIT licensed. Listening by Underdog's <a href="https://huggingface.co/ConwayResearch/Underdog-Bark-3.0-Clean">Bark 3.0 Clean</a>, FluidVoice's <a href="https://huggingface.co/FluidVoice-Labs/fluid-speech-mini-onnx">Fluid Speech Mini</a> and NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (all <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), run by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
     </div>
   </footer>
   <script src="/heyra.js" type="module"></script>
