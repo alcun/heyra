@@ -330,7 +330,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     footer { border-top: 1px solid var(--hair); padding: 3.5rem 0 3rem; color: var(--dim); font-size: 0.9rem; }
     .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; }
     .foot-brand p { margin: 0.8rem 0 0; }
-    .foot-brand .made { margin-top: 0.35rem; }
+    .foot-brand .made { margin-top: 0.8rem; }
     .foot-brand .made a { color: var(--slate); }
     .foot-cols { display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 5rem); }
     .foot-cols div { display: flex; flex-direction: column; gap: 0.55rem; }
@@ -514,7 +514,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <div class="wrap foot">
       <div class="foot-brand">
         <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
-        <p>Old Norse for "to hear".</p>
         {credit && <p class="made">Made by <a href={credit}>{new URL(credit).host}</a></p>}
       </div>
       <nav class="foot-cols" aria-label="Footer">
@@ -522,9 +521,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         <div><p class="label">Server</p><a href={SERVER_CODE}>Source</a><a href="/llms.txt">llms.txt</a><a href="#developers">API</a></div>
         <div><p class="label">More</p><a href="#faq">FAQ</a><a href="#private">Privacy</a></div>
       </nav>
-    </div>
-    <div class="wrap credits">
-      <p>MIT licensed. Listening by Underdog's <a href="https://huggingface.co/ConwayResearch/Underdog-Bark-3.0-Clean">Bark 3.0 Clean</a>, FluidVoice's <a href="https://huggingface.co/FluidVoice-Labs/fluid-speech-mini-onnx">Fluid Speech Mini</a> and NVIDIA's <a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Parakeet TDT 0.6B v3</a> (all <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), run by <a href="https://github.com/k2-fsa/sherpa-onnx">sherpa-onnx</a>.</p>
     </div>
   </footer>
   <script src="/heyra.js" type="module"></script>
