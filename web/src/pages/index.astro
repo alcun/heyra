@@ -68,7 +68,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       padding: 7.5rem 1rem 5rem; overflow: hidden; isolation: isolate;
     }
     .hero-inner { position: relative; width: 100%; max-width: 80rem; }
-    /* The sky: a faint field of stars and a slow, warm drift behind the orb. */
+    /* A faint field of stars behind the orb. */
     .sky { position: absolute; inset: 0; z-index: -1; pointer-events: none;
       background:
         radial-gradient(1px 1px at 12% 22%, rgb(237 224 196 / 0.35), transparent 60%),
@@ -80,13 +80,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         radial-gradient(1px 1px at 6% 61%, rgb(237 224 196 / 0.18), transparent 60%),
         radial-gradient(1px 1px at 93% 88%, rgb(237 224 196 / 0.2), transparent 60%),
         radial-gradient(120% 80% at 50% 0%, #17181f 0%, var(--ground) 60%);
-    }
-    /* The light: ribbons drawn by ribbons.js, behind faint scanlines. */
-    #ribbons { position: absolute; left: 0; right: 0; top: 28%; height: 46%; width: 100%; opacity: 0.32; }
-    .sky::after {
-      content: ""; position: absolute; inset: 0;
-      background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.22) 0 1px, transparent 1px 4px);
-      -webkit-mask-image: radial-gradient(90% 60% at 50% 57%, #000, transparent); mask-image: radial-gradient(90% 60% at 50% 57%, #000, transparent);
     }
     .stage { position: relative; width: min(22rem, 70vw, 34svh); aspect-ratio: 1; margin: 1rem auto -1rem; }
     #orb { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -370,7 +363,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
   <main>
     <section class="hero" aria-label="Heyra">
-      <div class="sky" aria-hidden="true"><canvas id="ribbons"></canvas></div>
+      <div class="sky" aria-hidden="true"></div>
       <div class="hero-inner">
         <h1 class="wordmark" aria-label="Heyra">
           <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="4" height="16" rx="2" fill="currentColor"/><rect x="8" y="7" width="4" height="6" rx="2" fill="#d9a86a"/><rect x="14" y="2" width="4" height="16" rx="2" fill="currentColor"/></svg>
@@ -547,7 +540,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     </div>
   </footer>
   <script src="/heyra.js" type="module"></script>
-  <script src="/ribbons.js" defer></script>
   <script src="/scene.js" type="module"></script>
   <script>
     // The install line: one click copies it, and the button says so for a moment.
