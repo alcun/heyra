@@ -1,15 +1,11 @@
 ---
 // The bench: how many words each voice model gets wrong, as static bars. Everything
 // here is in the markup at build time, so nothing moves after the page loads.
-import "@fontsource/ibm-plex-sans/latin-400.css";
-import "@fontsource/ibm-plex-sans/latin-500.css";
-import "@fontsource/ibm-plex-sans/latin-600.css";
-import "@fontsource/ibm-plex-mono/latin-400.css";
-import "@fontsource/ibm-plex-mono/latin-500.css";
 import "../styles/base.css";
 import { deflateSync } from "node:zlib";
 import bench from "../data/bench.json";
 import Analytics from "../components/Analytics.astro";
+import Header from "../components/Header.astro";
 
 const MAC = "https://github.com/alcun/heyra-desktop";
 const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
@@ -141,13 +137,7 @@ const sets = bench.sets.map((s) => {
   </style>
 </head>
 <body>
-  <header class="bar">
-    <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
-    <nav aria-label="Main">
-      <a href="/bench" aria-current="page" style="color: var(--cream)">Bench</a>
-      <a class="btn ghost small" href={MAC}>Download</a>
-    </nav>
-  </header>
+  <Header current="bench" />
 
   <main>
     <section class="top">

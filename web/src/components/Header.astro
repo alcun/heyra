@@ -1,0 +1,23 @@
+---
+// The top of every page: a floating pill with the mark and name, the links, and Download.
+interface Props {
+  current?: "bench";
+}
+const { current } = Astro.props;
+const MAC = "https://github.com/alcun/heyra-desktop/releases/latest";
+const CODE = "https://github.com/alcun/heyra-desktop";
+---
+<header class="bar">
+  <a class="mark" href="/" aria-label="Heyra home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="4" height="16" rx="2" fill="currentColor"/><rect x="8" y="7" width="4" height="6" rx="2" fill="#d9a86a"/><rect x="14" y="2" width="4" height="16" rx="2" fill="currentColor"/></svg>
+    <span>eyra</span>
+  </a>
+  <nav aria-label="Main">
+    <a href="/bench" aria-current={current === "bench" ? "page" : undefined}>Bench</a>
+    <a href={CODE}>GitHub</a>
+    <a class="btn primary small" href={MAC}>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.5a.75.75 0 0 1 .75.75v6.69l2.22-2.22a.75.75 0 1 1 1.06 1.06l-3.5 3.5a.75.75 0 0 1-1.06 0l-3.5-3.5a.75.75 0 0 1 1.06-1.06l2.22 2.22V2.25A.75.75 0 0 1 8 1.5zM2.75 12a.75.75 0 0 1 .75.75v.75h9v-.75a.75.75 0 0 1 1.5 0v1.5a.75.75 0 0 1-.75.75H2.75A.75.75 0 0 1 2 14.25v-1.5a.75.75 0 0 1 .75-.75z"/></svg>
+      Download
+    </a>
+  </nav>
+</header>
