@@ -1,21 +1,71 @@
-// The orb's journey: as you scroll, the hero's orb shrinks and glides down the page
-// into the dot above the Dock in the scene below, because that's what it is. The words
-// and the swell around it drift off as it leaves; when it lands, the scene's own dot
+// The orb's journey: as you scroll, the hero's orb winds up (it swells where it is while
+// the words and the swell fade away), then drops down the page into the dot above the
+// Dock in the scene below, because that's what it is. When it lands, the scene's own dot
 // takes over with one gold pulse. Tied to the scroll, so scrolling up plays it back.
-// Off with reduced motion: then both orbs simply stay where they are.
+//
+// Smooth: the path is worked out on screen, so holding and falling are one curve, and it
+// follows an eased copy of the scroll, so uneven wheel steps glide. Cheap: only opacity
+// and transforms move (never blur), and nothing runs unless the page is scrolling or
+// the glide is settling. Off with reduced motion: both orbs simply stay where they are.
 (() => {
   const hero = document.querySelector(".hero");
   const stage = hero?.querySelector(".stage");
   const target = document.querySelector("#scene .scene-orb");
   if (!stage || !target || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const drifting = [...hero.querySelectorAll(".hero-inner > :not(.stage), .scroll")];
+  const leaving = [...hero.querySelectorAll(".hero-inner > :not(.stage), .scroll")];
   const sky = hero.querySelector(".sky");
+  for (const el of [stage, sky, ...leaving]) if (el) el.style.willChange = "translate, scale, opacity";
   // The scene draws its resting dot at 0.12 of its canvas; the hero orb at full size.
   const DOT = 0.12;
-  let from, to, end, last = -1;
+  // Two beats: the wind-up, then the drop.
+  const WIND = 0.24, SWELL = 1.5;
+  let from, to, end;
   const centre = (el) => {
     const r = el.getBoundingClientRect();
     return { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY, w: r.width };
+  };
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const out = (t) => 1 - Math.pow(1 - t, 3);
+
+  function draw(y) {
+    const p = Math.min(1, Math.max(0, y / end));
+    const small = (to.w * DOT) / from.w;
+    const release = p < WIND ? 0 : ease((p - WIND) / (1 - WIND));
+    const scale = p < WIND ? 1 + (SWELL - 1) * out(p / WIND) : SWELL + (small - SWELL) * release;
+    // On screen: held where it started, then carried to wherever the dot is now.
+    const startOnScreen = from.y, dotOnScreen = to.y - y;
+    const onScreen = startOnScreen + (dotOnScreen - startOnScreen) * release;
+    stage.style.translate = `${((to.x - from.x) * release).toFixed(2)}px ${(onScreen + y - from.y).toFixed(2)}px`;
+    stage.style.scale = scale.toFixed(4);
+    // The swell blooms outward and fades as it winds up; the words drift up and fade.
+    const w = out(Math.min(1, p / WIND));
+    if (sky) {
+      sky.style.scale = (1 + 0.3 * w).toFixed(4);
+      sky.style.opacity = (1 - w).toFixed(3);
+    }
+    const f = out(Math.min(1, p / (WIND * 0.85)));
+    for (const el of leaving) {
+      el.style.opacity = (1 - f).toFixed(3);
+      el.style.translate = `0 ${(-f * 32).toFixed(1)}px`;
+    }
+    const landed = p >= 0.998;
+    stage.style.opacity = landed ? "0" : "1";
+    target.style.opacity = landed ? "1" : "0";
+    document.body.classList.toggle("orb-landed", landed);
+  }
+
+  // Glide towards the real scroll position instead of jumping with each wheel step, and
+  // stop once there: no work at all while the page is still.
+  let shown = scrollY, running = false;
+  function frame() {
+    shown += (scrollY - shown) * 0.2;
+    if (Math.abs(scrollY - shown) < 0.25) shown = scrollY;
+    if (shown <= end + innerHeight || scrollY <= end + innerHeight) draw(shown);
+    if (shown !== scrollY) requestAnimationFrame(frame);
+    else running = false;
+  }
+  const wake = () => {
+    if (!running) { running = true; requestAnimationFrame(frame); }
   };
   function measure() {
     stage.style.translate = "";
@@ -24,55 +74,11 @@
     to = centre(target);
     // It lands when the dot is a little below the middle of the screen.
     end = Math.max(1, to.y - innerHeight * 0.62);
-    last = -1;
+    draw(shown);
   }
-  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  const out = (t) => 1 - Math.pow(1 - t, 3);
-  // Two beats: first it swells towards you (the wind-up), then it lets go and drops.
-  const WIND = 0.24, SWELL = 1.5;
-  function frame() {
-    const p = Math.min(1, Math.max(0, scrollY / end));
-    if (p !== last) {
-      last = p;
-      const small = (to.w * DOT) / from.w;
-      let scale, e;
-      if (p < WIND) {
-        e = 0;
-        scale = 1 + (SWELL - 1) * out(p / WIND);
-      } else {
-        e = ease((p - WIND) / (1 - WIND));
-        scale = SWELL + (small - SWELL) * e;
-      }
-      // During the wind-up it holds its place on screen (moving down as fast as the page
-      // goes up); then it drops from there to the dot.
-      const held = Math.min(scrollY, WIND * end);
-      const dy = p < WIND ? scrollY : held + (to.y - from.y - held) * e;
-      stage.style.translate = `${(to.x - from.x) * e}px ${dy}px`;
-      stage.style.scale = String(scale);
-      // The swell blooms outward and dissolves as the orb winds up.
-      const w = Math.min(1, p / WIND);
-      if (sky) {
-        sky.style.scale = String(1 + 0.35 * out(w));
-        sky.style.opacity = String(1 - w);
-        sky.style.filter = w > 0 ? `blur(${(w * 10).toFixed(1)}px)` : "";
-      }
-      const landed = p >= 0.999;
-      stage.style.opacity = landed ? "0" : "1";
-      target.style.opacity = landed ? "1" : "0";
-      document.body.classList.toggle("orb-landed", landed);
-      // The words and the swell leave in the first third of the journey.
-      const f = Math.min(1, p / (WIND * 0.9));
-      for (const el of drifting) {
-        el.style.opacity = String(1 - f);
-        el.style.filter = f > 0 ? `blur(${(f * 8).toFixed(1)}px)` : "";
-        el.style.translate = `0 ${(-f * 28).toFixed(1)}px`;
-      }
-    }
-    requestAnimationFrame(frame);
-  }
-  measure();
+  addEventListener("scroll", wake, { passive: true });
   addEventListener("resize", measure);
   addEventListener("load", measure);
   document.fonts?.ready.then(measure);
-  requestAnimationFrame(frame);
+  measure();
 })();

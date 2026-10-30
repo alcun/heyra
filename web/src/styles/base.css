@@ -18,6 +18,8 @@
 }
 * { box-sizing: border-box; }
 html { background: var(--ground); }
+/* Nothing that grows past the edge (the orb on its way down) widens the page. */
+html, body { overflow-x: clip; }
 body {
   margin: 0; background: var(--ground); color: var(--cream);
   font: 400 1.0625rem/1.65 var(--sans); -webkit-font-smoothing: antialiased;
