@@ -81,23 +81,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         radial-gradient(1px 1px at 93% 88%, rgb(237 224 196 / 0.2), transparent 60%),
         radial-gradient(120% 80% at 50% 0%, #17181f 0%, var(--ground) 60%);
     }
-    /* A slow wave of gold light across the middle, behind faint scanlines. */
-    .sky span { position: absolute; border-radius: 50%; filter: blur(70px); }
-    .sky span:nth-child(1) { width: 70vw; height: 22vh; left: 20%; top: 62%; translate: -50% -50%; background: radial-gradient(closest-side, rgb(217 168 106 / 0.42), transparent); }
-    .sky span:nth-child(2) { width: 60vw; height: 26vh; left: 80%; top: 58%; translate: -50% -50%; background: radial-gradient(closest-side, rgb(196 128 62 / 0.38), transparent); }
-    .sky span:nth-child(3) { width: 46vw; height: 18vh; left: 50%; top: 70%; translate: -50% -50%; background: radial-gradient(closest-side, rgb(237 200 140 / 0.28), transparent); }
+    /* The light: ribbons drawn by ribbons.js, behind faint scanlines. */
+    #ribbons { position: absolute; left: 0; right: 0; top: 28%; height: 46%; width: 100%; opacity: 0.72; }
     .sky::after {
       content: ""; position: absolute; inset: 0;
-      background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 4px);
-      -webkit-mask-image: radial-gradient(90% 70% at 50% 60%, #000, transparent); mask-image: radial-gradient(90% 70% at 50% 60%, #000, transparent);
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .sky span:nth-child(1) { animation: wave-a 14s ease-in-out infinite alternate; }
-      .sky span:nth-child(2) { animation: wave-b 17s ease-in-out infinite alternate; }
-      .sky span:nth-child(3) { animation: wave-c 11s ease-in-out infinite alternate; }
-      @keyframes wave-a { to { transform: translate(14vw, -6vh) scale(1.15, 0.85); } }
-      @keyframes wave-b { to { transform: translate(-16vw, 7vh) scale(0.9, 1.2); } }
-      @keyframes wave-c { to { transform: translate(8vw, -9vh) scale(1.25, 0.9); } }
+      background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.22) 0 1px, transparent 1px 4px);
+      -webkit-mask-image: radial-gradient(90% 60% at 50% 57%, #000, transparent); mask-image: radial-gradient(90% 60% at 50% 57%, #000, transparent);
     }
     .stage { position: relative; width: min(22rem, 70vw, 34svh); aspect-ratio: 1; margin: 1rem auto -1rem; }
     #orb { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -115,7 +104,23 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       letter-spacing: 0.05em; text-wrap: balance;
     }
     h1 em { font-style: normal; color: var(--gold); }
-    h1.lede { font-family: var(--sans); font-weight: 400; letter-spacing: 0; color: var(--cream); opacity: 0.8; }
+    /* The big name: the mark is its h, as far from the e as the letters are apart. */
+    .wordmark { display: inline-flex; align-items: center; gap: 0.16em; margin: 0; color: var(--cream); font: 700 clamp(3.2rem, 9vw, 7.2rem)/1 var(--display); letter-spacing: 0.12em; }
+    .wordmark svg { width: 0.98em; height: 0.98em; flex: none; }
+    .wordmark span { margin-right: -0.12em; }
+    .hero .lede { margin-top: 1.4rem; font-size: clamp(1.05rem, 1.7vw, 1.25rem); color: var(--slate); }
+    /* Down to the rest. */
+    .scroll {
+      position: absolute; left: 50%; bottom: 1.75rem; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+      font: 500 0.7rem/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .scroll:hover { color: var(--cream); }
+    .scroll svg { width: 1.35rem; height: 1.35rem; }
+    @media (prefers-reduced-motion: no-preference) {
+      .scroll svg { animation: bob 2.2s ease-in-out infinite; }
+      @keyframes bob { 50% { transform: translateY(5px); } }
+    }
     .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
     .brew-row { margin: 0.25rem 0 1rem; }
     .actions { align-items: center; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 0.5rem; }
@@ -365,9 +370,13 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
   <main>
     <section class="hero" aria-label="Heyra">
-      <div class="sky" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="sky" aria-hidden="true"><canvas id="ribbons"></canvas></div>
       <div class="hero-inner">
-        <h1 class="lede">Free, open source voice to text that never leaves your Mac.</h1>
+        <h1 class="wordmark" aria-label="Heyra">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="4" height="16" rx="2" fill="currentColor"/><rect x="8" y="7" width="4" height="6" rx="2" fill="#d9a86a"/><rect x="14" y="2" width="4" height="16" rx="2" fill="currentColor"/></svg>
+          <span aria-hidden="true">eyra</span>
+        </h1>
+        <p class="lede">Free, open source voice to text that never leaves your Mac.</p>
 
         <div class="stage">
           <canvas id="orb" aria-hidden="true"></canvas>
@@ -392,6 +401,10 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         </div>
 
       </div>
+      <a class="scroll" href="#how" aria-label="Scroll to see more">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 10l5 5 5-5"/></svg>
+      </a>
     </section>
 
     <section class="block scene-block" id="how" aria-labelledby="scene-title">
@@ -534,6 +547,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     </div>
   </footer>
   <script src="/heyra.js" type="module"></script>
+  <script src="/ribbons.js" defer></script>
   <script src="/scene.js" type="module"></script>
   <script>
     // The install line: one click copies it, and the button says so for a moment.

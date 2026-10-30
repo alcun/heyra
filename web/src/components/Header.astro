@@ -21,3 +21,14 @@ const CODE = "https://github.com/alcun/heyra-desktop";
     </a>
   </nav>
 </header>
+<script>
+  // On the home page the bar waits below the hero, where the big name is; elsewhere it's always there.
+  const bar = document.querySelector("header.bar");
+  const hero = document.querySelector(".hero");
+  if (bar && hero) {
+    const place = () => bar.classList.toggle("away", scrollY < hero.offsetHeight - 140);
+    place();
+    addEventListener("scroll", place, { passive: true });
+    addEventListener("resize", place);
+  }
+</script>
