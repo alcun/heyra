@@ -10,6 +10,8 @@ if (scene) {
   const o = makeOrb(scene.querySelector(".scene-orb"), { scale: 0.12 });
   const key = document.querySelector(".keys .fnkey");
   const app = scene.querySelector(".mb-app");
+  const live = scene.querySelector(".live");
+  const liveText = scene.querySelector(".live-text");
   const windows = { notes: scene.querySelector(".window.notes"), term: scene.querySelector(".window.term") };
   // Each take goes to whichever window is in front.
   const takes = [
@@ -43,6 +45,15 @@ if (scene) {
       };
       tick();
     });
+  }
+
+  // The words box fills in a word at a time while you talk, as in the app.
+  function words(text, ms) {
+    const all = text.split(" ");
+    liveText.textContent = "";
+    live.classList.add("on");
+    return Promise.all(all.map((_, i) => wait((ms * 0.9 * (i + 1)) / all.length)
+      .then(() => { liveText.textContent = all.slice(0, i + 1).join(" "); })));
   }
 
   // In Notes each take lands as a new line; in the terminal it fills the prompt
@@ -90,10 +101,11 @@ if (scene) {
       key.classList.add("down");
       o.size(1);
       await wait(350);
-      await speak(2600);
+      await Promise.all([speak(2600), words(text, 2600)]);
       key.classList.remove("down");
       o.writing(true);
       await wait(520);
+      live.classList.remove("on");
       place(where, text);
       o.writing(false);
       o.size(0.12);
@@ -105,6 +117,8 @@ if (scene) {
   if (calm.matches) {
     focus("term");
     place("term", takes[0][1]);
+    liveText.textContent = takes[0][1];
+    live.classList.add("on");
     o.size(1);
     o.level(0.4);
   }

@@ -72,8 +72,8 @@
     stage.style.scale = "";
     from = centre(stage);
     to = centre(target);
-    // It lands when the dot is a little below the middle of the screen.
-    end = Math.max(1, to.y - innerHeight * 0.62);
+    // It lands once the dot is well up the screen, so the scene plays with its own orb.
+    end = Math.max(1, to.y - innerHeight * 0.86);
     draw(shown);
   }
   addEventListener("scroll", wake, { passive: true });
