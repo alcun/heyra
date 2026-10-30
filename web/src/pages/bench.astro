@@ -72,6 +72,9 @@ const sets = bench.sets.map((s) => {
   <title>Heyra · Bench</title>
   {canonical && <link rel="canonical" href={canonical} />}
   <meta name="description" content={`How many words each voice model in Heyra gets wrong, on ${bench.clips} public English clips.`} />
+  <link rel="preload" href="/fonts/Outland-Bold.otf" as="font" type="font/otf" crossorigin />
+  <link rel="preload" href="/fonts/SpaceGrotesk-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/MartianMono-StdMd.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   {analyticsKey && <Analytics publicKey={analyticsKey} />}
   <style is:global>

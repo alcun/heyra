@@ -1,12 +1,12 @@
 /* Shared by every page, in the app's look: near-black ground, off-white words, gold for
    anything live, slate for labels. Outland for titles, Space Grotesk for text, Martian
    Mono for labels and numbers, all served from here. */
-@font-face { font-family: "Outland"; src: url("/fonts/Outland-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Bold.ttf") format("truetype"); font-weight: 600 700; font-display: swap; }
-@font-face { font-family: "Martian Mono"; src: url("/fonts/MartianMono-StdRg.ttf") format("truetype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Martian Mono"; src: url("/fonts/MartianMono-StdMd.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Outland"; src: url("/fonts/Outland-Bold.otf") format("opentype"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Regular.ttf") format("truetype"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Medium.ttf") format("truetype"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Bold.ttf") format("truetype"); font-weight: 600 700; font-display: block; }
+@font-face { font-family: "Martian Mono"; src: url("/fonts/MartianMono-StdRg.ttf") format("truetype"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Martian Mono"; src: url("/fonts/MartianMono-StdMd.ttf") format("truetype"); font-weight: 500; font-display: block; }
 :root {
   --ground: #121318; --ground-2: #17181e; --panel: #1d1f26; --hair: #2c2f3a;
   --cream: #ebebed; --slate: #8a9aa6; --dim: #7a8491; --gold: #d9a86a; --gold-deep: #9c6d3c;
@@ -35,18 +35,20 @@ a { color: inherit; text-decoration-color: var(--gold); text-underline-offset: 0
 /* ---- top bar: a floating pill ---- */
 header.bar {
   position: fixed; top: 1rem; left: 50%; translate: -50% 0; z-index: 10;
-  width: min(64rem, calc(100% - 2rem)); height: 3.6rem;
+  width: min(68rem, calc(100% - 2rem)); height: 4.4rem;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: 0 0.55rem 0 1.25rem; border-radius: 999px;
+  padding: 0 0.7rem 0 1.6rem; border-radius: 999px;
   background: rgb(14 15 19 / 0.72); border: 1px solid rgb(255 255 255 / 0.08);
   backdrop-filter: blur(16px) saturate(1.3); -webkit-backdrop-filter: blur(16px) saturate(1.3);
   box-shadow: 0 10px 40px rgb(0 0 0 / 0.35);
 }
 html { scroll-padding-top: 6rem; }
 .mark { display: flex; align-items: center; gap: 0.5rem; color: var(--cream); text-decoration: none; }
-.mark svg { width: 1.15rem; height: 1.15rem; }
-.mark span { font: 700 1.15rem/1 var(--display); letter-spacing: 0.14em; }
-header.bar nav { display: flex; align-items: center; gap: 1.6rem; font: 500 0.92rem/1 var(--sans); }
+.mark { gap: 0.22rem; } /* the mark is the h: as far from the e as letters are apart */
+.mark svg { width: 1.45rem; height: 1.45rem; }
+.mark span { font: 700 1.45rem/1 var(--display); letter-spacing: 0.14em; }
+header.bar nav { display: flex; align-items: center; gap: 2rem; font: 500 1.05rem/1 var(--sans); }
+header.bar nav .btn { font-size: 1rem; padding: 0.8rem 1.25rem; }
 header.bar nav a:not(.btn) { color: var(--slate); text-decoration: none; transition: color 0.15s ease; }
 header.bar nav a:not(.btn):hover, header.bar nav a[aria-current="page"] { color: var(--cream); }
 
