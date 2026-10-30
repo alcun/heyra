@@ -153,6 +153,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .head .intro { margin: 0; }
     /* Each section's title stays pinned under the nav while you read that section. */
     .head { position: sticky; top: 5.6rem; z-index: 5; padding: 0.9rem 0; margin-top: -0.9rem; background: var(--ground); box-shadow: 0 -6rem 0 0 var(--ground), 0 1.2rem 1.2rem -0.6rem var(--ground); }
+    /* Not over the Mac scene, which is wider than the title row. */
+    #how .head { position: static; box-shadow: none; }
     @media (max-width: 860px) { .head { position: static; box-shadow: none; } }
     .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
 
