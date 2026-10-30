@@ -9,35 +9,34 @@
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const symbols = ".:o*%#@";
-  // Whole lines from The Waste Land, run together; one word in each glints gold.
+  // Whole lines from The Waste Land, run together; a word or two in each glints gold.
   const lines = [
-    ["aprilisthecruellestmonthbreedinglilacs", "lilacs"],
     ["mixingmemoryanddesirestirringdullroots", "desire"],
-    ["dullrootswithspringrain", "spring"],
-    ["winterkeptuswarmcoveringearthinforgetfulsnow", "warm"],
-    ["feedingalittlelifewithdriedtubers", "life"],
+    ["dullrootswithspringrain", "spring rain"],
+    ["winterkeptuswarmcoveringearthinforgetfulsnow", "warm snow"],
+    ["feedingalittlelifewithdriedtubers", "life little"],
     ["andwentoninsunlightintothehofgarten", "sunlight"],
     ["anddrankcoffeeandtalkedforanhour", "coffee"],
     ["inthemountainsthereyoufeelfree", "free"],
     ["yourshadowatmorningstridingbehindyou", "morning"],
-    ["lookingintotheheartoflightthesilence", "light"],
+    ["lookingintotheheartoflightthesilence", "light heart"],
     ["whenwecamebacklatefromthehyacinthgarden", "garden"],
-    ["theglitterofherjewelsrosetomeetit", "glitter"],
+    ["theglitterofherjewelsrosetomeetit", "glitter jewels"],
     ["inwhichsadlightacarveddolphinswam", "swam"],
     ["whatisthatnoisethewindunderthedoor", "wind"],
     ["glowedintowordsthenwouldbesavagelystill", "glowed"],
     ["sweetthamesrunsoftlytilliendmysong", "softly"],
     ["iftherewerethesoundofwateronly", "water"],
-    ["thebargesdriftwiththeturningtide", "tide"],
-    ["redsailswidetoleewardswingontheheavyspar", "sails"],
-    ["agildedshellredandgoldthebriskswell", "gold"],
+    ["thebargesdriftwiththeturningtide", "tide barges"],
+    ["redsailswidetoleewardswingontheheavyspar", "sails red"],
+    ["agildedshellredandgoldthebriskswell", "gold gilded"],
     ["thepealofbellswhitetowers", "bells"],
-    ["inthefaintmoonlightthegrassissinging", "singing"],
+    ["inthefaintmoonlightthegrassissinging", "singing moonlight"],
     ["wherethehermitthrushsingsinthepinetrees", "sings"],
     ["dripdropdripdropdropdropdrop", "drop"],
     ["thenadampgustbringingrain", "rain"],
     ["theboatrespondedgailytothehandexpertwithsailandoar", "boat"],
-    ["theseawascalmyourheartwouldhaveresponded", "calm"],
+    ["theseawascalmyourheartwouldhaveresponded", "calm sea"],
     ["shantihshantihshantih", "shantih"],
   ];
   const fragments = lines.map(([line]) => line);
@@ -102,13 +101,13 @@
             const character = ((streamPosition % fragment.length) + fragment.length) % fragment.length;
             glyph = fragment[character];
             letter = true;
-            const golden = goldenWords.get(fragment);
-            const start = golden ? fragment.indexOf(golden) : -1;
-            highlight = start >= 0 && character >= start && character < start + golden.length
-              && Math.floor(streamPosition / fragment.length) % 2 === 0;
+            highlight = (goldenWords.get(fragment) || "").split(" ").some((word) => {
+              const start = fragment.indexOf(word);
+              return word && start >= 0 && character >= start && character < start + word.length;
+            });
           }
           const gold = side === -1 && (col * 7 + row * 11) % 13 === 0;
-          ctx.fillStyle = highlight ? `rgba(217,168,106,${alpha * 0.85})` :
+          ctx.fillStyle = highlight ? `rgba(217,168,106,${Math.min(1, alpha * 1.35)})` :
             letter ? `rgba(205,211,214,${alpha * 1.1})` :
             gold ? `rgba(217,168,106,${alpha * 0.85})` : `rgba(138,154,166,${alpha})`;
           ctx.shadowColor = "transparent";
