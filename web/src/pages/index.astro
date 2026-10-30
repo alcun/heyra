@@ -151,6 +151,9 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     h2 { margin: 0; font: 700 clamp(1.2rem, 2vw, 1.5rem)/1.25 var(--display); letter-spacing: 0.05em; color: var(--cream); text-wrap: balance; max-width: 24ch; }
     .head { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 1rem clamp(2rem, 5vw, 5rem); align-items: baseline; margin-bottom: 2.5rem; }
     .head .intro { margin: 0; }
+    /* Each section's title stays pinned under the nav while you read that section. */
+    .head { position: sticky; top: 5.6rem; z-index: 5; padding: 0.9rem 0; margin-top: -0.9rem; background: var(--ground); box-shadow: 0 -6rem 0 0 var(--ground), 0 1.2rem 1.2rem -0.6rem var(--ground); }
+    @media (max-width: 860px) { .head { position: static; box-shadow: none; } }
     .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
 
 
