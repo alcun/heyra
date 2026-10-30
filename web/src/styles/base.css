@@ -53,6 +53,19 @@ header.bar nav { display: flex; align-items: center; gap: 2rem; font: 500 1.05re
 header.bar nav .btn { font-size: 1rem; padding: 0.8rem 1.25rem; }
 header.bar nav a:not(.btn) { color: var(--slate); text-decoration: none; transition: color 0.15s ease; }
 header.bar nav a:not(.btn):hover, header.bar nav a[aria-current="page"] { color: var(--cream); }
+@media (max-width: 600px) {
+  header.bar { width: calc(100% - 1.5rem); height: 3.75rem; top: 0.75rem; padding: 0 0.45rem 0 0.9rem; gap: 0.5rem; }
+  header.bar .mark { flex: none; }
+  header.bar .mark svg { width: 1.15rem; height: 1.15rem; }
+  header.bar .mark span { font-size: 1.15rem; }
+  header.bar nav { gap: 0.8rem; font-size: 0.85rem; }
+  header.bar nav .nav-github { display: none; }
+  header.bar nav .btn { font-size: 0.82rem; padding: 0.7rem 0.85rem; gap: 0.35rem; }
+}
+@media (max-width: 350px) {
+  header.bar nav .btn span { display: none; }
+  header.bar nav .btn { padding: 0.7rem; }
+}
 
 .btn {
   display: inline-flex; align-items: center; gap: 0.6rem; border-radius: 999px;

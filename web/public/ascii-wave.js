@@ -10,37 +10,66 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const symbols = ".:o*%#@";
   const fragments = [
-    "aprilisthecruellestmonth",
-    "lilacsoutofthedeadland",
+    "breedinglilacs",
     "memoryanddesire",
-    "dullrootswithspringrain",
+    "springrain",
     "winterkeptuswarm",
-    "alittlelifewithdriedtubers",
+    "alittlelife",
+    "andwentoninsunlight",
+    "anddrankcoffeeandtalkedforanhour",
     "inthemountainsthereyoufeelfree",
-    "aheapofbrokenimages",
-    "fearinahandfulofdust",
     "yourshadowatmorning",
     "lookingintotheheartoflight",
-    "unrealcity",
-    "thedeadtreegivesnoshelter",
+    "hyacinthgarden",
+    "theglitterofherjewels",
+    "acarveddolphinswam",
     "thewindunderthedoor",
     "glowedintowords",
-    "thereisnotevensilenceinthemountains",
-    "speaktomewhydoyouneverspeak",
     "sweetthamesrunsoftly",
-    "theriverbearsnoemptybottles",
     "thesoundofwater",
-    "theriversweatsoilandtar",
     "thebargesdriftwiththeturningtide",
-    "myfeetareatmoorgate",
-    "hereisnowaterbutonlyrock",
+    "redsails",
+    "redandgold",
+    "thepealofbells",
+    "whitetowers",
+    "thegrassissinging",
+    "thehermitthrushsings",
     "dripdropdripdropdropdropdrop",
-    "thevoicesingingoutofemptycisterns",
-    "thenspokethethunder",
-    "londonbridgeisfallingdown",
-    "thesefragmentsihaveshoredagainstmyruins",
+    "bringingrain",
+    "theboatresponded",
+    "theseawascalm",
     "shantihshantihshantih",
   ];
+  const goldenWords = new Map([
+    ["breedinglilacs", "lilacs"],
+    ["memoryanddesire", "desire"],
+    ["springrain", "spring"],
+    ["winterkeptuswarm", "warm"],
+    ["alittlelife", "life"],
+    ["andwentoninsunlight", "sunlight"],
+    ["anddrankcoffeeandtalkedforanhour", "coffee"],
+    ["inthemountainsthereyoufeelfree", "free"],
+    ["yourshadowatmorning", "morning"],
+    ["lookingintotheheartoflight", "light"],
+    ["hyacinthgarden", "garden"],
+    ["theglitterofherjewels", "glitter"],
+    ["acarveddolphinswam", "swam"],
+    ["thewindunderthedoor", "wind"],
+    ["glowedintowords", "glowed"],
+    ["sweetthamesrunsoftly", "softly"],
+    ["thesoundofwater", "water"],
+    ["thebargesdriftwiththeturningtide", "tide"],
+    ["redsails", "sails"],
+    ["redandgold", "gold"],
+    ["thepealofbells", "bells"],
+    ["whitetowers", "white"],
+    ["thegrassissinging", "singing"],
+    ["thehermitthrushsings", "sings"],
+    ["bringingrain", "rain"],
+    ["theboatresponded", "boat"],
+    ["theseawascalm", "calm"],
+    ["shantihshantihshantih", "shantih"],
+  ]);
   let width = 0;
   let height = 0;
   let visible = true;
@@ -94,14 +123,24 @@
           if (alpha === 0) continue;
           let glyph = symbols[Math.min(symbols.length - 1, Math.floor(shade * symbols.length))];
           let letter = false;
+          let highlight = false;
           if (side === 1 && shade > 0.34) {
             const fragment = fragments[(row * 7 + Math.floor(time / 18000)) % fragments.length];
-            glyph = fragment[(col - textDrift + fragment.length * 1000) % fragment.length];
+            const streamPosition = col - textDrift;
+            const character = ((streamPosition % fragment.length) + fragment.length) % fragment.length;
+            glyph = fragment[character];
             letter = true;
+            const golden = goldenWords.get(fragment);
+            const start = golden ? fragment.indexOf(golden) : -1;
+            highlight = start >= 0 && character >= start && character < start + golden.length
+              && Math.floor(streamPosition / fragment.length) % 2 === 0;
           }
-          const gold = (col * 7 + row * 11) % 13 === 0;
-          ctx.fillStyle = letter ? `rgba(205,211,214,${alpha * 1.1})` :
+          const gold = side === -1 && (col * 7 + row * 11) % 13 === 0;
+          ctx.fillStyle = highlight ? `rgba(217,168,106,${alpha * 0.85})` :
+            letter ? `rgba(205,211,214,${alpha * 1.1})` :
             gold ? `rgba(217,168,106,${alpha * 0.85})` : `rgba(138,154,166,${alpha})`;
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
           ctx.fillText(glyph, x, y);
         }
       }

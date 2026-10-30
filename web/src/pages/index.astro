@@ -41,7 +41,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <link rel="preload" href="/fonts/Outland-Bold.otf" as="font" type="font/otf" crossorigin />
   <link rel="preload" href="/fonts/SpaceGrotesk-Regular.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="/fonts/MartianMono-StdMd.ttf" as="font" type="font/ttf" crossorigin />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   {canonical && <meta property="og:url" content={canonical} />}
   <meta property="og:title" content="Heyra · Dictation that runs on your Mac" />
@@ -119,7 +119,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       @keyframes bob { 50% { transform: translateY(5px); } }
     }
     .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
-    .brew-row { margin: 0.25rem 0 1rem; }
+    .brew-row { margin: 0.25rem 0 1.75rem; }
     .actions { align-items: center; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 0.5rem; }
     .fine { margin: 1rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
     .fine a { color: var(--slate); }
@@ -138,7 +138,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .hero:has(#stone.listening) #status::before { background: var(--gold); box-shadow: 0 0 12px rgb(217 168 106 / 0.8); }
     /* The newest take is large, the one before it small and dim. */
     #heard { list-style: none; padding: 0; margin: 0.4rem auto 0; max-width: 40rem; height: 4.2rem; overflow: hidden; }
-    #heard:empty { height: 0.75rem; }
     #heard li { display: none; }
     #heard li q { quotes: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: copy; }
     #heard li:first-child { display: block; color: var(--cream); }
@@ -358,12 +357,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       .readouts div:nth-child(3) { border-left: 0; }
       .readouts div:nth-child(n+3) { border-top: 1px solid var(--hair); }
       .split { grid-template-columns: minmax(0, 1fr); }
-      header.bar nav .hide-sm { display: none; }
+    }
+    @media (max-width: 600px) {
+      #status { height: 3em; }
     }
   </style>
 </head>
 <body>
-  <Header />
+  <Header hideInHero />
 
   <main>
     <section class="hero" aria-label="Heyra">
@@ -546,15 +547,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <script src="/heyra.js" type="module"></script>
   <script src="/ascii-wave.js" defer></script>
   <script src="/scene.js" type="module"></script>
-  <script>
-    // The install line: one click copies it, and the button says so for a moment.
-    const copy = document.getElementById("copy-brew");
-    const icon = copy?.innerHTML;
-    copy?.addEventListener("click", async () => {
-      await navigator.clipboard.writeText("brew install --cask alcun/tap/heyra");
-      copy.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="#d9a86a" stroke-width="1.6" d="M3.5 8.5l3 3 6-7"/></svg>';
-      setTimeout(() => { copy.innerHTML = icon; }, 1500);
-    });
-  </script>
+  <script src="/copy-brew.js" defer></script>
 </body>
 </html>
