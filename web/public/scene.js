@@ -69,7 +69,7 @@ if (scene) {
         input.classList.remove("landed");
         const you = document.createElement("p");
         you.className = "cc-you";
-        you.textContent = "> " + text;
+        you.textContent = "❯ " + text;
         const says = document.createElement("p");
         says.className = "cc-says";
         says.textContent = reply;

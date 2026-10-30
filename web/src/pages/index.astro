@@ -217,15 +217,20 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     /* Claude Code: the welcome box, the conversation, the input box and its hint. */
     .tty { display: flex; flex-direction: column; gap: 0.8em; height: calc(100% - 2.154em); padding: 0.8em 1em; font: 400 0.846em/1.35 ui-monospace, "SF Mono", Menlo, var(--mono); color: rgb(255 255 255 / 0.88); }
     .tty p { margin: 0; }
-    .cc-welcome { align-self: flex-start; padding: 0.4em 2.5em 0.4em 0.8em; border: 1px solid #d77757; border-radius: 0.5em; }
-    .cc-welcome b { color: #d77757; font-weight: 400; }
-    .cc-dim, .cc-hint { color: rgb(255 255 255 / 0.4); }
+    .cc-head { display: flex; gap: 1em; align-items: center; }
+    .cc-crab { width: 4.6em; flex: none; }
+    .cc-head strong { color: #fff; }
+    .cc-dim { color: rgb(255 255 255 / 0.5); }
+    .cc-note { padding-left: 0.9em; border-left: 2px solid rgb(255 255 255 / 0.3); color: rgb(255 255 255 / 0.55); }
     .cc-log { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.8em; overflow: hidden; }
-    .cc-you { color: rgb(255 255 255 / 0.5); }
+    .cc-you { color: rgb(255 255 255 / 0.6); }
     .cc-says::before { content: "⏺ "; color: #fff; }
-    .cc-input { padding: 0.35em 0.7em; border: 1px solid rgb(255 255 255 / 0.3); border-radius: 0.4em; white-space: nowrap; overflow: hidden; }
-    .cc-prompt { color: rgb(255 255 255 / 0.6); }
-    .cc-hint { margin-top: -0.5em !important; padding-left: 0.8em; }
+    .cc-input { padding: 0.45em 0; border-block: 1px solid rgb(255 255 255 / 0.3); white-space: nowrap; overflow: hidden; }
+    .cc-prompt { color: rgb(255 255 255 / 0.8); }
+    .cc-try { color: rgb(255 255 255 / 0.4); }
+    .cc-input .doc-text:not(:empty) ~ .cc-try { display: none; }
+    .cc-mode { color: rgb(255 255 255 / 0.55); padding-left: 0.9em; }
+    .cc-mode b { color: #f5c542; font-weight: 400; }
     /* The Dock: 48pt icons. */
     .dock { position: absolute; left: 50%; bottom: 0.3em; translate: -50% 0; display: flex; gap: 0.4em; padding: 0.45em; border-radius: 1.4em; background: rgb(255 255 255 / 0.14); border: 1px solid rgb(255 255 255 / 0.18); backdrop-filter: blur(24px) saturate(1.5); }
     .dock i { width: 3.692em; aspect-ratio: 1; border-radius: 23%; display: grid; place-items: center; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2), 0 1px 3px rgb(0 0 0 / 0.25); }
@@ -407,10 +412,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
           <div class="window term" aria-hidden="true">
             <div class="titlebar"><i></i><i></i><i></i><span>site — claude — 80×24</span></div>
             <div class="tty">
-              <div class="cc-welcome"><p><b>✻</b> Welcome to <strong>Claude Code</strong>!</p><p class="cc-dim">/help for help, /status for your current setup</p><p class="cc-dim">cwd: ~/site</p></div>
+              <div class="cc-head">
+                <svg class="cc-crab" viewBox="0 0 120 90"><path fill="#de7a58" d="M16 2h90v32h14v18h-14v10H16V52H2V34h14zM16 62h6v26h-6zM28 62h6v26h-6zM86 62h6v26h-6zM98 62h6v26h-6z"/><path fill="#16171c" d="M30 20h6v14h-6zM86 20h6v14h-6z"/></svg>
+                <div><p><strong>Claude Code</strong> <span class="cc-dim">v2.1.314</span></p><p class="cc-dim">Opus 5.5 · Claude Pro</p><p class="cc-dim">~/site</p></div>
+              </div>
+              <p class="cc-note">Using Opus 5.5 · /model</p>
               <div class="cc-log"></div>
-              <div class="cc-input"><span class="cc-prompt">&gt;</span> <span class="doc-text"></span><span class="caret"></span></div>
-              <p class="cc-hint">? for shortcuts</p>
+              <div class="cc-input"><span class="cc-prompt">❯</span> <span class="doc-text"></span><span class="caret"></span><span class="cc-try">Try "how do I log an error?"</span></div>
+              <p class="cc-mode"><b>▸▸ auto mode on</b> (shift+tab to cycle)</p>
             </div>
           </div>
           <div class="live" aria-hidden="true"><p class="live-text"></p><i class="live-x"></i></div>
