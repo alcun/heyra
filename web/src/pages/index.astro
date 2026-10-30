@@ -6,16 +6,7 @@ import "../styles/base.css";
 const MAC = "https://github.com/alcun/heyra-desktop";
 const MAC_CODE = "https://github.com/alcun/heyra-desktop";
 const SERVER_CODE = "https://github.com/alcun/heyra";
-// One list for the page and for search engines' FAQ data.
-const faq = [
-  ["Does Heyra need the internet?", "Once, to download a speech model (300 to 490 MB). After that it works with no network at all."],
-  ["Which Macs does it run on?", "Macs with Apple Silicon (M1 or later) on macOS 13 or later."],
-  ["Which languages does it understand?", "English with any model. Pick Parakeet v3 for 24 other European languages, including French, German, Spanish and Italian; it works out which one you're speaking."],
-  ["How is it different from the dictation built into macOS?", "Heyra works in any app by holding one key, uses the open speech model you pick, keeps a history you can copy from, and has a dictionary for the words it gets wrong. And it's open source."],
-  ["Is it really free?", "Yes. It's MIT licensed, with no account and no paid tier."],
-  ["Does it work on Windows or Linux?", "Not yet. A Windows version is planned."],
-  ["What happens to my voice in the demo on this page?", "The demo sends your clip to this server, which writes it down in memory and doesn't keep the audio. The Mac app sends nothing."],
-];
+import { faq } from "../data/faq";
 import Analytics from "../components/Analytics.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -34,9 +25,9 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Heyra · Dictation that runs on your Mac</title>
+  <title>Heyra · Free offline dictation for Mac</title>
   {canonical && <link rel="canonical" href={canonical} />}
-  <meta name="description" content="Hold a key, talk, let go. Free, open source voice to text that never leaves your Mac." />
+  <meta name="description" content="Hold fn, talk, let go, and it types where your cursor is. Free, open source voice to text that runs on your Mac and never sends your voice anywhere." />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#121318" />
   <link rel="preload" href="/fonts/Outland-Bold.otf" as="font" type="font/otf" crossorigin />
@@ -45,11 +36,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   {canonical && <meta property="og:url" content={canonical} />}
-  <meta property="og:title" content="Heyra · Dictation that runs on your Mac" />
+  <meta property="og:title" content="Heyra · Free offline dictation for Mac" />
   {og && <meta property="og:image" content={og} />}
   {og && <meta name="twitter:card" content="summary_large_image" />}
   <meta property="og:description" content="Hold a key, talk, let go. Speech to text that runs on your own Mac." />
-  <link rel="alternate" type="text/plain" href="/llms.txt" title="How to use this API" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="Heyra for language models" />
+  <link rel="alternate" type="application/atom+xml" href="https://github.com/alcun/heyra-desktop/releases.atom" title="Heyra releases" />
   {analyticsKey && <Analytics publicKey={analyticsKey} />}
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Heyra",
@@ -156,7 +148,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
     /* ---- sections ---- */
     section.block { padding: clamp(4.5rem, 9vw, 7.5rem) 0; border-top: 1px solid var(--hair); overflow-x: clip; }
-    h2 { margin: 0; font: 500 1.35rem/1.3 var(--sans); letter-spacing: 0; color: var(--cream); text-wrap: balance; max-width: 24ch; }
+    h2 { margin: 0; font: 700 clamp(1.2rem, 2vw, 1.5rem)/1.25 var(--display); letter-spacing: 0.05em; color: var(--cream); text-wrap: balance; max-width: 24ch; }
     .head { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 1rem clamp(2rem, 5vw, 5rem); align-items: baseline; margin-bottom: 2.5rem; }
     .head .intro { margin: 0; }
     .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
@@ -257,9 +249,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .faq summary::-webkit-details-marker { display: none; }
     .faq summary::after { content: "+"; font: 400 1.2rem/1 var(--mono); color: var(--gold); transition: transform 0.25s ease; }
     .faq details[open] summary::after { transform: rotate(45deg); }
-    .faq { interpolate-size: allow-keywords; }
-    .faq details::details-content { block-size: 0; overflow: clip; transition: block-size 0.3s var(--ease), content-visibility 0.3s allow-discrete; }
-    .faq details[open]::details-content { block-size: auto; }
+    .faq summary:hover { color: #fff; }
+    .faq-side { position: sticky; top: 7rem; }
+    .ask { margin: 1rem 0 0; color: var(--dim); font-size: 0.95rem; }
+    .ask a { color: var(--slate); text-underline-offset: 3px; }
+    .ask a:hover { color: var(--cream); }
+    .faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+    @media (prefers-reduced-motion: no-preference) { .faq details[open] p { animation: answer 0.35s var(--ease); } }
+    @keyframes answer { from { opacity: 0; transform: translateY(-4px); } }
     .faq details p { margin: 0 0 1.2rem; max-width: 38rem; color: var(--slate); }
     @media (max-width: 860px) { .faq-wrap { grid-template-columns: minmax(0, 1fr); } }
 
@@ -279,7 +276,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         section.block h2, .closing h2 {
           animation: rise both var(--ease); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
-        section.block .intro, section.block .uses, section.block .faq, .closing .actions {
+        section.block .intro, section.block .uses, .closing .actions {
           animation: rise both var(--ease); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
         .screen, .shot, .server-split pre, .spec {
@@ -453,11 +450,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-wrap">
         <div>
-          <h2 id="faq-title">Questions</h2>
+          <div class="faq-side">
+            <h2 id="faq-title">Questions</h2>
+            <p class="ask">Something else? <a href="https://github.com/alcun/heyra-desktop/issues">Ask on GitHub</a></p>
+          </div>
         </div>
         <div class="faq">
           {faq.map(([q, a]) => (
-            <details>
+            <details name="faq">
               <summary>{q}</summary>
               <p>{a}</p>
             </details>
