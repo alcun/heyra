@@ -7,6 +7,7 @@ import { withWeb } from "./web.ts";
 const root = mkdtempSync(join(tmpdir(), "heyra-web-"));
 writeFileSync(join(root, "index.html"), "<h1>Heyra</h1>");
 writeFileSync(join(root, "heyra.js"), "// page");
+writeFileSync(join(root, "font.woff2"), "font");
 afterAll(() => rmSync(root, { recursive: true }));
 
 const fetch = withWeb(() => new Response("api"), root);
@@ -35,3 +36,16 @@ test("a link out of the web root is not followed", async () => {
   expect((await get("/leak.txt")).status).toBe(404);
 });
 test("other methods on the page are refused", async () => expect((await get("/", "POST")).status).toBe(404));
+test("fonts and pictures are kept a week, the page five minutes", async () => {
+  expect((await get("/font.woff2")).headers.get("cache-control")).toContain("max-age=604800");
+  expect((await get("/")).headers.get("cache-control")).toBe("public, max-age=300");
+});
+test("an unchanged file comes back as an empty 304", async () => {
+  const modified = (await get("/heyra.js")).headers.get("last-modified")!;
+  expect(modified).toBeTruthy();
+  const r = await fetch(new Request("http://heyra.test/heyra.js", { headers: { "if-modified-since": modified } }));
+  expect(r.status).toBe(304);
+  expect(await r.text()).toBe("");
+  const old = await fetch(new Request("http://heyra.test/heyra.js", { headers: { "if-modified-since": "Thu, 01 Jan 1970 00:00:00 GMT" } }));
+  expect(old.status).toBe(200);
+});

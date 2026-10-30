@@ -1,3 +1,13 @@
+<p align="center"><img src="docs/banner.webp" alt="Heyra: free, open source voice to text" width="100%"></p>
+
+<p align="center">
+  <a href="https://heyra.alcun.dev">Try it</a> ·
+  <a href="https://github.com/alcun/heyra-desktop">Mac app</a> ·
+  <a href="https://heyra.alcun.dev/llms.txt">llms.txt</a>
+</p>
+
+**0.25 s** to write a 3 second clip · **25** languages · **no GPU** · audio **never kept**
+
 # Heyra
 
 Self-hosted speech to text. Send a short WAV, get the words back. It runs on a
@@ -7,7 +17,8 @@ Old Norse for "to hear".
 It runs NVIDIA's Parakeet TDT 0.6B v3 through sherpa-onnx: English and 24 other
 European languages, found automatically, in about a quarter of a second for a
 3 second clip on an ordinary cloud CPU. A small page lets you try it: hold a
-button, speak, and read what it heard.
+button, speak, and read what it heard. For dictation on a Mac, with nothing sent
+anywhere, use [Heyra for Mac](https://github.com/alcun/heyra-desktop).
 
 ## Run it
 
@@ -115,6 +126,13 @@ rather than quietly becoming the default. Days are UTC.
 
 Audio is read in memory, transcribed and dropped. Nothing is written to disk,
 and neither audio nor transcripts are logged.
+
+## Speed
+
+The model is loaded once and warmed up with a second of silence before the
+server listens, so the first caller doesn't wait for it. The page's fonts and
+pictures are cached for a week, and every file carries a date, so a returning
+browser gets an empty 304 instead of the file again.
 
 ## Layout
 

@@ -22,6 +22,14 @@ export const PAGE_HEADERS = {
   "cache-control": "public, max-age=300",
 };
 
+// Fonts and pictures change rarely, so they are kept a week and refreshed in the
+// background after that; the page and its scripts are checked every five minutes.
+export function cacheFor(path: string) {
+  return /\.(woff2|otf|ttf|webp|png|jpg|svg)$/i.test(path)
+    ? "public, max-age=604800, stale-while-revalidate=86400"
+    : PAGE_HEADERS["cache-control"];
+}
+
 export function withWeb(api: Fetch, webRoot?: string): Fetch {
   if (!webRoot) return api;
   const root = realpathSync(resolve(webRoot));
@@ -38,7 +46,13 @@ export function withWeb(api: Fetch, webRoot?: string): Fetch {
       if (!(await file.exists())) continue;
       let real: string;
       try { real = realpathSync(candidate); } catch { continue; }
-      if (real.startsWith(root + sep)) return new Response(file, { headers: PAGE_HEADERS });
+      if (!real.startsWith(root + sep)) continue;
+      // A date lets a browser ask "changed since?" and get an empty 304 back.
+      const modified = new Date(Math.floor(file.lastModified / 1000) * 1000);
+      const headers = { ...PAGE_HEADERS, "cache-control": cacheFor(real), "last-modified": modified.toUTCString() };
+      const since = Date.parse(request.headers.get("if-modified-since") ?? "");
+      if (since >= modified.getTime()) return new Response(null, { status: 304, headers });
+      return new Response(file, { headers });
     }
     return new Response("Not found", { status: 404, headers: PAGE_HEADERS });
   };

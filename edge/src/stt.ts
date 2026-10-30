@@ -33,11 +33,15 @@ export async function loadRecogniser(dir: string, threads: number): Promise<Tran
       tokens: `${dir}/tokens.txt`, numThreads: threads, modelType: "nemo_transducer",
     },
   });
-  return oneAtATime(async (audio) => {
+  const run = async (audio: Audio) => {
     const stream = recogniser.createStream();
     // Other sample rates are resampled inside the recogniser.
     stream.acceptWaveform({ sampleRate: audio.rate, samples: audio.samples });
     const result = await recogniser.decodeAsync(stream);
     return String(result.text || "").trim();
-  });
+  };
+  // One second of silence before listening, so the first visitor isn't the one
+  // who waits while the model's first run sets itself up.
+  await run({ rate: 16000, samples: new Float32Array(16000), seconds: 1 }).catch(() => {});
+  return oneAtATime(run);
 }

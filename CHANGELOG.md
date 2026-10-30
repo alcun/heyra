@@ -2,6 +2,16 @@
 
 All notable changes to Heyra are documented here. Newest first.
 
+## 2026-10-30
+
+### Changed
+- The model runs once on a second of silence before the server listens, so
+  the first caller after a start doesn't wait for its first run.
+- Static files carry `last-modified`, and a matching `if-modified-since` gets
+  an empty 304. Fonts and pictures are cached for a week.
+- The page: new branding, the orb's scroll journey, real app pictures, a
+  rebuilt Bench, `/llms-full.txt`, and AI agents named in `/robots.txt`.
+
 ## 2026-10-20
 
 ### Added
