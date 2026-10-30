@@ -6,6 +6,7 @@ import { deflateSync } from "node:zlib";
 import bench from "../data/bench.json";
 import Analytics from "../components/Analytics.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 const MAC = "https://github.com/alcun/heyra-desktop";
 const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
@@ -58,6 +59,22 @@ const duos = bench.duos.map((d) => ({
   ...d,
   rows: (d.rows as [string, number, string][]).map(([name, v, id], i, all) => ({ name, v, fill: model[id].fill, win: i === all.length - 1 })),
 }));
+// The neutral dither for every model but the one a figure is about, which gets gold.
+const quiet = tile("#8a9aa6", 0.5);
+const gold = tile("#d9a86a", 0.875);
+const set = (name: string) => bench.sets.find((x) => x.name === name)!.v as Record<string, number>;
+const meant = set("Off the cuff, meant");
+const average = set("Average");
+// The answer, from the numbers.
+const answer = [
+  { when: "To talk and get what you meant", id: "clean", value: meant.clean, of: "off the cuff, against what people meant" },
+  { when: "Every word, word for word", id: "fluid", value: average.fluid, of: "averaged over seven public sets" },
+  { when: "In another language", id: "parakeet", value: average.parakeet, of: "averaged, and 25 languages" },
+];
+// The main chart: the seven-set average, the lowest in gold.
+const best = Object.entries(average).reduce((a, b) => (b[1] < a[1] ? b : a))[0];
+const main = models.map((m) => ({ m, v: average[m.id], lead: m.id === best })).filter((r) => r.v !== undefined).sort((a, b) => a.v - b.v);
+const mainMax = Math.max(...main.map((r) => r.v));
 const sets = bench.sets.map((s) => {
   const v = s.v as Record<string, number>;
   const low = Math.min(...Object.values(v));
@@ -78,63 +95,79 @@ const sets = bench.sets.map((s) => {
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
   {analyticsKey && <Analytics publicKey={analyticsKey} />}
   <style is:global>
-    main { max-width: 64rem; margin: 0 auto; padding: 6.5rem max(1rem, 4vw) 5rem; display: grid; gap: 3.5rem; }
-    section { display: grid; gap: 1rem; min-width: 0; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.08; font-weight: 600; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
-    h3 { margin: 0; font-size: 0.95rem; font-weight: 500; }
-    .small { margin: 0; color: var(--slate); font-size: 0.875rem; line-height: 1.5; }
-    .top { display: grid; gap: 0.9rem; }
+    main { max-width: 60rem; margin: 0 auto; padding: 6.5rem max(1rem, 4vw) 6rem; display: grid; gap: 4.5rem; }
+    section { display: grid; gap: 1.25rem; min-width: 0; }
+    h1 { font-size: clamp(1.8rem, 4.4vw, 2.8rem); line-height: 1.15; margin: 0; text-wrap: balance; }
+    h2 { margin: 0; font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.3; }
+    .small { margin: 0; color: var(--slate); font-size: 0.95rem; line-height: 1.55; max-width: 44rem; }
+    .meta { margin: 0; color: var(--dim); font: 400 0.8rem/1.5 var(--mono); }
+    .top { display: grid; gap: 1rem; }
     #wave { width: 100%; height: 6rem; display: block; image-rendering: pixelated; }
+    /* The point of a figure, in words: glyph-kit's ► line, in the gold of the signature. */
+    .point { margin: 0; font: 400 0.95rem/1.5 var(--sans); color: var(--cream); }
+    .point::before { content: "► "; color: var(--gold); }
 
-    .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--hair); border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; }
-    .tile { background: var(--panel); padding: 1.1rem 1.2rem; display: grid; gap: 0.7rem; align-content: start; }
-    .pair { display: grid; gap: 0.4rem; min-height: 4.2rem; align-content: start; }
+    /* The answer: three cards, the model and its one number. */
+    .answer { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .pick { background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+    .pick .when { color: var(--slate); font-size: 0.9rem; }
+    .pick b { font: 700 1.05rem/1.25 var(--display); letter-spacing: 0.05em; color: var(--cream); }
+    .pick .num { font: 500 1.9rem/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--cream); }
+    .pick .num small { font-size: 0.8rem; color: var(--dim); margin-left: 0.35rem; }
+    .pick .of { color: var(--dim); font-size: 0.82rem; }
+    .pick:first-child { border-color: rgb(217 168 106 / 0.45); }
+    .pick:first-child .num { color: var(--gold); }
 
-    .row { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 2.6rem; gap: 0.7rem; align-items: center; height: 1.15rem; }
-    .row .n { font-size: 0.8rem; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .row .t { height: 0.75rem; position: relative; }
-    .row .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; }
-    .row .v { font: 500 0.8rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--slate); }
-    .row.win .n, .row.win .v { color: var(--cream); }
-    .over { position: absolute; right: -0.7rem; top: -0.3rem; font: 0.85rem var(--mono); color: #e0795a; }
+    /* The main chart: one bar per model, the lead in gold, the rest quiet. */
+    .chart { display: grid; gap: 12px; padding: 20px; background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; }
+    .bar { display: grid; grid-template-columns: 13rem minmax(0, 1fr) 3.5rem; gap: 16px; align-items: center; }
+    .bar .n { font-size: 0.95rem; color: var(--slate); }
+    .bar .t { height: 16px; }
+    .bar .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; }
+    .bar .v { font: 500 0.95rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--slate); }
+    .bar.lead .n, .bar.lead .v { color: var(--cream); }
 
-    .legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 0.5rem 1rem; }
-    .key { display: grid; grid-template-columns: 1.6rem auto; column-gap: 0.5rem; align-items: center; font-size: 0.8rem; }
-    .key i { grid-row: span 2; width: 1.6rem; height: 0.75rem; background-size: 4px 4px; image-rendering: pixelated; }
-    .key b { font-weight: 500; }
-    .key span { color: var(--dim); font-size: 0.72rem; }
+    /* Every kind of speech: one table, a number and a thin bar per cell, the best per row in gold. */
+    .sets { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; overflow: hidden; }
+    .sets th, .sets td { padding: 12px 16px; border-top: 1px solid var(--hair); text-align: left; vertical-align: middle; }
+    .sets thead th { border-top: 0; font: 500 0.85rem/1.3 var(--sans); color: var(--slate); }
+    .sets th[scope="row"] { font-weight: 400; font-size: 0.95rem; color: var(--cream); white-space: nowrap; }
+    .sets th[scope="row"] span { display: block; font: 400 0.75rem var(--mono); color: var(--dim); }
+    .sets td { width: 17%; }
+    .sets .v { font: 500 0.9rem var(--mono); font-variant-numeric: tabular-nums; color: var(--slate); }
+    .sets .best .v { color: var(--gold); }
+    .sets .t { height: 4px; margin-top: 6px; background: rgb(255 255 255 / 0.05); border-radius: 2px; }
+    .sets .t i { display: block; height: 100%; border-radius: 2px; background: var(--slate); opacity: 0.6; }
+    .sets .best .t i { background: var(--gold); opacity: 1; }
+    .sets .none { color: var(--dim); font: 0.9rem var(--mono); }
+    .wide { overflow-x: auto; border-radius: 14px; }
 
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--hair); border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; }
-    .cell { background: var(--panel); padding: 0.9rem 1rem; display: grid; gap: 0.4rem; min-width: 0; }
-    .cell .head { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.85rem; font-weight: 500; white-space: nowrap; }
-    .cell .head span:last-child { font: 0.66rem var(--mono); color: var(--dim); align-self: center; overflow: hidden; text-overflow: ellipsis; }
-    .cell .row { grid-template-columns: minmax(0, 1fr) 2.6rem; }
-    .scale { display: grid; grid-template-columns: minmax(0, 1fr) 2.6rem; gap: 0.7rem; font: 0.62rem var(--mono); color: var(--dim); }
-    .scale div { display: flex; justify-content: space-between; }
-
-    .clips { display: grid; gap: 0.75rem; }
-    .clip { background: var(--panel); border: 1px solid var(--hair); border-radius: 12px; padding: 0.9rem 1rem; display: grid; gap: 0.4rem; }
-    .line { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; font-size: 0.9rem; }
-    .line .who { font: 0.72rem var(--mono); color: var(--dim); }
+    /* Side by side: what was said, and what each model wrote. */
+    .clips { display: grid; gap: 12px; }
+    .clip { background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; padding: 20px; display: grid; gap: 8px; }
+    .clip h3 { margin: 0 0 4px; font: 500 0.95rem var(--sans); color: var(--cream); }
+    .line { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 16px; align-items: baseline; font-size: 0.95rem; }
+    .line .who { font: 400 0.8rem var(--mono); color: var(--dim); }
     .line.said span:last-child { color: var(--slate); }
     .line.win .who { color: var(--gold); }
-    .line.empty span:last-child { color: #e0795a; font: 0.75rem var(--mono); letter-spacing: 0.06em; }
+    .line.empty span:last-child { color: var(--dim); font-style: normal; }
 
-    details { border: 1px solid var(--hair); border-radius: 12px; background: var(--panel); }
-    summary { cursor: pointer; padding: 0.8rem 1rem; font: 500 0.7rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
-    .scroll { overflow-x: auto; border-top: 1px solid var(--hair); }
-    table { border-collapse: collapse; width: 100%; font: 0.75rem/1.4 var(--mono); font-variant-numeric: tabular-nums; }
-    th, td { padding: 0.5rem 0.65rem; text-align: right; border-bottom: 1px solid var(--hair); white-space: nowrap; }
-    th { font-weight: 500; font-size: 0.62rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--slate); white-space: normal; min-width: 4.5rem; vertical-align: bottom; }
-    th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--panel); min-width: 9.5rem; font-family: var(--sans); font-size: 0.8rem; }
-    td.best { color: var(--gold); }
-    td.none { color: var(--dim); }
-    ul { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.85rem; display: grid; gap: 0.25rem; }
-    ul a { color: var(--cream); }
+    /* Under the hood: three small facts, quieter than the rest. */
+    .hood { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .fact { border: 1px solid var(--hair); border-radius: 14px; padding: 16px; display: grid; gap: 8px; align-content: start; }
+    .fact h3 { margin: 0; font: 500 0.9rem var(--sans); color: var(--cream); }
+    .row { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 2.8rem; gap: 10px; align-items: center; }
+    .row .n { font-size: 0.82rem; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .row .t { height: 8px; position: relative; }
+    .row .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; }
+    .row .v { font: 500 0.82rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--slate); }
+    .row.win .n, .row.win .v { color: var(--cream); }
+    .fact .small { font-size: 0.82rem; }
 
-    @media (max-width: 52rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 40rem) {
-      .tiles, .grid { grid-template-columns: minmax(0, 1fr); }
+    ul.method { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.95rem; display: grid; gap: 6px; }
+    @media (max-width: 48rem) {
+      .answer, .hood { grid-template-columns: minmax(0, 1fr); }
+      .bar { grid-template-columns: 8rem minmax(0, 1fr) 3rem; }
       .line { grid-template-columns: minmax(0, 1fr); gap: 0; }
     }
   </style>
@@ -145,103 +178,105 @@ const sets = bench.sets.map((s) => {
   <main>
     <section class="top">
       <canvas id="wave" aria-hidden="true"></canvas>
-      <div class="label">Bench · {bench.date} · {bench.clips} clips</div>
       <h1>Which voice model should you use?</h1>
-      <p class="small">% of words wrong. Shorter is better. {bench.wait}</p>
+      <p class="meta">heyra-bench · {bench.clips} public English clips · {bench.date} · words wrong in 100, fewer is better</p>
     </section>
 
-    <section>
-      <div class="tiles">
-        {duos.map((d) => (
-          <div class="tile">
-            <h3>{d.title}</h3>
-            <div class="pair">
-              {d.rows.map((r) => (
-                <div class={r.win ? "row win" : "row"}>
-                  <span class="n">{r.name}</span>
-                  <div class="t">
-                    <div class="b" style={`width:${width(r.v, d.max)};background-image:${r.fill}`}></div>
-                    {r.v > d.max && <span class="over">›</span>}
-                  </div>
-                  <span class="v">{r.v.toFixed(1)}</span>
-                </div>
-              ))}
-            </div>
-            <p class="small">{d.note}</p>
+    <section aria-label="The answer">
+      <div class="answer">
+        {answer.map((a) => (
+          <div class="pick">
+            <span class="when">{a.when}</span>
+            <b>{model[a.id].name}</b>
+            <span class="num">{a.value.toFixed(1)}<small>in 100 wrong</small></span>
+            <span class="of">{a.of}</span>
           </div>
         ))}
       </div>
+      <p class="small">Leaderboard transcripts keep every “um”, so Bark Clean, which leaves them out on purpose, scores worse on those sets by design.</p>
     </section>
 
-    <section>
-      <div class="label">By kind of speech · 0–20 %</div>
-      <div class="legend">
-        {models.map((m) => (
-          <div class="key"><i style={`background-image:${m.fill}`}></i><b>{m.name}</b><span>{m.note}</span></div>
-        ))}
-      </div>
-      <div class="grid">
-        {sets.map((s) => (
-          <div class="cell">
-            <div class="head"><span>{s.name}</span><span>{s.source}</span></div>
-            {s.cells.filter((c) => c.v !== undefined).map((c) => (
-              <div class={c.win ? "row win" : "row"} title={`${c.m.name}: ${c.v.toFixed(2)} %`}>
-                <div class="t">
-                  <div class="b" style={`width:${width(c.v, 20)};background-image:${c.m.fill}`}></div>
-                  {c.v > 20 && <span class="over">›</span>}
-                </div>
-                <span class="v">{c.v.toFixed(1)}</span>
-              </div>
-            ))}
-            <div class="scale"><div><span>0</span><span>10</span><span>20</span></div><span></span></div>
+    <section aria-labelledby="avg-title">
+      <h2 id="avg-title">Words wrong, word for word</h2>
+      <div class="chart">
+        {main.map((r) => (
+          <div class={r.lead ? "bar lead" : "bar"}>
+            <span class="n">{r.m.name}</span>
+            <div class="t"><div class="b" style={`width:${width(r.v, mainMax)};background-image:${r.lead ? gold : quiet}`}></div></div>
+            <span class="v">{r.v.toFixed(1)}</span>
           </div>
         ))}
       </div>
-      <p class="small">Leaderboard transcripts keep “um”s, so Bark Clean scores worse there by design.</p>
+      <p class="point">{model[best].name} gets the fewest words wrong: {average[best].toFixed(1)} in 100, averaged over seven public sets. The old engine got {average.old.toFixed(1)}.</p>
     </section>
 
-    <section>
-      <div class="label">Side by side</div>
-      <div class="clips">
-        {bench.clips_shown.map((c) => (
-          <div class="clip">
-            <div class="label">{c.kind}</div>
-            {c.lines.map(([who, text, kind]) => (
-              <div class={`line ${kind}`}><span class="who">{who}</span><span>{text}</span></div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <details>
-      <summary>All numbers</summary>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>Model</th>{sets.map((s) => <th>{s.name}</th>)}</tr></thead>
+    <section aria-labelledby="sets-title">
+      <h2 id="sets-title">Every kind of speech</h2>
+      <div class="wide">
+        <table class="sets">
+          <thead><tr><th scope="col">Speech</th>{models.map((m) => <th scope="col">{m.name}</th>)}</tr></thead>
           <tbody>
-            {models.map((m, i) => (
+            {sets.filter((x) => x.name !== "Average").map((x) => (
               <tr>
-                <td>{m.name}</td>
-                {sets.map((s) => {
-                  const c = s.cells[i];
-                  return c.v === undefined ? <td class="none">–</td> : <td class={c.win ? "best" : undefined}>{c.v.toFixed(2)}</td>;
-                })}
+                <th scope="row">{x.name}<span>{x.source}</span></th>
+                {x.cells.map((c) => c.v === undefined ? <td class="none">–</td> : (
+                  <td class={c.win ? "best" : undefined} title={`${c.m.name}: ${c.v.toFixed(2)} words wrong in 100`}>
+                    <span class="v">{c.v.toFixed(1)}</span>
+                    <div class="t"><i style={`width:${width(c.v, 30)}`}></i></div>
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </details>
+      <p class="point">No one model wins everywhere: the best in each kind of speech is in gold.</p>
+    </section>
 
-    <section>
-      <div class="label">Method</div>
-      <ul>
+    <section aria-labelledby="side-title">
+      <h2 id="side-title">Side by side</h2>
+      <div class="clips">
+        {bench.clips_shown.map((c) => (
+          <div class="clip">
+            <h3>{c.kind}</h3>
+            {c.lines.map(([who, text, kind]) => (
+              <div class={`line ${kind}`}><span class="who">{who}</span><span>{kind === "empty" ? "Nothing" : text}</span></div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="hood-title">
+      <h2 id="hood-title">Under the hood</h2>
+      <div class="hood">
+        {duos.map((d) => (
+          <div class="fact">
+            <h3>{d.title}</h3>
+            {d.rows.map((r) => (
+              <div class={r.win ? "row win" : "row"}>
+                <span class="n">{r.name}</span>
+                <div class="t"><div class="b" style={`width:${width(r.v, d.max)};background-image:${r.win ? gold : quiet}`}></div></div>
+                <span class="v">{r.v.toFixed(1)}</span>
+              </div>
+            ))}
+            <p class="small">{d.note}</p>
+          </div>
+        ))}
+      </div>
+      <p class="small">{bench.wait}</p>
+    </section>
+
+    <section aria-labelledby="method-title">
+      <h2 id="method-title">Method</h2>
+      <ul class="method">
         <li>100 clips each: LibriSpeech, AMI, Earnings-22, GigaSpeech, SPGISpeech, VoxPopuli, DisfluencySpeech.</li>
         <li>{bench.engine}, as in Heyra. Lower-cased, no punctuation.</li>
       </ul>
     </section>
   </main>
+
+  <Footer />
 
   <script src="/wave.js" type="module"></script>
 </body>

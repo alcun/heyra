@@ -18,6 +18,7 @@ const faq = [
 ];
 import Analytics from "../components/Analytics.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 const analyticsKey = import.meta.env.HEYRA_LOGGERLIZARD_KEY;
 const credit = import.meta.env.HEYRA_CREDIT_URL;
 const site = Astro.site;
@@ -324,17 +325,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .closing .actions.closing-actions { margin-top: 2.75rem; }
     .closing .fine { margin-top: 1.25rem; font: 400 0.9rem/1.5 var(--sans); }
 
-    footer { border-top: 1px solid var(--hair); padding: 3.5rem 0 3rem; color: var(--dim); font-size: 0.9rem; }
-    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; }
-    .foot-brand p { margin: 0.8rem 0 0; }
-    .foot-brand .made { margin-top: 0.8rem; }
-    .foot-brand .made a { color: var(--slate); }
-    .foot-cols { display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 5rem); }
-    .foot-cols div { display: flex; flex-direction: column; gap: 0.55rem; }
-    .foot-cols .label { margin: 0 0 0.25rem; font: 500 0.9rem/1.4 var(--sans); letter-spacing: 0; text-transform: none; color: var(--cream); }
-    .official { margin: 0.75rem 0 0; max-width: 22rem; font-size: 0.85rem; color: var(--dim); }
-    .foot-cols a { color: var(--slate); text-decoration: none; font-size: 0.92rem; }
-    .foot-cols a:hover { color: var(--cream); }
     .credits { margin-top: 2.5rem; }
     .credits p { margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--hair); font-size: 0.82rem; }
     .credits a { color: var(--slate); }
@@ -515,23 +505,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     </section>
   </main>
 
-  <footer>
-    <div class="wrap foot">
-      <div class="foot-brand">
-        <a class="mark" href="/" aria-label="Heyra home">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="4" height="16" rx="2" fill="currentColor"/><rect x="8" y="7" width="4" height="6" rx="2" fill="#d9a86a"/><rect x="14" y="2" width="4" height="16" rx="2" fill="currentColor"/></svg>
-          <span>eyra</span>
-        </a>
-        <p class="official">Heyra is only distributed from GitHub and the alcun/tap Homebrew tap.</p>
-        {credit && <p class="made">Made by <a href={credit}>{new URL(credit).host}</a></p>}
-      </div>
-      <nav class="foot-cols" aria-label="Footer">
-        <div><p class="label">Mac</p><a href={MAC}>Download</a><a href={MAC_CODE}>Source</a><a href={`${MAC_CODE}/releases`}>Releases</a></div>
-        <div><p class="label">Server</p><a href={SERVER_CODE}>Source</a><a href="/llms.txt">llms.txt</a><a href="#developers">API</a></div>
-        <div><p class="label">More</p><a href="#faq">FAQ</a><a href="#private">Privacy</a></div>
-      </nav>
-    </div>
-  </footer>
+  <Footer />
   <script src="/heyra.js" type="module"></script>
   <script src="/ascii-wave.js" defer></script>
   <script src="/scene.js" type="module"></script>
