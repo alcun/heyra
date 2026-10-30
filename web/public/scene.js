@@ -15,11 +15,11 @@ if (scene) {
   const windows = { notes: scene.querySelector(".window.notes"), term: scene.querySelector(".window.term") };
   // Each take goes to whichever window is in front.
   const takes = [
-    ["term", "Add a dark mode switch to the settings page."],
+    ["term", "Add a dark mode switch to the settings page.", "I'll add a dark mode toggle to the settings page."],
     ["notes", "Can we move the standup to ten tomorrow?"],
-    ["term", "Why is the login test failing? Fix it and run the suite."],
+    ["term", "Why is the login test failing? Fix it and run the suite.", "Reading the login test and its fixtures."],
     ["notes", "Remind me to send Sam the invoice on Friday."],
-    ["term", "Write tests for the invoice parser."],
+    ["term", "Write tests for the invoice parser.", "I'll start with the parser's edge cases."],
     ["notes", "Book a table for four at seven."],
   ];
   function focus(name) {
@@ -56,28 +56,31 @@ if (scene) {
       .then(() => { liveText.textContent = all.slice(0, i + 1).join(" "); })));
   }
 
-  // In Notes each take lands as a new line; in the terminal it fills the prompt
-  // and the agent starts on it.
-  function place(where, text) {
+  // In Notes each take lands as a new line. In Claude Code it lands in the input
+  // box, is sent, and Claude answers.
+  function place(where, text, reply) {
+    if (where === "term") {
+      const input = windows.term.querySelector(".cc-input .doc-text");
+      const log = windows.term.querySelector(".cc-log");
+      input.textContent = text;
+      input.classList.add("landed");
+      wait(900).then(() => {
+        input.textContent = "";
+        input.classList.remove("landed");
+        const you = document.createElement("p");
+        you.className = "cc-you";
+        you.textContent = "> " + text;
+        const says = document.createElement("p");
+        says.className = "cc-says";
+        says.textContent = reply;
+        log.append(you, says);
+        while (log.children.length > 6) log.firstElementChild.remove();
+      });
+      return;
+    }
     const box = windows[where].querySelector(".doc");
     const current = box.querySelector(".now");
     const caret = current.querySelector(".caret");
-    if (where === "term") {
-      current.classList.remove("now");
-      current.querySelector(".doc-text").textContent = text;
-      current.querySelector(".doc-text").classList.add("landed");
-      caret.remove();
-      const reply = document.createElement("p");
-      reply.className = "doc-line dim";
-      reply.textContent = "✻ On it.";
-      const next = document.createElement("p");
-      next.className = "doc-line now";
-      next.innerHTML = '<span class="prompt">›</span> <span class="doc-text"></span>';
-      next.append(caret);
-      box.append(reply, next);
-      while (box.children.length > 5) box.firstElementChild.remove();
-      return;
-    }
     current.classList.remove("now");
     caret.remove();
     const line = document.createElement("p");
@@ -95,7 +98,7 @@ if (scene) {
     if (running) return;
     running = true;
     while (visible && !calm.matches) {
-      const [where, text] = takes[n++ % takes.length];
+      const [where, text, reply] = takes[n++ % takes.length];
       focus(where);
       await wait(1400);
       key.classList.add("down");
@@ -106,7 +109,7 @@ if (scene) {
       o.writing(true);
       await wait(520);
       live.classList.remove("on");
-      place(where, text);
+      place(where, text, reply);
       o.writing(false);
       o.size(0.12);
       await wait(2400);
@@ -116,7 +119,7 @@ if (scene) {
 
   if (calm.matches) {
     focus("term");
-    place("term", takes[0][1]);
+    place("term", takes[0][1], takes[0][2]);
     liveText.textContent = takes[0][1];
     live.classList.add("on");
     o.size(1);
