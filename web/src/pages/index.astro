@@ -154,12 +154,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     #key[hidden] { display: none; }
     #key input { flex: 1; min-width: 0; font: 400 0.9rem/1 var(--mono); color: var(--cream); background: var(--panel); border: 1px solid var(--hair); border-radius: 999px; padding: 0.7rem 1rem; }
     button.plain { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); background: none; border: 1px solid var(--hair); border-radius: 999px; padding: 0.7rem 1rem; cursor: pointer; }
-    .demo-note { margin: 2rem 0 0; max-width: 38rem; font: 400 0.8rem/1.6 var(--mono); color: var(--dim); }
+    .demo-note { margin: 2rem 0 0; max-width: 38rem; font-size: 0.95rem; line-height: 1.6; color: var(--dim); }
     code { font-family: var(--mono); font-size: 0.92em; overflow-wrap: anywhere; }
 
     /* ---- sections ---- */
     section.block { padding: clamp(4.5rem, 9vw, 7.5rem) 0; border-top: 1px solid var(--hair); overflow-x: clip; }
-    h2 { margin: 0; font: 600 clamp(1.9rem, 4.2vw, 3rem)/1.08 var(--sans); letter-spacing: -0.03em; text-wrap: balance; max-width: 20ch; }
+    h2 { margin: 0; font: 700 clamp(1.35rem, 2.5vw, 1.95rem)/1.2 var(--display); letter-spacing: 0.05em; text-wrap: balance; max-width: 24ch; }
     .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
 
 
@@ -174,12 +174,12 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
     .shot { position: relative; border-radius: 16px; padding: 10px; background: linear-gradient(160deg, #2a2c35, #16171c); border: 1px solid var(--hair); box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.02); }
     .shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
-    .shot::before { content: ""; position: absolute; inset: -30% -10% auto; height: 70%; background: radial-gradient(closest-side, rgb(217 168 106 / 0.10), transparent); z-index: -1; }
+
 
     .features { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.25rem; }
     .features li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 0.75rem; }
-    .features li::before { content: ""; width: 0.55rem; height: 0.55rem; margin-top: 0.55rem; border-radius: 50%; background: #000; box-shadow: 0 0 0 1px #34374a, 0 0 12px rgb(217 168 106 / 0.35); justify-self: center; }
-    .features b { display: block; font-weight: 600; }
+    .features li::before { content: ""; width: 0.55rem; height: 0.55rem; margin-top: 0.55rem; border-radius: 50%; background: #000; box-shadow: 0 0 0 1px #34374a; justify-self: center; }
+    .features b { display: block; font-weight: 500; }
     .features span { color: var(--slate); font-size: 0.98rem; }
 
 
@@ -224,14 +224,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .scene-wrap { position: relative; margin-top: 3rem; }
     .scene-wrap .screen { margin-top: 0; }
     .keys { display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0 0 2%; }
-    .keys span { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+    .keys span { font: 400 0.85rem/1 var(--sans); color: var(--dim); }
     .fnkey {
       display: grid; place-items: center; width: clamp(2.6rem, 6vw, 4.2rem); aspect-ratio: 1.1;
       border-radius: 12%; background: linear-gradient(#2a2c35, #1c1e25); border: 1px solid #3b3e4c;
       box-shadow: 0 4px 0 #0c0d11, inset 0 1px 0 #44475a; font: 500 clamp(0.6rem, 1.5vw, 1.05rem)/1 var(--mono); color: var(--cream);
       transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.2s ease;
     }
-    .fnkey.down { transform: translateY(3px); box-shadow: 0 1px 0 #0c0d11, inset 0 1px 0 #44475a, 0 0 24px rgb(217 168 106 / 0.35); color: var(--gold); }
+    .fnkey.down { transform: translateY(3px); box-shadow: 0 1px 0 #0c0d11, inset 0 1px 0 #44475a; color: var(--gold); }
 
 
     /* privacy */
@@ -245,19 +245,19 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .center-head .intro { margin-inline: auto; }
     .scene-wrap.wide { width: min(84rem, calc(100vw - 2 * max(1rem, 4vw))); margin-left: 50%; translate: -50% 0; margin-top: 3.5rem; }
     .split.flip { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); }
-    .privacy-block { background: radial-gradient(60rem 30rem at 50% 0%, rgb(154 148 180 / 0.07), transparent 70%), var(--ground); }
-    .statement { font-size: clamp(2.2rem, 5.4vw, 4.4rem); line-height: 1.05; letter-spacing: 0.05em; }
+
+    .statement { font-size: clamp(1.6rem, 3.2vw, 2.4rem); line-height: 1.15; }
     .privacy-block .compare { max-width: 54rem; margin: 3.5rem auto 0; }
     .after-note { margin: 1.5rem auto 0; max-width: 54rem; text-align: center; font-size: 0.9rem; color: var(--dim); }
     .band { background: #0d0e12; border-top-color: #1d1f27; }
-    .band pre { background: #08090c; }
+    .band pre { background: #08090c; overflow-x: auto; }
     @media (max-width: 860px) { .split.flip { grid-template-columns: minmax(0, 1fr); } .server-split > :first-child { order: 2; } }
 
     /* comparison */
     .compare { margin-top: 2.5rem; border: 1px solid var(--hair); border-radius: 16px; overflow: hidden; }
     .crow { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); }
     .crow > span { padding: 1rem 1.4rem; border-top: 1px solid var(--hair); color: var(--slate); min-width: 0; }
-    .crow.head > span { border-top: 0; font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); background: var(--ground-2); }
+    .crow.head > span { border-top: 0; font: 500 0.9rem/1.4 var(--sans); color: var(--dim); background: var(--ground-2); }
     .crow.head > span:nth-child(2) { color: var(--gold); }
     .crow > span:nth-child(2) { background: rgb(217 168 106 / 0.04); border-inline: 1px solid var(--hair); }
     .crow > span[role="rowheader"] { color: var(--cream); }
@@ -290,20 +290,15 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       @supports (animation-timeline: view()) {
         /* Sections: heading, then copy, then the visual, each easing into place. */
         section.block h2, .closing h2 {
-          animation: rise both cubic-bezier(.16,1,.3,1); animation-timeline: view(); animation-range: entry 5% cover 30%;
+          animation: rise both cubic-bezier(.16,1,.3,1); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
         section.block .intro, section.block .features, section.block .uses, section.block .faq, .closing .actions {
-          animation: rise both cubic-bezier(.16,1,.3,1); animation-timeline: view(); animation-range: entry 10% cover 34%;
+          animation: rise both cubic-bezier(.16,1,.3,1); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
         .screen, .shot, .compare, .server-split pre, .readouts {
-          animation: unveil both cubic-bezier(.16,1,.3,1); animation-timeline: view(); animation-range: entry 0% cover 38%;
+          animation: rise both cubic-bezier(.16,1,.3,1); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
-        @keyframes rise { from { transform: translateY(36px); } }
-        @keyframes unveil {
-          from { transform: translateY(48px) scale(0.965); clip-path: inset(6% 3% 0 3% round 18px); }
-          60% { clip-path: inset(0 0 0 0 round 18px); }
-          to { clip-path: inset(-40% -40% -40% -40% round 18px); }
-        }
+        @keyframes rise { from { transform: translateY(16px); opacity: 0; } }
         /* Hero depth: as you leave, the orb sinks back and the words lift away faster. */
         .hero-inner > .stage {
           animation: bloom 1.6s cubic-bezier(.2,.8,.2,1) 0.2s both, sink linear both;
@@ -320,8 +315,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     }
 
     /* developers */
-    .uses { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .uses li { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); border: 1px solid var(--hair); border-radius: 999px; padding: 0.55rem 0.85rem; }
+    .uses { margin: 1rem 0 0; max-width: 34rem; color: var(--dim); }
     .hero:has(#stone.listening) #status { color: var(--gold); }
     .hero:has(#stone.thinking) #status { color: var(--cream); }
 
@@ -331,12 +325,11 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .dev-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
 
     /* closing */
-    .closing { text-align: center; padding: clamp(6rem, 13vw, 10rem) 0; border-top: 1px solid var(--hair);
-      background: radial-gradient(40rem 22rem at 50% 30%, rgb(217 168 106 / 0.06), transparent 70%); }
+    .closing { text-align: center; padding: clamp(5rem, 10vw, 8rem) 0; border-top: 1px solid var(--hair); }
     .closing h2 { margin-inline: auto; }
     .closing-orb { display: block; width: 9rem; height: 9rem; margin: -2rem auto 0.5rem; cursor: pointer; }
     .closing .actions.closing-actions { margin-top: 2.75rem; }
-    .closing .fine { margin-top: 1.25rem; }
+    .closing .fine { margin-top: 1.25rem; font: 400 0.9rem/1.5 var(--sans); }
 
     footer { border-top: 1px solid var(--hair); padding: 3.5rem 0 3rem; color: var(--dim); font-size: 0.9rem; }
     .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; }
@@ -345,7 +338,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .foot-brand .made a { color: var(--slate); }
     .foot-cols { display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 5rem); }
     .foot-cols div { display: flex; flex-direction: column; gap: 0.55rem; }
-    .foot-cols .label { margin: 0 0 0.3rem; }
+    .foot-cols .label { margin: 0 0 0.25rem; font: 500 0.9rem/1.4 var(--sans); letter-spacing: 0; text-transform: none; color: var(--cream); }
+    .official { margin: 0.75rem 0 0; max-width: 22rem; font-size: 0.85rem; color: var(--dim); }
     .foot-cols a { color: var(--slate); text-decoration: none; font-size: 0.92rem; }
     .foot-cols a:hover { color: var(--cream); }
     .credits { margin-top: 2.5rem; }
@@ -408,7 +402,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block scene-block" id="how" aria-labelledby="scene-title">
       <div class="wrap">
         <div class="center-head">
-          <h2 id="scene-title">A dot above the Dock.</h2>
+          <h2 id="scene-title">A dot above the Dock</h2>
           <p class="intro">Hold fn in any app. Heyra listens, then types what you said.</p>
         </div>
         <div class="scene-wrap wide">
@@ -442,10 +436,10 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block" aria-labelledby="app-title">
       <div class="wrap split flip">
         <figure class="shot" style="margin:0">
-          <img src="/app.png" width="1560" height="1080" alt="Heyra's Home screen: a ready light and level meter, the microphone in use, and a setup list with each step ticked off." loading="lazy" decoding="async" />
+          <img src="/app.webp" width="2640" height="1760" alt="Heyra's Home: the orb with the microphone and voice model, today's words over two weeks, time saved, streak and pace." loading="lazy" decoding="async" />
         </figure>
         <div>
-          <h2 id="app-title">It lives in your menu bar.</h2>
+          <h2 id="app-title">It lives in your menu bar</h2>
           <ul class="features">
             <li><div><b>Written in Rust</b><span>A small native app, not a browser in disguise. Six seconds of speech becomes text in under half a second.</span></div></li>
             <li><div><b>History</b><span>Every take is kept on your Mac. Click one to copy it again.</span></div></li>
@@ -460,7 +454,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="block privacy-block" id="private" aria-labelledby="private-title">
       <div class="wrap">
         <div class="center-head">
-          <h2 id="private-title" class="statement">Your voice stays<br />on your Mac.</h2>
+          <h2 id="private-title" class="statement">Your voice stays<br />on your Mac</h2>
           <p class="intro">The speech model runs on your Mac. Turn off Wi-Fi and it still works.</p>
         </div>
         <div class="compare" role="table" aria-label="Heyra compared with cloud dictation">
@@ -491,11 +485,9 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
           <p class="demo-note">The orb at the top of this page is a live demo. It sends your clip to this server, which writes it down and doesn't keep it. The Mac app sends nothing at all.</p>
         </div>
         <div>
-          <h2 id="dev-title">The same engine, for everything else.</h2>
+          <h2 id="dev-title">The same engine, for everything else</h2>
           <p class="intro">Run Heyra on a server for anything that can't run a model itself. Send a WAV, get the words back.</p>
-          <ul class="uses" aria-label="What people connect to it">
-            <li>Microcontrollers</li><li>Web pages</li><li>Shell scripts</li><li>Home automation</li><li>Agents</li>
-          </ul>
+          <p class="uses">For microcontrollers, web pages, shell scripts, home automation and agents.</p>
         </div>
       </div>
     </section>
@@ -519,14 +511,14 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     <section class="closing" aria-labelledby="end-title">
       <div class="wrap">
         <canvas class="closing-orb" aria-hidden="true"></canvas>
-        <h2 id="end-title">Talk to your Mac.</h2>
+        <h2 id="end-title">Talk to your Mac</h2>
         <div class="actions closing-actions">
           <a class="btn primary" href={MAC}>
             <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.5-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.3 4.7 3.2 5.4 2.6 6.5c-1.2 2.1-.3 5.2.9 6.9.6.8 1.2 1.7 2.1 1.7.8 0 1.2-.5 2.2-.5s1.3.5 2.2.5 1.5-.8 2-1.7c.6-.9.9-1.8.9-1.9-.1 0-1.7-.7-1.7-3zM9.6 3.6c.4-.5.8-1.3.7-2-.7 0-1.5.4-1.9 1-.4.5-.8 1.2-.7 2 .7 0 1.4-.4 1.9-1z"/></svg>
             Download for Mac
           </a>
         </div>
-        <p class="fine">Free and open source.</p>
+        <p class="fine">Free and open source</p>
       </div>
     </section>
   </main>
@@ -534,7 +526,11 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
   <footer>
     <div class="wrap foot">
       <div class="foot-brand">
-        <a class="mark" href="/" aria-label="Heyra home"><i aria-hidden="true"></i>HEYRA</a>
+        <a class="mark" href="/" aria-label="Heyra home">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="2" width="4" height="16" rx="2" fill="currentColor"/><rect x="8" y="7" width="4" height="6" rx="2" fill="#d9a86a"/><rect x="14" y="2" width="4" height="16" rx="2" fill="currentColor"/></svg>
+          <span>eyra</span>
+        </a>
+        <p class="official">Heyra is only distributed from GitHub and the alcun/tap Homebrew tap.</p>
         {credit && <p class="made">Made by <a href={credit}>{new URL(credit).host}</a></p>}
       </div>
       <nav class="foot-cols" aria-label="Footer">
