@@ -38,11 +38,11 @@
       const [cr, cg, cb] = r.color;
       const grad = ctx.createLinearGradient(0, 0, w, 0);
       grad.addColorStop(0, `rgba(${cr},${cg},${cb},0)`);
-      grad.addColorStop(0.5, `rgba(${cr},${cg},${cb},0.55)`);
+      grad.addColorStop(0.5, `rgba(${cr},${cg},${cb},0.4)`);
       grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
       ctx.fillStyle = grad;
       ctx.shadowColor = `rgba(${cr},${cg},${cb},0.9)`;
-      ctx.shadowBlur = 28;
+      ctx.shadowBlur = 16;
       ctx.beginPath();
       ctx.moveTo(top[0][0], top[0][1]);
       for (const [x, y] of top) ctx.lineTo(x, y);
