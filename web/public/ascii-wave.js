@@ -1,4 +1,4 @@
-// A slow, dithered swell made from type. The centre stays quiet for the orb.
+// Sound on the left becomes words on the right, with the orb at the crossing.
 (() => {
   const canvas = document.getElementById("ascii-wave");
   if (!canvas) return;
@@ -6,7 +6,8 @@
   if (!ctx) return;
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const glyphs = ".:o*%#@";
+  const symbols = ".:o*%#@";
+  const words = ["say", "it", "and", "see", "the", "words"];
   let width = 0;
   let height = 0;
   let visible = true;
@@ -26,29 +27,46 @@
 
   function draw(time) {
     ctx.clearRect(0, 0, width, height);
-    ctx.font = '500 17px "Martian Mono", ui-monospace, monospace';
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    const cellX = 14;
-    const cellY = 17;
-    const drift = reducedMotion.matches ? 0 : time * 0.00042;
-    for (let row = 0, y = cellY / 2; y < height; row++, y += cellY) {
-      for (let col = 0, x = cellX / 2; x < width; col++, x += cellX) {
-        const envelope = 0.55 + 0.45 * Math.sin(Math.PI * x / width);
-        const swell = Math.sin(x * 0.007 - drift) * 48 * envelope
-          + Math.sin(x * 0.014 + drift * 0.6) * 14;
-        const centre = height * 0.49 + swell;
-        const distance = Math.abs(y - centre);
-        const thickness = (64 + 14 * Math.sin(x * 0.011 + drift * 0.7)) * envelope;
-        if (distance > thickness) continue;
-        const strength = 1 - distance / thickness;
-        const grain = (Math.sin(col * 17.13 + row * 78.77) * 43758.55) % 1;
-        const shade = Math.max(0, Math.min(1, strength * 0.82 + Math.abs(grain) * 0.18));
-        const glyph = glyphs[Math.min(glyphs.length - 1, Math.floor(shade * glyphs.length))];
-        const gold = (col * 7 + row * 11) % 29 === 0;
-        const alpha = (0.13 + strength * 0.2) * envelope;
-        ctx.fillStyle = gold ? `rgba(217,168,106,${alpha * 0.7})` : `rgba(138,154,166,${alpha})`;
-        ctx.fillText(glyph, x, y);
+    const drift = reducedMotion.matches ? 0 : time * 0.00065;
+    for (const side of [-1, 1]) {
+      const sound = side === -1;
+      const cellX = sound ? 16 : 60;
+      const cellY = sound ? 19 : 18;
+      ctx.font = sound
+        ? '500 19px "Martian Mono", ui-monospace, monospace'
+        : '500 14px "Martian Mono", ui-monospace, monospace';
+      for (let row = 0, y = cellY / 2; y < height; row++, y += cellY) {
+        for (let col = 0, localX = cellX / 2; localX < width / 2; col++, localX += cellX) {
+          const x = sound ? localX : width / 2 + localX;
+          const envelope = 0.7 + 0.3 * Math.sin(Math.PI * x / width);
+          const fromCentre = Math.abs(x - width / 2);
+          const swell = side * (
+            Math.sin(fromCentre * 0.006 - drift) * 76 * envelope
+            + Math.sin(fromCentre * 0.013 + drift * 0.6) * 25
+          );
+          const centre = height * 0.49 + swell;
+          const distance = Math.abs(y - centre);
+          const thickness = (92 + 22 * Math.sin(x * 0.01 + drift * 0.7)) * envelope;
+          if (distance > thickness) continue;
+          const strength = 1 - distance / thickness;
+          const grain = Math.abs((Math.sin(col * 17.13 + row * 78.77) * 43758.55) % 1);
+          const shade = Math.max(0, Math.min(1, strength * 0.82 + grain * 0.18));
+          const clearHeadline = Math.max(0, Math.min(1, (y - height * 0.22) / (height * 0.16)));
+          const alpha = (0.2 + shade * 0.43) * envelope * clearHeadline;
+          if (alpha === 0) continue;
+          if (sound) {
+            const glyph = symbols[Math.min(symbols.length - 1, Math.floor(shade * symbols.length))];
+            const gold = (col * 7 + row * 11) % 13 === 0;
+            ctx.fillStyle = gold ? `rgba(217,168,106,${alpha * 0.85})` : `rgba(138,154,166,${alpha})`;
+            ctx.fillText(glyph, x, y);
+          } else {
+            const word = words[(col + row * 2) % words.length];
+            ctx.fillStyle = `rgba(205,211,214,${alpha * 1.3})`;
+            ctx.fillText(word, x, y);
+          }
+        }
       }
     }
   }
