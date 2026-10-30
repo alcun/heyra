@@ -242,6 +242,13 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     /* The dot sits just above the Dock and grows to 120pt while you talk. */
     .scene-orb { position: absolute; left: 50%; bottom: 3.4em; width: 9.23em; aspect-ratio: 1; translate: -50% 0; z-index: 3; }
     .scene-wrap { position: relative; margin-top: 3rem; container-type: inline-size; }
+    /* On a phone the whole Mac is too small to read, so show its middle up close:
+       the words box, the orb and the Dock, at 2.4 times. */
+    @media (max-width: 700px) {
+      .scene-wrap.wide { overflow: hidden; height: calc((100vw - 2rem) * 1.2); border-radius: 1rem; border: 1px solid var(--hair); }
+      .scene-wrap.wide .screen { width: 240%; margin-left: -78%; margin-top: -30cqw; font-size: calc(240cqw * 13 / 1440); border: 0; border-radius: 0; }
+      .scene-wrap .keys { display: none; }
+    }
     .scene-wrap .screen { margin-top: 0; }
     .keys { display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0 0 2%; }
     .keys span { font: 400 0.85rem/1 var(--sans); color: var(--dim); }
