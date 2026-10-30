@@ -105,6 +105,11 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .wordmark { display: inline-flex; align-items: center; gap: 0.16em; margin: 0; color: var(--cream); font: 700 clamp(3.2rem, 9vw, 7.2rem)/1 var(--display); letter-spacing: 0.12em; }
     .wordmark svg { width: 0.98em; height: 0.98em; flex: none; }
     .wordmark span { margin-right: -0.12em; }
+    /* Down to the rest: a chevron, no word. */
+    .scroll { position: absolute; left: 50%; bottom: 1.5rem; translate: -50% 0; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; color: var(--dim); transition: color 0.2s ease; }
+    .scroll:hover { color: var(--cream); }
+    .scroll svg { width: 1.4rem; height: 1.4rem; }
+    @media (prefers-reduced-motion: no-preference) { .scroll svg { animation: bob 2.4s ease-in-out infinite; } @keyframes bob { 50% { transform: translateY(4px); } } }
     .hero .lede { margin-top: 1.4rem; font-size: clamp(1.05rem, 1.7vw, 1.25rem); color: var(--slate); }
     .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
     .brew-row { margin: 0.25rem 0 1.75rem; }
@@ -381,6 +386,9 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         </div>
 
       </div>
+      <a class="scroll" href="#how" aria-label="Scroll to see more">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 10l5 5 5-5"/></svg>
+      </a>
     </section>
 
     <section class="block scene-block" id="how" aria-labelledby="scene-title">
