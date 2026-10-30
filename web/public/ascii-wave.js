@@ -1,4 +1,6 @@
-// Sound on the left becomes words on the right, with the orb at the crossing.
+// Two blocky ASCII swells move in opposite directions around the orb.
+// On the right, horizontal streams of letters from The Waste Land emerge inside
+// the same grid. The short fragments came from the text Al supplied.
 (() => {
   const canvas = document.getElementById("ascii-wave");
   if (!canvas) return;
@@ -7,7 +9,16 @@
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const symbols = ".:o*%#@";
-  const words = ["say", "it", "and", "see", "the", "words"];
+  const fragments = [
+    "aprilisthecruellestmonth",
+    "memoryanddesire",
+    "fearinahandfulofdust",
+    "thewindunderthedoor",
+    "thesoundofwater",
+    "thevoicesingingoutofemptycisterns",
+    "thesefragmentshaveishored",
+    "shantihshantihshantih",
+  ];
   let width = 0;
   let height = 0;
   let visible = true;
@@ -30,23 +41,25 @@
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     const drift = reducedMotion.matches ? 0 : time * 0.00065;
+    const cellX = 16;
+    const cellY = 19;
+    const half = width / 2;
+    const waveAt = (x, side) => {
+      const envelope = 0.7 + 0.3 * Math.sin(Math.PI * x / width);
+      const fromCentre = Math.abs(x - half);
+      const swell = side * (
+        Math.sin(fromCentre * 0.006 - drift) * 76 * envelope
+        + Math.sin(fromCentre * 0.013 + drift * 0.6) * 25
+      );
+      return { centre: height * 0.49 + swell, envelope };
+    };
+    const textDrift = reducedMotion.matches ? 0 : Math.floor(time / 260);
+    ctx.font = '500 19px "Martian Mono", ui-monospace, monospace';
     for (const side of [-1, 1]) {
-      const sound = side === -1;
-      const cellX = sound ? 16 : 60;
-      const cellY = sound ? 19 : 18;
-      ctx.font = sound
-        ? '500 19px "Martian Mono", ui-monospace, monospace'
-        : '500 14px "Martian Mono", ui-monospace, monospace';
       for (let row = 0, y = cellY / 2; y < height; row++, y += cellY) {
         for (let col = 0, localX = cellX / 2; localX < width / 2; col++, localX += cellX) {
-          const x = sound ? localX : width / 2 + localX;
-          const envelope = 0.7 + 0.3 * Math.sin(Math.PI * x / width);
-          const fromCentre = Math.abs(x - width / 2);
-          const swell = side * (
-            Math.sin(fromCentre * 0.006 - drift) * 76 * envelope
-            + Math.sin(fromCentre * 0.013 + drift * 0.6) * 25
-          );
-          const centre = height * 0.49 + swell;
+          const x = side === -1 ? localX : half + localX;
+          const { centre, envelope } = waveAt(x, side);
           const distance = Math.abs(y - centre);
           const thickness = (92 + 22 * Math.sin(x * 0.01 + drift * 0.7)) * envelope;
           if (distance > thickness) continue;
@@ -56,16 +69,17 @@
           const clearHeadline = Math.max(0, Math.min(1, (y - height * 0.22) / (height * 0.16)));
           const alpha = (0.2 + shade * 0.43) * envelope * clearHeadline;
           if (alpha === 0) continue;
-          if (sound) {
-            const glyph = symbols[Math.min(symbols.length - 1, Math.floor(shade * symbols.length))];
-            const gold = (col * 7 + row * 11) % 13 === 0;
-            ctx.fillStyle = gold ? `rgba(217,168,106,${alpha * 0.85})` : `rgba(138,154,166,${alpha})`;
-            ctx.fillText(glyph, x, y);
-          } else {
-            const word = words[(col + row * 2) % words.length];
-            ctx.fillStyle = `rgba(205,211,214,${alpha * 1.3})`;
-            ctx.fillText(word, x, y);
+          let glyph = symbols[Math.min(symbols.length - 1, Math.floor(shade * symbols.length))];
+          let letter = false;
+          if (side === 1 && shade > 0.34) {
+            const fragment = fragments[(row * 5 + 2) % fragments.length];
+            glyph = fragment[(col - textDrift + fragment.length * 1000) % fragment.length];
+            letter = true;
           }
+          const gold = (col * 7 + row * 11) % 13 === 0;
+          ctx.fillStyle = letter ? `rgba(205,211,214,${alpha * 1.1})` :
+            gold ? `rgba(217,168,106,${alpha * 0.85})` : `rgba(138,154,166,${alpha})`;
+          ctx.fillText(glyph, x, y);
         }
       }
     }
