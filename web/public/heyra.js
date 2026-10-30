@@ -42,7 +42,7 @@ const say = (t) => {
     else status.append(part);
   }
 };
-const IDLE = matchMedia("(pointer: coarse)").matches ? "Hold the orb to speak." : "Hold the orb or space bar to speak.";
+const IDLE = matchMedia("(pointer: coarse)").matches ? "Hold the orb to speak" : "space bar to speak";
 
 function showKey(message) {
   keyForm.hidden = false; forget.hidden = true;

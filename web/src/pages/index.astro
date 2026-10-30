@@ -106,18 +106,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .wordmark svg { width: 0.98em; height: 0.98em; flex: none; }
     .wordmark span { margin-right: -0.12em; }
     .hero .lede { margin-top: 1.4rem; font-size: clamp(1.05rem, 1.7vw, 1.25rem); color: var(--slate); }
-    /* Down to the rest. */
-    .scroll {
-      position: absolute; left: 50%; bottom: 1.75rem; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
-      font: 500 0.7rem/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    .scroll:hover { color: var(--cream); }
-    .scroll svg { width: 1.35rem; height: 1.35rem; }
-    @media (prefers-reduced-motion: no-preference) {
-      .scroll svg { animation: bob 2.2s ease-in-out infinite; }
-      @keyframes bob { 50% { transform: translateY(5px); } }
-    }
     .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
     .brew-row { margin: 0.25rem 0 1.75rem; }
     .actions { align-items: center; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 0.5rem; }
@@ -393,10 +381,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         </div>
 
       </div>
-      <a class="scroll" href="#how" aria-label="Scroll to see more">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 10l5 5 5-5"/></svg>
-      </a>
     </section>
 
     <section class="block scene-block" id="how" aria-labelledby="scene-title">
