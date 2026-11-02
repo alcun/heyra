@@ -150,8 +150,9 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
     .chip { font: 500 0.85rem/1 var(--sans); color: var(--slate); background: transparent; border: 1px solid var(--hair); border-radius: 999px; padding: 0.55rem 0.9rem; cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s; }
     .chip:hover { color: var(--cream); }
     .chip[aria-pressed="true"] { color: #111216; background: var(--cream); border-color: var(--cream); }
-    .rank { padding: 14px 20px; display: grid; position: relative; }
-    .bar { display: grid; grid-template-columns: 1.6rem 15rem minmax(0, 1fr) 3.5rem; gap: 14px; align-items: center; height: 46px; transition: transform 0.6s var(--ease), opacity 0.3s; }
+    .rank { --row: 46px; position: relative; height: calc(var(--n) * var(--row) + 28px); }
+    .bar { position: absolute; left: 20px; right: 20px; top: 14px; transform: translateY(calc(var(--i) * var(--row))); display: grid; grid-template-columns: 1.6rem 15rem minmax(0, 1fr) 3.5rem; grid-template-areas: "pos n t v"; gap: 14px; align-items: center; height: var(--row); transition: transform 0.6s var(--ease), opacity 0.3s; }
+    .bar .pos { grid-area: pos; } .bar .n { grid-area: n; } .bar .t { grid-area: t; } .bar .v { grid-area: v; }
     .bar .pos { font: 500 0.8rem var(--mono); color: var(--dim); text-align: right; }
     .bar .n { display: grid; gap: 2px; min-width: 0; }
     .bar .n b { font: 500 0.95rem/1.2 var(--sans); color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -221,7 +222,10 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
     ul.method { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.95rem; display: grid; gap: 6px; }
     @media (max-width: 48rem) {
       .answer, .hood { grid-template-columns: minmax(0, 1fr); }
-      .bar { grid-template-columns: 1.2rem 9rem minmax(0, 1fr) 2.8rem; gap: 10px; }
+      .rank { --row: 64px; }
+      .bar { left: 14px; right: 14px; grid-template-columns: 1.2rem minmax(0, 1fr) 2.8rem; grid-template-areas: "pos n v" ". t t"; gap: 4px 10px; align-content: center; }
+      .plot { overflow-x: auto; }
+      .plot svg { min-width: 560px; }
       .take { grid-template-columns: minmax(0, 1fr) 2rem; }
       .take p { grid-column: 1 / -1; }
     }
@@ -257,9 +261,9 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
       <div class="chips" role="group" aria-label="Kind of speech">
         {views.map((v, i) => <button type="button" class="chip" data-view={v.id} aria-pressed={i === 0 ? "true" : "false"} title={v.source}>{v.name}</button>)}
       </div>
-      <div class="rank panel" id="rank" style={`height:${ranked.length * 46 + 28}px`}>
+      <div class="rank panel" id="rank" style={`--n:${ranked.length}`}>
         {ranked.map((m, i) => (
-          <div class={i === 0 ? "bar lead" : "bar"} data-id={m.id} style={`position:absolute;left:20px;right:20px;top:14px;transform:translateY(${i * 46}px)`}>
+          <div class={i === 0 ? "bar lead" : "bar"} data-id={m.id} style={`--i:${i}`}>
             <span class="pos">{i + 1}</span>
             <span class="n"><b>{m.name}</b><span>{m.langs}{m.heyra && <> · <span class="in">in Heyra</span></>}</span></span>
             <div class="t"><div class="b" style={`width:${width(m.average!, rankMax)};background-image:${m.heyra ? gold : quiet}`}></div></div>

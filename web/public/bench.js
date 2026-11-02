@@ -1,7 +1,6 @@
 // The bench page's moving parts. Pick a kind of speech and the bars slide into their
 // new order; pick a clip and play it. Everything shown is already in the markup.
 const data = JSON.parse(document.getElementById("bench-data").textContent);
-const ROW = 46;
 
 // ---- pick your speech ----
 const rank = document.getElementById("rank");
@@ -17,7 +16,7 @@ function show(view) {
   order.forEach((m, i) => {
     const el = bars.get(m.id);
     const v = value(m);
-    el.style.transform = `translateY(${i * ROW}px)`;
+    el.style.setProperty("--i", i);
     el.querySelector(".pos").textContent = i + 1;
     el.querySelector(".b").style.width = v == null ? "0" : `${Math.min(100, (v / data.rankMax) * 100).toFixed(2)}%`;
     el.querySelector(".v").textContent = v == null ? "–" : v.toFixed(1);
