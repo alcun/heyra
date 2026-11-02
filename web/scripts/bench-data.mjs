@@ -17,7 +17,7 @@ const old = JSON.parse(readFileSync("src/data/bench.json", "utf8"));
 const META = {
   "bark-3.0-clean": { name: "Bark 3.0 Clean", by: "Underdog", langs: "English", note: "Leaves out “um” and “uh”", license: "CC BY 4.0", heyra: true },
   "fluid-speech-mini": { name: "Fluid Speech Mini", by: "FluidVoice", langs: "English", note: "Every word", license: "CC BY 4.0", heyra: true },
-  "parakeet-v2": { name: "Parakeet v2", by: "NVIDIA", langs: "English", note: "Parakeet TDT 0.6B v2", license: "CC BY 4.0" },
+  "parakeet-v2": { name: "Parakeet v2", by: "NVIDIA", langs: "English", note: "Parakeet TDT 0.6B v2", license: "CC BY 4.0", heyra: true },
   "parakeet-v3": { name: "Parakeet v3", by: "NVIDIA", langs: "25 languages", note: "Parakeet TDT 0.6B v3", license: "CC BY 4.0", heyra: true },
   "parakeet-unified": { name: "Parakeet Unified", by: "NVIDIA", langs: "English", note: "2026, offline build", license: "NVIDIA Open Model" },
   "parakeet-110m": { name: "Parakeet 110M", by: "NVIDIA", langs: "English", note: "A fifth of the size", license: "CC BY 4.0" },
