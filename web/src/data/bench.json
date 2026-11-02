@@ -9,20 +9,42 @@
       "langs": "English",
       "note": "Leaves out “um” and “uh”",
       "heyra": true,
-      "mb": 670,
-      "speed": 12,
-      "average": 10.33,
-      "meant": 9.24,
+      "mb": 673,
+      "speed": 11,
+      "average": 9.25,
+      "meant": 8.13,
       "v": {
-        "ami": 19.71,
-        "disfluency": 16.88,
-        "disfluency-meant": 6.99,
-        "earnings22": 20.37,
-        "gigaspeech": 13.37,
-        "librispeech-clean": 4.12,
-        "librispeech-other": 4.52,
-        "spgispeech": 5.65,
-        "voxpopuli": 4.58
+        "ami": 17.38,
+        "disfluency": 13.73,
+        "disfluency-meant": 5.61,
+        "earnings22": 16.9,
+        "gigaspeech": 11.56,
+        "librispeech-clean": 3.72,
+        "librispeech-other": 5.39,
+        "spgispeech": 5.61,
+        "voxpopuli": 4.17
+      }
+    },
+    {
+      "id": "canary-180m",
+      "name": "Canary 180M",
+      "langs": "4 languages",
+      "note": "English, German, Spanish, French",
+      "heyra": false,
+      "mb": 207,
+      "speed": 8,
+      "average": 13.73,
+      "meant": 12.9,
+      "v": {
+        "ami": 18.71,
+        "disfluency": 6.26,
+        "disfluency-meant": 14.56,
+        "earnings22": 32.46,
+        "gigaspeech": 11.76,
+        "librispeech-clean": 2.18,
+        "librispeech-other": 3.62,
+        "spgispeech": 21.14,
+        "voxpopuli": 6.22
       }
     },
     {
@@ -33,18 +55,62 @@
       "heyra": true,
       "mb": 60,
       "speed": 11,
-      "average": 6.6,
-      "meant": 5.96,
+      "average": 6.71,
+      "meant": 6.2,
       "v": {
-        "ami": 12.12,
-        "disfluency": 3.9,
-        "disfluency-meant": 17.26,
-        "earnings22": 10.25,
-        "gigaspeech": 10.24,
-        "librispeech-clean": 2.47,
-        "librispeech-other": 2.93,
+        "ami": 11.92,
+        "disfluency": 3.34,
+        "disfluency-meant": 16.83,
+        "earnings22": 10.68,
+        "gigaspeech": 10.6,
+        "librispeech-clean": 2.26,
+        "librispeech-other": 3.49,
+        "spgispeech": 5.14,
+        "voxpopuli": 2.85
+      }
+    },
+    {
+      "id": "moonshine-base",
+      "name": "Moonshine Base",
+      "langs": "English",
+      "note": "Small and quick",
+      "heyra": false,
+      "mb": 286,
+      "speed": 49,
+      "average": 10.32,
+      "meant": 9.48,
+      "v": {
+        "ami": 17.44,
+        "disfluency": 10.11,
+        "disfluency-meant": 15.46,
+        "earnings22": 17.62,
+        "gigaspeech": 12.4,
+        "librispeech-clean": 3.48,
+        "librispeech-other": 8.01,
+        "spgispeech": 6.24,
+        "voxpopuli": 7.05
+      }
+    },
+    {
+      "id": "parakeet-110m",
+      "name": "Parakeet 110M",
+      "langs": "English",
+      "note": "A fifth of the size",
+      "heyra": false,
+      "mb": 132,
+      "speed": 51,
+      "average": 9.75,
+      "meant": 8.77,
+      "v": {
+        "ami": 20.37,
+        "disfluency": 6.96,
+        "disfluency-meant": 14.24,
+        "earnings22": 17.41,
+        "gigaspeech": 11.36,
+        "librispeech-clean": 3.19,
+        "librispeech-other": 5.51,
         "spgispeech": 5.1,
-        "voxpopuli": 3.11
+        "voxpopuli": 5.29
       }
     },
     {
@@ -54,19 +120,19 @@
       "note": "NVIDIA, English only",
       "heyra": false,
       "mb": 661,
-      "speed": 11,
-      "average": 7.07,
-      "meant": 6.35,
+      "speed": 12,
+      "average": 7.31,
+      "meant": 6.6,
       "v": {
-        "ami": 10.79,
-        "disfluency": 3.39,
-        "disfluency-meant": 16.04,
-        "earnings22": 13.04,
-        "gigaspeech": 11.96,
-        "librispeech-clean": 2.02,
-        "librispeech-other": 2.59,
-        "spgispeech": 3.87,
-        "voxpopuli": 5.19
+        "ami": 9.99,
+        "disfluency": 2.92,
+        "disfluency-meant": 16.2,
+        "earnings22": 15.39,
+        "gigaspeech": 11.32,
+        "librispeech-clean": 2.18,
+        "librispeech-other": 2.84,
+        "spgispeech": 4.15,
+        "voxpopuli": 5.29
       }
     },
     {
@@ -76,19 +142,41 @@
       "note": "European languages",
       "heyra": true,
       "mb": 670,
-      "speed": 11,
-      "average": 8.13,
-      "meant": 7.62,
+      "speed": 12,
+      "average": 8.33,
+      "meant": 7.77,
       "v": {
-        "ami": 11.92,
-        "disfluency": 4.45,
-        "disfluency-meant": 17.47,
-        "earnings22": 16.6,
-        "gigaspeech": 10.68,
-        "librispeech-clean": 2.26,
-        "librispeech-other": 4.01,
-        "spgispeech": 6.68,
-        "voxpopuli": 4.77
+        "ami": 13.78,
+        "disfluency": 4.73,
+        "disfluency-meant": 18,
+        "earnings22": 13.81,
+        "gigaspeech": 11.68,
+        "librispeech-clean": 2.38,
+        "librispeech-other": 4.52,
+        "spgispeech": 6.91,
+        "voxpopuli": 5.19
+      }
+    },
+    {
+      "id": "whisper-distil-v3.5",
+      "name": "Whisper Distil v3.5",
+      "langs": "English",
+      "note": "OpenAI Whisper, distilled",
+      "heyra": false,
+      "mb": 983,
+      "speed": 2,
+      "average": 10.26,
+      "meant": 9.28,
+      "v": {
+        "ami": 19.64,
+        "disfluency": 8.95,
+        "disfluency-meant": 12.71,
+        "earnings22": 17.84,
+        "gigaspeech": 13.01,
+        "librispeech-clean": 5.86,
+        "librispeech-other": 8.06,
+        "spgispeech": 3.4,
+        "voxpopuli": 4.04
       }
     }
   ],
@@ -143,49 +231,29 @@
     {
       "kind": "Audiobook",
       "source": "LibriSpeech clean",
-      "secs": 5.8,
-      "audio": "/bench/clips/librispeech-clean-0052.mp3",
-      "said": "naomi shook her forefinger reproachfully at them as if the two sturdy young farmers had been two children",
+      "secs": 10.9,
+      "audio": "/bench/clips/librispeech-clean-0024.mp3",
+      "said": "we shut our eyes the flowers bloom on we murmur but the corn ears fill we choose the shadow but the sun that casts it shines behind us still",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 0,
+          "wrong": 4,
           "ops": [
             [
               "k",
-              "naomi"
+              "we"
             ],
             [
               "k",
-              "shook"
+              "shut"
             ],
             [
               "k",
-              "her"
+              "our"
             ],
             [
               "k",
-              "forefinger"
-            ],
-            [
-              "k",
-              "reproachfully"
-            ],
-            [
-              "k",
-              "at"
-            ],
-            [
-              "k",
-              "them"
-            ],
-            [
-              "k",
-              "as"
-            ],
-            [
-              "k",
-              "if"
+              "eyes"
             ],
             [
               "k",
@@ -193,77 +261,243 @@
             ],
             [
               "k",
-              "two"
+              "flowers"
             ],
             [
               "k",
-              "sturdy"
+              "bloom"
             ],
             [
               "k",
-              "young"
+              "on"
             ],
             [
               "k",
-              "farmers"
+              "we"
+            ],
+            [
+              "s",
+              "murmure"
             ],
             [
               "k",
-              "had"
+              "but"
             ],
             [
               "k",
-              "been"
+              "the"
+            ],
+            [
+              "m",
+              "corn"
+            ],
+            [
+              "s",
+              "corniers"
             ],
             [
               "k",
-              "two"
+              "fill"
             ],
             [
               "k",
-              "children"
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
+            ]
+          ]
+        },
+        {
+          "id": "canary-180m",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "shut"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "eyes"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "flowers"
+            ],
+            [
+              "k",
+              "bloom"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "murmur"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "corn"
+            ],
+            [
+              "k",
+              "ears"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
             ]
           ]
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 0,
+          "wrong": 3,
           "ops": [
             [
               "k",
-              "naomi"
+              "we"
             ],
             [
               "k",
-              "shook"
+              "shut"
             ],
             [
               "k",
-              "her"
+              "our"
             ],
             [
               "k",
-              "forefinger"
-            ],
-            [
-              "k",
-              "reproachfully"
-            ],
-            [
-              "k",
-              "at"
-            ],
-            [
-              "k",
-              "them"
-            ],
-            [
-              "k",
-              "as"
-            ],
-            [
-              "k",
-              "if"
+              "eyes"
             ],
             [
               "k",
@@ -271,77 +505,365 @@
             ],
             [
               "k",
-              "two"
+              "flowers"
             ],
             [
               "k",
-              "sturdy"
+              "bloom"
             ],
             [
               "k",
-              "young"
+              "on"
             ],
             [
               "k",
-              "farmers"
+              "we"
             ],
             [
               "k",
-              "had"
+              "murmur"
             ],
             [
               "k",
-              "been"
+              "but"
             ],
             [
               "k",
-              "two"
+              "the"
+            ],
+            [
+              "m",
+              "corn"
+            ],
+            [
+              "s",
+              "corniers"
             ],
             [
               "k",
-              "children"
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
+            ]
+          ]
+        },
+        {
+          "id": "moonshine-base",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "shut"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "eyes"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "flowers"
+            ],
+            [
+              "k",
+              "bloom"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "murmur"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "corn"
+            ],
+            [
+              "k",
+              "ears"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-110m",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "shut"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "eyes"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "flowers"
+            ],
+            [
+              "k",
+              "bloom"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "murmur"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "corn"
+            ],
+            [
+              "k",
+              "ears"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
             ]
           ]
         },
         {
           "id": "parakeet-v2",
-          "wrong": 0,
+          "wrong": 1,
           "ops": [
             [
               "k",
-              "naomi"
+              "we"
             ],
             [
               "k",
-              "shook"
+              "shut"
             ],
             [
               "k",
-              "her"
+              "our"
             ],
             [
               "k",
-              "forefinger"
-            ],
-            [
-              "k",
-              "reproachfully"
-            ],
-            [
-              "k",
-              "at"
-            ],
-            [
-              "k",
-              "them"
-            ],
-            [
-              "k",
-              "as"
-            ],
-            [
-              "k",
-              "if"
+              "eyes"
             ],
             [
               "k",
@@ -349,77 +871,121 @@
             ],
             [
               "k",
-              "two"
+              "flowers"
             ],
             [
               "k",
-              "sturdy"
+              "bloom"
             ],
             [
               "k",
-              "young"
+              "on"
             ],
             [
               "k",
-              "farmers"
+              "we"
             ],
             [
               "k",
-              "had"
+              "murmur"
             ],
             [
               "k",
-              "been"
+              "but"
             ],
             [
               "k",
-              "two"
+              "the"
             ],
             [
               "k",
-              "children"
+              "corn"
+            ],
+            [
+              "k",
+              "ears"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
             ]
           ]
         },
         {
           "id": "parakeet-v3",
-          "wrong": 0,
+          "wrong": 1,
           "ops": [
             [
               "k",
-              "naomi"
+              "we"
             ],
             [
               "k",
-              "shook"
+              "shut"
             ],
             [
               "k",
-              "her"
+              "our"
             ],
             [
               "k",
-              "forefinger"
-            ],
-            [
-              "k",
-              "reproachfully"
-            ],
-            [
-              "k",
-              "at"
-            ],
-            [
-              "k",
-              "them"
-            ],
-            [
-              "k",
-              "as"
-            ],
-            [
-              "k",
-              "if"
+              "eyes"
             ],
             [
               "k",
@@ -427,35 +993,221 @@
             ],
             [
               "k",
-              "two"
+              "flowers"
             ],
             [
               "k",
-              "sturdy"
+              "bloom"
             ],
             [
               "k",
-              "young"
+              "on"
             ],
             [
               "k",
-              "farmers"
+              "we"
             ],
             [
               "k",
-              "had"
+              "murmur"
             ],
             [
               "k",
-              "been"
+              "but"
             ],
             [
               "k",
-              "two"
+              "the"
             ],
             [
               "k",
-              "children"
+              "corn"
+            ],
+            [
+              "k",
+              "ears"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-distil-v3.5",
+          "wrong": 3,
+          "ops": [
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "shut"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "eyes"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "flowers"
+            ],
+            [
+              "k",
+              "bloom"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "murmur"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "m",
+              "corn"
+            ],
+            [
+              "s",
+              "corniers"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
             ]
           ]
         }
@@ -464,9 +1216,9 @@
     {
       "kind": "Audiobook, hard",
       "source": "LibriSpeech other",
-      "secs": 12.5,
-      "audio": "/bench/clips/librispeech-other-0015.mp3",
-      "said": "the brahman stated the case and the eagle answered whenever men see me they try to shoot me they climb the rocks and steal away my little ones",
+      "secs": 5.2,
+      "audio": "/bench/clips/librispeech-other-0052.mp3",
+      "said": "i got to stick it said dickie sadly i'd best be getting home",
       "takes": [
         {
           "id": "bark-3.0-clean",
@@ -474,181 +1226,243 @@
           "ops": [
             [
               "k",
-              "the"
+              "i"
+            ],
+            [
+              "k",
+              "got"
             ],
             [
               "s",
-              "brahma"
-            ],
-            [
-              "s",
-              "suited"
+              "a"
             ],
             [
               "k",
-              "the"
+              "stick"
             ],
             [
               "k",
-              "case"
+              "it"
             ],
             [
               "k",
-              "and"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "eagle"
+              "said"
             ],
             [
               "m",
-              "answered"
+              "dickie"
             ],
             [
               "s",
-              "answeredwhenever"
+              "diggy"
+            ],
+            [
+              "s",
+              "sadlyi'd"
             ],
             [
               "k",
-              "men"
+              "best"
             ],
             [
               "k",
-              "see"
+              "be"
             ],
             [
               "k",
-              "me"
+              "getting"
             ],
             [
               "k",
-              "they"
+              "home"
+            ]
+          ]
+        },
+        {
+          "id": "canary-180m",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "i"
             ],
             [
               "k",
-              "try"
+              "got"
             ],
             [
-              "k",
+              "m",
               "to"
             ],
             [
-              "k",
-              "shoot"
+              "s",
+              "a"
+            ],
+            [
+              "s",
+              "sticker"
             ],
             [
               "k",
-              "me"
+              "said"
+            ],
+            [
+              "s",
+              "dicky"
             ],
             [
               "k",
-              "they"
+              "sadly"
             ],
             [
               "k",
-              "climb"
+              "i'd"
             ],
             [
               "k",
-              "the"
+              "best"
             ],
             [
               "k",
-              "rocks"
+              "be"
             ],
             [
               "k",
-              "and"
+              "getting"
             ],
             [
               "k",
-              "steal"
-            ],
-            [
-              "k",
-              "away"
-            ],
-            [
-              "k",
-              "my"
-            ],
-            [
-              "k",
-              "little"
-            ],
-            [
-              "k",
-              "ones"
+              "home"
             ]
           ]
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 1,
+          "wrong": 3,
           "ops": [
             [
               "k",
-              "the"
+              "i"
+            ],
+            [
+              "k",
+              "got"
+            ],
+            [
+              "m",
+              "to"
             ],
             [
               "s",
-              "brahmin"
+              "a"
+            ],
+            [
+              "s",
+              "sticket"
             ],
             [
               "k",
-              "stated"
+              "said"
             ],
             [
               "k",
-              "the"
+              "dickie"
             ],
             [
               "k",
-              "case"
+              "sadly"
             ],
             [
               "k",
-              "and"
+              "i'd"
             ],
             [
               "k",
-              "the"
+              "best"
             ],
             [
               "k",
-              "eagle"
+              "be"
             ],
             [
               "k",
-              "answered"
+              "getting"
             ],
             [
               "k",
-              "whenever"
+              "home"
+            ]
+          ]
+        },
+        {
+          "id": "moonshine-base",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "i"
             ],
             [
               "k",
-              "men"
+              "got"
+            ],
+            [
+              "s",
+              "a"
             ],
             [
               "k",
-              "see"
+              "stick"
             ],
             [
               "k",
-              "me"
+              "it"
             ],
             [
               "k",
-              "they"
+              "said"
+            ],
+            [
+              "s",
+              "dicky"
             ],
             [
               "k",
-              "try"
+              "sadly"
+            ],
+            [
+              "k",
+              "i'd"
+            ],
+            [
+              "k",
+              "best"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "getting"
+            ],
+            [
+              "k",
+              "home"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-110m",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "got"
             ],
             [
               "k",
@@ -656,51 +1470,43 @@
             ],
             [
               "k",
-              "shoot"
+              "stick"
             ],
             [
               "k",
-              "me"
+              "it"
             ],
             [
               "k",
-              "they"
+              "said"
             ],
             [
               "k",
-              "climb"
+              "dickie"
             ],
             [
               "k",
-              "the"
+              "sadly"
             ],
             [
               "k",
-              "rocks"
+              "i'd"
             ],
             [
               "k",
-              "and"
+              "best"
             ],
             [
               "k",
-              "steal"
+              "be"
             ],
             [
               "k",
-              "away"
+              "getting"
             ],
             [
               "k",
-              "my"
-            ],
-            [
-              "k",
-              "little"
-            ],
-            [
-              "k",
-              "ones"
+              "home"
             ]
           ]
         },
@@ -710,233 +1516,171 @@
           "ops": [
             [
               "k",
-              "the"
+              "i"
+            ],
+            [
+              "k",
+              "got"
             ],
             [
               "s",
-              "brahmin"
+              "a"
             ],
             [
               "k",
-              "stated"
+              "stick"
             ],
             [
               "k",
-              "the"
+              "it"
             ],
             [
               "k",
-              "case"
+              "said"
             ],
             [
               "k",
-              "and"
+              "dickie"
             ],
             [
               "k",
-              "the"
+              "sadly"
             ],
             [
               "k",
-              "eagle"
+              "i'd"
             ],
             [
               "k",
-              "answered"
+              "best"
             ],
             [
               "k",
-              "whenever"
+              "be"
             ],
             [
               "k",
-              "men"
+              "getting"
             ],
             [
               "k",
-              "see"
-            ],
-            [
-              "k",
-              "me"
-            ],
-            [
-              "k",
-              "they"
-            ],
-            [
-              "k",
-              "try"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "shoot"
-            ],
-            [
-              "k",
-              "me"
-            ],
-            [
-              "k",
-              "they"
-            ],
-            [
-              "k",
-              "climb"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "rocks"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "steal"
-            ],
-            [
-              "k",
-              "away"
-            ],
-            [
-              "k",
-              "my"
-            ],
-            [
-              "k",
-              "little"
-            ],
-            [
-              "k",
-              "ones"
+              "home"
             ]
           ]
         },
         {
           "id": "parakeet-v3",
-          "wrong": 3,
+          "wrong": 2,
           "ops": [
             [
               "k",
-              "the"
+              "i"
+            ],
+            [
+              "k",
+              "got"
             ],
             [
               "s",
-              "brahmin"
+              "a"
+            ],
+            [
+              "k",
+              "stick"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "said"
             ],
             [
               "s",
-              "suited"
+              "dicky"
             ],
             [
               "k",
-              "the"
+              "sadly"
             ],
             [
               "k",
-              "case"
+              "i'd"
             ],
             [
               "k",
-              "and"
+              "best"
             ],
             [
               "k",
-              "the"
+              "be"
             ],
             [
               "k",
-              "eagle"
+              "getting"
             ],
             [
               "k",
-              "answered"
+              "home"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-distil-v3.5",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "i"
             ],
             [
               "k",
-              "whenever"
-            ],
-            [
-              "k",
-              "men"
-            ],
-            [
-              "k",
-              "see"
-            ],
-            [
-              "k",
-              "me"
-            ],
-            [
-              "k",
-              "they"
-            ],
-            [
-              "k",
-              "try"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "shoot"
-            ],
-            [
-              "k",
-              "me"
-            ],
-            [
-              "k",
-              "they"
-            ],
-            [
-              "k",
-              "climb"
+              "got"
             ],
             [
               "m",
-              "the"
+              "to"
+            ],
+            [
+              "s",
+              "his"
+            ],
+            [
+              "s",
+              "ticket"
             ],
             [
               "k",
-              "rocks"
+              "said"
+            ],
+            [
+              "s",
+              "dicky"
             ],
             [
               "k",
-              "and"
+              "sadly"
             ],
             [
               "k",
-              "steal"
+              "i'd"
             ],
             [
               "k",
-              "away"
+              "best"
             ],
             [
               "k",
-              "my"
+              "be"
             ],
             [
               "k",
-              "little"
+              "getting"
             ],
             [
               "k",
-              "ones"
+              "home"
             ]
           ]
         }
@@ -946,60 +1690,106 @@
       "kind": "Meeting",
       "source": "AMI",
       "secs": 7.2,
-      "audio": "/bench/clips/ami-0017.mp3",
-      "said": "but I don't I don't think it's really sort of necessary when you th you think of the next two options,",
+      "audio": "/bench/clips/ami-0019.mp3",
+      "said": "So um uh you c you can't put a a lot of uh functions uh in one uh Yeah.",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 5,
+          "wrong": 9,
           "ops": [
             [
               "k",
-              "but"
+              "so"
             ],
             [
               "m",
-              "i"
+              "um"
             ],
             [
               "m",
-              "don't"
+              "uh"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "c"
             ],
             [
               "k",
-              "i"
+              "you"
+            ],
+            [
+              "s",
+              "can"
             ],
             [
               "k",
-              "don't"
+              "put"
+            ],
+            [
+              "m",
+              "a"
             ],
             [
               "k",
-              "think"
+              "a"
             ],
             [
               "k",
-              "it's"
-            ],
-            [
-              "k",
-              "really"
-            ],
-            [
-              "k",
-              "sort"
+              "lot"
             ],
             [
               "k",
               "of"
             ],
             [
-              "k",
-              "necessary"
+              "m",
+              "uh"
             ],
             [
               "k",
-              "when"
+              "functions"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "canary-180m",
+          "wrong": 10,
+          "ops": [
+            [
+              "k",
+              "so"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "m",
+              "uh"
             ],
             [
               "m",
@@ -1007,77 +1797,113 @@
             ],
             [
               "m",
-              "th"
+              "c"
             ],
             [
               "k",
               "you"
-            ],
-            [
-              "k",
-              "think"
             ],
             [
               "s",
-              "as"
+              "can"
             ],
             [
               "k",
-              "the"
+              "put"
+            ],
+            [
+              "m",
+              "a"
             ],
             [
               "k",
-              "next"
+              "a"
             ],
             [
               "k",
-              "two"
+              "lot"
             ],
             [
               "k",
-              "options"
+              "of"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "functions"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "yeah"
             ]
           ]
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 1,
+          "wrong": 6,
           "ops": [
             [
               "k",
-              "but"
+              "so"
             ],
             [
               "k",
-              "i"
+              "um"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "s",
+              "yeah"
             ],
             [
               "k",
-              "don't"
+              "you"
+            ],
+            [
+              "s",
+              "can"
             ],
             [
               "k",
-              "i"
+              "put"
+            ],
+            [
+              "m",
+              "a"
             ],
             [
               "k",
-              "don't"
+              "a"
             ],
             [
               "k",
-              "think"
-            ],
-            [
-              "k",
-              "it's"
-            ],
-            [
-              "k",
-              "really"
-            ],
-            [
-              "k",
-              "sort"
+              "lot"
             ],
             [
               "k",
@@ -1085,101 +1911,213 @@
             ],
             [
               "k",
-              "necessary"
+              "uh"
             ],
             [
               "k",
-              "when"
+              "functions"
             ],
             [
               "k",
-              "you"
+              "uh"
             ],
             [
               "k",
-              "th"
+              "in"
             ],
             [
               "k",
-              "you"
-            ],
-            [
-              "k",
-              "think"
+              "one"
             ],
             [
               "s",
-              "as"
+              "um"
             ],
             [
               "k",
-              "the"
+              "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "moonshine-base",
+          "wrong": 3,
+          "ops": [
+            [
+              "k",
+              "so"
             ],
             [
               "k",
-              "next"
+              "um"
+            ],
+            [
+              "s",
+              "yeah"
             ],
             [
               "k",
-              "two"
+              "you"
             ],
             [
               "k",
-              "options"
+              "c"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "s",
+              "can"
+            ],
+            [
+              "k",
+              "put"
+            ],
+            [
+              "m",
+              "a"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "functions"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-110m",
+          "wrong": 10,
+          "ops": [
+            [
+              "k",
+              "so"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "c"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "s",
+              "can"
+            ],
+            [
+              "k",
+              "put"
+            ],
+            [
+              "m",
+              "a"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "functions"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "yeah"
             ]
           ]
         },
         {
           "id": "parakeet-v2",
-          "wrong": 0,
+          "wrong": 3,
           "ops": [
             [
               "k",
-              "but"
+              "so"
             ],
             [
               "k",
-              "i"
+              "um"
             ],
             [
-              "k",
-              "don't"
-            ],
-            [
-              "k",
-              "i"
-            ],
-            [
-              "k",
-              "don't"
-            ],
-            [
-              "k",
-              "think"
-            ],
-            [
-              "k",
-              "it's"
-            ],
-            [
-              "k",
-              "really"
-            ],
-            [
-              "k",
-              "sort"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "necessary"
-            ],
-            [
-              "k",
-              "when"
+              "s",
+              "yeah"
             ],
             [
               "k",
@@ -1187,15 +2125,31 @@
             ],
             [
               "k",
-              "th"
+              "c"
             ],
             [
               "k",
               "you"
             ],
             [
+              "s",
+              "can"
+            ],
+            [
               "k",
-              "think"
+              "put"
+            ],
+            [
+              "s",
+              "uh"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
             ],
             [
               "k",
@@ -1203,61 +2157,81 @@
             ],
             [
               "k",
-              "the"
+              "uh"
             ],
             [
               "k",
-              "next"
+              "functions"
             ],
             [
               "k",
-              "two"
+              "uh"
             ],
             [
               "k",
-              "options"
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "yeah"
             ]
           ]
         },
         {
           "id": "parakeet-v3",
-          "wrong": 1,
+          "wrong": 4,
           "ops": [
             [
               "k",
-              "but"
+              "so"
             ],
             [
               "k",
-              "i"
+              "um"
+            ],
+            [
+              "s",
+              "yeah"
             ],
             [
               "k",
-              "don't"
+              "you"
             ],
             [
               "k",
-              "i"
+              "c"
             ],
             [
               "k",
-              "don't"
+              "you"
+            ],
+            [
+              "s",
+              "can"
             ],
             [
               "k",
-              "think"
+              "put"
+            ],
+            [
+              "s",
+              "uh"
             ],
             [
               "k",
-              "it's"
+              "a"
             ],
             [
               "k",
-              "really"
-            ],
-            [
-              "k",
-              "sort"
+              "lot"
             ],
             [
               "k",
@@ -1265,47 +2239,117 @@
             ],
             [
               "k",
-              "necessary"
+              "uh"
             ],
             [
               "k",
-              "when"
+              "functions"
+            ],
+            [
+              "a",
+              "uh"
             ],
             [
               "k",
+              "uh"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-distil-v3.5",
+          "wrong": 9,
+          "ops": [
+            [
+              "k",
+              "so"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
               "you"
-            ],
-            [
-              "k",
-              "th"
-            ],
-            [
-              "k",
-              "you"
-            ],
-            [
-              "k",
-              "think"
             ],
             [
               "s",
-              "as"
+              "yeah"
             ],
             [
               "k",
-              "the"
+              "you"
+            ],
+            [
+              "s",
+              "can"
             ],
             [
               "k",
-              "next"
+              "put"
+            ],
+            [
+              "m",
+              "a"
             ],
             [
               "k",
-              "two"
+              "a"
             ],
             [
               "k",
-              "options"
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "functions"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "one"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "yeah"
             ]
           ]
         }
@@ -1315,20 +2359,28 @@
       "kind": "Earnings call",
       "source": "Earnings-22",
       "secs": 14,
-      "audio": "/bench/clips/earnings22-0014.mp3",
-      "said": "And really the key for us is to take our leading position there with our leading position across infrastructure, real estate, credit growth equity on a global base and the marriage of those two things, and we think that could lead to a lot of growth for us in that part of the world.",
+      "audio": "/bench/clips/earnings22-0015.mp3",
+      "said": "All in all, over the first three months of 2021, the total value of our cash from deposits in three months increased by 1 billion and 40 millions reaching a total of 1 billion and 950 million .",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 2,
+          "wrong": 20,
           "ops": [
             [
-              "k",
-              "and"
+              "s",
+              "how"
+            ],
+            [
+              "s",
+              "you"
+            ],
+            [
+              "s",
+              "know"
             ],
             [
               "k",
-              "really"
+              "over"
             ],
             [
               "k",
@@ -1336,27 +2388,47 @@
             ],
             [
               "k",
-              "key"
+              "first"
             ],
             [
               "k",
-              "for"
+              "three"
             ],
             [
               "k",
-              "us"
+              "months"
             ],
             [
               "k",
-              "is"
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
             ],
             [
               "k",
-              "to"
+              "the"
             ],
             [
               "k",
-              "take"
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
             ],
             [
               "k",
@@ -1364,171 +2436,137 @@
             ],
             [
               "k",
-              "leading"
+              "cash"
             ],
             [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "there"
-            ],
-            [
-              "k",
-              "with"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "across"
-            ],
-            [
-              "k",
-              "infrastructure"
-            ],
-            [
-              "k",
-              "real"
-            ],
-            [
-              "k",
-              "estate"
-            ],
-            [
-              "k",
-              "credit"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "equity"
-            ],
-            [
-              "k",
+              "s",
               "on"
             ],
             [
               "k",
-              "a"
-            ],
-            [
-              "k",
-              "global"
-            ],
-            [
-              "m",
-              "base"
-            ],
-            [
-              "s",
-              "basis"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "marriage"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "those"
-            ],
-            [
-              "k",
-              "two"
-            ],
-            [
-              "k",
-              "things"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "think"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "k",
-              "could"
-            ],
-            [
-              "k",
-              "lead"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
+              "deposits"
             ],
             [
               "k",
               "in"
             ],
             [
-              "k",
-              "that"
+              "s",
+              "two"
             ],
             [
               "k",
-              "part"
+              "months"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "four"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "notes"
+            ],
+            [
+              "s",
+              "which"
+            ],
+            [
+              "s",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
             ],
             [
               "k",
               "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "a",
+              "and"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "s",
+              "fifty"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "dollar"
+            ]
+          ]
+        },
+        {
+          "id": "canary-180m",
+          "wrong": 20,
+          "ops": [
+            [
+              "m",
+              "all"
+            ],
+            [
+              "m",
+              "in"
+            ],
+            [
+              "m",
+              "all"
+            ],
+            [
+              "k",
+              "over"
             ],
             [
               "k",
@@ -1536,205 +2574,161 @@
             ],
             [
               "k",
-              "world"
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "on"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "m",
+              "in"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "teamworks"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "fourteen"
+            ],
+            [
+              "s",
+              "billion"
+            ],
+            [
+              "s",
+              "dollars"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "s",
+              "fifty"
+            ],
+            [
+              "s",
+              "billion"
+            ],
+            [
+              "s",
+              "dollars"
             ]
           ]
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 2,
+          "wrong": 7,
           "ops": [
             [
               "k",
-              "and"
-            ],
-            [
-              "k",
-              "really"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "key"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "is"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "take"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "there"
-            ],
-            [
-              "k",
-              "with"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "across"
-            ],
-            [
-              "k",
-              "infrastructure"
-            ],
-            [
-              "k",
-              "real"
-            ],
-            [
-              "k",
-              "estate"
-            ],
-            [
-              "k",
-              "credit"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "equity"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "global"
-            ],
-            [
-              "m",
-              "base"
-            ],
-            [
-              "s",
-              "basin"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "marriage"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "those"
-            ],
-            [
-              "k",
-              "two"
-            ],
-            [
-              "k",
-              "things"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "think"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "k",
-              "could"
-            ],
-            [
-              "k",
-              "lead"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
+              "all"
             ],
             [
               "k",
@@ -1742,15 +2736,11 @@
             ],
             [
               "k",
-              "that"
+              "all"
             ],
             [
               "k",
-              "part"
-            ],
-            [
-              "k",
-              "of"
+              "over"
             ],
             [
               "k",
@@ -1758,205 +2748,489 @@
             ],
             [
               "k",
-              "world"
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "2021"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "bank"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "40"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "zotric"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "950"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "zotric"
+            ]
+          ]
+        },
+        {
+          "id": "moonshine-base",
+          "wrong": 6,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "2021"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "k",
+              "from"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "m",
+              "in"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "debonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "40"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "lakh"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "950"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "lakh"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-110m",
+          "wrong": 16,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "on"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "forty"
+            ],
+            [
+              "s",
+              "million"
+            ],
+            [
+              "s",
+              "los"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "s",
+              "fifty"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "los"
             ]
           ]
         },
         {
           "id": "parakeet-v2",
-          "wrong": 1,
+          "wrong": 17,
           "ops": [
             [
               "k",
-              "and"
-            ],
-            [
-              "k",
-              "really"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "key"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "is"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "take"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "there"
-            ],
-            [
-              "k",
-              "with"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "across"
-            ],
-            [
-              "k",
-              "infrastructure"
-            ],
-            [
-              "k",
-              "real"
-            ],
-            [
-              "k",
-              "estate"
-            ],
-            [
-              "k",
-              "credit"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "equity"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "global"
-            ],
-            [
-              "s",
-              "basis"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "marriage"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "those"
-            ],
-            [
-              "k",
-              "two"
-            ],
-            [
-              "k",
-              "things"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "think"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "k",
-              "could"
-            ],
-            [
-              "k",
-              "lead"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
+              "all"
             ],
             [
               "k",
@@ -1964,15 +3238,11 @@
             ],
             [
               "k",
-              "that"
+              "all"
             ],
             [
               "k",
-              "part"
-            ],
-            [
-              "k",
-              "of"
+              "over"
             ],
             [
               "k",
@@ -1980,205 +3250,169 @@
             ],
             [
               "k",
-              "world"
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "fund"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "key"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "forty"
+            ],
+            [
+              "s",
+              "million"
+            ],
+            [
+              "s",
+              "zlotic"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "a",
+              "and"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "s",
+              "fifty"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "slotted"
             ]
           ]
         },
         {
           "id": "parakeet-v3",
-          "wrong": 1,
+          "wrong": 14,
           "ops": [
             [
               "k",
-              "and"
-            ],
-            [
-              "k",
-              "really"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "key"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "is"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "take"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "there"
-            ],
-            [
-              "k",
-              "with"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "leading"
-            ],
-            [
-              "k",
-              "position"
-            ],
-            [
-              "k",
-              "across"
-            ],
-            [
-              "k",
-              "infrastructure"
-            ],
-            [
-              "k",
-              "real"
-            ],
-            [
-              "k",
-              "estate"
-            ],
-            [
-              "k",
-              "credit"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "equity"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "global"
-            ],
-            [
-              "s",
-              "basis"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "marriage"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "those"
-            ],
-            [
-              "k",
-              "two"
-            ],
-            [
-              "k",
-              "things"
-            ],
-            [
-              "k",
-              "and"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "think"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "k",
-              "could"
-            ],
-            [
-              "k",
-              "lead"
-            ],
-            [
-              "k",
-              "to"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "growth"
-            ],
-            [
-              "k",
-              "for"
-            ],
-            [
-              "k",
-              "us"
+              "all"
             ],
             [
               "k",
@@ -2186,15 +3420,11 @@
             ],
             [
               "k",
-              "that"
+              "all"
             ],
             [
               "k",
-              "part"
-            ],
-            [
-              "k",
-              "of"
+              "over"
             ],
             [
               "k",
@@ -2202,7 +3432,321 @@
             ],
             [
               "k",
-              "world"
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "fund"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "forty"
+            ],
+            [
+              "s",
+              "million"
+            ],
+            [
+              "s",
+              "losses"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "a",
+              "and"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "s",
+              "fifty"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "dollars"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-distil-v3.5",
+          "wrong": 8,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "2021"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "bank"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "40"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "zlotyk"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "s",
+              "915"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "zlotyk"
             ]
           ]
         }
@@ -2211,45 +3755,17 @@
     {
       "kind": "Parliament",
       "source": "VoxPopuli",
-      "secs": 6.1,
-      "audio": "/bench/clips/voxpopuli-0090.mp3",
-      "said": "The discovery of a distressed teenager in Dublin this week is a reminder that Ireland is affected very much by human trafficking.",
+      "secs": 9.9,
+      "audio": "/bench/clips/voxpopuli-0051.mp3",
+      "said": "Uh this is a step towards uh strong European um supervision on the financial markets uh that have developed far beyond national uh borders.",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 0,
+          "wrong": 6,
           "ops": [
             [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "discovery"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "distressed"
-            ],
-            [
-              "k",
-              "teenager"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "dublin"
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2257,7 +3773,105 @@
             ],
             [
               "k",
-              "week"
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "have"
+            ],
+            [
+              "k",
+              "developed"
+            ],
+            [
+              "k",
+              "far"
+            ],
+            [
+              "k",
+              "beyond"
+            ],
+            [
+              "k",
+              "national"
+            ],
+            [
+              "s",
+              "borders"
+            ],
+            [
+              "s",
+              "and"
+            ]
+          ]
+        },
+        {
+          "id": "canary-180m",
+          "wrong": 6,
+          "ops": [
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "this"
             ],
             [
               "k",
@@ -2269,7 +3883,51 @@
             ],
             [
               "k",
-              "reminder"
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2277,35 +3935,31 @@
             ],
             [
               "k",
-              "ireland"
+              "have"
             ],
             [
               "k",
-              "is"
+              "developed"
             ],
             [
               "k",
-              "affected"
+              "far"
             ],
             [
               "k",
-              "very"
+              "beyond"
             ],
             [
               "k",
-              "much"
+              "national"
             ],
             [
-              "k",
-              "by"
+              "s",
+              "borders"
             ],
             [
-              "k",
-              "human"
-            ],
-            [
-              "k",
-              "trafficking"
+              "s",
+              "and"
             ]
           ]
         },
@@ -2315,35 +3969,7 @@
           "ops": [
             [
               "k",
-              "the"
-            ],
-            [
-              "k",
-              "discovery"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "distressed"
-            ],
-            [
-              "k",
-              "teenager"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "dublin"
+              "uh"
             ],
             [
               "k",
@@ -2351,7 +3977,105 @@
             ],
             [
               "k",
-              "week"
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "k",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "have"
+            ],
+            [
+              "k",
+              "developed"
+            ],
+            [
+              "k",
+              "far"
+            ],
+            [
+              "k",
+              "beyond"
+            ],
+            [
+              "k",
+              "national"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "borders"
+            ]
+          ]
+        },
+        {
+          "id": "moonshine-base",
+          "wrong": 5,
+          "ops": [
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "this"
             ],
             [
               "k",
@@ -2363,7 +4087,51 @@
             ],
             [
               "k",
-              "reminder"
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2371,7 +4139,45 @@
             ],
             [
               "k",
-              "ireland"
+              "have"
+            ],
+            [
+              "k",
+              "developed"
+            ],
+            [
+              "k",
+              "far"
+            ],
+            [
+              "k",
+              "beyond"
+            ],
+            [
+              "k",
+              "national"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "borders"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-110m",
+          "wrong": 5,
+          "ops": [
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "this"
             ],
             [
               "k",
@@ -2379,65 +4185,97 @@
             ],
             [
               "k",
-              "affected"
+              "a"
             ],
             [
               "k",
-              "very"
+              "step"
             ],
             [
               "k",
-              "much"
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
             ],
             [
               "k",
-              "by"
+              "strong"
             ],
             [
               "k",
-              "human"
+              "european"
+            ],
+            [
+              "m",
+              "um"
             ],
             [
               "k",
-              "trafficking"
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "have"
+            ],
+            [
+              "k",
+              "developed"
+            ],
+            [
+              "k",
+              "far"
+            ],
+            [
+              "k",
+              "beyond"
+            ],
+            [
+              "k",
+              "national"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "borders"
             ]
           ]
         },
         {
           "id": "parakeet-v2",
-          "wrong": 0,
+          "wrong": 6,
           "ops": [
             [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "discovery"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "distressed"
-            ],
-            [
-              "k",
-              "teenager"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "dublin"
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2445,10 +4283,6 @@
             ],
             [
               "k",
-              "week"
-            ],
-            [
-              "k",
               "is"
             ],
             [
@@ -2457,7 +4291,51 @@
             ],
             [
               "k",
-              "reminder"
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2465,73 +4343,41 @@
             ],
             [
               "k",
-              "ireland"
+              "have"
             ],
             [
               "k",
-              "is"
+              "developed"
             ],
             [
               "k",
-              "affected"
+              "far"
             ],
             [
               "k",
-              "very"
+              "beyond"
             ],
             [
               "k",
-              "much"
+              "national"
             ],
             [
-              "k",
-              "by"
+              "s",
+              "borders"
             ],
             [
-              "k",
-              "human"
-            ],
-            [
-              "k",
-              "trafficking"
+              "s",
+              "and"
             ]
           ]
         },
         {
           "id": "parakeet-v3",
-          "wrong": 0,
+          "wrong": 5,
           "ops": [
             [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "discovery"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "distressed"
-            ],
-            [
-              "k",
-              "teenager"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "dublin"
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2539,7 +4385,105 @@
             ],
             [
               "k",
-              "week"
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "have"
+            ],
+            [
+              "k",
+              "developed"
+            ],
+            [
+              "k",
+              "far"
+            ],
+            [
+              "k",
+              "beyond"
+            ],
+            [
+              "k",
+              "national"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "borders"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-distil-v3.5",
+          "wrong": 8,
+          "ops": [
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "this"
             ],
             [
               "k",
@@ -2551,7 +4495,51 @@
             ],
             [
               "k",
-              "reminder"
+              "step"
+            ],
+            [
+              "k",
+              "towards"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "strong"
+            ],
+            [
+              "k",
+              "european"
+            ],
+            [
+              "m",
+              "um"
+            ],
+            [
+              "k",
+              "supervision"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "financial"
+            ],
+            [
+              "k",
+              "markets"
+            ],
+            [
+              "m",
+              "uh"
             ],
             [
               "k",
@@ -2559,35 +4547,39 @@
             ],
             [
               "k",
-              "ireland"
+              "have"
             ],
             [
               "k",
-              "is"
+              "developed"
             ],
             [
               "k",
-              "affected"
+              "far"
             ],
             [
               "k",
-              "very"
+              "beyond"
             ],
             [
               "k",
-              "much"
+              "national"
             ],
             [
-              "k",
-              "by"
+              "a",
+              "borders"
             ],
             [
-              "k",
-              "human"
+              "a",
+              "and"
             ],
             [
-              "k",
-              "trafficking"
+              "s",
+              "i'm"
+            ],
+            [
+              "s",
+              "sorry"
             ]
           ]
         }

@@ -286,7 +286,9 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
             <g class={d.m.heyra ? "heyra" : undefined} tabindex="0">
               <title>{`${d.m.name}: ${d.m.average!.toFixed(1)} in 100 wrong, ${d.m.speed}× real time, ${d.m.mb} MB, ${d.m.langs}`}</title>
               <circle class={d.m.heyra ? "dot heyra" : "dot"} cx={d.x} cy={d.y} r={d.r} />
-              <text class="name" x={d.x + d.r + 5} y={d.ly}>{d.m.name}</text>
+              {d.x > plot.w - 150
+                ? <text class="name" x={d.x - d.r - 5} y={d.ly} text-anchor="end">{d.m.name}</text>
+                : <text class="name" x={d.x + d.r + 5} y={d.ly}>{d.m.name}</text>}
             </g>
           ))}
         </svg>
