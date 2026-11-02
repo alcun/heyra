@@ -130,7 +130,7 @@
       "langs": "English",
       "note": "Parakeet TDT 0.6B v2",
       "license": "CC BY 4.0",
-      "heyra": false,
+      "heyra": true,
       "mb": 661,
       "speed": 12,
       "average": 7.31,
@@ -172,6 +172,30 @@
       }
     },
     {
+      "id": "qwen3-asr-0.6b",
+      "name": "Qwen3-ASR 0.6B",
+      "by": "Alibaba",
+      "langs": "30 languages",
+      "note": "Qwen3-ASR",
+      "license": "Apache 2.0",
+      "heyra": false,
+      "mb": 983,
+      "speed": 4,
+      "average": 8.48,
+      "meant": 7.46,
+      "v": {
+        "ami": 15.31,
+        "disfluency": 4.96,
+        "disfluency-meant": 15.67,
+        "earnings22": 14.79,
+        "gigaspeech": 11.12,
+        "librispeech-clean": 2.87,
+        "librispeech-other": 5.39,
+        "spgispeech": 4.98,
+        "voxpopuli": 4.87
+      }
+    },
+    {
       "id": "whisper-distil-v3.5",
       "name": "Whisper Distil v3.5",
       "by": "OpenAI, distilled",
@@ -193,6 +217,30 @@
         "librispeech-other": 8.06,
         "spgispeech": 3.4,
         "voxpopuli": 4.04
+      }
+    },
+    {
+      "id": "whisper-turbo",
+      "name": "Whisper Turbo",
+      "by": "OpenAI",
+      "langs": "99 languages",
+      "note": "Whisper large v3 turbo",
+      "license": "MIT",
+      "heyra": false,
+      "mb": 1036,
+      "speed": 2,
+      "average": 8.77,
+      "meant": 7.65,
+      "v": {
+        "ami": 19.31,
+        "disfluency": 8.95,
+        "disfluency-meant": 10.75,
+        "earnings22": 14.79,
+        "gigaspeech": 11.8,
+        "librispeech-clean": 2.47,
+        "librispeech-other": 4.7,
+        "spgispeech": 3.4,
+        "voxpopuli": 4.9
       }
     }
   ],
@@ -1106,6 +1154,128 @@
           ]
         },
         {
+          "id": "qwen3-asr-0.6b",
+          "wrong": 3,
+          "ops": [
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "shut"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "eyes"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "flowers"
+            ],
+            [
+              "k",
+              "bloom"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "murmur"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "m",
+              "corn"
+            ],
+            [
+              "s",
+              "cornears"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
+            ]
+          ]
+        },
+        {
           "id": "whisper-distil-v3.5",
           "wrong": 3,
           "ops": [
@@ -1164,6 +1334,128 @@
             [
               "s",
               "corniers"
+            ],
+            [
+              "k",
+              "fill"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "choose"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "shadow"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "sun"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "s",
+              "cast"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "shines"
+            ],
+            [
+              "k",
+              "behind"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "still"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-turbo",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "shut"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "eyes"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "flowers"
+            ],
+            [
+              "k",
+              "bloom"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "murmur"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "corn"
+            ],
+            [
+              "k",
+              "ears"
             ],
             [
               "k",
@@ -1643,6 +1935,64 @@
           ]
         },
         {
+          "id": "qwen3-asr-0.6b",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "got"
+            ],
+            [
+              "m",
+              "to"
+            ],
+            [
+              "s",
+              "a"
+            ],
+            [
+              "s",
+              "ticket"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "s",
+              "dicky"
+            ],
+            [
+              "k",
+              "sadly"
+            ],
+            [
+              "k",
+              "i'd"
+            ],
+            [
+              "k",
+              "best"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "getting"
+            ],
+            [
+              "k",
+              "home"
+            ]
+          ]
+        },
+        {
           "id": "whisper-distil-v3.5",
           "wrong": 4,
           "ops": [
@@ -1699,6 +2049,64 @@
               "home"
             ]
           ]
+        },
+        {
+          "id": "whisper-turbo",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "got"
+            ],
+            [
+              "m",
+              "to"
+            ],
+            [
+              "s",
+              "a"
+            ],
+            [
+              "s",
+              "sticket"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "s",
+              "dicky"
+            ],
+            [
+              "k",
+              "sadly"
+            ],
+            [
+              "k",
+              "i'd"
+            ],
+            [
+              "k",
+              "best"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "getting"
+            ],
+            [
+              "k",
+              "home"
+            ]
+          ]
         }
       ]
     },
@@ -1706,20 +2114,52 @@
       "kind": "Meeting",
       "source": "AMI",
       "secs": 7.2,
-      "audio": "/bench/clips/ami-0019.mp3",
-      "said": "So um uh you c you can't put a a lot of uh functions uh in one uh Yeah.",
+      "audio": "/bench/clips/ami-0018.mp3",
+      "said": "Hmm yeah, I think maybe seventy percent is a unique uh uh remote controller and thirty percent is yeah it's sort of like yeah.",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 9,
+          "wrong": 10,
           "ops": [
             [
-              "k",
-              "so"
+              "m",
+              "hmm"
             ],
             [
-              "m",
-              "um"
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "k",
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
             ],
             [
               "m",
@@ -1727,66 +2167,54 @@
             ],
             [
               "m",
-              "you"
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
             ],
             [
               "m",
-              "c"
-            ],
-            [
-              "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
-            ],
-            [
-              "k",
-              "put"
+              "is"
             ],
             [
               "m",
-              "a"
+              "yeah"
             ],
             [
-              "k",
-              "a"
+              "m",
+              "it's"
             ],
             [
-              "k",
-              "lot"
+              "m",
+              "sort"
             ],
             [
-              "k",
+              "m",
               "of"
             ],
             [
               "m",
-              "uh"
-            ],
-            [
-              "k",
-              "functions"
+              "like"
             ],
             [
               "m",
-              "uh"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "one"
-            ],
-            [
-              "m",
-              "uh"
-            ],
-            [
-              "k",
               "yeah"
             ]
           ]
@@ -1796,12 +2224,44 @@
           "wrong": 10,
           "ops": [
             [
-              "k",
-              "so"
+              "m",
+              "hmm"
             ],
             [
-              "m",
-              "um"
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "k",
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
             ],
             [
               "m",
@@ -1809,63 +2269,51 @@
             ],
             [
               "m",
-              "you"
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
             ],
             [
               "m",
-              "c"
-            ],
-            [
-              "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
-            ],
-            [
-              "k",
-              "put"
+              "is"
             ],
             [
               "m",
-              "a"
+              "yeah"
             ],
             [
-              "k",
-              "a"
+              "m",
+              "it's"
             ],
             [
-              "k",
-              "lot"
+              "m",
+              "sort"
             ],
             [
-              "k",
+              "m",
               "of"
             ],
             [
               "m",
-              "uh"
-            ],
-            [
-              "k",
-              "functions"
-            ],
-            [
-              "m",
-              "uh"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "one"
-            ],
-            [
-              "m",
-              "uh"
+              "like"
             ],
             [
               "m",
@@ -1875,79 +2323,99 @@
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 6,
+          "wrong": 10,
           "ops": [
             [
-              "k",
-              "so"
-            ],
-            [
-              "k",
-              "um"
-            ],
-            [
               "m",
-              "uh"
+              "hmm"
             ],
             [
-              "m",
-              "you"
-            ],
-            [
-              "s",
+              "k",
               "yeah"
             ],
             [
               "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
+              "i"
             ],
             [
               "k",
-              "put"
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
             ],
             [
               "m",
-              "a"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "k",
-              "uh"
-            ],
-            [
-              "k",
-              "functions"
-            ],
-            [
-              "k",
-              "uh"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "one"
+              "seventy"
             ],
             [
               "s",
-              "um"
+              "70"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "m",
+              "thirty"
+            ],
+            [
+              "s",
+              "30"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "s",
+              "what"
+            ],
+            [
+              "s",
+              "i"
+            ],
+            [
+              "s",
+              "think"
             ],
             [
               "k",
@@ -1957,79 +2425,99 @@
         },
         {
           "id": "moonshine-base",
-          "wrong": 3,
+          "wrong": 8,
           "ops": [
             [
               "k",
-              "so"
+              "hmm"
             ],
             [
               "k",
-              "um"
-            ],
-            [
-              "s",
               "yeah"
             ],
             [
               "k",
-              "you"
+              "i"
             ],
             [
               "k",
-              "c"
+              "think"
             ],
             [
               "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
+              "maybe"
             ],
             [
               "k",
-              "put"
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
             ],
             [
               "m",
-              "a"
+              "thirty"
             ],
             [
-              "k",
-              "a"
+              "m",
+              "percent"
             ],
             [
-              "k",
-              "lot"
+              "m",
+              "is"
             ],
             [
-              "k",
-              "of"
+              "m",
+              "yeah"
             ],
             [
-              "k",
-              "uh"
+              "m",
+              "it's"
             ],
             [
-              "k",
-              "functions"
+              "s",
+              "touti"
             ],
             [
-              "k",
-              "uh"
+              "s",
+              "person"
             ],
             [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "one"
-            ],
-            [
-              "k",
-              "uh"
+              "s",
+              "that"
             ],
             [
               "k",
@@ -2039,15 +2527,47 @@
         },
         {
           "id": "parakeet-110m",
-          "wrong": 10,
+          "wrong": 9,
           "ops": [
             [
-              "k",
-              "so"
+              "s",
+              "h"
             ],
             [
-              "m",
-              "um"
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "k",
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
             ],
             [
               "m",
@@ -2055,35 +2575,43 @@
             ],
             [
               "m",
-              "you"
-            ],
-            [
-              "m",
-              "c"
+              "uh"
             ],
             [
               "k",
-              "you"
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "m",
+              "is"
             ],
             [
               "s",
-              "can"
+              "that"
             ],
             [
-              "k",
-              "put"
+              "s",
+              "think"
             ],
             [
-              "m",
-              "a"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
+              "s",
+              "is"
             ],
             [
               "k",
@@ -2091,27 +2619,7 @@
             ],
             [
               "m",
-              "uh"
-            ],
-            [
-              "k",
-              "functions"
-            ],
-            [
-              "m",
-              "uh"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "one"
-            ],
-            [
-              "m",
-              "uh"
+              "like"
             ],
             [
               "m",
@@ -2121,43 +2629,39 @@
         },
         {
           "id": "parakeet-v2",
-          "wrong": 3,
+          "wrong": 6,
           "ops": [
             [
-              "k",
-              "so"
-            ],
-            [
-              "k",
-              "um"
-            ],
-            [
               "s",
+              "hm"
+            ],
+            [
+              "k",
               "yeah"
             ],
             [
               "k",
-              "you"
+              "i"
             ],
             [
               "k",
-              "c"
+              "think"
             ],
             [
               "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
+              "maybe"
             ],
             [
               "k",
-              "put"
+              "seventy"
             ],
             [
-              "s",
-              "uh"
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
             ],
             [
               "k",
@@ -2165,11 +2669,7 @@
             ],
             [
               "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
+              "unique"
             ],
             [
               "k",
@@ -2177,23 +2677,153 @@
             ],
             [
               "k",
-              "functions"
-            ],
-            [
-              "k",
               "uh"
             ],
             [
               "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "s",
+              "that"
+            ],
+            [
+              "s",
               "in"
             ],
             [
-              "k",
-              "one"
+              "s",
+              "principle"
             ],
             [
               "k",
+              "like"
+            ],
+            [
+              "s",
+              "one"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 23,
+          "ops": [
+            [
+              "m",
+              "hmm"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "i"
+            ],
+            [
+              "m",
+              "think"
+            ],
+            [
+              "m",
+              "maybe"
+            ],
+            [
+              "m",
+              "seventy"
+            ],
+            [
+              "m",
+              "percent"
+            ],
+            [
+              "m",
+              "is"
+            ],
+            [
+              "m",
+              "a"
+            ],
+            [
+              "m",
+              "unique"
+            ],
+            [
+              "m",
               "uh"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "remote"
+            ],
+            [
+              "m",
+              "controller"
+            ],
+            [
+              "m",
+              "and"
+            ],
+            [
+              "m",
+              "thirty"
+            ],
+            [
+              "m",
+              "percent"
+            ],
+            [
+              "m",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "m",
+              "sort"
+            ],
+            [
+              "m",
+              "of"
+            ],
+            [
+              "s",
+              "hm"
             ],
             [
               "k",
@@ -2202,44 +2832,40 @@
           ]
         },
         {
-          "id": "parakeet-v3",
-          "wrong": 4,
+          "id": "qwen3-asr-0.6b",
+          "wrong": 7,
           "ops": [
             [
               "k",
-              "so"
+              "hmm"
             ],
             [
               "k",
-              "um"
-            ],
-            [
-              "s",
               "yeah"
             ],
             [
               "k",
-              "you"
+              "i"
             ],
             [
               "k",
-              "c"
+              "think"
             ],
             [
               "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
+              "maybe"
             ],
             [
               "k",
-              "put"
+              "seventy"
             ],
             [
-              "s",
-              "uh"
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
             ],
             [
               "k",
@@ -2247,57 +2873,109 @@
             ],
             [
               "k",
-              "lot"
+              "unique"
             ],
             [
-              "k",
-              "of"
+              "m",
+              "uh"
             ],
             [
-              "k",
+              "m",
               "uh"
             ],
             [
               "k",
-              "functions"
-            ],
-            [
-              "a",
-              "uh"
+              "remote"
             ],
             [
               "k",
-              "uh"
+              "controller"
             ],
             [
               "k",
-              "in"
+              "and"
             ],
             [
               "k",
-              "one"
+              "thirty"
             ],
             [
               "k",
-              "uh"
+              "percent"
             ],
             [
               "k",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "m",
+              "sort"
+            ],
+            [
+              "s",
+              "a"
+            ],
+            [
+              "k",
+              "like"
+            ],
+            [
+              "m",
               "yeah"
             ]
           ]
         },
         {
           "id": "whisper-distil-v3.5",
-          "wrong": 9,
+          "wrong": 10,
           "ops": [
             [
               "k",
-              "so"
+              "hmm"
+            ],
+            [
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
             ],
             [
               "m",
-              "um"
+              "seventy"
+            ],
+            [
+              "s",
+              "70"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
             ],
             [
               "m",
@@ -2305,7 +2983,43 @@
             ],
             [
               "m",
-              "you"
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "m",
+              "thirty"
+            ],
+            [
+              "s",
+              "30"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "s",
+              "that"
             ],
             [
               "s",
@@ -2313,59 +3027,113 @@
             ],
             [
               "k",
-              "you"
-            ],
-            [
-              "s",
-              "can"
-            ],
-            [
-              "k",
-              "put"
-            ],
-            [
-              "m",
-              "a"
-            ],
-            [
-              "k",
-              "a"
-            ],
-            [
-              "k",
-              "lot"
-            ],
-            [
-              "k",
-              "of"
-            ],
-            [
-              "m",
-              "uh"
-            ],
-            [
-              "k",
-              "functions"
-            ],
-            [
-              "m",
-              "uh"
-            ],
-            [
-              "k",
-              "in"
-            ],
-            [
-              "k",
-              "one"
-            ],
-            [
-              "m",
-              "uh"
+              "like"
             ],
             [
               "k",
               "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-turbo",
+          "wrong": 13,
+          "ops": [
+            [
+              "m",
+              "hmm"
+            ],
+            [
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "m",
+              "seventy"
+            ],
+            [
+              "s",
+              "70"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "m",
+              "thirty"
+            ],
+            [
+              "s",
+              "30"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "s",
+              "a"
+            ],
+            [
+              "s",
+              "unique"
+            ],
+            [
+              "s",
+              "remote"
+            ],
+            [
+              "s",
+              "controller"
             ]
           ]
         }
@@ -3605,6 +4373,168 @@
           ]
         },
         {
+          "id": "qwen3-asr-0.6b",
+          "wrong": 7,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "2021"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "bank"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "40"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "dollars"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "950"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "dollars"
+            ]
+          ]
+        },
+        {
           "id": "whisper-distil-v3.5",
           "wrong": 8,
           "ops": [
@@ -3765,23 +4695,241 @@
               "zlotyk"
             ]
           ]
+        },
+        {
+          "id": "whisper-turbo",
+          "wrong": 8,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "2021"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "bank"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "40"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "zl"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "s",
+              "915"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "zl"
+            ]
+          ]
         }
       ]
     },
     {
       "kind": "Parliament",
       "source": "VoxPopuli",
-      "secs": 9.9,
-      "audio": "/bench/clips/voxpopuli-0051.mp3",
-      "said": "Uh this is a step towards uh strong European um supervision on the financial markets uh that have developed far beyond national uh borders.",
+      "secs": 11.3,
+      "audio": "/bench/clips/voxpopuli-0047.mp3",
+      "said": "Appreciate very much what you said, but can you make sure, once you foresee this kind of simulation uh two days, that you invite some of the people which were actually in Mumbai? I think it could be give you some insight.",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 6,
+          "wrong": 2,
           "ops": [
             [
-              "m",
-              "uh"
+              "a",
+              "i"
+            ],
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -3789,19 +4937,15 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
@@ -3809,39 +4953,11 @@
             ],
             [
               "k",
-              "strong"
+              "two"
             ],
             [
               "k",
-              "european"
-            ],
-            [
-              "m",
-              "um"
-            ],
-            [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "days"
             ],
             [
               "k",
@@ -3849,41 +4965,149 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
             ],
             [
-              "s",
-              "borders"
+              "k",
+              "people"
             ],
             [
-              "s",
-              "and"
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ]
           ]
         },
         {
           "id": "canary-180m",
-          "wrong": 6,
+          "wrong": 8,
           "ops": [
             [
-              "m",
-              "uh"
+              "a",
+              "i"
+            ],
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -3891,59 +5115,27 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
               "uh"
             ],
             [
-              "k",
-              "strong"
-            ],
-            [
-              "k",
-              "european"
-            ],
-            [
               "m",
-              "um"
+              "two"
             ],
             [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "s",
+              "today"
             ],
             [
               "k",
@@ -3951,41 +5143,157 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
+            ],
+            [
+              "k",
+              "people"
             ],
             [
               "s",
-              "borders"
+              "who"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
             ],
             [
               "s",
-              "and"
+              "giving"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
+            ],
+            [
+              "a",
+              "into"
+            ],
+            [
+              "a",
+              "this"
             ]
           ]
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 0,
+          "wrong": 2,
           "ops": [
             [
+              "a",
+              "i"
+            ],
+            [
               "k",
-              "uh"
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -3993,19 +5301,15 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "k",
@@ -4013,38 +5317,14 @@
             ],
             [
               "k",
-              "strong"
+              "two"
             ],
             [
               "k",
-              "european"
+              "days"
             ],
             [
-              "k",
-              "um"
-            ],
-            [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "k",
+              "a",
               "uh"
             ],
             [
@@ -4053,41 +5333,145 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
             ],
             [
               "k",
-              "uh"
+              "people"
             ],
             [
               "k",
-              "borders"
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ]
           ]
         },
         {
           "id": "moonshine-base",
-          "wrong": 5,
+          "wrong": 4,
           "ops": [
             [
-              "m",
-              "uh"
+              "s",
+              "she's"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -4095,59 +5479,27 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
               "uh"
             ],
             [
-              "k",
-              "strong"
-            ],
-            [
-              "k",
-              "european"
-            ],
-            [
               "m",
-              "um"
+              "two"
             ],
             [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "s",
+              "today's"
             ],
             [
               "k",
@@ -4155,41 +5507,145 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
-            ],
-            [
-              "m",
-              "uh"
+              "the"
             ],
             [
               "k",
-              "borders"
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ]
           ]
         },
         {
           "id": "parakeet-110m",
-          "wrong": 5,
+          "wrong": 6,
           "ops": [
             [
-              "m",
-              "uh"
+              "s",
+              "appate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -4197,59 +5653,27 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
               "uh"
             ],
             [
-              "k",
-              "strong"
-            ],
-            [
-              "k",
-              "european"
-            ],
-            [
               "m",
-              "um"
+              "two"
             ],
             [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "s",
+              "today"
             ],
             [
               "k",
@@ -4257,41 +5681,149 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
             ],
             [
               "m",
-              "uh"
+              "think"
             ],
             [
               "k",
-              "borders"
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ]
           ]
         },
         {
           "id": "parakeet-v2",
-          "wrong": 6,
+          "wrong": 5,
           "ops": [
             [
-              "m",
-              "uh"
+              "a",
+              "i"
+            ],
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -4299,59 +5831,27 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
               "uh"
             ],
             [
-              "k",
-              "strong"
-            ],
-            [
-              "k",
-              "european"
-            ],
-            [
               "m",
-              "um"
+              "two"
             ],
             [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "s",
+              "today"
             ],
             [
               "k",
@@ -4359,31 +5859,83 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
             ],
             [
-              "s",
-              "borders"
+              "k",
+              "people"
             ],
             [
-              "s",
-              "and"
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ]
           ]
         },
@@ -4392,8 +5944,64 @@
           "wrong": 5,
           "ops": [
             [
-              "m",
-              "uh"
+              "a",
+              "i"
+            ],
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -4401,59 +6009,27 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
               "uh"
             ],
             [
-              "k",
-              "strong"
-            ],
-            [
-              "k",
-              "european"
-            ],
-            [
               "m",
-              "um"
+              "two"
             ],
             [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "s",
+              "today"
             ],
             [
               "k",
@@ -4461,41 +6037,327 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
+            ]
+          ]
+        },
+        {
+          "id": "qwen3-asr-0.6b",
+          "wrong": 5,
+          "ops": [
+            [
+              "a",
+              "i"
+            ],
+            [
+              "s",
+              "agree"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "kind"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "simulation"
             ],
             [
               "m",
               "uh"
             ],
             [
+              "m",
+              "two"
+            ],
+            [
+              "s",
+              "today"
+            ],
+            [
               "k",
-              "borders"
+              "that"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "invite"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ]
           ]
         },
         {
           "id": "whisper-distil-v3.5",
-          "wrong": 8,
+          "wrong": 3,
           "ops": [
             [
-              "m",
-              "uh"
+              "a",
+              "i"
+            ],
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
             ],
             [
               "k",
@@ -4503,19 +6365,15 @@
             ],
             [
               "k",
-              "is"
+              "kind"
             ],
             [
               "k",
-              "a"
+              "of"
             ],
             [
               "k",
-              "step"
-            ],
-            [
-              "k",
-              "towards"
+              "simulation"
             ],
             [
               "m",
@@ -4523,39 +6381,11 @@
             ],
             [
               "k",
-              "strong"
+              "two"
             ],
             [
               "k",
-              "european"
-            ],
-            [
-              "m",
-              "um"
-            ],
-            [
-              "k",
-              "supervision"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "financial"
-            ],
-            [
-              "k",
-              "markets"
-            ],
-            [
-              "m",
-              "uh"
+              "days"
             ],
             [
               "k",
@@ -4563,39 +6393,261 @@
             ],
             [
               "k",
-              "have"
+              "you"
             ],
             [
               "k",
-              "developed"
+              "invite"
             ],
             [
               "k",
-              "far"
+              "some"
             ],
             [
               "k",
-              "beyond"
+              "of"
             ],
             [
               "k",
-              "national"
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
             ],
             [
               "a",
-              "borders"
+              "okay"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-turbo",
+          "wrong": 42,
+          "ops": [
+            [
+              "m",
+              "appreciate"
             ],
             [
-              "a",
-              "and"
+              "m",
+              "very"
+            ],
+            [
+              "m",
+              "much"
+            ],
+            [
+              "m",
+              "what"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "said"
+            ],
+            [
+              "m",
+              "but"
+            ],
+            [
+              "m",
+              "can"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "make"
+            ],
+            [
+              "m",
+              "sure"
+            ],
+            [
+              "m",
+              "once"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "foresee"
+            ],
+            [
+              "m",
+              "this"
+            ],
+            [
+              "m",
+              "kind"
+            ],
+            [
+              "m",
+              "of"
+            ],
+            [
+              "m",
+              "simulation"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "two"
+            ],
+            [
+              "m",
+              "days"
+            ],
+            [
+              "m",
+              "that"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "invite"
+            ],
+            [
+              "m",
+              "some"
+            ],
+            [
+              "m",
+              "of"
+            ],
+            [
+              "m",
+              "the"
+            ],
+            [
+              "m",
+              "people"
+            ],
+            [
+              "m",
+              "which"
+            ],
+            [
+              "m",
+              "were"
+            ],
+            [
+              "m",
+              "actually"
+            ],
+            [
+              "m",
+              "in"
+            ],
+            [
+              "m",
+              "mumbai"
+            ],
+            [
+              "m",
+              "i"
+            ],
+            [
+              "m",
+              "think"
+            ],
+            [
+              "m",
+              "it"
+            ],
+            [
+              "m",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "m",
+              "give"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "some"
             ],
             [
               "s",
-              "i'm"
-            ],
-            [
-              "s",
-              "sorry"
+              "okay"
             ]
           ]
         }
