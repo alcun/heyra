@@ -1,6 +1,7 @@
 ---
-// The bench: how many words each voice model gets wrong, as static bars. Everything
-// here is in the markup at build time, so nothing moves after the page loads.
+// The bench: how many words each voice model gets wrong. Everything is in the markup at
+// build time; a small script then lets you pick a kind of speech (the bars re-rank), see
+// speed against accuracy, and play clips with each model's mistakes marked.
 import "../styles/base.css";
 import { deflateSync } from "node:zlib";
 import bench from "../data/bench.json";
@@ -51,35 +52,55 @@ function tile(hex: string, density: number) {
   return `url(data:image/png;base64,${Buffer.from(png).toString("base64")})`;
 }
 
-const models = bench.models.map((m) => ({ ...m, fill: tile(m.color, m.density) }));
+
+
+type M = (typeof bench.models)[number];
+const models = bench.models as M[];
 const model = Object.fromEntries(models.map((m) => [m.id, m]));
 const width = (v: number, max: number) => `${Math.min(100, (v / max) * 100).toFixed(2)}%`;
-// Shaped here, so the markup below only loops.
-const duos = bench.duos.map((d) => ({
-  ...d,
-  rows: (d.rows as [string, number, string][]).map(([name, v, id], i, all) => ({ name, v, fill: model[id].fill, win: i === all.length - 1 })),
-}));
-// The neutral dither for every model but the one a figure is about, which gets gold.
 const quiet = tile("#8a9aa6", 0.5);
 const gold = tile("#d9a86a", 0.875);
-const set = (name: string) => bench.sets.find((x) => x.name === name)!.v as Record<string, number>;
-const meant = set("Off the cuff, meant");
-const average = set("Average");
+const low = (list: M[], v: (m: M) => number | null | undefined) =>
+  list.filter((m) => v(m) != null).reduce((a, b) => (v(b)! < v(a)! ? b : a));
 // The answer, from the numbers.
+const meantBest = low(models, (m) => m.v["disfluency-meant"]);
+const avgBest = low(models, (m) => m.average);
+const otherBest = low(models.filter((m) => m.langs !== "English"), (m) => m.average);
 const answer = [
-  { when: "To talk and get what you meant", id: "clean", value: meant.clean, of: "off the cuff, against what people meant" },
-  { when: "Every word, word for word", id: "fluid", value: average.fluid, of: "averaged over seven public sets" },
-  { when: "In another language", id: "parakeet", value: average.parakeet, of: "averaged, and 25 languages" },
+  { when: "To talk and get what you meant", m: meantBest, value: meantBest.v["disfluency-meant"], of: "off the cuff, against what people meant" },
+  { when: "Every word, word for word", m: avgBest, value: avgBest.average!, of: "averaged over seven public sets" },
+  { when: "In another language", m: otherBest, value: otherBest.average!, of: `averaged, and ${otherBest.langs}` },
 ];
-// The main chart: the seven-set average, the lowest in gold.
-const best = Object.entries(average).reduce((a, b) => (b[1] < a[1] ? b : a))[0];
-const main = models.map((m) => ({ m, v: average[m.id], lead: m.id === best })).filter((r) => r.v !== undefined).sort((a, b) => a.v - b.v);
-const mainMax = Math.max(...main.map((r) => r.v));
-const sets = bench.sets.map((s) => {
-  const v = s.v as Record<string, number>;
-  const low = Math.min(...Object.values(v));
-  return { ...s, cells: models.map((m) => ({ m, v: v[m.id], win: v[m.id] === low })) };
-});
+// Pick your speech: the average first, then each set.
+const views = [{ id: "average", name: "Average", source: "seven public sets" }, ...bench.sets];
+const valueOf = (m: M, id: string) => (id === "average" ? m.average : m.v[id]) ?? null;
+const ranked = models.filter((m) => m.average != null).sort((a, b) => a.average! - b.average!);
+const rankMax = 30;
+// Speed against accuracy: speed on a log scale, words wrong up the side.
+const plot = { w: 640, h: 360, l: 48, r: 24, t: 20, b: 44 };
+const speeds = ranked.map((m) => m.speed);
+const [s0, s1] = [Math.min(...speeds) / 1.4, Math.max(...speeds) * 1.4];
+const avgs = ranked.map((m) => m.average!);
+const [w0, w1] = [Math.max(0, Math.floor(Math.min(...avgs)) - 1), Math.ceil(Math.max(...avgs)) + 1];
+const sx = (s: number) => plot.l + ((Math.log(s) - Math.log(s0)) / (Math.log(s1) - Math.log(s0))) * (plot.w - plot.l - plot.r);
+const sy = (v: number) => plot.t + ((v - w0) / (w1 - w0)) * (plot.h - plot.t - plot.b);
+const ticksX = [2, 5, 10, 20, 50, 100, 200, 500].filter((t) => t >= s0 && t <= s1);
+const step = w1 - w0 > 12 ? 5 : 2;
+const ticksY = Array.from({ length: 40 }, (_, i) => Math.ceil(w0 / step) * step + i * step).filter((t) => t <= w1);
+const dots = ranked.map((m) => ({ m, x: sx(m.speed), y: sy(m.average!), r: 4 + Math.sqrt(m.mb) / 6, ly: 0 }));
+// Labels: beside each dot, pushed apart so none overlap.
+for (const d of dots) d.ly = d.y + 4;
+const byY = [...dots].sort((a, b) => a.ly - b.ly);
+for (let pass = 0; pass < 20; pass++)
+  for (let i = 1; i < byY.length; i++) {
+    const [a, b] = [byY[i - 1], byY[i]];
+    if (Math.abs(a.x - b.x) < 150 && b.ly - a.ly < 14) { const push = (14 - (b.ly - a.ly)) / 2; a.ly -= push; b.ly += push; }
+  }
+const duos = bench.duos.map((d) => ({
+  ...d,
+  rows: (d.rows as [string, number, string][]).map(([name, v], i, all) => ({ name, v, win: i === all.length - 1 })),
+}));
+const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average, v }) => ({ id, name, langs, heyra, mb, speed, average, v })), rankMax };
 ---
 <!doctype html>
 <html lang="en">
@@ -91,31 +112,31 @@ const sets = bench.sets.map((s) => {
   <meta property="og:type" content="website" />
   {canonical && <meta property="og:url" content={canonical} />}
   <meta property="og:title" content="Heyra Bench · Which voice model should you use?" />
-  <meta property="og:description" content={`Words wrong in 100 for each voice model in Heyra, on ${bench.clips} public English clips.`} />
+  <meta property="og:description" content={`Words wrong in 100 for ${models.length} voice models, on ${bench.clips} public English clips.`} />
   {site && <meta property="og:image" content={new URL("/og.jpg", site).href} />}
   {site && <meta name="twitter:card" content="summary_large_image" />}
-  <meta name="description" content={`How many words each voice model in Heyra gets wrong, on ${bench.clips} public English clips.`} />
+  <meta name="description" content={`How many words ${models.length} voice models get wrong, and how fast, on ${bench.clips} public English clips.`} />
   <link rel="preload" href="/fonts/Outland-Bold.otf" as="font" type="font/otf" crossorigin />
   <link rel="preload" href="/fonts/SpaceGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/MartianMono-StdMd.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
   {analyticsKey && <Analytics publicKey={analyticsKey} />}
   <style is:global>
-    main { max-width: 60rem; margin: 0 auto; padding: 6.5rem max(1rem, 4vw) 6rem; display: grid; gap: 4.5rem; }
+    main { max-width: 60rem; margin: 0 auto; padding: 6.5rem max(1rem, 4vw) 6rem; display: grid; gap: 5rem; }
     section { display: grid; gap: 1.25rem; min-width: 0; }
-    h1 { font-size: clamp(1.8rem, 4.4vw, 2.8rem); line-height: 1.15; margin: 0; text-wrap: balance; }
-    h2 { margin: 0; font: 700 clamp(1.2rem, 2vw, 1.5rem)/1.25 var(--display); letter-spacing: 0.05em; color: var(--cream); }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.12; margin: 0; text-wrap: balance; }
+    h2 { margin: 0; font: 700 clamp(1.5rem, 3vw, 2.2rem)/1.15 var(--display); letter-spacing: 0.05em; color: var(--cream); }
     .small { margin: 0; color: var(--slate); font-size: 0.95rem; line-height: 1.55; max-width: 44rem; }
     .meta { margin: 0; color: var(--dim); font: 400 0.8rem/1.5 var(--mono); }
     .top { display: grid; gap: 1rem; }
     #wave { width: 100%; height: 6rem; display: block; image-rendering: pixelated; }
-    /* The point of a figure, in words: glyph-kit's ► line, in the gold of the signature. */
     .point { margin: 0; font: 400 0.95rem/1.5 var(--sans); color: var(--cream); }
     .point::before { content: "► "; color: var(--gold); }
+    .panel { background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; }
 
     /* The answer: three cards, the model and its one number. */
     .answer { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-    .pick { background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+    .pick { padding: 20px; display: grid; gap: 10px; align-content: start; }
     .pick .when { color: var(--slate); font-size: 0.9rem; }
     .pick b { font: 700 1.05rem/1.25 var(--display); letter-spacing: 0.05em; color: var(--cream); }
     .pick .num { font: 500 1.9rem/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--cream); }
@@ -124,39 +145,66 @@ const sets = bench.sets.map((s) => {
     .pick:first-child { border-color: rgb(217 168 106 / 0.45); }
     .pick:first-child .num { color: var(--gold); }
 
-    /* The main chart: one bar per model, the lead in gold, the rest quiet. */
-    .chart { display: grid; gap: 12px; padding: 20px; background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; }
-    .bar { display: grid; grid-template-columns: 13rem minmax(0, 1fr) 3.5rem; gap: 16px; align-items: center; }
-    .bar .n { font-size: 0.95rem; color: var(--slate); }
-    .bar .t { height: 16px; }
-    .bar .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; }
+    /* Pick your speech: chips, then bars that re-rank. */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { font: 500 0.85rem/1 var(--sans); color: var(--slate); background: transparent; border: 1px solid var(--hair); border-radius: 999px; padding: 0.55rem 0.9rem; cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s; }
+    .chip:hover { color: var(--cream); }
+    .chip[aria-pressed="true"] { color: #111216; background: var(--cream); border-color: var(--cream); }
+    .rank { padding: 14px 20px; display: grid; position: relative; }
+    .bar { display: grid; grid-template-columns: 1.6rem 15rem minmax(0, 1fr) 3.5rem; gap: 14px; align-items: center; height: 46px; transition: transform 0.6s var(--ease), opacity 0.3s; }
+    .bar .pos { font: 500 0.8rem var(--mono); color: var(--dim); text-align: right; }
+    .bar .n { display: grid; gap: 2px; min-width: 0; }
+    .bar .n b { font: 500 0.95rem/1.2 var(--sans); color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar .n span { font: 400 0.72rem/1.2 var(--mono); color: var(--dim); white-space: nowrap; }
+    .bar .n .in { color: var(--gold); }
+    .bar .t { height: 14px; }
+    .bar .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; transition: width 0.6s var(--ease); }
     .bar .v { font: 500 0.95rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--slate); }
-    .bar.lead .n, .bar.lead .v { color: var(--cream); }
+    .bar.lead .v { color: var(--gold); }
+    .bar.none { opacity: 0.35; }
 
-    /* Every kind of speech: one table, a number and a thin bar per cell, the best per row in gold. */
-    .sets { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; overflow: hidden; }
-    .sets th, .sets td { padding: 12px 16px; border-top: 1px solid var(--hair); text-align: left; vertical-align: middle; }
-    .sets thead th { border-top: 0; font: 500 0.85rem/1.3 var(--sans); color: var(--slate); }
-    .sets th[scope="row"] { font-weight: 400; font-size: 0.95rem; color: var(--cream); white-space: nowrap; }
-    .sets th[scope="row"] span { display: block; font: 400 0.75rem var(--mono); color: var(--dim); }
-    .sets td { width: 17%; }
-    .sets .v { font: 500 0.9rem var(--mono); font-variant-numeric: tabular-nums; color: var(--slate); }
-    .sets .best .v { color: var(--gold); }
-    .sets .t { height: 4px; margin-top: 6px; background: rgb(255 255 255 / 0.05); border-radius: 2px; }
-    .sets .t i { display: block; height: 100%; border-radius: 2px; background: var(--slate); opacity: 0.6; }
-    .sets .best .t i { background: var(--gold); opacity: 1; }
-    .sets .none { color: var(--dim); font: 0.9rem var(--mono); }
-    .wide { overflow-x: auto; border-radius: 14px; }
+    /* Speed against accuracy. */
+    .plot { padding: 12px; position: relative; }
+    .plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .plot .grid { stroke: var(--hair); stroke-width: 1; }
+    .plot .tick { fill: var(--dim); font: 400 11px var(--mono); text-transform: none; }
+    .plot .axis { fill: var(--slate); font: 400 12px var(--sans); text-transform: none; letter-spacing: 0; }
+    .plot .dot { fill: rgb(138 154 166 / 0.35); stroke: var(--slate); stroke-width: 1.2; cursor: pointer; transition: r 0.2s, fill 0.2s; }
+    .plot .dot.heyra { fill: rgb(217 168 106 / 0.35); stroke: var(--gold); }
+    .plot g:hover .dot, .plot g:focus .dot { fill: var(--cream); }
+    .plot .name { fill: var(--slate); font: 400 11px var(--sans); text-transform: none; letter-spacing: 0; pointer-events: none; }
+    .plot g.heyra .name { fill: var(--cream); }
+    .plot g { outline: none; }
 
-    /* Side by side: what was said, and what each model wrote. */
-    .clips { display: grid; gap: 12px; }
-    .clip { background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; padding: 20px; display: grid; gap: 8px; }
-    .clip h3 { margin: 0 0 4px; font: 500 0.95rem var(--sans); color: var(--cream); }
-    .line { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 16px; align-items: baseline; font-size: 0.95rem; }
-    .line .who { font: 400 0.8rem var(--mono); color: var(--dim); }
-    .line.said span:last-child { color: var(--slate); }
-    .line.win .who { color: var(--gold); }
-    .line.empty span:last-child { color: var(--dim); font-style: normal; }
+    /* Listen: a clip, then what each model wrote, mistakes marked. */
+    .clip-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .clip { padding: 20px; display: grid; gap: 14px; }
+    .clip[hidden] { display: none; }
+    .player { display: flex; align-items: center; gap: 14px; }
+    .play { width: 3rem; height: 3rem; border-radius: 50%; border: 0; background: var(--cream); color: #111216; display: grid; place-items: center; cursor: pointer; flex: none; transition: transform 0.15s; }
+    .play:hover { transform: scale(1.05); }
+    .play svg { width: 1.1rem; height: 1.1rem; }
+    .play .pause { display: none; }
+    .play.on .pause { display: block; }
+    .play.on .go { display: none; }
+    .track { flex: 1; height: 4px; border-radius: 2px; background: var(--hair); overflow: hidden; }
+    .track i { display: block; height: 100%; width: 0; background: var(--gold); }
+    .player .src { font: 400 0.75rem var(--mono); color: var(--dim); white-space: nowrap; }
+    .said { margin: 0; color: var(--cream); font-size: 1.05rem; line-height: 1.5; }
+    .takes { display: grid; gap: 2px; }
+    .take { display: grid; grid-template-columns: 11rem 2rem minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 6px 0; border-top: 1px solid var(--hair); font-size: 0.92rem; }
+    .take .who { font: 400 0.78rem var(--mono); color: var(--slate); }
+    .take.heyra .who { color: var(--gold); }
+    .take .w { font: 500 0.78rem var(--mono); color: var(--dim); text-align: right; }
+    .take .w.zero { color: #8fbf8a; }
+    .take p { margin: 0; color: var(--slate); line-height: 1.55; }
+    .take p .s { color: #e0795a; text-decoration: underline wavy rgb(224 121 90 / 0.6); text-underline-offset: 3px; }
+    .take p .a { color: #e0795a; }
+    .take p .m { color: var(--dim); text-decoration: line-through; }
+    .key { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 400 0.78rem var(--mono); color: var(--dim); }
+    .key .s { color: #e0795a; text-decoration: underline wavy rgb(224 121 90 / 0.6); }
+    .key .a { color: #e0795a; }
+    .key .m { text-decoration: line-through; }
 
     /* Under the hood: three small facts, quieter than the rest. */
     .hood { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
@@ -173,9 +221,11 @@ const sets = bench.sets.map((s) => {
     ul.method { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.95rem; display: grid; gap: 6px; }
     @media (max-width: 48rem) {
       .answer, .hood { grid-template-columns: minmax(0, 1fr); }
-      .bar { grid-template-columns: 8rem minmax(0, 1fr) 3rem; }
-      .line { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .bar { grid-template-columns: 1.2rem 9rem minmax(0, 1fr) 2.8rem; gap: 10px; }
+      .take { grid-template-columns: minmax(0, 1fr) 2rem; }
+      .take p { grid-column: 1 / -1; }
     }
+    @media (prefers-reduced-motion: reduce) { .bar, .bar .b { transition: none; } }
   </style>
 </head>
 <body>
@@ -185,15 +235,15 @@ const sets = bench.sets.map((s) => {
     <section class="top">
       <canvas id="wave" aria-hidden="true"></canvas>
       <h1>Which voice model should you use?</h1>
-      <p class="meta">heyra-bench · {bench.clips} public English clips · {bench.date} · words wrong in 100, fewer is better</p>
+      <p class="meta">heyra-bench · {models.length} models · {bench.clips} public English clips · {bench.date} · words wrong in 100, fewer is better</p>
     </section>
 
     <section aria-label="The answer">
       <div class="answer">
         {answer.map((a) => (
-          <div class="pick">
+          <div class="pick panel">
             <span class="when">{a.when}</span>
-            <b>{model[a.id].name}</b>
+            <b>{a.m.name}</b>
             <span class="num">{a.value.toFixed(1)}<small>in 100 wrong</small></span>
             <span class="of">{a.of}</span>
           </div>
@@ -202,55 +252,73 @@ const sets = bench.sets.map((s) => {
       <p class="small">Leaderboard transcripts keep every “um”, so Bark Clean, which leaves them out on purpose, scores worse on those sets by design.</p>
     </section>
 
-    <section aria-labelledby="avg-title">
-      <h2 id="avg-title">Words wrong, word for word</h2>
-      <div class="chart">
-        {main.map((r) => (
-          <div class={r.lead ? "bar lead" : "bar"}>
-            <span class="n">{r.m.name}</span>
-            <div class="t"><div class="b" style={`width:${width(r.v, mainMax)};background-image:${r.lead ? gold : quiet}`}></div></div>
-            <span class="v">{r.v.toFixed(1)}</span>
+    <section aria-labelledby="rank-title">
+      <h2 id="rank-title">Pick your speech</h2>
+      <div class="chips" role="group" aria-label="Kind of speech">
+        {views.map((v, i) => <button type="button" class="chip" data-view={v.id} aria-pressed={i === 0 ? "true" : "false"} title={v.source}>{v.name}</button>)}
+      </div>
+      <div class="rank panel" id="rank" style={`height:${ranked.length * 46 + 28}px`}>
+        {ranked.map((m, i) => (
+          <div class={i === 0 ? "bar lead" : "bar"} data-id={m.id} style={`position:absolute;left:20px;right:20px;top:14px;transform:translateY(${i * 46}px)`}>
+            <span class="pos">{i + 1}</span>
+            <span class="n"><b>{m.name}</b><span>{m.langs}{m.heyra && <> · <span class="in">in Heyra</span></>}</span></span>
+            <div class="t"><div class="b" style={`width:${width(m.average!, rankMax)};background-image:${m.heyra ? gold : quiet}`}></div></div>
+            <span class="v">{m.average!.toFixed(1)}</span>
           </div>
         ))}
       </div>
-      <p class="point">{model[best].name} gets the fewest words wrong: {average[best].toFixed(1)} in 100, averaged over seven public sets. The old engine got {average.old.toFixed(1)}.</p>
+      <p class="point" id="rank-point">{ranked[0].name} gets the fewest words wrong on average: {ranked[0].average!.toFixed(1)} in 100. Gold bars are the models in Heyra.</p>
     </section>
 
-    <section aria-labelledby="sets-title">
-      <h2 id="sets-title">Every kind of speech</h2>
-      <div class="wide">
-        <table class="sets">
-          <thead><tr><th scope="col">Speech</th>{models.map((m) => <th scope="col">{m.name}</th>)}</tr></thead>
-          <tbody>
-            {sets.filter((x) => x.name !== "Average").map((x) => (
-              <tr>
-                <th scope="row">{x.name}<span>{x.source}</span></th>
-                {x.cells.map((c) => c.v === undefined ? <td class="none">–</td> : (
-                  <td class={c.win ? "best" : undefined} title={`${c.m.name}: ${c.v.toFixed(2)} words wrong in 100`}>
-                    <span class="v">{c.v.toFixed(1)}</span>
-                    <div class="t"><i style={`width:${width(c.v, 30)}`}></i></div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <section aria-labelledby="plot-title">
+      <h2 id="plot-title">Speed and size</h2>
+      <div class="plot panel">
+        <svg viewBox={`0 0 ${plot.w} ${plot.h}`} role="img" aria-label="Each model's speed against the words it gets wrong">
+          {ticksY.map((t) => <><line class="grid" x1={plot.l} x2={plot.w - plot.r} y1={sy(t)} y2={sy(t)} /><text class="tick" x={plot.l - 8} y={sy(t) + 4} text-anchor="end">{t}</text></>)}
+          {ticksX.map((t) => <text class="tick" x={sx(t)} y={plot.h - plot.b + 18} text-anchor="middle">{t}×</text>)}
+          <text class="axis" x={(plot.l + plot.w - plot.r) / 2} y={plot.h - 6} text-anchor="middle">faster than real time →</text>
+          <text class="axis" x={14} y={plot.t + 4} transform={`rotate(-90 14 ${plot.t + 4})`} text-anchor="end">← fewer words wrong</text>
+          {dots.map((d) => (
+            <g class={d.m.heyra ? "heyra" : undefined} tabindex="0">
+              <title>{`${d.m.name}: ${d.m.average!.toFixed(1)} in 100 wrong, ${d.m.speed}× real time, ${d.m.mb} MB, ${d.m.langs}`}</title>
+              <circle class={d.m.heyra ? "dot heyra" : "dot"} cx={d.x} cy={d.y} r={d.r} />
+              <text class="name" x={d.x + d.r + 5} y={d.ly}>{d.m.name}</text>
+            </g>
+          ))}
+        </svg>
       </div>
-      <p class="point">No one model wins everywhere: the best in each kind of speech is in gold.</p>
+      <p class="point">Up and to the right is better. Bigger dots are bigger downloads; gold are the models in Heyra. Speed is on 4 CPU threads of an M-series Mac.</p>
     </section>
 
-    <section aria-labelledby="side-title">
-      <h2 id="side-title">Side by side</h2>
-      <div class="clips">
-        {bench.clips_shown.map((c) => (
-          <div class="clip">
-            <h3>{c.kind}</h3>
-            {c.lines.map(([who, text, kind]) => (
-              <div class={`line ${kind}`}><span class="who">{who}</span><span>{kind === "empty" ? "Nothing" : text}</span></div>
+    <section aria-labelledby="listen-title">
+      <h2 id="listen-title">Listen</h2>
+      <div class="clip-tabs" role="group" aria-label="Clip">
+        {bench.listen.map((c, i) => <button type="button" class="chip" data-clip={i} aria-pressed={i === 0 ? "true" : "false"}>{c.kind}</button>)}
+      </div>
+      {bench.listen.map((c, i) => (
+        <div class="clip panel" data-clip-panel={i} hidden={i !== 0}>
+          <div class="player">
+            <button type="button" class="play" aria-label={`Play the ${c.kind.toLowerCase()} clip`}>
+              <svg class="go" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 2.5v11l9-5.5z"/></svg>
+              <svg class="pause" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>
+            </button>
+            <div class="track"><i></i></div>
+            <span class="src">{c.source} · {c.secs} s</span>
+            <audio src={c.audio} preload="none"></audio>
+          </div>
+          <p class="said">{c.said}</p>
+          <div class="takes">
+            {[...c.takes].sort((a, b) => a.wrong - b.wrong).map((t) => (
+              <div class={model[t.id]?.heyra ? "take heyra" : "take"}>
+                <span class="who">{model[t.id]?.name ?? t.id}</span>
+                <span class={t.wrong === 0 ? "w zero" : "w"}>{t.wrong}</span>
+                <p>{(t.ops as [string, string][]).map(([k, w]) => k === "k" ? <>{w}{" "}</> : <><span class={k}>{w}</span>{" "}</>)}</p>
+              </div>
             ))}
           </div>
-        ))}
-      </div>
+          <div class="key"><span>wrong words:</span><span class="s">swapped</span><span class="a">added</span><span class="m">left out</span></div>
+        </div>
+      ))}
     </section>
 
     <section aria-labelledby="hood-title">
@@ -277,13 +345,16 @@ const sets = bench.sets.map((s) => {
       <h2 id="method-title">Method</h2>
       <ul class="method">
         <li>100 clips each: LibriSpeech, AMI, Earnings-22, GigaSpeech, SPGISpeech, VoxPopuli, DisfluencySpeech.</li>
-        <li>{bench.engine}, as in Heyra. Lower-cased, no punctuation.</li>
+        <li>{bench.engine}, as in Heyra: long clips go in 15-second pieces, as Heyra sends a take. Lower-cased, no punctuation.</li>
+        <li>The clips to listen to come from sets whose audio may be shared, and are the ones where the models differ most.</li>
       </ul>
     </section>
   </main>
 
   <Footer />
 
+  <script type="application/json" id="bench-data" set:html={JSON.stringify(data)} />
   <script src="/wave.js" type="module"></script>
+  <script src="/bench.js" type="module"></script>
 </body>
 </html>

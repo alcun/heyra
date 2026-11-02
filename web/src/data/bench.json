@@ -1,127 +1,2597 @@
 {
-  "date": "21 October 2026",
+  "date": "2 November 2026",
   "clips": 800,
   "engine": "sherpa-onnx 1.13.8, int8",
   "models": [
     {
-      "id": "clean",
+      "id": "bark-3.0-clean",
       "name": "Bark 3.0 Clean",
-      "note": "English · no “um”",
-      "color": "#d9a86a",
-      "density": 0.75
+      "langs": "English",
+      "note": "Leaves out “um” and “uh”",
+      "heyra": true,
+      "mb": 670,
+      "speed": 12,
+      "average": 10.33,
+      "meant": 9.24,
+      "v": {
+        "ami": 19.71,
+        "disfluency": 16.88,
+        "disfluency-meant": 6.99,
+        "earnings22": 20.37,
+        "gigaspeech": 13.37,
+        "librispeech-clean": 4.12,
+        "librispeech-other": 4.52,
+        "spgispeech": 5.65,
+        "voxpopuli": 4.58
+      }
     },
     {
-      "id": "fluid",
+      "id": "fluid-speech-mini",
       "name": "Fluid Speech Mini",
-      "note": "English · every word",
-      "color": "#ede0c4",
-      "density": 0.875
+      "langs": "English",
+      "note": "Every word",
+      "heyra": true,
+      "mb": 60,
+      "speed": 11,
+      "average": 6.6,
+      "meant": 5.96,
+      "v": {
+        "ami": 12.12,
+        "disfluency": 3.9,
+        "disfluency-meant": 17.26,
+        "earnings22": 10.25,
+        "gigaspeech": 10.24,
+        "librispeech-clean": 2.47,
+        "librispeech-other": 2.93,
+        "spgispeech": 5.1,
+        "voxpopuli": 3.11
+      }
     },
     {
-      "id": "parakeet",
+      "id": "parakeet-v2",
+      "name": "Parakeet v2",
+      "langs": "English",
+      "note": "NVIDIA, English only",
+      "heyra": false,
+      "mb": 661,
+      "speed": 11,
+      "average": 7.07,
+      "meant": 6.35,
+      "v": {
+        "ami": 10.79,
+        "disfluency": 3.39,
+        "disfluency-meant": 16.04,
+        "earnings22": 13.04,
+        "gigaspeech": 11.96,
+        "librispeech-clean": 2.02,
+        "librispeech-other": 2.59,
+        "spgispeech": 3.87,
+        "voxpopuli": 5.19
+      }
+    },
+    {
+      "id": "parakeet-v3",
       "name": "Parakeet v3",
-      "note": "25 languages",
-      "color": "#ede0c4",
-      "density": 0.5
-    },
-    {
-      "id": "old",
-      "name": "Parakeet, Heyra 0.3.10",
-      "note": "old engine",
-      "color": "#e0795a",
-      "density": 0.375
+      "langs": "25 languages",
+      "note": "European languages",
+      "heyra": true,
+      "mb": 670,
+      "speed": 11,
+      "average": 8.13,
+      "meant": 7.62,
+      "v": {
+        "ami": 11.92,
+        "disfluency": 4.45,
+        "disfluency-meant": 17.47,
+        "earnings22": 16.6,
+        "gigaspeech": 10.68,
+        "librispeech-clean": 2.26,
+        "librispeech-other": 4.01,
+        "spgispeech": 6.68,
+        "voxpopuli": 4.77
+      }
     }
   ],
   "sets": [
     {
+      "id": "disfluency-meant",
       "name": "Off the cuff, meant",
-      "source": "DisfluencySpeech",
-      "v": {
-        "clean": 6.09,
-        "fluid": 17.26,
-        "parakeet": 17.47,
-        "old": 17.84
-      }
+      "source": "DisfluencySpeech, cleaned up"
     },
     {
-      "name": "Average",
-      "source": "7 leaderboard sets",
-      "v": {
-        "clean": 9.91,
-        "fluid": 6.6,
-        "parakeet": 8.13,
-        "old": 23.25
-      }
+      "id": "disfluency",
+      "name": "Off the cuff, word for word",
+      "source": "DisfluencySpeech"
     },
     {
+      "id": "ami",
       "name": "Meetings",
-      "source": "AMI",
-      "v": {
-        "clean": 17.78,
-        "fluid": 12.12,
-        "parakeet": 11.92,
-        "old": 34.29
-      }
+      "source": "AMI"
     },
     {
+      "id": "earnings22",
       "name": "Earnings calls",
-      "source": "Earnings-22",
-      "v": {
-        "clean": 19.51,
-        "fluid": 10.25,
-        "parakeet": 16.6,
-        "old": 33.32
-      }
+      "source": "Earnings-22"
     },
     {
+      "id": "gigaspeech",
       "name": "Podcasts",
-      "source": "GigaSpeech",
-      "v": {
-        "clean": 12.77,
-        "fluid": 10.24,
-        "parakeet": 10.68,
-        "old": 10.92
-      }
+      "source": "GigaSpeech"
     },
     {
+      "id": "spgispeech",
       "name": "Finance calls",
-      "source": "SPGISpeech",
-      "v": {
-        "clean": 5.57,
-        "fluid": 5.1,
-        "parakeet": 6.68,
-        "old": 66.46
-      }
+      "source": "SPGISpeech"
     },
     {
+      "id": "voxpopuli",
       "name": "Parliament",
-      "source": "VoxPopuli",
-      "v": {
-        "clean": 4.23,
-        "fluid": 3.11,
-        "parakeet": 4.77,
-        "old": 7.15
-      }
+      "source": "VoxPopuli"
     },
     {
+      "id": "librispeech-clean",
       "name": "Audiobooks",
-      "source": "LibriSpeech clean",
-      "v": {
-        "clean": 3.84,
-        "fluid": 2.47,
-        "parakeet": 2.26,
-        "old": 3.19
-      }
+      "source": "LibriSpeech clean"
     },
     {
+      "id": "librispeech-other",
       "name": "Audiobooks, hard",
+      "source": "LibriSpeech other"
+    }
+  ],
+  "listen": [
+    {
+      "kind": "Audiobook",
+      "source": "LibriSpeech clean",
+      "secs": 5.8,
+      "audio": "/bench/clips/librispeech-clean-0052.mp3",
+      "said": "naomi shook her forefinger reproachfully at them as if the two sturdy young farmers had been two children",
+      "takes": [
+        {
+          "id": "bark-3.0-clean",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "naomi"
+            ],
+            [
+              "k",
+              "shook"
+            ],
+            [
+              "k",
+              "her"
+            ],
+            [
+              "k",
+              "forefinger"
+            ],
+            [
+              "k",
+              "reproachfully"
+            ],
+            [
+              "k",
+              "at"
+            ],
+            [
+              "k",
+              "them"
+            ],
+            [
+              "k",
+              "as"
+            ],
+            [
+              "k",
+              "if"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "sturdy"
+            ],
+            [
+              "k",
+              "young"
+            ],
+            [
+              "k",
+              "farmers"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "been"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "children"
+            ]
+          ]
+        },
+        {
+          "id": "fluid-speech-mini",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "naomi"
+            ],
+            [
+              "k",
+              "shook"
+            ],
+            [
+              "k",
+              "her"
+            ],
+            [
+              "k",
+              "forefinger"
+            ],
+            [
+              "k",
+              "reproachfully"
+            ],
+            [
+              "k",
+              "at"
+            ],
+            [
+              "k",
+              "them"
+            ],
+            [
+              "k",
+              "as"
+            ],
+            [
+              "k",
+              "if"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "sturdy"
+            ],
+            [
+              "k",
+              "young"
+            ],
+            [
+              "k",
+              "farmers"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "been"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "children"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v2",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "naomi"
+            ],
+            [
+              "k",
+              "shook"
+            ],
+            [
+              "k",
+              "her"
+            ],
+            [
+              "k",
+              "forefinger"
+            ],
+            [
+              "k",
+              "reproachfully"
+            ],
+            [
+              "k",
+              "at"
+            ],
+            [
+              "k",
+              "them"
+            ],
+            [
+              "k",
+              "as"
+            ],
+            [
+              "k",
+              "if"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "sturdy"
+            ],
+            [
+              "k",
+              "young"
+            ],
+            [
+              "k",
+              "farmers"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "been"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "children"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "naomi"
+            ],
+            [
+              "k",
+              "shook"
+            ],
+            [
+              "k",
+              "her"
+            ],
+            [
+              "k",
+              "forefinger"
+            ],
+            [
+              "k",
+              "reproachfully"
+            ],
+            [
+              "k",
+              "at"
+            ],
+            [
+              "k",
+              "them"
+            ],
+            [
+              "k",
+              "as"
+            ],
+            [
+              "k",
+              "if"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "sturdy"
+            ],
+            [
+              "k",
+              "young"
+            ],
+            [
+              "k",
+              "farmers"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "been"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "children"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Audiobook, hard",
       "source": "LibriSpeech other",
-      "v": {
-        "clean": 5.64,
-        "fluid": 2.93,
-        "parakeet": 4.01,
-        "old": 7.41
-      }
+      "secs": 12.5,
+      "audio": "/bench/clips/librispeech-other-0015.mp3",
+      "said": "the brahman stated the case and the eagle answered whenever men see me they try to shoot me they climb the rocks and steal away my little ones",
+      "takes": [
+        {
+          "id": "bark-3.0-clean",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "brahma"
+            ],
+            [
+              "s",
+              "suited"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "case"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "eagle"
+            ],
+            [
+              "m",
+              "answered"
+            ],
+            [
+              "s",
+              "answeredwhenever"
+            ],
+            [
+              "k",
+              "men"
+            ],
+            [
+              "k",
+              "see"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "try"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "shoot"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "climb"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "rocks"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "steal"
+            ],
+            [
+              "k",
+              "away"
+            ],
+            [
+              "k",
+              "my"
+            ],
+            [
+              "k",
+              "little"
+            ],
+            [
+              "k",
+              "ones"
+            ]
+          ]
+        },
+        {
+          "id": "fluid-speech-mini",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "brahmin"
+            ],
+            [
+              "k",
+              "stated"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "case"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "eagle"
+            ],
+            [
+              "k",
+              "answered"
+            ],
+            [
+              "k",
+              "whenever"
+            ],
+            [
+              "k",
+              "men"
+            ],
+            [
+              "k",
+              "see"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "try"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "shoot"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "climb"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "rocks"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "steal"
+            ],
+            [
+              "k",
+              "away"
+            ],
+            [
+              "k",
+              "my"
+            ],
+            [
+              "k",
+              "little"
+            ],
+            [
+              "k",
+              "ones"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v2",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "brahmin"
+            ],
+            [
+              "k",
+              "stated"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "case"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "eagle"
+            ],
+            [
+              "k",
+              "answered"
+            ],
+            [
+              "k",
+              "whenever"
+            ],
+            [
+              "k",
+              "men"
+            ],
+            [
+              "k",
+              "see"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "try"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "shoot"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "climb"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "rocks"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "steal"
+            ],
+            [
+              "k",
+              "away"
+            ],
+            [
+              "k",
+              "my"
+            ],
+            [
+              "k",
+              "little"
+            ],
+            [
+              "k",
+              "ones"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 3,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "brahmin"
+            ],
+            [
+              "s",
+              "suited"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "case"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "eagle"
+            ],
+            [
+              "k",
+              "answered"
+            ],
+            [
+              "k",
+              "whenever"
+            ],
+            [
+              "k",
+              "men"
+            ],
+            [
+              "k",
+              "see"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "try"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "shoot"
+            ],
+            [
+              "k",
+              "me"
+            ],
+            [
+              "k",
+              "they"
+            ],
+            [
+              "k",
+              "climb"
+            ],
+            [
+              "m",
+              "the"
+            ],
+            [
+              "k",
+              "rocks"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "steal"
+            ],
+            [
+              "k",
+              "away"
+            ],
+            [
+              "k",
+              "my"
+            ],
+            [
+              "k",
+              "little"
+            ],
+            [
+              "k",
+              "ones"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Meeting",
+      "source": "AMI",
+      "secs": 7.2,
+      "audio": "/bench/clips/ami-0017.mp3",
+      "said": "but I don't I don't think it's really sort of necessary when you th you think of the next two options,",
+      "takes": [
+        {
+          "id": "bark-3.0-clean",
+          "wrong": 5,
+          "ops": [
+            [
+              "k",
+              "but"
+            ],
+            [
+              "m",
+              "i"
+            ],
+            [
+              "m",
+              "don't"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it's"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "sort"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "necessary"
+            ],
+            [
+              "k",
+              "when"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "th"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "s",
+              "as"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "next"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "options"
+            ]
+          ]
+        },
+        {
+          "id": "fluid-speech-mini",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it's"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "sort"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "necessary"
+            ],
+            [
+              "k",
+              "when"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "th"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "s",
+              "as"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "next"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "options"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v2",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it's"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "sort"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "necessary"
+            ],
+            [
+              "k",
+              "when"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "th"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "next"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "options"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "don't"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it's"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "sort"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "necessary"
+            ],
+            [
+              "k",
+              "when"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "th"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "s",
+              "as"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "next"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "options"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Earnings call",
+      "source": "Earnings-22",
+      "secs": 14,
+      "audio": "/bench/clips/earnings22-0014.mp3",
+      "said": "And really the key for us is to take our leading position there with our leading position across infrastructure, real estate, credit growth equity on a global base and the marriage of those two things, and we think that could lead to a lot of growth for us in that part of the world.",
+      "takes": [
+        {
+          "id": "bark-3.0-clean",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "key"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "take"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "there"
+            ],
+            [
+              "k",
+              "with"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "across"
+            ],
+            [
+              "k",
+              "infrastructure"
+            ],
+            [
+              "k",
+              "real"
+            ],
+            [
+              "k",
+              "estate"
+            ],
+            [
+              "k",
+              "credit"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "equity"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "global"
+            ],
+            [
+              "m",
+              "base"
+            ],
+            [
+              "s",
+              "basis"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "marriage"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "those"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "things"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "lead"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "part"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "world"
+            ]
+          ]
+        },
+        {
+          "id": "fluid-speech-mini",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "key"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "take"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "there"
+            ],
+            [
+              "k",
+              "with"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "across"
+            ],
+            [
+              "k",
+              "infrastructure"
+            ],
+            [
+              "k",
+              "real"
+            ],
+            [
+              "k",
+              "estate"
+            ],
+            [
+              "k",
+              "credit"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "equity"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "global"
+            ],
+            [
+              "m",
+              "base"
+            ],
+            [
+              "s",
+              "basin"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "marriage"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "those"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "things"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "lead"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "part"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "world"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v2",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "key"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "take"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "there"
+            ],
+            [
+              "k",
+              "with"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "across"
+            ],
+            [
+              "k",
+              "infrastructure"
+            ],
+            [
+              "k",
+              "real"
+            ],
+            [
+              "k",
+              "estate"
+            ],
+            [
+              "k",
+              "credit"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "equity"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "global"
+            ],
+            [
+              "s",
+              "basis"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "marriage"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "those"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "things"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "lead"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "part"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "world"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "really"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "key"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "take"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "there"
+            ],
+            [
+              "k",
+              "with"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "leading"
+            ],
+            [
+              "k",
+              "position"
+            ],
+            [
+              "k",
+              "across"
+            ],
+            [
+              "k",
+              "infrastructure"
+            ],
+            [
+              "k",
+              "real"
+            ],
+            [
+              "k",
+              "estate"
+            ],
+            [
+              "k",
+              "credit"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "equity"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "global"
+            ],
+            [
+              "s",
+              "basis"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "marriage"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "those"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "things"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "we"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "lead"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "lot"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "growth"
+            ],
+            [
+              "k",
+              "for"
+            ],
+            [
+              "k",
+              "us"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "part"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "world"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Parliament",
+      "source": "VoxPopuli",
+      "secs": 6.1,
+      "audio": "/bench/clips/voxpopuli-0090.mp3",
+      "said": "The discovery of a distressed teenager in Dublin this week is a reminder that Ireland is affected very much by human trafficking.",
+      "takes": [
+        {
+          "id": "bark-3.0-clean",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "discovery"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "distressed"
+            ],
+            [
+              "k",
+              "teenager"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "dublin"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "week"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "reminder"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "ireland"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "affected"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "human"
+            ],
+            [
+              "k",
+              "trafficking"
+            ]
+          ]
+        },
+        {
+          "id": "fluid-speech-mini",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "discovery"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "distressed"
+            ],
+            [
+              "k",
+              "teenager"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "dublin"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "week"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "reminder"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "ireland"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "affected"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "human"
+            ],
+            [
+              "k",
+              "trafficking"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v2",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "discovery"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "distressed"
+            ],
+            [
+              "k",
+              "teenager"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "dublin"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "week"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "reminder"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "ireland"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "affected"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "human"
+            ],
+            [
+              "k",
+              "trafficking"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "discovery"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "distressed"
+            ],
+            [
+              "k",
+              "teenager"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "dublin"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "week"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "reminder"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "ireland"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "affected"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "human"
+            ],
+            [
+              "k",
+              "trafficking"
+            ]
+          ]
+        }
+      ]
     }
   ],
   "duos": [
@@ -178,68 +2648,6 @@
           "Bark Clean",
           5.3,
           "clean"
-        ]
-      ]
-    }
-  ],
-  "clips_shown": [
-    {
-      "kind": "Off the cuff",
-      "lines": [
-        [
-          "Said",
-          "Well, what about, uh, papyrus, you know, made out of bam-, you know, bamboo stuff, from the from the banks of the Nile.",
-          "said"
-        ],
-        [
-          "Parakeet v3",
-          "Well, what about uh peppers, you know, made out of bam, you know, bamboo stuff from the from the banks of the now?",
-          ""
-        ],
-        [
-          "Bark 3.0 Clean",
-          "what about, pepperice, made out of bamboo stuff from the banks of the now?",
-          "win"
-        ]
-      ]
-    },
-    {
-      "kind": "Meeting",
-      "lines": [
-        [
-          "Said",
-          "It should be a battery because uh uh remote controller should be like you you you should take it t to wherever you want…",
-          "said"
-        ],
-        [
-          "Parakeet v3",
-          "it should be a battery because uh remote controller should be like you you you should take it to to wherever you want…",
-          ""
-        ],
-        [
-          "Bark 3.0 Clean",
-          "It should be a battery because the remote control should be like you should take it to wherever you want…",
-          "win"
-        ]
-      ]
-    },
-    {
-      "kind": "Finance call",
-      "lines": [
-        [
-          "Said",
-          "the capacity of the existing tank houses that we have with our improvement program, so that's an important part of this.",
-          "said"
-        ],
-        [
-          "0.3.10",
-          "NOTHING",
-          "empty"
-        ],
-        [
-          "0.3.11",
-          "the the capacity of the existing tank houses that we have uh with our improvement program. So that's an important part of this.",
-          "win"
         ]
       ]
     }
