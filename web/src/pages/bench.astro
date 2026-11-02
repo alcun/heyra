@@ -87,15 +87,30 @@ const sy = (v: number) => plot.t + ((v - w0) / (w1 - w0)) * (plot.h - plot.t - p
 const ticksX = [2, 5, 10, 20, 50, 100, 200, 500].filter((t) => t >= s0 && t <= s1);
 const step = w1 - w0 > 12 ? 5 : 2;
 const ticksY = Array.from({ length: 40 }, (_, i) => Math.ceil(w0 / step) * step + i * step).filter((t) => t <= w1);
-const dots = ranked.map((m) => ({ m, x: sx(m.speed), y: sy(m.average!), r: 4 + Math.sqrt(m.mb) / 6, ly: 0 }));
-// Labels: beside each dot, pushed apart so none overlap.
-for (const d of dots) d.ly = d.y + 4;
-const byY = [...dots].sort((a, b) => a.ly - b.ly);
-for (let pass = 0; pass < 20; pass++)
-  for (let i = 1; i < byY.length; i++) {
-    const [a, b] = [byY[i - 1], byY[i]];
-    if (Math.abs(a.x - b.x) < 150 && b.ly - a.ly < 14) { const push = (14 - (b.ly - a.ly)) / 2; a.ly -= push; b.ly += push; }
-  }
+const dots = ranked.map((m) => ({ m, x: sx(m.speed), y: sy(m.average!), r: 4 + Math.sqrt(m.mb) / 6, lx: 0, ly: 0, anchor: "start" }));
+// Labels: each tries right, left, above, below, then the corners of its dot, and takes the first spot
+// clear of every dot and every label already placed. Models in Heyra go first.
+type Box = [number, number, number, number];
+const boxes: Box[] = [];
+const hits = (a: Box, b: Box) => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
+const dotBox = (d: (typeof dots)[number]): Box => [d.x - d.r, d.y - d.r, d.x + d.r, d.y + d.r];
+for (const d of [...dots].sort((a, b) => Number(b.m.heyra) - Number(a.m.heyra))) {
+  const w = d.m.name.length * 6.2;
+  const spots = [
+    { lx: d.x + d.r + 5, ly: d.y + 4, anchor: "start", box: [d.x + d.r + 5, d.y - 6, d.x + d.r + 5 + w, d.y + 6] },
+    { lx: d.x - d.r - 5, ly: d.y + 4, anchor: "end", box: [d.x - d.r - 5 - w, d.y - 6, d.x - d.r - 5, d.y + 6] },
+    { lx: d.x, ly: d.y - d.r - 5, anchor: "middle", box: [d.x - w / 2, d.y - d.r - 16, d.x + w / 2, d.y - d.r - 3] },
+    { lx: d.x, ly: d.y + d.r + 13, anchor: "middle", box: [d.x - w / 2, d.y + d.r + 2, d.x + w / 2, d.y + d.r + 15] },
+    { lx: d.x - d.r, ly: d.y - d.r - 3, anchor: "end", box: [d.x - d.r - w, d.y - d.r - 14, d.x - d.r, d.y - d.r - 1] },
+    { lx: d.x + d.r, ly: d.y - d.r - 3, anchor: "start", box: [d.x + d.r, d.y - d.r - 14, d.x + d.r + w, d.y - d.r - 1] },
+    { lx: d.x - d.r, ly: d.y + d.r + 11, anchor: "end", box: [d.x - d.r - w, d.y + d.r, d.x - d.r, d.y + d.r + 13] },
+    { lx: d.x + d.r, ly: d.y + d.r + 11, anchor: "start", box: [d.x + d.r, d.y + d.r, d.x + d.r + w, d.y + d.r + 13] },
+  ] as { lx: number; ly: number; anchor: string; box: Box }[];
+  const fits = (b: Box) => b[0] >= plot.l && b[2] <= plot.w && !boxes.some((o) => hits(o, b)) && !dots.some((o) => o !== d && hits(dotBox(o), b));
+  const spot = spots.find((sp) => fits(sp.box)) ?? spots[0];
+  Object.assign(d, { lx: spot.lx, ly: spot.ly, anchor: spot.anchor });
+  boxes.push(spot.box);
+}
 // The full table: every model, every number, sortable. Best per column in gold.
 const columns = [
   { id: "average", name: "Average", unit: "", low: true },
@@ -338,9 +353,7 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
             <g class={d.m.heyra ? "heyra" : undefined} tabindex="0">
               <title>{`${d.m.name}: ${d.m.average!.toFixed(1)} in 100 wrong, ${d.m.speed}× real time, ${d.m.mb} MB, ${d.m.langs}`}</title>
               <circle class={d.m.heyra ? "dot heyra" : "dot"} cx={d.x} cy={d.y} r={d.r} />
-              {d.x > plot.w - 150
-                ? <text class="name" x={d.x - d.r - 5} y={d.ly} text-anchor="end">{d.m.name}</text>
-                : <text class="name" x={d.x + d.r + 5} y={d.ly}>{d.m.name}</text>}
+              <text class="name" x={d.lx} y={d.ly} text-anchor={d.anchor}>{d.m.name}</text>
             </g>
           ))}
         </svg>

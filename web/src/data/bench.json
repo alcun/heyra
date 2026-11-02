@@ -52,6 +52,30 @@
       }
     },
     {
+      "id": "cohere-transcribe",
+      "name": "Cohere Transcribe",
+      "by": "Cohere",
+      "langs": "14 languages",
+      "note": "2B, March 2026",
+      "license": "Apache 2.0",
+      "heyra": false,
+      "mb": 2888,
+      "speed": 5,
+      "average": 7.83,
+      "meant": 6.97,
+      "v": {
+        "ami": 12.65,
+        "disfluency": 8.72,
+        "disfluency-meant": 10.48,
+        "earnings22": 12.82,
+        "gigaspeech": 12.44,
+        "librispeech-clean": 1.62,
+        "librispeech-other": 2.67,
+        "spgispeech": 3.4,
+        "voxpopuli": 9.23
+      }
+    },
+    {
       "id": "fluid-speech-mini",
       "name": "Fluid Speech Mini",
       "by": "FluidVoice",
@@ -100,6 +124,54 @@
       }
     },
     {
+      "id": "nemotron-3.5",
+      "name": "Nemotron 3.5",
+      "by": "NVIDIA",
+      "langs": "40 languages",
+      "note": "Streaming, 560 ms",
+      "license": "NVIDIA Open Model",
+      "heyra": false,
+      "mb": 682,
+      "speed": 4,
+      "average": 11.2,
+      "meant": 10.26,
+      "v": {
+        "ami": 26.56,
+        "disfluency": 6.22,
+        "disfluency-meant": 16.89,
+        "earnings22": 16.38,
+        "gigaspeech": 11.76,
+        "librispeech-clean": 3.84,
+        "librispeech-other": 6.46,
+        "spgispeech": 6.8,
+        "voxpopuli": 6.57
+      }
+    },
+    {
+      "id": "nemotron-en",
+      "name": "Nemotron Streaming",
+      "by": "NVIDIA",
+      "langs": "English",
+      "note": "Streaming, 560 ms",
+      "license": "NVIDIA Open Model",
+      "heyra": false,
+      "mb": 662,
+      "speed": 3,
+      "average": 7.7,
+      "meant": 7.01,
+      "v": {
+        "ami": 12.12,
+        "disfluency": 4.36,
+        "disfluency-meant": 17.73,
+        "earnings22": 14.75,
+        "gigaspeech": 10.6,
+        "librispeech-clean": 2.99,
+        "librispeech-other": 4.27,
+        "spgispeech": 5.06,
+        "voxpopuli": 4.1
+      }
+    },
+    {
       "id": "parakeet-110m",
       "name": "Parakeet 110M",
       "by": "NVIDIA",
@@ -121,6 +193,30 @@
         "librispeech-other": 5.51,
         "spgispeech": 5.1,
         "voxpopuli": 5.29
+      }
+    },
+    {
+      "id": "parakeet-unified",
+      "name": "Parakeet Unified",
+      "by": "NVIDIA",
+      "langs": "English",
+      "note": "2026, offline build",
+      "license": "NVIDIA Open Model",
+      "heyra": false,
+      "mb": 663,
+      "speed": 11,
+      "average": 7.34,
+      "meant": 6.62,
+      "v": {
+        "ami": 9.72,
+        "disfluency": 4.68,
+        "disfluency-meant": 14.45,
+        "earnings22": 14.84,
+        "gigaspeech": 12.36,
+        "librispeech-clean": 2.18,
+        "librispeech-other": 3.1,
+        "spgispeech": 3.83,
+        "voxpopuli": 5.35
       }
     },
     {
@@ -296,52 +392,36 @@
       "kind": "Audiobook",
       "source": "LibriSpeech clean",
       "secs": 10.9,
-      "audio": "/bench/clips/librispeech-clean-0024.mp3",
-      "said": "we shut our eyes the flowers bloom on we murmur but the corn ears fill we choose the shadow but the sun that casts it shines behind us still",
+      "audio": "/bench/clips/librispeech-clean-0022.mp3",
+      "said": "missus grey had met southerners before but not intimately and she always had in mind vividly their cruelty to poor negroes a subject she made a point of introducing forthwith",
       "takes": [
         {
           "id": "bark-3.0-clean",
-          "wrong": 4,
+          "wrong": 2,
           "ops": [
             [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
+              "s",
+              "mrs"
             ],
             [
               "s",
-              "murmure"
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
             ],
             [
               "k",
@@ -349,75 +429,95 @@
             ],
             [
               "k",
-              "the"
-            ],
-            [
-              "m",
-              "corn"
-            ],
-            [
-              "s",
-              "corniers"
+              "not"
             ],
             [
               "k",
-              "fill"
+              "intimately"
             ],
             [
               "k",
-              "we"
+              "and"
             ],
             [
               "k",
-              "choose"
+              "she"
             ],
             [
               "k",
-              "the"
+              "always"
             ],
             [
               "k",
-              "shadow"
+              "had"
             ],
             [
               "k",
-              "but"
+              "in"
             ],
             [
               "k",
-              "the"
+              "mind"
             ],
             [
               "k",
-              "sun"
+              "vividly"
             ],
             [
               "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
+              "their"
             ],
             [
               "k",
-              "it"
+              "cruelty"
             ],
             [
               "k",
-              "shines"
+              "to"
             ],
             [
               "k",
-              "behind"
+              "poor"
             ],
             [
               "k",
-              "us"
+              "negroes"
             ],
             [
               "k",
-              "still"
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
             ]
           ]
         },
@@ -426,44 +526,28 @@
           "wrong": 1,
           "ops": [
             [
-              "k",
-              "we"
+              "s",
+              "misses"
             ],
             [
               "k",
-              "shut"
+              "grey"
             ],
             [
               "k",
-              "our"
+              "had"
             ],
             [
               "k",
-              "eyes"
+              "met"
             ],
             [
               "k",
-              "the"
+              "southerners"
             ],
             [
               "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
+              "before"
             ],
             [
               "k",
@@ -471,365 +555,251 @@
             ],
             [
               "k",
-              "the"
+              "not"
             ],
             [
               "k",
-              "corn"
+              "intimately"
             ],
             [
               "k",
-              "ears"
+              "and"
             ],
             [
               "k",
-              "fill"
+              "she"
             ],
             [
               "k",
-              "we"
+              "always"
             ],
             [
               "k",
-              "choose"
+              "had"
             ],
             [
               "k",
-              "the"
+              "in"
             ],
             [
               "k",
-              "shadow"
+              "mind"
             ],
             [
               "k",
-              "but"
+              "vividly"
             ],
             [
               "k",
-              "the"
+              "their"
             ],
             [
               "k",
-              "sun"
+              "cruelty"
             ],
             [
               "k",
-              "that"
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "cohere-transcribe",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "missus"
             ],
             [
               "s",
-              "cast"
+              "gray"
             ],
             [
               "k",
-              "it"
+              "had"
             ],
             [
               "k",
-              "shines"
+              "met"
             ],
             [
               "k",
-              "behind"
+              "southerners"
             ],
             [
               "k",
-              "us"
+              "before"
             ],
             [
               "k",
-              "still"
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
             ]
           ]
         },
         {
           "id": "fluid-speech-mini",
-          "wrong": 3,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "m",
-              "corn"
-            ],
-            [
-              "s",
-              "corniers"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "moonshine-base",
           "wrong": 1,
           "ops": [
             [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "corn"
-            ],
-            [
-              "k",
-              "ears"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
               "s",
-              "cast"
+              "mrs"
             ],
             [
               "k",
-              "it"
+              "grey"
             ],
             [
               "k",
-              "shines"
+              "had"
             ],
             [
               "k",
-              "behind"
+              "met"
             ],
             [
               "k",
-              "us"
+              "southerners"
             ],
             [
               "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "parakeet-110m",
-          "wrong": 1,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
+              "before"
             ],
             [
               "k",
@@ -837,868 +807,95 @@
             ],
             [
               "k",
-              "the"
+              "not"
             ],
             [
               "k",
-              "corn"
+              "intimately"
             ],
             [
               "k",
-              "ears"
+              "and"
             ],
             [
               "k",
-              "fill"
+              "she"
             ],
             [
               "k",
-              "we"
+              "always"
             ],
             [
               "k",
-              "choose"
+              "had"
             ],
             [
               "k",
-              "the"
+              "in"
             ],
             [
               "k",
-              "shadow"
+              "mind"
             ],
             [
               "k",
-              "but"
+              "vividly"
             ],
             [
               "k",
-              "the"
+              "their"
             ],
             [
               "k",
-              "sun"
+              "cruelty"
             ],
             [
               "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "parakeet-v2",
-          "wrong": 1,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "corn"
-            ],
-            [
-              "k",
-              "ears"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "parakeet-v3",
-          "wrong": 1,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "corn"
-            ],
-            [
-              "k",
-              "ears"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "qwen3-asr-0.6b",
-          "wrong": 3,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "m",
-              "corn"
-            ],
-            [
-              "s",
-              "cornears"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "whisper-distil-v3.5",
-          "wrong": 3,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "m",
-              "corn"
-            ],
-            [
-              "s",
-              "corniers"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        },
-        {
-          "id": "whisper-turbo",
-          "wrong": 1,
-          "ops": [
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "shut"
-            ],
-            [
-              "k",
-              "our"
-            ],
-            [
-              "k",
-              "eyes"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "flowers"
-            ],
-            [
-              "k",
-              "bloom"
-            ],
-            [
-              "k",
-              "on"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "murmur"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "corn"
-            ],
-            [
-              "k",
-              "ears"
-            ],
-            [
-              "k",
-              "fill"
-            ],
-            [
-              "k",
-              "we"
-            ],
-            [
-              "k",
-              "choose"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "shadow"
-            ],
-            [
-              "k",
-              "but"
-            ],
-            [
-              "k",
-              "the"
-            ],
-            [
-              "k",
-              "sun"
-            ],
-            [
-              "k",
-              "that"
-            ],
-            [
-              "s",
-              "cast"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "shines"
-            ],
-            [
-              "k",
-              "behind"
-            ],
-            [
-              "k",
-              "us"
-            ],
-            [
-              "k",
-              "still"
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "kind": "Audiobook, hard",
-      "source": "LibriSpeech other",
-      "secs": 5.2,
-      "audio": "/bench/clips/librispeech-other-0052.mp3",
-      "said": "i got to stick it said dickie sadly i'd best be getting home",
-      "takes": [
-        {
-          "id": "bark-3.0-clean",
-          "wrong": 4,
-          "ops": [
-            [
-              "k",
-              "i"
-            ],
-            [
-              "k",
-              "got"
-            ],
-            [
-              "s",
-              "a"
-            ],
-            [
-              "k",
-              "stick"
-            ],
-            [
-              "k",
-              "it"
-            ],
-            [
-              "k",
-              "said"
-            ],
-            [
-              "m",
-              "dickie"
-            ],
-            [
-              "s",
-              "diggy"
-            ],
-            [
-              "s",
-              "sadlyi'd"
-            ],
-            [
-              "k",
-              "best"
-            ],
-            [
-              "k",
-              "be"
-            ],
-            [
-              "k",
-              "getting"
-            ],
-            [
-              "k",
-              "home"
-            ]
-          ]
-        },
-        {
-          "id": "canary-180m",
-          "wrong": 4,
-          "ops": [
-            [
-              "k",
-              "i"
-            ],
-            [
-              "k",
-              "got"
-            ],
-            [
-              "m",
               "to"
             ],
             [
-              "s",
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
               "a"
             ],
             [
-              "s",
-              "sticker"
+              "k",
+              "subject"
             ],
             [
               "k",
-              "said"
-            ],
-            [
-              "s",
-              "dicky"
+              "she"
             ],
             [
               "k",
-              "sadly"
+              "made"
             ],
             [
               "k",
-              "i'd"
-            ],
-            [
-              "k",
-              "best"
-            ],
-            [
-              "k",
-              "be"
-            ],
-            [
-              "k",
-              "getting"
-            ],
-            [
-              "k",
-              "home"
-            ]
-          ]
-        },
-        {
-          "id": "fluid-speech-mini",
-          "wrong": 3,
-          "ops": [
-            [
-              "k",
-              "i"
-            ],
-            [
-              "k",
-              "got"
-            ],
-            [
-              "m",
-              "to"
-            ],
-            [
-              "s",
               "a"
             ],
             [
-              "s",
-              "sticket"
+              "k",
+              "point"
             ],
             [
               "k",
-              "said"
+              "of"
             ],
             [
               "k",
-              "dickie"
+              "introducing"
             ],
             [
               "k",
-              "sadly"
-            ],
-            [
-              "k",
-              "i'd"
-            ],
-            [
-              "k",
-              "best"
-            ],
-            [
-              "k",
-              "be"
-            ],
-            [
-              "k",
-              "getting"
-            ],
-            [
-              "k",
-              "home"
+              "forthwith"
             ]
           ]
         },
@@ -1707,56 +904,2433 @@
           "wrong": 2,
           "ops": [
             [
-              "k",
-              "i"
-            ],
-            [
-              "k",
-              "got"
+              "s",
+              "mrs"
             ],
             [
               "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
               "a"
             ],
             [
               "k",
-              "stick"
+              "subject"
             ],
             [
               "k",
-              "it"
+              "she"
             ],
             [
               "k",
-              "said"
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-3.5",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "missus"
+            ],
+            [
+              "k",
+              "grey"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "a",
+              "forth"
             ],
             [
               "s",
-              "dicky"
+              "with"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-en",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "missus"
             ],
             [
               "k",
-              "sadly"
+              "grey"
             ],
             [
               "k",
-              "i'd"
+              "had"
             ],
             [
               "k",
-              "best"
+              "met"
             ],
             [
               "k",
-              "be"
+              "southerners"
             ],
             [
               "k",
-              "getting"
+              "before"
             ],
             [
               "k",
-              "home"
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-110m",
+          "wrong": 3,
+          "ops": [
+            [
+              "s",
+              "misses"
+            ],
+            [
+              "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "s",
+              "ngroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-unified",
+          "wrong": 1,
+          "ops": [
+            [
+              "s",
+              "misses"
+            ],
+            [
+              "k",
+              "grey"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v2",
+          "wrong": 2,
+          "ops": [
+            [
+              "s",
+              "misses"
+            ],
+            [
+              "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-v3",
+          "wrong": 2,
+          "ops": [
+            [
+              "s",
+              "misses"
+            ],
+            [
+              "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "qwen3-asr-0.6b",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "missus"
+            ],
+            [
+              "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-distil-v3.5",
+          "wrong": 2,
+          "ops": [
+            [
+              "s",
+              "mrs"
+            ],
+            [
+              "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        },
+        {
+          "id": "whisper-turbo",
+          "wrong": 2,
+          "ops": [
+            [
+              "s",
+              "mrs"
+            ],
+            [
+              "s",
+              "gray"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "met"
+            ],
+            [
+              "k",
+              "southerners"
+            ],
+            [
+              "k",
+              "before"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "not"
+            ],
+            [
+              "k",
+              "intimately"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "always"
+            ],
+            [
+              "k",
+              "had"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mind"
+            ],
+            [
+              "k",
+              "vividly"
+            ],
+            [
+              "k",
+              "their"
+            ],
+            [
+              "k",
+              "cruelty"
+            ],
+            [
+              "k",
+              "to"
+            ],
+            [
+              "k",
+              "poor"
+            ],
+            [
+              "k",
+              "negroes"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "subject"
+            ],
+            [
+              "k",
+              "she"
+            ],
+            [
+              "k",
+              "made"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "point"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "introducing"
+            ],
+            [
+              "k",
+              "forthwith"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "Audiobook, hard",
+      "source": "LibriSpeech other",
+      "secs": 12.5,
+      "audio": "/bench/clips/librispeech-other-0013.mp3",
+      "said": "on the left the coil of rope in the center the model of a sailing ship in a green glass bottle and on the right the wooden statue of a negro boy in baggy trousers turkish jacket and white turban",
+      "takes": [
+        {
+          "id": "bark-3.0-clean",
+          "wrong": 0,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "center"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "green"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "canary-180m",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "grain"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "cohere-transcribe",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "grained"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "fluid-speech-mini",
+          "wrong": 1,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "green"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "moonshine-base",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "grained"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "veneegro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-3.5",
+          "wrong": 4,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "grain"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "the"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-en",
+          "wrong": 3,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "grain"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         },
@@ -1766,55 +3340,329 @@
           "ops": [
             [
               "k",
-              "i"
+              "on"
             ],
             [
               "k",
-              "got"
+              "the"
             ],
             [
               "k",
-              "to"
+              "left"
             ],
             [
               "k",
-              "stick"
+              "the"
             ],
             [
               "k",
-              "it"
+              "coil"
             ],
             [
               "k",
-              "said"
+              "of"
             ],
             [
               "k",
-              "dickie"
+              "rope"
             ],
             [
               "k",
-              "sadly"
+              "in"
             ],
             [
               "k",
-              "i'd"
+              "the"
             ],
             [
               "k",
-              "best"
+              "center"
             ],
             [
               "k",
-              "be"
+              "the"
             ],
             [
               "k",
-              "getting"
+              "model"
             ],
             [
               "k",
-              "home"
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "green"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-unified",
+          "wrong": 2,
+          "ops": [
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "s",
+              "grain"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         },
@@ -1824,287 +3672,831 @@
           "ops": [
             [
               "k",
-              "i"
+              "on"
             ],
             [
               "k",
-              "got"
+              "the"
+            ],
+            [
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
             ],
             [
               "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
               "a"
             ],
             [
               "k",
-              "stick"
+              "sailing"
             ],
             [
               "k",
-              "it"
+              "ship"
             ],
             [
               "k",
-              "said"
+              "in"
             ],
             [
               "k",
-              "dickie"
+              "a"
             ],
             [
               "k",
-              "sadly"
+              "green"
             ],
             [
               "k",
-              "i'd"
+              "glass"
             ],
             [
               "k",
-              "best"
+              "bottle"
             ],
             [
               "k",
-              "be"
+              "and"
             ],
             [
               "k",
-              "getting"
+              "on"
             ],
             [
               "k",
-              "home"
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         },
         {
           "id": "parakeet-v3",
-          "wrong": 2,
+          "wrong": 0,
           "ops": [
             [
               "k",
-              "i"
+              "on"
             ],
             [
               "k",
-              "got"
+              "the"
             ],
             [
-              "s",
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "center"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
               "a"
             ],
             [
               "k",
-              "stick"
+              "sailing"
             ],
             [
               "k",
-              "it"
+              "ship"
             ],
             [
               "k",
-              "said"
-            ],
-            [
-              "s",
-              "dicky"
+              "in"
             ],
             [
               "k",
-              "sadly"
+              "a"
             ],
             [
               "k",
-              "i'd"
+              "green"
             ],
             [
               "k",
-              "best"
+              "glass"
             ],
             [
               "k",
-              "be"
+              "bottle"
             ],
             [
               "k",
-              "getting"
+              "and"
             ],
             [
               "k",
-              "home"
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         },
         {
           "id": "qwen3-asr-0.6b",
-          "wrong": 4,
+          "wrong": 0,
           "ops": [
             [
               "k",
-              "i"
+              "on"
             ],
             [
               "k",
-              "got"
+              "the"
             ],
             [
-              "m",
-              "to"
+              "k",
+              "left"
             ],
             [
-              "s",
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "center"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
               "a"
             ],
             [
-              "s",
-              "ticket"
+              "k",
+              "sailing"
             ],
             [
               "k",
-              "said"
-            ],
-            [
-              "s",
-              "dicky"
+              "ship"
             ],
             [
               "k",
-              "sadly"
+              "in"
             ],
             [
               "k",
-              "i'd"
+              "a"
             ],
             [
               "k",
-              "best"
+              "green"
             ],
             [
               "k",
-              "be"
+              "glass"
             ],
             [
               "k",
-              "getting"
+              "bottle"
             ],
             [
               "k",
-              "home"
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         },
         {
           "id": "whisper-distil-v3.5",
-          "wrong": 4,
+          "wrong": 0,
           "ops": [
             [
               "k",
-              "i"
+              "on"
             ],
             [
               "k",
-              "got"
-            ],
-            [
-              "m",
-              "to"
-            ],
-            [
-              "s",
-              "his"
-            ],
-            [
-              "s",
-              "ticket"
+              "the"
             ],
             [
               "k",
-              "said"
-            ],
-            [
-              "s",
-              "dicky"
+              "left"
             ],
             [
               "k",
-              "sadly"
+              "the"
             ],
             [
               "k",
-              "i'd"
+              "coil"
             ],
             [
               "k",
-              "best"
+              "of"
             ],
             [
               "k",
-              "be"
+              "rope"
             ],
             [
               "k",
-              "getting"
+              "in"
             ],
             [
               "k",
-              "home"
+              "the"
+            ],
+            [
+              "k",
+              "center"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "green"
+            ],
+            [
+              "k",
+              "glass"
+            ],
+            [
+              "k",
+              "bottle"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "on"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "right"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         },
         {
           "id": "whisper-turbo",
-          "wrong": 4,
+          "wrong": 3,
           "ops": [
             [
               "k",
-              "i"
+              "on"
             ],
             [
               "k",
-              "got"
+              "the"
             ],
             [
-              "m",
-              "to"
+              "k",
+              "left"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "coil"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "rope"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "the"
             ],
             [
               "s",
+              "centre"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "model"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "sailing"
+            ],
+            [
+              "k",
+              "ship"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
               "a"
             ],
             [
               "s",
-              "sticket"
+              "grain"
             ],
             [
               "k",
-              "said"
-            ],
-            [
-              "s",
-              "dicky"
+              "glass"
             ],
             [
               "k",
-              "sadly"
+              "bottle"
             ],
             [
               "k",
-              "i'd"
+              "and"
             ],
             [
               "k",
-              "best"
+              "on"
             ],
             [
               "k",
-              "be"
+              "the"
             ],
             [
               "k",
-              "getting"
+              "right"
             ],
             [
               "k",
-              "home"
+              "the"
+            ],
+            [
+              "k",
+              "wooden"
+            ],
+            [
+              "k",
+              "statue"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "negro"
+            ],
+            [
+              "k",
+              "boy"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "baggy"
+            ],
+            [
+              "k",
+              "trousers"
+            ],
+            [
+              "a",
+              "a"
+            ],
+            [
+              "k",
+              "turkish"
+            ],
+            [
+              "k",
+              "jacket"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "white"
+            ],
+            [
+              "k",
+              "turban"
             ]
           ]
         }
@@ -2322,6 +4714,108 @@
           ]
         },
         {
+          "id": "cohere-transcribe",
+          "wrong": 14,
+          "ops": [
+            [
+              "m",
+              "hmm"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "m",
+              "seventy"
+            ],
+            [
+              "s",
+              "70"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "m",
+              "thirty"
+            ],
+            [
+              "s",
+              "30"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "m",
+              "sort"
+            ],
+            [
+              "s",
+              "a"
+            ],
+            [
+              "s",
+              "remote"
+            ],
+            [
+              "s",
+              "controller"
+            ]
+          ]
+        },
+        {
           "id": "fluid-speech-mini",
           "wrong": 10,
           "ops": [
@@ -2526,6 +5020,210 @@
           ]
         },
         {
+          "id": "nemotron-3.5",
+          "wrong": 10,
+          "ops": [
+            [
+              "m",
+              "hmm"
+            ],
+            [
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "k",
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "m",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "m",
+              "sort"
+            ],
+            [
+              "m",
+              "of"
+            ],
+            [
+              "m",
+              "like"
+            ],
+            [
+              "m",
+              "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-en",
+          "wrong": 8,
+          "ops": [
+            [
+              "k",
+              "hmm"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "k",
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "m",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "m",
+              "sort"
+            ],
+            [
+              "m",
+              "of"
+            ],
+            [
+              "m",
+              "like"
+            ],
+            [
+              "m",
+              "yeah"
+            ]
+          ]
+        },
+        {
           "id": "parakeet-110m",
           "wrong": 9,
           "ops": [
@@ -2615,6 +5313,108 @@
             ],
             [
               "k",
+              "of"
+            ],
+            [
+              "m",
+              "like"
+            ],
+            [
+              "m",
+              "yeah"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-unified",
+          "wrong": 7,
+          "ops": [
+            [
+              "k",
+              "hmm"
+            ],
+            [
+              "k",
+              "yeah"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "maybe"
+            ],
+            [
+              "k",
+              "seventy"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "k",
+              "is"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "unique"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "uh"
+            ],
+            [
+              "k",
+              "remote"
+            ],
+            [
+              "k",
+              "controller"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "thirty"
+            ],
+            [
+              "k",
+              "percent"
+            ],
+            [
+              "m",
+              "is"
+            ],
+            [
+              "m",
+              "yeah"
+            ],
+            [
+              "m",
+              "it's"
+            ],
+            [
+              "m",
+              "sort"
+            ],
+            [
+              "m",
               "of"
             ],
             [
@@ -3507,6 +6307,168 @@
           ]
         },
         {
+          "id": "cohere-transcribe",
+          "wrong": 7,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "2021"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "bank"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "40"
+            ],
+            [
+              "a",
+              "million"
+            ],
+            [
+              "s",
+              "zlotys"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "k",
+              "950"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "zlotys"
+            ]
+          ]
+        },
+        {
           "id": "fluid-speech-mini",
           "wrong": 7,
           "ops": [
@@ -3831,6 +6793,350 @@
           ]
         },
         {
+          "id": "nemotron-3.5",
+          "wrong": 16,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "funk"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "m",
+              "in"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "tonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "s",
+              "forty"
+            ],
+            [
+              "s",
+              "million"
+            ],
+            [
+              "s",
+              "location"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "s",
+              "hundred"
+            ],
+            [
+              "s",
+              "fifteen"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "lots"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-en",
+          "wrong": 15,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "fund"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "fourteen"
+            ],
+            [
+              "s",
+              "billion"
+            ],
+            [
+              "s",
+              "slotic"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "s",
+              "fifteen"
+            ],
+            [
+              "k",
+              "million"
+            ]
+          ]
+        },
+        {
           "id": "parakeet-110m",
           "wrong": 16,
           "ops": [
@@ -4005,6 +7311,180 @@
             [
               "a",
               "los"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-unified",
+          "wrong": 13,
+          "ops": [
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "all"
+            ],
+            [
+              "k",
+              "over"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "first"
+            ],
+            [
+              "k",
+              "three"
+            ],
+            [
+              "k",
+              "months"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "a",
+              "twenty"
+            ],
+            [
+              "s",
+              "one"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "value"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "our"
+            ],
+            [
+              "k",
+              "cash"
+            ],
+            [
+              "s",
+              "bank"
+            ],
+            [
+              "k",
+              "deposits"
+            ],
+            [
+              "s",
+              "and"
+            ],
+            [
+              "s",
+              "t"
+            ],
+            [
+              "s",
+              "bonds"
+            ],
+            [
+              "k",
+              "increased"
+            ],
+            [
+              "k",
+              "by"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "s",
+              "forty"
+            ],
+            [
+              "s",
+              "million"
+            ],
+            [
+              "k",
+              "reaching"
+            ],
+            [
+              "k",
+              "a"
+            ],
+            [
+              "k",
+              "total"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "1"
+            ],
+            [
+              "k",
+              "billion"
+            ],
+            [
+              "k",
+              "and"
+            ],
+            [
+              "a",
+              "nine"
+            ],
+            [
+              "a",
+              "hundred"
+            ],
+            [
+              "s",
+              "fifty"
+            ],
+            [
+              "k",
+              "million"
+            ],
+            [
+              "a",
+              "loss"
             ]
           ]
         },
@@ -5232,6 +8712,192 @@
           ]
         },
         {
+          "id": "cohere-transcribe",
+          "wrong": 6,
+          "ops": [
+            [
+              "a",
+              "i"
+            ],
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "kind"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "simulation"
+            ],
+            [
+              "s",
+              "in"
+            ],
+            [
+              "k",
+              "two"
+            ],
+            [
+              "k",
+              "days"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "invite"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "s",
+              "who"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
+            ],
+            [
+              "a",
+              "into"
+            ],
+            [
+              "a",
+              "that"
+            ]
+          ]
+        },
+        {
           "id": "fluid-speech-mini",
           "wrong": 2,
           "ops": [
@@ -5588,6 +9254,358 @@
           ]
         },
         {
+          "id": "nemotron-3.5",
+          "wrong": 17,
+          "ops": [
+            [
+              "m",
+              "appreciate"
+            ],
+            [
+              "m",
+              "very"
+            ],
+            [
+              "m",
+              "much"
+            ],
+            [
+              "m",
+              "what"
+            ],
+            [
+              "m",
+              "you"
+            ],
+            [
+              "m",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "kind"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "simulation"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "two"
+            ],
+            [
+              "s",
+              "today"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "invite"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "a",
+              "we"
+            ],
+            [
+              "s",
+              "are"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "m",
+              "i"
+            ],
+            [
+              "m",
+              "think"
+            ],
+            [
+              "m",
+              "it"
+            ],
+            [
+              "m",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "s",
+              "giving"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
+            ]
+          ]
+        },
+        {
+          "id": "nemotron-en",
+          "wrong": 3,
+          "ops": [
+            [
+              "k",
+              "appreciate"
+            ],
+            [
+              "k",
+              "very"
+            ],
+            [
+              "k",
+              "much"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "kind"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "simulation"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "two"
+            ],
+            [
+              "s",
+              "today's"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "invite"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "k",
+              "which"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "k",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
+            ]
+          ]
+        },
+        {
           "id": "parakeet-110m",
           "wrong": 6,
           "ops": [
@@ -5729,6 +9747,180 @@
             ],
             [
               "m",
+              "think"
+            ],
+            [
+              "k",
+              "it"
+            ],
+            [
+              "k",
+              "could"
+            ],
+            [
+              "m",
+              "be"
+            ],
+            [
+              "k",
+              "give"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "insight"
+            ]
+          ]
+        },
+        {
+          "id": "parakeet-unified",
+          "wrong": 8,
+          "ops": [
+            [
+              "m",
+              "appreciate"
+            ],
+            [
+              "s",
+              "i"
+            ],
+            [
+              "s",
+              "appreciate"
+            ],
+            [
+              "k",
+              "what"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "said"
+            ],
+            [
+              "k",
+              "but"
+            ],
+            [
+              "k",
+              "can"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "make"
+            ],
+            [
+              "k",
+              "sure"
+            ],
+            [
+              "k",
+              "once"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "foresee"
+            ],
+            [
+              "k",
+              "this"
+            ],
+            [
+              "k",
+              "kind"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "simulation"
+            ],
+            [
+              "m",
+              "uh"
+            ],
+            [
+              "m",
+              "two"
+            ],
+            [
+              "s",
+              "today"
+            ],
+            [
+              "k",
+              "that"
+            ],
+            [
+              "k",
+              "you"
+            ],
+            [
+              "k",
+              "invite"
+            ],
+            [
+              "k",
+              "some"
+            ],
+            [
+              "k",
+              "of"
+            ],
+            [
+              "k",
+              "the"
+            ],
+            [
+              "k",
+              "people"
+            ],
+            [
+              "s",
+              "who"
+            ],
+            [
+              "k",
+              "were"
+            ],
+            [
+              "k",
+              "actually"
+            ],
+            [
+              "k",
+              "in"
+            ],
+            [
+              "k",
+              "mumbai"
+            ],
+            [
+              "k",
+              "i"
+            ],
+            [
+              "k",
               "think"
             ],
             [
