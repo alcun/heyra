@@ -2,6 +2,16 @@
 
 All notable changes to Heyra are documented here. Newest first.
 
+## 2026-11-02
+
+### Changed
+- The page: section titles larger and on their own row, one width for every
+  section, "Run it on a server" with a host-it-yourself link, a GitHub button
+  beside Download, and the text-only privacy section folded into the FAQ.
+
+### Fixed
+- On phones: the chevron, the Mac scene and the wave around the orb are centred.
+
 ## 2026-10-30
 
 ### Changed

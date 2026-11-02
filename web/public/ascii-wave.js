@@ -43,6 +43,8 @@
   const goldenWords = new Map(lines);
   let width = 0;
   let height = 0;
+  let middle = 0.52;
+  let reach = 1;
   let visible = true;
   let frame = 0;
   let last = 0;
@@ -55,6 +57,11 @@
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Level with the orb, and calmer on narrow screens, where a full swell
+    // leaves one side low and the other high.
+    const orb = document.getElementById("orb")?.getBoundingClientRect();
+    if (orb && height) middle = (orb.top + orb.height / 2 - rect.top) / height;
+    reach = Math.min(1, width / 1100);
     draw(0);
   }
 
@@ -70,11 +77,11 @@
       const envelope = 0.7 + 0.3 * Math.sin(Math.PI * x / width);
       const fromCentre = Math.abs(x - half);
       const merge = Math.min(1, fromCentre / (width * 0.23));
-      const swell = side * merge * (
+      const swell = side * merge * reach * (
         Math.sin(fromCentre * 0.006 - drift) * 76 * envelope
         + Math.sin(fromCentre * 0.013 + drift * 0.6) * 25
       );
-      return { centre: height * 0.52 + swell, envelope, merge };
+      return { centre: height * middle + swell, envelope, merge };
     };
     const textDrift = reducedMotion.matches ? 0 : Math.floor(time / 260);
     ctx.font = '500 19px "Martian Mono", ui-monospace, monospace';

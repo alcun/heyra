@@ -99,7 +99,7 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .wordmark svg { width: 0.98em; height: 0.98em; flex: none; }
     .wordmark span { margin-right: -0.12em; }
     /* Down to the rest: a chevron, no word. */
-    .scroll { position: absolute; left: 50%; bottom: 1.5rem; translate: -50% 0; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; color: var(--dim); transition: color 0.2s ease; }
+    .scroll { position: absolute; left: 0; right: 0; margin-inline: auto; bottom: 1.5rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; color: var(--dim); transition: color 0.2s ease; }
     .scroll:hover { color: var(--cream); }
     .scroll svg { width: 1.4rem; height: 1.4rem; }
     /* The orb lands as the dot above the Dock: one gold pulse. */
@@ -109,6 +109,8 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .lede { margin: 1.25rem auto 0; max-width: 40rem; color: var(--slate); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.5; text-wrap: balance; }
     .brew-row { margin: 0.25rem 0 1.75rem; }
     @media (max-width: 640px) { .brew-row { display: none; } }
+    .btn.round { width: 2.97em; height: 2.97em; padding: 0; justify-content: center; border-radius: 50%; }
+    .btn.round svg { width: 1.25rem; height: 1.25rem; }
     .actions { align-items: center; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 0.5rem; }
     .fine { margin: 1rem 0 0; font: 400 0.78rem/1.5 var(--mono); color: var(--dim); }
     .fine a { color: var(--slate); }
@@ -148,14 +150,10 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
 
     /* ---- sections ---- */
     section.block { padding: clamp(4.5rem, 9vw, 7.5rem) 0; border-top: 1px solid var(--hair); overflow-x: clip; }
-    h2 { margin: 0; font: 700 clamp(1.2rem, 2vw, 1.5rem)/1.25 var(--display); letter-spacing: 0.05em; color: var(--cream); text-wrap: balance; max-width: 24ch; }
-    .head { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 1rem clamp(2rem, 5vw, 5rem); align-items: baseline; margin-bottom: 2.5rem; }
-    .head .intro { margin: 0; }
-    /* Each section's title stays pinned under the nav while you read that section. */
-    .head { position: sticky; top: 5.6rem; z-index: 5; padding: 0.9rem 0; margin-top: -0.9rem; background: var(--ground); box-shadow: 0 -6rem 0 0 var(--ground), 0 1.2rem 1.2rem -0.6rem var(--ground); }
-    /* Not over the Mac scene, which is wider than the title row. */
-    #how .head { position: static; box-shadow: none; }
-    @media (max-width: 860px) { .head { position: static; box-shadow: none; } }
+    h2 { margin: 0; font: 700 clamp(1.7rem, 3.4vw, 2.7rem)/1.15 var(--display); letter-spacing: 0.05em; color: var(--cream); text-wrap: balance; }
+    /* Each section: the title on its own row, the words under it, then the picture. */
+    .head { margin-bottom: 2.5rem; }
+    .head .intro { margin: 1.1rem 0 0; max-width: 40rem; }
     .intro { margin: 1rem 0 0; max-width: 34rem; color: var(--slate); font-size: 1.1rem; }
 
 
@@ -164,15 +162,13 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .spec span:first-child b { color: var(--gold); }
     .spec a { color: inherit; text-underline-offset: 3px; }
 
-    /* split: words and picture */
-    .split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
     .shot { position: relative; border-radius: 16px; padding: 10px; background: var(--ground-2); border: 1px solid var(--hair); }
     .shot img { display: block; width: 100%; height: auto; border-radius: 10px; }
     .app-grid { display: block; }
     .app-grid figure, .pieces figure { margin: 0; }
     .app-grid figcaption, .pieces figcaption { margin-top: 0.85rem; font-size: 0.95rem; color: var(--slate); }
     .shot figcaption { padding: 0 0.25rem 0.25rem; }
-    .pieces { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: clamp(2.5rem, 5vw, 4rem); align-items: start; }
+    .pieces { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: clamp(2.5rem, 5vw, 4rem); align-items: end; }
     .pieces img { display: block; width: 100%; height: auto; }
     @media (max-width: 860px) { .pieces { grid-template-columns: minmax(0, 1fr); } }
 
@@ -251,11 +247,11 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
        the words box, the orb and the Dock, at 2.4 times. */
     @media (max-width: 700px) {
       .scene-wrap.wide { overflow: hidden; height: calc((100vw - 2rem) * 1.2); border-radius: 1rem; border: 1px solid var(--hair); }
-      .scene-wrap.wide .screen { width: 240%; margin-left: -78%; margin-top: -30cqw; font-size: calc(240cqw * 13 / 1440); border: 0; border-radius: 0; }
+      .scene-wrap.wide .screen { width: 240%; margin-left: -70%; margin-top: -30cqw; font-size: calc(240cqw * 13 / 1440); border: 0; border-radius: 0; }
       .scene-wrap .keys { display: none; }
     }
     .scene-wrap .screen { margin-top: 0; }
-    .keys { display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0 0 2%; }
+    .keys { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin: 1.25rem 0 0; }
     .keys span { font: 400 0.85rem/1 var(--sans); color: var(--dim); }
     .fnkey {
       display: grid; place-items: center; width: clamp(2.6rem, 6vw, 4.2rem); aspect-ratio: 1.1;
@@ -266,18 +262,15 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     .fnkey.down { transform: translateY(3px); box-shadow: 0 1px 0 #0c0d11, inset 0 1px 0 #44475a; color: var(--gold); }
 
 
-    /* privacy */
 
 
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     /* section variety */
-    .scene-wrap.wide { width: min(76rem, calc(100vw - 2 * max(1rem, 4vw))); margin-left: 50%; translate: -50% 0; margin-top: 3.5rem; }
-    .split.flip { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); }
+    .scene-wrap.wide { margin-top: 3.5rem; }
 
     .band { background: #0d0e12; border-top-color: #1d1f27; }
     .band pre { background: #08090c; overflow-x: auto; }
-    @media (max-width: 860px) { .split.flip { grid-template-columns: minmax(0, 1fr); } .server-split > :first-child { order: 2; } }
 
     /* comparison */
 
@@ -317,10 +310,10 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
         section.block h2, .closing h2 {
           animation: rise both var(--ease); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
-        section.block .intro, section.block .uses, .closing .actions {
+        section.block .intro, .closing .actions {
           animation: rise both var(--ease); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
-        .screen, .shot, .server-split pre, .spec {
+        .screen, .shot, section.block pre, .spec {
           animation: rise both var(--ease); animation-timeline: view(); animation-range: entry 0% entry 70%;
         }
         @keyframes rise { from { transform: translateY(16px); opacity: 0; } }
@@ -329,28 +322,21 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
     }
 
     /* developers */
-    .uses { margin: 1rem 0 0; max-width: 34rem; color: var(--dim); }
     .hero:has(#stone.listening) #status { color: var(--gold); }
     .hero:has(#stone.thinking) #status { color: var(--cream); }
 
-    .server-split { align-items: center; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
-    .server-split pre { margin-top: 0; }
     pre { margin: 2rem 0 0; padding: 1.25rem 1.4rem; border-radius: 14px; background: #0d0e12; border: 1px solid var(--hair); overflow-x: auto; font: 400 0.85rem/1.7 var(--mono); color: var(--cream); }
     .dev-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
 
     /* closing */
     .closing { text-align: center; padding: clamp(5rem, 10vw, 8rem) 0; border-top: 1px solid var(--hair); }
-    .closing h2 { margin-inline: auto; font: 700 clamp(1.6rem, 3vw, 2.2rem)/1.2 var(--display); letter-spacing: 0.05em; }
+    .closing h2 { margin-inline: auto; font: 700 clamp(2rem, 4.4vw, 3.4rem)/1.15 var(--display); letter-spacing: 0.05em; }
     .closing .actions.closing-actions { margin-top: 2.75rem; }
 
     .credits { margin-top: 2.5rem; }
     .credits p { margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--hair); font-size: 0.82rem; }
     .credits a { color: var(--slate); }
 
-    @media (max-width: 860px) {
-        .head { grid-template-columns: minmax(0, 1fr); }
-      .split { grid-template-columns: minmax(0, 1fr); }
-    }
     @media (max-width: 600px) {
       #status { height: 3em; }
     }
@@ -388,6 +374,9 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
           <a class="btn primary" href={MAC}>
             <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.5-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.3 4.7 3.2 5.4 2.6 6.5c-1.2 2.1-.3 5.2.9 6.9.6.8 1.2 1.7 2.1 1.7.8 0 1.2-.5 2.2-.5s1.3.5 2.2.5 1.5-.8 2-1.7c.6-.9.9-1.8.9-1.9-.1 0-1.7-.7-1.7-3zM9.6 3.6c.4-.5.8-1.3.7-2-.7 0-1.5.4-1.9 1-.4.5-.8 1.2-.7 2 .7 0 1.4-.4 1.9-1z"/></svg>
             Download for Mac
+          </a>
+          <a class="btn ghost round" href={MAC_CODE} aria-label="Heyra on GitHub">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
           </a>
         </div>
 
@@ -466,21 +455,16 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
       </div>
     </section>
 
-    <section class="block privacy-block" id="private" aria-labelledby="private-title">
+    <section class="block band" id="developers" aria-labelledby="dev-title">
       <div class="wrap">
         <div class="head">
-          <h2 id="private-title">Your voice stays on your Mac</h2>
-          <p class="intro">The speech model runs on your Mac, so it works with Wi-Fi off. No account, and the code is open, MIT. The only download is the model, once, from GitHub, checked against a fingerprint.</p>
+          <h2 id="dev-title">Run it on a server</h2>
+          <p class="intro">The same engine, for anything that can't run a model itself: microcontrollers, web pages, scripts and agents. Send a WAV, get the words back. Use this one, or host your own with Docker.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="block band" id="developers" aria-labelledby="dev-title">
-      <div class="wrap split server-split">
         <div>
           <pre><code id="curl">{curl}</code></pre>
           <div class="dev-links">
-            <a class="btn ghost small" href={SERVER_CODE}>Server code</a>
+            <a class="btn ghost small" href={`${SERVER_CODE}#run-it`}>Host it yourself</a>
             <a class="btn ghost small" href="/llms.txt">llms.txt</a>
             <button id="forget" class="btn ghost small" type="button">Use a key in the demo</button>
           </div>
@@ -489,11 +473,6 @@ const curl = `curl http://localhost:3000/v1/transcribe \\
             <button class="btn ghost small" type="submit">Use key</button>
           </form>
           <p class="demo-note">The orb at the top of this page is a live demo. It sends your clip to this server, which writes it down and doesn't keep it. The Mac app sends nothing at all.</p>
-        </div>
-        <div>
-          <h2 id="dev-title">The same engine, for everything else</h2>
-          <p class="intro">Run Heyra on a server for anything that can't run a model itself. Send a WAV, get the words back.</p>
-          <p class="uses">For microcontrollers, web pages, shell scripts, home automation and agents.</p>
         </div>
       </div>
     </section>
