@@ -25,8 +25,8 @@ function show(view) {
   });
   const best = order[0];
   const chip = chips.find((c) => c.dataset.view === view);
-  const where = view === "average" ? "on average" : `on ${chip.textContent.toLowerCase()}`;
-  point.textContent = `${best.name} gets the fewest words wrong ${where}: ${value(best).toFixed(1)} in 100. Gold bars are the models in Heyra.`;
+  const where = view === "average" ? "" : ` on ${chip.textContent.toLowerCase()}`;
+  point.textContent = `Fewest mistakes${where}: ${best.name}, ${value(best).toFixed(1)} in 100. Gold: in Heyra.`;
   for (const c of chips) c.setAttribute("aria-pressed", String(c === chip));
 }
 for (const c of chips) c.addEventListener("click", () => show(c.dataset.view));
@@ -60,4 +60,45 @@ for (const p of panels) {
   audio.addEventListener("timeupdate", () => {
     fill.style.width = `${((audio.currentTime / (audio.duration || 1)) * 100).toFixed(1)}%`;
   });
+}
+
+// ---- the leaderboard: sort by any column, filter the rows ----
+const board = document.getElementById("board");
+if (board) {
+  const body = board.tBodies[0];
+  const heads = [...board.querySelectorAll("thead button[data-sort]")];
+  const cellIndex = (button) => [...button.closest("tr").children].indexOf(button.closest("th"));
+  for (const h of heads) {
+    h.addEventListener("click", () => {
+      const was = h.getAttribute("aria-sort");
+      const low = h.dataset.low !== "false";
+      const dir = was ? (was === "ascending" ? "descending" : "ascending") : low || h.dataset.sort === "name" ? "ascending" : "descending";
+      for (const x of heads) x.removeAttribute("aria-sort");
+      h.setAttribute("aria-sort", dir);
+      const i = cellIndex(h);
+      const key = (tr) => {
+        if (h.dataset.sort === "name") return tr.dataset.name;
+        const v = tr.children[i].dataset.v;
+        return v === "" ? null : Number(v);
+      };
+      const rows = [...body.rows].sort((a, b) => {
+        const [x, y] = [key(a), key(b)];
+        if (x === null) return 1;
+        if (y === null) return -1;
+        const order = typeof x === "string" ? x.localeCompare(y) : x - y;
+        return dir === "ascending" ? order : -order;
+      });
+      body.append(...rows);
+    });
+  }
+  const filters = [...document.querySelectorAll(".chip[data-filter]")];
+  for (const f of filters) {
+    f.addEventListener("click", () => {
+      for (const x of filters) x.setAttribute("aria-pressed", String(x === f));
+      for (const tr of body.rows) {
+        const want = f.dataset.filter;
+        tr.hidden = want === "all" ? false : want === "heyra" ? tr.dataset.heyra !== "true" : tr.dataset.langs !== want;
+      }
+    });
+  }
 }

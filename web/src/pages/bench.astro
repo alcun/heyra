@@ -96,10 +96,20 @@ for (let pass = 0; pass < 20; pass++)
     const [a, b] = [byY[i - 1], byY[i]];
     if (Math.abs(a.x - b.x) < 150 && b.ly - a.ly < 14) { const push = (14 - (b.ly - a.ly)) / 2; a.ly -= push; b.ly += push; }
   }
-const duos = bench.duos.map((d) => ({
-  ...d,
-  rows: (d.rows as [string, number, string][]).map(([name, v], i, all) => ({ name, v, win: i === all.length - 1 })),
+// The full table: every model, every number, sortable. Best per column in gold.
+const columns = [
+  { id: "average", name: "Average", unit: "", low: true },
+  { id: "speed", name: "Speed", unit: "×", low: false },
+  { id: "mb", name: "Size", unit: " MB", low: true },
+  ...bench.sets.map((x) => ({ id: x.id, name: x.name, unit: "", low: true, source: x.source })),
+];
+const cellOf = (m: M, id: string): number | null => (id === "average" ? m.average : id === "speed" ? m.speed : id === "mb" ? m.mb : m.v[id] ?? null);
+const bestIn = Object.fromEntries(columns.map((c) => {
+  const vals = models.map((m) => cellOf(m, c.id)).filter((v): v is number => v != null);
+  return [c.id, c.low ? Math.min(...vals) : Math.max(...vals)];
 }));
+const fmt = (v: number | null, id: string) => (v == null ? "–" : id === "speed" || id === "mb" ? String(v) : v.toFixed(2));
+const tableRows = [...models].sort((a, b) => (a.average ?? 99) - (b.average ?? 99));
 const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average, v }) => ({ id, name, langs, heyra, mb, speed, average, v })), rankMax };
 ---
 <!doctype html>
@@ -127,7 +137,8 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
     h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.12; margin: 0; text-wrap: balance; }
     h2 { margin: 0; font: 700 clamp(1.5rem, 3vw, 2.2rem)/1.15 var(--display); letter-spacing: 0.05em; color: var(--cream); }
     .small { margin: 0; color: var(--slate); font-size: 0.95rem; line-height: 1.55; max-width: 44rem; }
-    .meta { margin: 0; color: var(--dim); font: 400 0.8rem/1.5 var(--mono); }
+    .facts { margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; font: 400 0.95rem/1.4 var(--sans); color: var(--slate); }
+    .facts b { font: 500 1.05rem var(--mono); color: var(--cream); margin-right: 0.3rem; }
     .top { display: grid; gap: 1rem; }
     #wave { width: 100%; height: 6rem; display: block; image-rendering: pixelated; }
     .point { margin: 0; font: 400 0.95rem/1.5 var(--sans); color: var(--cream); }
@@ -144,6 +155,25 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
     .pick .of { color: var(--dim); font-size: 0.82rem; }
     .pick:first-child { border-color: rgb(217 168 106 / 0.45); }
     .pick:first-child .num { color: var(--gold); }
+
+    /* The leaderboard: one wide table, sortable, the first column pinned. */
+    .board-wrap { overflow-x: auto; padding: 0; }
+    .board { width: 100%; border-collapse: collapse; font: 400 0.85rem var(--mono); font-variant-numeric: tabular-nums; }
+    .board th, .board td { padding: 10px 12px; border-top: 1px solid var(--hair); text-align: right; white-space: nowrap; }
+    .board thead th { border-top: 0; vertical-align: bottom; }
+    .board thead button { all: unset; cursor: pointer; font: 500 0.75rem/1.3 var(--sans); color: var(--slate); white-space: normal; display: inline-block; max-width: 7rem; }
+    .board thead button:hover { color: var(--cream); }
+    .board thead button[aria-sort]::after { content: " ↑"; color: var(--gold); }
+    .board thead button[aria-sort="descending"]::after { content: " ↓"; }
+    .board .model-col { text-align: left; position: sticky; left: 0; background: var(--panel); z-index: 1; min-width: 12rem; }
+    .board tbody th b { display: block; font: 500 0.92rem var(--sans); color: var(--cream); }
+    .board tbody th span { font: 400 0.72rem var(--mono); color: var(--dim); }
+    .board tbody th i { font-style: normal; color: var(--gold); }
+    .board td { color: var(--slate); }
+    .board td.best { color: var(--gold); font-weight: 500; }
+    .board td.text { text-align: left; font: 400 0.8rem var(--sans); color: var(--dim); }
+    .board tbody tr:hover th, .board tbody tr:hover td { background: rgb(255 255 255 / 0.025); }
+    .board tr[hidden] { display: none; }
 
     /* Pick your speech: chips, then bars that re-rank. */
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -207,21 +237,10 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
     .key .a { color: #e0795a; }
     .key .m { text-decoration: line-through; }
 
-    /* Under the hood: three small facts, quieter than the rest. */
-    .hood { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-    .fact { border: 1px solid var(--hair); border-radius: 14px; padding: 16px; display: grid; gap: 8px; align-content: start; }
-    .fact h3 { margin: 0; font: 500 0.9rem var(--sans); color: var(--cream); }
-    .row { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 2.8rem; gap: 10px; align-items: center; }
-    .row .n { font-size: 0.82rem; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .row .t { height: 8px; position: relative; }
-    .row .b { height: 100%; min-width: 2px; background-size: 4px 4px; image-rendering: pixelated; }
-    .row .v { font: 500 0.82rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--slate); }
-    .row.win .n, .row.win .v { color: var(--cream); }
-    .fact .small { font-size: 0.82rem; }
 
     ul.method { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.95rem; display: grid; gap: 6px; }
     @media (max-width: 48rem) {
-      .answer, .hood { grid-template-columns: minmax(0, 1fr); }
+      .answer { grid-template-columns: minmax(0, 1fr); }
       .rank { --row: 64px; }
       .bar { left: 14px; right: 14px; grid-template-columns: 1.2rem minmax(0, 1fr) 2.8rem; grid-template-areas: "pos n v" ". t t"; gap: 4px 10px; align-content: center; }
       .plot { overflow-x: auto; }
@@ -239,7 +258,7 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
     <section class="top">
       <canvas id="wave" aria-hidden="true"></canvas>
       <h1>Which voice model should you use?</h1>
-      <p class="meta">heyra-bench · {models.length} models · {bench.clips} public English clips · {bench.date} · words wrong in 100, fewer is better</p>
+      <p class="facts"><span><b>{models.length}</b> models</span><span><b>{bench.clips}</b> clips</span><span><b>{bench.sets.length}</b> kinds of speech</span><span><b>{bench.date.split(" ").slice(1).join(" ")}</b></span></p>
     </section>
 
     <section aria-label="The answer">
@@ -253,7 +272,40 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
           </div>
         ))}
       </div>
-      <p class="small">Leaderboard transcripts keep every “um”, so Bark Clean, which leaves them out on purpose, scores worse on those sets by design.</p>
+      <p class="small">Bark Clean drops “um” and “uh” on purpose. Test sets that keep them count that as a mistake.</p>
+    </section>
+
+    <section aria-labelledby="board-title">
+      <h2 id="board-title">Leaderboard</h2>
+      <div class="chips" role="group" aria-label="Show">
+        {[["all", "All"], ["en", "English"], ["multi", "More languages"], ["heyra", "In Heyra"]].map(([id, name], i) => <button type="button" class="chip" data-filter={id} aria-pressed={i === 0 ? "true" : "false"}>{name}</button>)}
+      </div>
+      <div class="board-wrap panel">
+        <table class="board" id="board">
+          <thead>
+            <tr>
+              <th scope="col" class="model-col"><button type="button" data-sort="name">Model</button></th>
+              {columns.map((c) => <th scope="col" title={c.source}><button type="button" data-sort={c.id} data-low={String(c.low)} aria-sort={c.id === "average" ? "ascending" : undefined}>{c.name}</button></th>)}
+              <th scope="col">Languages</th>
+              <th scope="col">Licence</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map((m) => (
+              <tr data-id={m.id} data-langs={m.langs === "English" ? "en" : "multi"} data-heyra={String(m.heyra)} data-name={m.name}>
+                <th scope="row" class="model-col"><b>{m.name}</b><span>{m.by}{m.heyra && <> · <i>in Heyra</i></>}</span></th>
+                {columns.map((c) => {
+                  const v = cellOf(m, c.id);
+                  return <td data-v={v ?? ""} class={v != null && v === bestIn[c.id] ? "best" : undefined}>{fmt(v, c.id)}</td>;
+                })}
+                <td class="text">{m.langs}</td>
+                <td class="text">{m.license}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Words wrong in 100: lower wins. Speed: times faster than real time. Size: the download. Average leaves out the off-the-cuff columns. Click a column to sort.</p>
     </section>
 
     <section aria-labelledby="rank-title">
@@ -271,7 +323,7 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
           </div>
         ))}
       </div>
-      <p class="point" id="rank-point">{ranked[0].name} gets the fewest words wrong on average: {ranked[0].average!.toFixed(1)} in 100. Gold bars are the models in Heyra.</p>
+      <p class="point" id="rank-point">Fewest mistakes: {ranked[0].name}, {ranked[0].average!.toFixed(1)} in 100. Gold: in Heyra.</p>
     </section>
 
     <section aria-labelledby="plot-title">
@@ -293,7 +345,7 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
           ))}
         </svg>
       </div>
-      <p class="point">Up and to the right is better. Bigger dots are bigger downloads; gold are the models in Heyra. Speed is on 4 CPU threads of an M-series Mac.</p>
+      <p class="point">Top right wins. Bigger dot, bigger download. Gold: in Heyra.</p>
     </section>
 
     <section aria-labelledby="listen-title">
@@ -327,32 +379,13 @@ const data = { models: models.map(({ id, name, langs, heyra, mb, speed, average,
       ))}
     </section>
 
-    <section aria-labelledby="hood-title">
-      <h2 id="hood-title">Under the hood</h2>
-      <div class="hood">
-        {duos.map((d) => (
-          <div class="fact">
-            <h3>{d.title}</h3>
-            {d.rows.map((r) => (
-              <div class={r.win ? "row win" : "row"}>
-                <span class="n">{r.name}</span>
-                <div class="t"><div class="b" style={`width:${width(r.v, d.max)};background-image:${r.win ? gold : quiet}`}></div></div>
-                <span class="v">{r.v.toFixed(1)}</span>
-              </div>
-            ))}
-            <p class="small">{d.note}</p>
-          </div>
-        ))}
-      </div>
-      <p class="small">{bench.wait}</p>
-    </section>
-
     <section aria-labelledby="method-title">
       <h2 id="method-title">Method</h2>
       <ul class="method">
-        <li>100 clips each: LibriSpeech, AMI, Earnings-22, GigaSpeech, SPGISpeech, VoxPopuli, DisfluencySpeech.</li>
-        <li>{bench.engine}, as in Heyra: long clips go in 15-second pieces, as Heyra sends a take. Lower-cased, no punctuation.</li>
-        <li>The clips to listen to come from sets whose audio may be shared, and are the ones where the models differ most.</li>
+        <li>800 clips: 100 from each of seven public test sets, plus DisfluencySpeech for talk off the cuff.</li>
+        <li>Every model runs the way Heyra runs it: int8, 4 CPU threads, takes cut into 15-second pieces.</li>
+        <li>Scored by words wrong in 100. Case and punctuation don't count.</li>
+        <li>You can only listen to clips from sets that allow sharing.</li>
       </ul>
     </section>
   </main>

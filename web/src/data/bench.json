@@ -6,8 +6,10 @@
     {
       "id": "bark-3.0-clean",
       "name": "Bark 3.0 Clean",
+      "by": "Underdog",
       "langs": "English",
       "note": "Leaves out “um” and “uh”",
+      "license": "CC BY 4.0",
       "heyra": true,
       "mb": 673,
       "speed": 11,
@@ -28,8 +30,10 @@
     {
       "id": "canary-180m",
       "name": "Canary 180M",
+      "by": "NVIDIA",
       "langs": "4 languages",
       "note": "English, German, Spanish, French",
+      "license": "CC BY 4.0",
       "heyra": false,
       "mb": 207,
       "speed": 8,
@@ -50,8 +54,10 @@
     {
       "id": "fluid-speech-mini",
       "name": "Fluid Speech Mini",
+      "by": "FluidVoice",
       "langs": "English",
       "note": "Every word",
+      "license": "CC BY 4.0",
       "heyra": true,
       "mb": 60,
       "speed": 11,
@@ -72,8 +78,10 @@
     {
       "id": "moonshine-base",
       "name": "Moonshine Base",
+      "by": "Useful Sensors",
       "langs": "English",
       "note": "Small and quick",
+      "license": "MIT",
       "heyra": false,
       "mb": 286,
       "speed": 49,
@@ -94,8 +102,10 @@
     {
       "id": "parakeet-110m",
       "name": "Parakeet 110M",
+      "by": "NVIDIA",
       "langs": "English",
       "note": "A fifth of the size",
+      "license": "CC BY 4.0",
       "heyra": false,
       "mb": 132,
       "speed": 51,
@@ -116,8 +126,10 @@
     {
       "id": "parakeet-v2",
       "name": "Parakeet v2",
+      "by": "NVIDIA",
       "langs": "English",
-      "note": "NVIDIA, English only",
+      "note": "Parakeet TDT 0.6B v2",
+      "license": "CC BY 4.0",
       "heyra": false,
       "mb": 661,
       "speed": 12,
@@ -138,8 +150,10 @@
     {
       "id": "parakeet-v3",
       "name": "Parakeet v3",
+      "by": "NVIDIA",
       "langs": "25 languages",
-      "note": "European languages",
+      "note": "Parakeet TDT 0.6B v3",
+      "license": "CC BY 4.0",
       "heyra": true,
       "mb": 670,
       "speed": 12,
@@ -160,8 +174,10 @@
     {
       "id": "whisper-distil-v3.5",
       "name": "Whisper Distil v3.5",
+      "by": "OpenAI, distilled",
       "langs": "English",
-      "note": "OpenAI Whisper, distilled",
+      "note": "Distil-Whisper large v3.5",
+      "license": "MIT",
       "heyra": false,
       "mb": 983,
       "speed": 2,
@@ -181,16 +197,6 @@
     }
   ],
   "sets": [
-    {
-      "id": "disfluency-meant",
-      "name": "Off the cuff, meant",
-      "source": "DisfluencySpeech, cleaned up"
-    },
-    {
-      "id": "disfluency",
-      "name": "Off the cuff, word for word",
-      "source": "DisfluencySpeech"
-    },
     {
       "id": "ami",
       "name": "Meetings",
@@ -225,6 +231,16 @@
       "id": "librispeech-other",
       "name": "Audiobooks, hard",
       "source": "LibriSpeech other"
+    },
+    {
+      "id": "disfluency-meant",
+      "name": "Off the cuff, meant",
+      "source": "DisfluencySpeech, cleaned up"
+    },
+    {
+      "id": "disfluency",
+      "name": "Off the cuff, word for word",
+      "source": "DisfluencySpeech"
     }
   ],
   "listen": [
@@ -4583,64 +4599,6 @@
             ]
           ]
         }
-      ]
-    }
-  ],
-  "duos": [
-    {
-      "title": "Engine",
-      "note": "0.3.10 returned nothing for 60 of 100 finance-call clips.",
-      "max": 25,
-      "rows": [
-        [
-          "0.3.10",
-          23.25,
-          "old"
-        ],
-        [
-          "0.3.11",
-          8.13,
-          "parakeet"
-        ]
-      ]
-    },
-    {
-      "title": "Off the cuff, meant",
-      "note": "Against transcripts without “um”s and repeats.",
-      "max": 25,
-      "rows": [
-        [
-          "Parakeet v3",
-          17.47,
-          "parakeet"
-        ],
-        [
-          "Bark Clean",
-          6.09,
-          "clean"
-        ]
-      ]
-    },
-    {
-      "title": "7-minute take",
-      "note": "0.3.11 cuts long takes into 15 s pieces.",
-      "max": 35,
-      "rows": [
-        [
-          "60 s pieces",
-          30.8,
-          "old"
-        ],
-        [
-          "15 s pieces",
-          10.9,
-          "parakeet"
-        ],
-        [
-          "Bark Clean",
-          5.3,
-          "clean"
-        ]
       ]
     }
   ],
